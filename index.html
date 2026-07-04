@@ -2,176 +2,316 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Mountain Peak — 世界の山岳データベース（デモ版）</title>
 <meta name="description" content="世界中の山を、多言語で、正しく引ける。標高・ルート・天気・歴史 — 登山情報のグローバルデータベース（静的デモ版）">
+<meta name="theme-color" content="#1B2A32">
+<meta property="og:title" content="Mountain Peak — 世界の山岳データベース">
+<meta property="og:description" content="標高・ルート・天気・歴史。登山に必要な一次情報を日本語と英語で。">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 14 L92 86 L8 86 Z' fill='%23C44536'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Mountain Peak","alternateName":"マウンテンピーク","description":"Global mountain database — elevation, routes, weather and history in Japanese and English."}</script>
 <style>
 :root{
-  --bg:#f5f5f7;--card:#fff;--ink:#1d1d1f;--muted:#6e6e73;--line:rgba(0,0,0,.08);
-  --accent:#0e7490;--accent2:#0369a1;
+  --paper:#F3F5F2;--card:#FFFFFF;--ink:#1B2A32;--muted:#5C6B70;
+  --line:rgba(27,42,50,.12);--hair:rgba(27,42,50,.08);
+  --route:#C44536;--route-soft:rgba(196,69,54,.09);
+  --glacier:#2F6B93;--forest:#3E6B4F;--forest-soft:rgba(62,107,79,.14);
+  --shadow:0 1px 2px rgba(27,42,50,.05),0 12px 32px -16px rgba(27,42,50,.18);
+  --shadow-lift:0 2px 4px rgba(27,42,50,.06),0 20px 44px -18px rgba(27,42,50,.26);
+  --r:14px;
 }
 .dark{
-  --bg:#0a0a0c;--card:#141418;--ink:#f5f5f7;--muted:#98989d;--line:rgba(255,255,255,.1);
-  --accent:#22d3ee;--accent2:#38bdf8;
+  --paper:#0C1518;--card:#13232A;--ink:#E7EEEA;--muted:#8FA3A1;
+  --line:rgba(231,238,234,.14);--hair:rgba(231,238,234,.08);
+  --route:#E8776A;--route-soft:rgba(232,119,106,.13);
+  --glacier:#7FB8DA;--forest:#7FBE97;--forest-soft:rgba(127,190,151,.15);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -16px rgba(0,0,0,.5);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.35),0 20px 44px -18px rgba(0,0,0,.6);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+body{background:var(--paper);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.65;font-size:15px}
+.disp{font-family:"Bricolage Grotesque","Zen Kaku Gothic New",sans-serif}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-feature-settings:"tnum"}
 a{color:inherit;text-decoration:none}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-input,select{font-family:inherit;color:var(--ink)}
-.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-.grad{background:linear-gradient(135deg,var(--accent),var(--accent2))}
-.grad-text{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-header.site{position:sticky;top:0;z-index:40;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(16px)}
-.hrow{display:flex;align-items:center;gap:12px;height:56px}
-.logo{display:flex;align-items:center;gap:8px;font-weight:800;flex-shrink:0}
-.logo .mark{width:32px;height:32px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px}
-nav.tabs{display:flex;gap:4px;overflow-x:auto;padding:8px 0}
-nav.tabs button{flex-shrink:0;padding:6px 14px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid transparent}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input,select{font-family:inherit;color:var(--ink);font-size:14px}
+:focus-visible{outline:2px solid var(--glacier);outline-offset:2px;border-radius:4px}
+::selection{background:var(--route-soft)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+@media(max-width:560px){.wrap{padding:0 14px}}
+
+/* ===== ヘッダー ===== */
+header.site{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+.hrow{display:flex;align-items:center;gap:14px;height:60px}
+.logo{display:flex;align-items:baseline;gap:9px;flex-shrink:0;cursor:pointer}
+.logo .tri{color:var(--route);font-size:15px;transform:translateY(-1px)}
+.logo .nm{font-weight:800;font-size:17px;letter-spacing:-.01em}
+.logo .demo{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px;transform:translateY(-2px)}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex-shrink:0;padding:19px 13px 17px;font-size:13.5px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;transition:color .15s}
 nav.tabs button:hover{color:var(--ink)}
-nav.tabs button.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;font-weight:700}
-.hctl{margin-left:auto;display:flex;align-items:center;gap:8px}
-.pill{display:flex;gap:2px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:3px;font-size:11px}
-.pill button{padding:4px 10px;border-radius:999px;color:var(--muted)}
-.pill button.on{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.iconbtn{width:36px;height:36px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:14px}
-main{min-height:70vh;padding:28px 0 48px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}
-.hero{border-radius:26px;padding:36px 28px}
-.hero .kicker{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-.hero h1{font-size:clamp(24px,4.5vw,34px);font-weight:800;line-height:1.25;margin-top:6px}
-.hero p.sub{margin-top:10px;color:var(--muted);font-size:14px;max-width:560px}
-.searchrow{display:flex;gap:8px;margin-top:20px;max-width:560px}
-.searchrow input{flex:1;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:10px 18px;font-size:14px;outline:none}
-.searchrow input:focus{border-color:var(--accent)}
-.searchrow button{padding:10px 20px;border-radius:999px;color:#fff;font-weight:700;font-size:14px}
-h2.sec{font-size:20px;font-weight:800;margin:36px 0 14px;display:flex;align-items:center;justify-content:space-between}
-h2.sec .more{font-size:13px;font-weight:600;color:var(--accent);cursor:pointer}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
-.mcard{display:flex;flex-direction:column;cursor:pointer;transition:transform .15s,box-shadow .15s}
-.mcard:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--route)}
+.hctl{margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pill{display:flex;gap:1px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:2px;font-size:11px}
+.pill button{padding:4px 10px;border-radius:999px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.pill button.on{background:var(--ink);color:var(--paper)}
+.iconbtn{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;display:flex;align-items:center;justify-content:center}
+@media(max-width:760px){
+  .hrow{flex-wrap:wrap;height:auto;padding:8px 0 0}
+  nav.tabs{order:3;width:100%;border-top:1px solid var(--hair);margin-top:2px}
+  nav.tabs button{padding:11px 13px 10px}
+}
+
+/* ===== ヒーロー ===== */
+main{min-height:70vh;padding:26px 0 64px}
+.hero{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(178deg,#20343E 0%,#2E4A57 46%,#3D5E6B 72%,#4E7280 100%);color:#EFF4F2;box-shadow:var(--shadow)}
+.dark .hero{background:linear-gradient(178deg,#08131A 0%,#0F212B 50%,#173040 100%)}
+.hero .ridge{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .inner{position:relative;z-index:2;padding:56px 40px 130px;max-width:640px}
+@media(max-width:640px){.hero .inner{padding:40px 22px 110px}}
+.hero .kicker{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#B9D2CB;margin-bottom:14px}
+.hero .kicker::before{content:"";width:22px;height:1px;background:var(--route);opacity:.9}
+.hero h1{font-size:clamp(27px,4.6vw,42px);font-weight:800;line-height:1.2;letter-spacing:-.015em}
+.hero p.sub{margin-top:14px;color:#C6D6D2;font-size:13.5px;line-height:1.85;max-width:520px}
+.searchbox{position:relative;margin-top:24px;max-width:520px}
+.searchrow{display:flex;gap:8px}
+.searchrow input{flex:1;border:1px solid rgba(255,255,255,.25);background:rgba(10,22,28,.35);color:#fff;border-radius:12px;padding:12px 18px;font-size:14px;outline:none;backdrop-filter:blur(6px)}
+.searchrow input::placeholder{color:rgba(230,240,238,.55)}
+.searchrow input:focus{border-color:rgba(255,255,255,.6)}
+.searchrow button{padding:12px 22px;border-radius:12px;background:var(--route);color:#fff;font-weight:700;font-size:14px;flex-shrink:0;transition:filter .15s}
+.searchrow button:hover{filter:brightness(1.08)}
+.sug{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lift);overflow:hidden;z-index:30;color:var(--ink)}
+.sug button{display:flex;width:100%;align-items:center;gap:10px;padding:10px 16px;text-align:left;font-size:14px;border-bottom:1px solid var(--hair)}
+.sug button:last-child{border-bottom:none}
+.sug button:hover,.sug button.hl{background:var(--route-soft)}
+.sug .tri{color:var(--route);font-size:11px}
+.sug .e{margin-left:auto;font-size:12px;color:var(--muted)}
+
+/* ===== セクション見出し ===== */
+h2.sec{display:flex;align-items:baseline;gap:10px;margin:44px 0 16px}
+h2.sec .tt{font-size:20px;font-weight:800;letter-spacing:-.01em}
+h2.sec .eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--route)}
+h2.sec .more{margin-left:auto;font-size:13px;font-weight:600;color:var(--glacier);cursor:pointer;white-space:nowrap}
+h2.sec .more:hover{text-decoration:underline}
+
+/* ===== カード ===== */
+.card{background:var(--card);border:1px solid var(--hair);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(255px,1fr))}
+.mcard{display:flex;flex-direction:column;cursor:pointer;transition:transform .18s,box-shadow .18s;position:relative}
+.mcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
 .mcard .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.mcard .nm{font-weight:800;line-height:1.3}
+.mcard .nm{font-weight:800;line-height:1.3;font-size:15.5px}
 .mcard .ln{font-size:11px;color:var(--muted);margin-top:2px}
-.mcard .el{font-size:19px;font-weight:800;white-space:nowrap}
-.mcard .el small{font-size:11px}
-.mcard .sm{font-size:12px;color:var(--muted);margin-top:8px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;align-items:center}
-.badge{display:inline-flex;align-items:center;gap:4px;border-radius:999px;padding:2px 10px;font-size:11px;font-weight:700}
-.badge.plain{border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:400}
-.d1{background:#d1fae5;color:#065f46}.d2{background:#ecfccb;color:#3f6212}.d3{background:#fef3c7;color:#92400e}.d4{background:#ffedd5;color:#9a3412}.d5{background:#fee2e2;color:#991b1b}
-.dark .d1{background:rgba(6,95,70,.4);color:#6ee7b7}.dark .d2{background:rgba(63,98,18,.4);color:#d9f99d}.dark .d3{background:rgba(146,64,14,.4);color:#fcd34d}.dark .d4{background:rgba(154,52,18,.4);color:#fdba74}.dark .d5{background:rgba(153,27,27,.4);color:#fca5a5}
-.crumbs{font-size:12px;color:var(--muted);margin-bottom:16px;display:flex;flex-wrap:wrap;gap:6px}
-.crumbs a{cursor:pointer}
-.crumbs a:hover{color:var(--ink)}
-.detail-hero{border-radius:26px;padding:28px}
-.detail-hero .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.detail-hero h1{font-size:30px;font-weight:800}
-.detail-hero .local{color:var(--muted);font-size:13px;margin-top:2px}
-.detail-hero .elv{font-size:34px;font-weight:800;text-align:right}
-.detail-hero .elv small{font-size:16px}
-.detail-hero .meta{font-size:12px;color:var(--muted);text-align:right}
-.cols{display:grid;gap:18px;grid-template-columns:2fr 1fr;margin-top:18px}
-@media(max-width:820px){.cols{grid-template-columns:1fr}}
-.sect{margin-bottom:14px}
-.sect h3{font-size:13px;font-weight:800;color:var(--accent);margin-bottom:6px}
-.sect p{font-size:14px;white-space:pre-line}
-.hazard{border:1px solid rgba(220,38,38,.4);background:rgba(254,226,226,.6);border-radius:20px;padding:16px}
-.dark .hazard{background:rgba(153,27,27,.15)}
-.hazard h3{color:#b91c1c;font-size:13px;font-weight:800;margin-bottom:6px}
-.dark .hazard h3{color:#fca5a5}
-.hazard p{font-size:13px;white-space:pre-line;color:#7f1d1d}
-.dark .hazard p{color:#fecaca}
-.notice{border:1px solid rgba(217,119,6,.35);background:rgba(254,243,199,.55);border-radius:20px;padding:14px 16px;font-size:12px;color:#78350f;line-height:1.7}
-.dark .notice{background:rgba(120,53,15,.18);color:#fcd34d}
-.dtable{width:100%;font-size:12px;border-collapse:collapse}
-.dtable td{padding:5px 0;border-bottom:1px solid var(--line)}
-.dtable tr:last-child td{border-bottom:none}
-.dtable td:first-child{color:var(--muted)}
-.dtable td:last-child{text-align:right;font-weight:600}
-.rcard{border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;cursor:pointer}
-.rcard:hover{border-color:var(--accent)}
-.rcard .rt{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-weight:800}
-.rcard .rs{font-size:12px;color:var(--muted);margin-top:4px}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-top:16px}
-.stat{border:1px solid var(--line);background:var(--bg);border-radius:14px;padding:10px;text-align:center}
-.stat .l{font-size:10px;color:var(--muted)}
-.stat .v{font-size:14px;font-weight:800;margin-top:2px}
-.weather .now{display:flex;align-items:center;gap:14px;margin-top:10px}
-.weather .now .ico{font-size:34px}
-.weather .now .t{font-size:24px;font-weight:800}
-.weather .now .c{font-size:11px;color:var(--muted)}
-.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px;text-align:center}
-.wk .day{border:1px solid var(--line);border-radius:10px;padding:6px 2px;font-size:10px}
-.wk .day .i{font-size:15px}
-.wk .day .mx{font-weight:700}
-.wk .day .mn{color:var(--muted)}
-.wk .day .pp{color:#0284c7;font-size:9px}
-.dark .wk .day .pp{color:#7dd3fc}
-.ranklist{list-style:none}
-.ranklist li{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 16px;margin-bottom:10px;cursor:pointer}
-.ranklist li:hover{border-color:var(--accent)}
-.ranklist .no{font-size:22px;font-weight:800;width:36px;text-align:center;flex-shrink:0}
-.ranklist .nm{font-weight:800}
-.ranklist .sub{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:420px}
-.ranklist .rgt{margin-left:auto;text-align:right;flex-shrink:0}
-.ranklist .rgt .e{font-weight:800}
-.filters{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-bottom:16px}
-.filters label{font-size:11px;color:var(--muted)}
-.filters input,.filters select{width:100%;margin-top:4px;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:8px 10px;font-size:13px;outline:none}
-.filters input:focus,.filters select:focus{border-color:var(--accent)}
-.count{font-size:13px;color:var(--muted);margin:12px 0}
-.empty{border:1px dashed var(--line);background:var(--card);border-radius:20px;padding:40px;text-align:center;color:var(--muted);font-size:14px}
-.acard{cursor:pointer;transition:transform .15s}
-.acard:hover{transform:translateY(-2px)}
-.acard .cat{font-size:11px;color:var(--muted);display:flex;gap:8px;align-items:center}
-.acard .cat span{border:1px solid var(--line);border-radius:999px;padding:1px 8px}
-.acard .ti{font-weight:800;margin-top:6px;line-height:1.4}
-.acard .ds{font-size:12px;color:var(--muted);margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.article-body{max-width:720px;margin:0 auto}
-.article-body .card p{font-size:14px;margin-bottom:14px;white-space:pre-line;line-height:1.9}
+.mcard .el{font-size:19px;font-weight:600;white-space:nowrap;color:var(--ink)}
+.mcard .el small{font-size:11px;color:var(--muted);font-weight:500}
+.mcard .sm{font-size:12.5px;color:var(--muted);margin-top:8px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.7}
+.mcard .done{position:absolute;top:-7px;right:12px;background:var(--forest);color:#fff;font-size:10px;font-weight:700;border-radius:999px;padding:2px 9px;letter-spacing:.04em}
+/* 標高ゲージ（シグネチャー） */
+.gauge{margin-top:14px;padding-top:9px;position:relative}
+.gauge .base{height:2px;background:var(--hair);border-radius:2px;position:relative}
+.gauge .fill{position:absolute;left:0;top:0;height:2px;background:linear-gradient(90deg,var(--glacier),var(--route));border-radius:2px}
+.gauge .mk{position:absolute;top:-6px;transform:translateX(-50%);color:var(--route);font-size:9px;line-height:1}
+.gauge .ref{position:absolute;top:-2px;width:1px;height:6px;background:var(--line)}
+.gauge .lab{display:flex;justify-content:space-between;font-size:8.5px;color:var(--muted);margin-top:4px;letter-spacing:.05em}
+
+/* ===== バッジ ===== */
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:4px;border-radius:6px;padding:2.5px 9px;font-size:10.5px;font-weight:700;letter-spacing:.02em}
+.badge.plain{border:1px solid var(--line);background:transparent;color:var(--muted);font-weight:500}
+.d1{background:#E3F2E7;color:#2C5E3C}.d2{background:#E8F0DC;color:#4A6218}.d3{background:#F6EBD2;color:#8A5A12}.d4{background:#F7E1D2;color:#9A4416}.d5{background:#F7D9D4;color:#9E2B1F}
+.dark .d1{background:rgba(62,107,79,.3);color:#9ED8B2}.dark .d2{background:rgba(90,116,40,.3);color:#CBE39A}.dark .d3{background:rgba(138,90,18,.3);color:#EFC97E}.dark .d4{background:rgba(154,68,22,.3);color:#F0A97E}.dark .d5{background:rgba(158,43,31,.32);color:#F5A398}
+
+/* ===== チップ ===== */
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:7px 16px;font-size:13px;cursor:pointer}
-.chip:hover,.chip.on{border-color:var(--accent);color:var(--accent)}
-footer.site{border-top:1px solid var(--line);background:var(--card);margin-top:40px;padding:32px 0;font-size:12px;color:var(--muted)}
-footer .links{display:flex;flex-wrap:wrap;gap:16px;margin-top:10px}
-footer .links a{cursor:pointer}
-footer .links a:hover{color:var(--ink)}
-.osm{display:block;border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-top:8px}
-.osm iframe{width:100%;height:220px;border:0;display:block}
-.osm .cap{padding:6px 12px;font-size:10px;color:var(--muted)}
-dialog{border:none;border-radius:20px;padding:24px;max-width:420px;background:var(--card);color:var(--ink)}
-.mono{font-variant-numeric:tabular-nums}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 15px;font-size:12.5px;font-weight:500;cursor:pointer;transition:all .14s;color:var(--muted)}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper);font-weight:700}
+
+/* ===== パンくず ===== */
+.crumbs{font-size:12px;color:var(--muted);margin-bottom:18px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.crumbs a{cursor:pointer}
+.crumbs a:hover{color:var(--route)}
+.crumbs .sep{opacity:.5}
+
+/* ===== 詳細ヒーロー ===== */
+.detail-hero{border-radius:18px;padding:28px;position:relative;overflow:hidden}
+.detail-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--glacier),var(--route))}
+.detail-hero .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.detail-hero h1{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.detail-hero .local{color:var(--muted);font-size:13px;margin-top:3px}
+.detail-hero .elv{font-size:36px;font-weight:600;text-align:right;line-height:1}
+.detail-hero .elv small{font-size:15px;color:var(--muted)}
+.detail-hero .meta{font-size:12px;color:var(--muted);text-align:right;margin-top:5px}
+.actrow{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.abtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 15px;font-size:12.5px;font-weight:600;transition:all .14s}
+.abtn:hover{border-color:var(--ink)}
+.abtn.done{background:var(--forest);border-color:var(--forest);color:#fff}
+
+/* ===== 2カラム ===== */
+.cols{display:grid;gap:18px;grid-template-columns:1fr 340px;margin-top:18px;align-items:start}
+@media(max-width:880px){.cols{grid-template-columns:1fr}}
+aside.sticky{position:sticky;top:76px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:880px){aside.sticky{position:static}}
+.sect{margin-bottom:14px}
+.sect h3{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--glacier);margin-bottom:9px}
+.sect h3::before{content:"△";font-size:9px;color:var(--route)}
+.sect p{font-size:14px;white-space:pre-line;line-height:1.85}
+.hazard{border:1px solid rgba(196,69,54,.35);background:var(--route-soft);border-radius:var(--r);padding:18px 20px}
+.hazard h3{color:var(--route);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.hazard p{font-size:13.5px;white-space:pre-line;line-height:1.85}
+.notice{border:1px solid var(--line);border-left:3px solid var(--route);background:var(--card);border-radius:10px;padding:14px 18px;font-size:12px;color:var(--muted);line-height:1.8}
+.notice b{color:var(--ink)}
+
+/* ===== データテーブル・シーズン・比較 ===== */
+.dtable{width:100%;border-collapse:collapse;font-size:13px}
+.dtable td{padding:8px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.dtable td:first-child{color:var(--muted);font-size:12px;width:42%}
+.dtable tr:last-child td{border-bottom:none}
+.season{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:6px}
+.season .m{height:26px;border-radius:5px;background:var(--hair);display:flex;align-items:center;justify-content:center;font-size:8.5px;color:var(--muted);position:relative}
+.season .m.on{background:var(--forest-soft);color:var(--forest);font-weight:700}
+.season .m.now{box-shadow:inset 0 0 0 1.5px var(--route)}
+.cmp{margin-top:8px}
+.cmp .row{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:11px;color:var(--muted)}
+.cmp .row .nm{width:74px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp .bar{flex:1;height:7px;background:var(--hair);border-radius:4px;overflow:hidden;position:relative}
+.cmp .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--line)}
+.cmp .row.me{color:var(--ink);font-weight:700}
+.cmp .row.me .bar i{background:linear-gradient(90deg,var(--glacier),var(--route))}
+.cmp .v{width:58px;text-align:right;flex-shrink:0}
+
+/* ===== ルートカード・統計 ===== */
+.rcard{border:1px solid var(--hair);border-radius:12px;padding:14px 16px;margin-bottom:9px;cursor:pointer;transition:all .15s;background:var(--paper)}
+.rcard:hover{border-color:var(--route);transform:translateX(3px)}
+.rcard .rt{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;flex-wrap:wrap}
+.rcard .rs{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:18px}
+.stat{background:var(--paper);border:1px solid var(--hair);border-radius:11px;padding:11px 14px}
+.stat .l{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.stat .v{font-size:16px;font-weight:600;margin-top:3px}
+
+/* ===== 天気 ===== */
+.weather .now{display:flex;align-items:center;gap:13px;margin-top:12px}
+.weather .ico{font-size:34px}
+.weather .t{font-size:29px;font-weight:600;line-height:1}
+.weather .t small{font-size:13px;color:var(--muted)}
+.weather .c{font-size:12px;color:var(--muted);margin-top:3px}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:9px;text-align:center}
+.wk .day{font-size:10px;color:var(--muted);background:var(--paper);border-radius:8px;padding:7px 2px}
+.wk .i{font-size:15px;margin:3px 0}
+.wk .mx{font-weight:700;color:var(--ink);font-size:11px}
+.wk .mn{font-size:10px}
+.wk .pp{color:var(--glacier);font-size:9.5px;margin-top:2px}
+
+/* ===== 地図 ===== */
+.osm{border-radius:var(--r);overflow:hidden;border:1px solid var(--hair);background:var(--card);box-shadow:var(--shadow)}
+.osm iframe{width:100%;height:230px;border:0;display:block}
+.osm .cap{font-size:10px;color:var(--muted);padding:7px 12px}
+
+/* ===== ランキング ===== */
+.ranklist{list-style:none}
+.ranklist li{display:flex;align-items:center;gap:15px;background:var(--card);border:1px solid var(--hair);border-radius:13px;padding:14px 18px;margin-bottom:9px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow)}
+.ranklist li:hover{transform:translateX(3px);box-shadow:var(--shadow-lift)}
+.ranklist .no{font-size:19px;font-weight:600;color:var(--route);width:34px;flex-shrink:0;text-align:center}
+.ranklist .nm{font-weight:700;font-size:14.5px}
+.ranklist .sub{font-size:11.5px;color:var(--muted);margin-top:2px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.ranklist .rgt{margin-left:auto;text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.ranklist .e{font-weight:600;font-size:14px}
+.ckbtn{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--line);flex-shrink:0;font-size:13px;display:flex;align-items:center;justify-content:center;color:transparent;transition:all .14s}
+.ckbtn:hover{border-color:var(--forest)}
+.ckbtn.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.progress{margin-top:14px}
+.progress .bar{height:8px;background:var(--hair);border-radius:5px;overflow:hidden}
+.progress .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--forest),var(--glacier));border-radius:5px;transition:width .4s}
+.progress .t{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:6px}
+.progress .t b{color:var(--ink)}
+
+/* ===== フィルタ ===== */
+.filters{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:10px;align-items:end}
+@media(max-width:880px){.filters{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.filters{grid-template-columns:1fr}}
+.filters label{display:flex;flex-direction:column;gap:5px;font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;position:relative}
+.filters input,.filters select{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 12px;outline:none}
+.filters input:focus,.filters select:focus{border-color:var(--glacier)}
+.count{font-size:13px;color:var(--muted);margin:16px 2px 12px}
+.count b{color:var(--ink);font-size:15px}
+.sortrow{display:flex;align-items:center;gap:10px;margin:14px 0;flex-wrap:wrap}
+.sortrow select{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 11px;outline:none;font-size:12.5px}
+.empty{text-align:center;color:var(--muted);padding:70px 20px;font-size:14px;line-height:2}
+.empty .big{font-size:34px}
+
+/* ===== 記事 ===== */
+.acard{cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
+.acard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.acard .cat{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted)}
+.acard .cat span{color:var(--route);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.acard .ti{font-weight:800;font-size:15px;line-height:1.5;margin-top:9px}
+.acard .ds{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.75;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.article-body{max-width:760px;margin:0 auto}
+.article-body h1{font-size:clamp(22px,3.6vw,29px);font-weight:800;line-height:1.45;letter-spacing:-.01em;margin:12px 0 18px}
+.article-body .card p{margin-bottom:15px;font-size:14.5px;line-height:2}
+.article-body .card p:last-child{margin-bottom:0}
+
+/* ===== フッター・その他 ===== */
+footer.site{border-top:1px solid var(--hair);padding:34px 0 46px;margin-top:30px}
+footer .frow{display:flex;align-items:baseline;gap:9px;font-weight:800}
+footer .frow .tri{color:var(--route);font-size:12px}
+footer .note{font-size:11.5px;color:var(--muted);line-height:1.9;margin-top:12px;max-width:760px}
+footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
+#toTop{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:15px;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+#toTop.show{opacity:1;pointer-events:auto}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:var(--ink);color:var(--paper);border-radius:999px;padding:9px 20px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;z-index:70;box-shadow:var(--shadow-lift)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ===== 出現アニメーション ===== */
+.rv{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .hero .routeline{animation:none!important;stroke-dashoffset:0!important}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+.hero .routeline{stroke-dasharray:1600;stroke-dashoffset:1600;animation:drawroute 2.6s .3s ease forwards}
+@keyframes drawroute{to{stroke-dashoffset:0}}
 </style>
 </head>
 <body>
 <header class="site">
-  <div class="wrap">
-    <div class="hrow">
-      <a class="logo" onclick="go({name:'home'})" style="cursor:pointer">
-        <span class="mark grad">⛰</span><span>Mountain Peak</span>
-        <span class="badge plain" id="demoBadge">DEMO</span>
-      </a>
-      <div class="hctl">
-        <div class="pill" id="langPill">
-          <button data-l="ja">日本語</button><button data-l="en">English</button>
-        </div>
-        <button class="iconbtn" id="themeBtn" aria-label="theme">🌙</button>
+  <div class="wrap hrow">
+    <a class="logo" onclick="go({name:'home'})" aria-label="Mountain Peak Home">
+      <span class="tri" aria-hidden="true">▲</span><span class="nm disp">Mountain Peak</span><span class="demo mono">DEMO</span>
+    </a>
+    <nav class="tabs" id="tabs" aria-label="Main"></nav>
+    <div class="hctl">
+      <div class="pill" id="unitPill" role="group" aria-label="Elevation unit">
+        <button data-u="m" class="on mono">m</button><button data-u="ft" class="mono">ft</button>
       </div>
+      <div class="pill" id="langPill" role="group" aria-label="Language">
+        <button data-l="ja" class="on">日本語</button><button data-l="en">English</button>
+      </div>
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode">🌙</button>
     </div>
-    <nav class="tabs" id="tabs"></nav>
   </div>
 </header>
 <main><div class="wrap" id="app"></div></main>
 <footer class="site">
   <div class="wrap">
-    <div style="font-weight:800;color:var(--ink)">⛰ Mountain Peak <span class="badge plain">静的デモ版 / Static Demo</span></div>
-    <p id="fnote" style="margin-top:8px;max-width:680px"></p>
-    <div class="notice" id="fdisc" style="margin-top:12px"></div>
-    <p style="margin-top:14px">© 2026 Mountain Peak / STELLAR</p>
+    <div class="frow"><span class="tri">▲</span><span class="disp">Mountain Peak</span><span class="demo mono" style="font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px">STATIC DEMO</span></div>
+    <p class="note" id="fnote"></p>
+    <div class="notice" style="margin-top:14px;max-width:760px" id="fdisc"></div>
+    <div class="cr">© 2026 Mountain Peak / STELLAR</div>
   </div>
 </footer>
+<button id="toTop" aria-label="Back to top">↑</button>
+<div id="toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
 "use strict";
@@ -180,44 +320,64 @@ var DATA = {"mountains":[{"id":"mt_fuji","slug":"mount-fuji","elevationM":3776,"
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"ランキング",articles:"記事・ガイド"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"世界中の山を、正しく引ける",s:"標高・ルート・天気・歴史 — 登山に必要な一次情報を、日本語と英語で。（このページは静的デモ版です。データはブラウザ内のみで処理され、サーバーに送信されません）",ph:"山名・キーワードで検索（例: 富士山, Everest）",go:"検索"},
-  featured:"注目の山",lists:"リストから探す",newest:"新着記事",byCountry:"国から探す",viewAll:"すべて見る →",
-  f:{kw:"キーワード",country:"国",allC:"すべての国",elev:"標高",any:"指定なし",diff:"難易度",allD:"すべての難易度",found:"件の山が見つかりました",none:"条件に合う山が見つかりませんでした",reset:"リセット"},
-  l:{elevation:"標高",summary:"概要",features:"特徴",history:"歴史・初登頂",firstAscent:"初登頂",access:"登山口・アクセス",equipment:"必要装備",hazards:"⚠ 危険箇所",routes:"主な登頂ルート",weather:"天気（モック）",data:"山のデータ",coords:"緯度経度",country:"国",region:"山域",season:"ベストシーズン",prominence:"プロミネンス",nearby:"近隣・類似の山",dist:"距離",gain:"累積標高差",time:"標準コースタイム",stamina:"体力度",tech:"技術グレード",notes:"補足",updated:"最終更新",map:"地図",home:"ホーム",peaks:"座",back:"← 一覧へ戻る"},
+  featured:"注目の山",lists:"リストから探す",newest:"新着記事",byCountry:"国から探す",viewAll:"すべて見る →",season_now:"今月が旬の山",your:"あなたの登頂チェックリスト",
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
+  f:{kw:"キーワード",country:"国",allC:"すべての国",elev:"標高",any:"指定なし",diff:"難易度",allD:"すべての難易度",found:"件の山が見つかりました",none:"条件に合う山が見つかりませんでした。フィルタを変えてみてください。",reset:"リセット"},
+  sort:{t:"並び替え:",elevD:"標高が高い順",elevA:"標高が低い順",diffA:"難易度がやさしい順",diffD:"難易度が高い順",name:"名前順"},
+  l:{elevation:"標高",summary:"概要",features:"特徴",history:"歴史・初登頂",firstAscent:"初登頂",access:"登山口・アクセス",equipment:"必要装備",hazards:"⚠ 危険箇所",routes:"主な登頂ルート",weather:"天気（モック）",data:"山のデータ",coords:"緯度経度",country:"国",region:"山域",season:"ベストシーズン",prominence:"プロミネンス",nearby:"近隣・類似の山",dist:"距離",gain:"累積標高差",time:"標準コースタイム",stamina:"体力度",tech:"技術グレード",notes:"補足",updated:"最終更新",map:"地図",home:"ホーム",peaks:"座",back:"← 一覧へ戻る",cmp:"標高くらべ",share:"リンクをコピー",shared:"リンクをコピーしました",summit:"登頂済みにする",summited:"✓ 登頂済み",unclimbed:"未登頂に戻す"},
   w:{now:"現在の天気",week:"週間予報",wind:"風速",sr:"日の出",ss:"日の入り",est:"山頂付近の推定値",mock:"デモデータ（モック）",note:"天気は参考情報です。登山の可否判断は必ず複数の情報源と現地の最新情報で行ってください。"},
   diffs:{1:"初級",2:"初中級",3:"中級",4:"上級",5:"エキスパート"},
   cats:{guide:"初心者ガイド",gear:"装備",season:"季節",safety:"安全",inbound:"訪日登山"},
   months:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+  monthsS:["1","2","3","4","5","6","7","8","9","10","11","12"],
   tags:{hyakumeizan:"日本百名山","seven-summits":"七大陸最高峰","8000m":"8000m峰",beginner:"初心者向け"},
   disc:{t:"⚠ 安全に関する注意",b:"山岳情報は変化します。本ページの情報は参考であり、正確性・最新性を保証するものではありません。入山にあたっては必ず公式情報・最新の現地情報を確認し、自己責任で計画・行動してください。難易度の高いルートではガイドの利用をご検討ください。"},
-  fnote:"これは Mountain Peak の静的デモ版です。検索・詳細・ランキング・モック天気をブラウザ内だけで動作させています。会員機能・管理画面・実DB接続・Open-Meteo実照会はフル版（サーバー版）でのみ提供されます。入力内容がサーバーへ送信されることはありません。",
+  fnote:"これは Mountain Peak の静的デモ版です。検索・詳細・リスト・モック天気・登頂チェックリストをブラウザ内だけで動作させています。会員機能・管理画面・実DB接続・Open-Meteo実照会はフル版（サーバー版）でのみ提供されます。入力内容がサーバーへ送信されることはありません。",
+  prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
  en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"The world's mountains, done right",s:"Elevation, routes, weather and history — primary mountain information in English and Japanese. (This is a static demo. Everything runs in your browser; nothing is sent to a server.)",ph:"Search mountains (e.g. Everest, Fuji)",go:"Search"},
-  featured:"Featured Mountains",lists:"Browse by List",newest:"Latest Articles",byCountry:"Browse by Country",viewAll:"View all →",
-  f:{kw:"Keyword",country:"Country",allC:"All countries",elev:"Elevation",any:"Any",diff:"Difficulty",allD:"Any difficulty",found:"mountains found",none:"No mountains match your filters",reset:"Reset"},
-  l:{elevation:"Elevation",summary:"Overview",features:"Features",history:"History & First Ascent",firstAscent:"First ascent",access:"Access",equipment:"Equipment",hazards:"⚠ Hazards",routes:"Climbing Routes",weather:"Weather (mock)",data:"Mountain Data",coords:"Coordinates",country:"Country",region:"Range",season:"Best season",prominence:"Prominence",nearby:"Nearby & Similar Peaks",dist:"Distance",gain:"Elevation gain",time:"Typical time",stamina:"Stamina",tech:"Tech grade",notes:"Notes",updated:"Last updated",map:"Map",home:"Home",peaks:"peaks",back:"← Back to list"},
+  featured:"Featured Mountains",lists:"Browse by List",newest:"Latest Articles",byCountry:"Browse by Country",viewAll:"View all →",season_now:"In Season This Month",your:"Your Summit Checklist",
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
+  f:{kw:"Keyword",country:"Country",allC:"All countries",elev:"Elevation",any:"Any",diff:"Difficulty",allD:"Any difficulty",found:"mountains found",none:"No mountains match your filters. Try adjusting them.",reset:"Reset"},
+  sort:{t:"Sort:",elevD:"Highest first",elevA:"Lowest first",diffA:"Easiest first",diffD:"Hardest first",name:"Name"},
+  l:{elevation:"Elevation",summary:"Overview",features:"Features",history:"History & First Ascent",firstAscent:"First ascent",access:"Access",equipment:"Equipment",hazards:"⚠ Hazards",routes:"Climbing Routes",weather:"Weather (mock)",data:"Mountain Data",coords:"Coordinates",country:"Country",region:"Range",season:"Best season",prominence:"Prominence",nearby:"Nearby & Similar Peaks",dist:"Distance",gain:"Elevation gain",time:"Typical time",stamina:"Stamina",tech:"Tech grade",notes:"Notes",updated:"Last updated",map:"Map",home:"Home",peaks:"peaks",back:"← Back to list",cmp:"Elevation Compare",share:"Copy link",shared:"Link copied",summit:"Mark as climbed",summited:"✓ Climbed",unclimbed:"Unmark"},
   w:{now:"Current Weather",week:"7-Day Forecast",wind:"Wind",sr:"Sunrise",ss:"Sunset",est:"Estimated near summit",mock:"Demo data (mock)",note:"Weather shown here is reference only. Always make go/no-go decisions from multiple sources and current local conditions."},
   diffs:{1:"Easy",2:"Moderate",3:"Challenging",4:"Difficult",5:"Expert"},
   cats:{guide:"Beginner Guide",gear:"Gear",season:"Seasons",safety:"Safety",inbound:"Climbing in Japan"},
   months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+  monthsS:["J","F","M","A","M","J","J","A","S","O","N","D"],
   tags:{hyakumeizan:"100 Famous Japanese Mountains","seven-summits":"Seven Summits","8000m":"8000m Peak",beginner:"Beginner-friendly"},
   disc:{t:"⚠ Safety Notice",b:"Mountain conditions change. Information on this page is for reference and is not guaranteed to be accurate or current. Always check official and up-to-date local information, plan and act at your own risk, and consider hiring a guide for difficult routes."},
-  fnote:"This is the static demo of Mountain Peak. Search, detail pages, lists and mock weather all run entirely in your browser. Accounts, the admin console, a real database and live Open-Meteo queries are available only in the full (server) version. Nothing you type is sent to any server.",
+  fnote:"This is the static demo of Mountain Peak. Search, detail pages, lists, mock weather and the summit checklist all run entirely in your browser. Accounts, the admin console, a real database and live Open-Meteo queries are available only in the full (server) version. Nothing you type is sent to any server.",
+  prog:function(n,t){return n+" / "+t+" climbed"},
   expedition:function(d){return "approx. "+d+" days (expedition)"},hm:function(h,m){return (h?h+"h":"")+(m?m+"min":"")}}
 };
 var WCODES={0:["快晴","Clear","☀️"],1:["晴れ","Mostly clear","🌤️"],2:["薄曇り","Partly cloudy","⛅"],3:["曇り","Overcast","☁️"],61:["小雨","Light rain","🌧️"],71:["小雪","Light snow","🌨️"],95:["雷雨","Thunderstorm","⛈️"]};
+var FLAGS={c_jp:"🇯🇵",c_np:"🇳🇵",c_pk:"🇵🇰",c_fr:"🇫🇷",c_ch:"🇨🇭",c_tz:"🇹🇿",c_us:"🇺🇸",c_ar:"🇦🇷",c_ru:"🇷🇺",c_aq:"🇦🇶",c_id:"🇮🇩"};
 
-/* ====== 状態 ====== */
-var state={locale:"ja",view:{name:"home"},filters:{q:"",country:"",elev:"",diff:""},artCat:""};
+/* ====== 状態・永続化 ====== */
+var state={locale:"ja",unit:"m",view:{name:"home"},filters:{q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD"},artCat:""};
+function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function getSum(){try{return JSON.parse(load("mp-demo-summits")||"[]")}catch(e){return []}}
+function isSum(id){return getSum().indexOf(id)>=0}
+function toggleSum(id){var s=getSum();var i=s.indexOf(id);if(i>=0)s.splice(i,1);else s.push(id);store("mp-demo-summits",JSON.stringify(s));render()}
+
+/* ====== ヘルパー ====== */
 function d(){return DICT[state.locale]}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
 function tr(obj){return obj.translations[state.locale]||obj.translations.ja||obj.translations.en}
 function names(obj){return obj.names[state.locale]||obj.names.ja}
 function ft(m){return Math.round(m*3.28084)}
+function elevMain(m){return state.unit==="ft"?ft(m).toLocaleString():m.toLocaleString()}
+function elevUnit(){return state.unit==="ft"?"ft":"m"}
+function elevAlt(m){return state.unit==="ft"?m.toLocaleString()+" m":ft(m).toLocaleString()+" ft"}
 function countryOf(id){return DATA.countries.find(function(c){return c.id===id})}
 function regionOf(id){return DATA.regions.find(function(r){return r.id===id})}
+function flag(id){return FLAGS[id]||""}
 
 /* ====== モック天気（フル版 lib/weather/mock.ts と同一ロジック） ====== */
 function det(seed){var x=Math.sin(seed*12.9898)*43758.5453;return x-Math.floor(x)}
@@ -238,23 +398,32 @@ function mockForecast(lat,lng,elev){
     var dt=new Date(now.getTime()+i*86400000);
     daily.push({date:dt.toISOString().slice(0,10),minC:Math.round((base+swing-4)*10)/10,maxC:Math.round((base+swing+4)*10)/10,pp:Math.round(r2*80),wind:Math.round((3+r3*15)*10)/10,code:codes[Math.floor(r2*codes.length)]||2});
   }
-  var rNow=det(seedBase+0.5);
   return {daily:daily,cur:{t:Math.round(((daily[0].minC+daily[0].maxC)/2)*10)/10,wind:daily[0].wind,code:daily[0].code},sr:"05:12",ss:"18:47"};
 }
 
-/* ====== 検索・フィルタ（フル版 lib/search.ts と同一ロジック） ====== */
+/* ====== 検索・フィルタ（フル版 lib/search.ts と同一ロジック＋タグ・並び替え拡張） ====== */
 var BANDS={"0-1999":[0,1999],"2000-2999":[2000,2999],"3000-4999":[3000,4999],"5000-7999":[5000,7999],"8000+":[8000,99999]};
 function textOf(m){var out=[];for(var k in m.translations){var t=m.translations[k];out.push(t.name,t.localName||"",t.summary)}return out.join(" ").toLowerCase()}
 function filterMountains(f){
   var q=(f.q||"").trim().toLowerCase();
-  return DATA.mountains.filter(function(m){
+  var list=DATA.mountains.filter(function(m){
     if(m.status!=="published")return false;
     if(f.country&&m.countryId!==f.country)return false;
     if(f.diff&&m.difficultyLevel!==Number(f.diff))return false;
     if(f.elev){var b=BANDS[f.elev];if(m.elevationM<b[0]||m.elevationM>b[1])return false}
+    if(f.tag&&(m.tags||[]).indexOf(f.tag)<0)return false;
     if(q&&textOf(m).indexOf(q)<0&&m.slug.indexOf(q)<0)return false;
     return true;
-  }).sort(function(a,b){return b.elevationM-a.elevationM});
+  });
+  var s=f.sort||"elevD";
+  list.sort(function(a,b){
+    if(s==="elevA")return a.elevationM-b.elevationM;
+    if(s==="diffA")return a.difficultyLevel-b.difficultyLevel||b.elevationM-a.elevationM;
+    if(s==="diffD")return b.difficultyLevel-a.difficultyLevel||b.elevationM-a.elevationM;
+    if(s==="name")return tr(a).name.localeCompare(tr(b).name,state.locale);
+    return b.elevationM-a.elevationM;
+  });
+  return list;
 }
 function haversine(a,b,c,e){var R=6371,rad=function(x){return x*Math.PI/180};var dl=rad(c-a),dg=rad(e-b);var h=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(dg/2)*Math.sin(dg/2);return 2*R*Math.asin(Math.sqrt(h))}
 function nearby(target,limit){
@@ -265,28 +434,68 @@ function nearby(target,limit){
 function fmtTime(min){
   var D=d();
   if(min>=4320)return D.expedition(Math.round(min/1440));
-  var h=Math.floor(min/60),m=min%60;return D.hm(h,m)||m+ (state.locale==="ja"?"分":"min");
+  var h=Math.floor(min/60),m=min%60;return D.hm(h,m)||m+(state.locale==="ja"?"分":"min");
 }
 
+/* ====== オートコンプリート ====== */
+function suggest(inputId,boxId){
+  var el=document.getElementById(inputId),box=document.getElementById(boxId);
+  if(!el||!box)return;
+  var q=el.value.trim().toLowerCase();
+  if(!q){box.innerHTML="";box.style.display="none";return}
+  var hits=DATA.mountains.filter(function(m){return m.status==="published"&&(textOf(m).indexOf(q)>=0||m.slug.indexOf(q)>=0)}).slice(0,6);
+  if(!hits.length){box.innerHTML="";box.style.display="none";return}
+  box.innerHTML=hits.map(function(m){var t=tr(m);
+    return '<button type="button" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><span class="tri">▲</span><span>'+esc(t.name)+'</span><span class="e mono">'+elevMain(m.elevationM)+" "+elevUnit()+"</span></button>"}).join("");
+  box.style.display="block";
+}
+function hideSug(boxId){setTimeout(function(){var b=document.getElementById(boxId);if(b)b.style.display="none"},160)}
+
 /* ====== HTML部品 ====== */
-function diffBadge(lv){return '<span class="badge d'+lv+'" title="">'+"▲".repeat(lv)+" "+d().diffs[lv]+"</span>"}
+function diffBadge(lv){return '<span class="badge d'+lv+'">'+"▲".repeat(lv)+" "+d().diffs[lv]+"</span>"}
 function tagBadges(tags){return (tags||[]).map(function(t){return d().tags[t]?'<span class="badge plain">'+esc(d().tags[t])+"</span>":""}).join("")}
 function seasonBadge(months){if(!months||!months.length)return "";return '<span class="badge plain">🗓 '+months.map(function(m){return d().months[m-1]}).join(" · ")+"</span>"}
+function gauge(m){
+  var pct=Math.min(100,m.elevationM/8849*100);
+  var refs=[3776,8000];
+  return '<div class="gauge" aria-hidden="true"><div class="base"><div class="fill" style="width:'+pct.toFixed(1)+'%"></div>'+
+    refs.map(function(r){return '<span class="ref" style="left:'+(r/8849*100).toFixed(1)+'%"></span>'}).join("")+
+    '<span class="mk" style="left:'+pct.toFixed(1)+'%">▲</span></div>'+
+    '<div class="lab mono"><span>0</span><span>8,849m</span></div></div>';
+}
 function mountainCard(m){
   var t=tr(m),c=countryOf(m.countryId);
-  return '<div class="card mcard" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">'+
+  return '<div class="card mcard rv" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">'+
+    (isSum(m.id)?'<span class="done">✓ '+(state.locale==="ja"?"登頂":"Climbed")+"</span>":"")+
     '<div class="top"><div><div class="nm">'+esc(t.name)+'</div>'+(t.localName&&t.localName!==t.name?'<div class="ln">'+esc(t.localName)+"</div>":"")+"</div>"+
-    '<div class="el grad-text mono">'+m.elevationM.toLocaleString()+"<small>m</small></div></div>"+
+    '<div class="el mono">'+elevMain(m.elevationM)+"<small> "+elevUnit()+"</small></div></div>"+
     '<div class="sm">'+esc(t.summary)+"</div>"+
-    '<div class="badges">'+diffBadge(m.difficultyLevel)+(c?'<span class="badge plain">'+esc(names(c))+"</span>":"")+'<span style="margin-left:auto;font-size:11px;color:var(--muted)" class="mono">'+ft(m.elevationM).toLocaleString()+" ft</span></div></div>";
+    '<div class="badges">'+diffBadge(m.difficultyLevel)+(c?'<span class="badge plain">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+"</div>"+gauge(m)+"</div>";
 }
 function crumbs(items){
   return '<div class="crumbs">'+items.map(function(it,i){
-    var s=(i?"› ":"")+(it.go?'<a onclick=\''+it.go+'\'>'+esc(it.n)+"</a>":'<span style="color:var(--ink)">'+esc(it.n)+"</span>");return s}).join(" ")+"</div>";
+    var s=(i?'<span class="sep">›</span> ':"")+(it.go?"<a onclick='"+it.go+"'>"+esc(it.n)+"</a>":'<span style="color:var(--ink)">'+esc(it.n)+"</span>");return s}).join(" ")+"</div>";
 }
 function disclaimer(updated){
   var D=d();
-  return '<div class="notice"><b>'+D.disc.t+"</b><br>"+D.disc.b+(updated?"<br><span style='opacity:.75'>"+d().l.updated+": "+new Date(updated).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+"</span>":"")+"</div>";
+  return '<div class="notice"><b>'+D.disc.t+"</b><br>"+D.disc.b+(updated?"<br><span style='opacity:.75'>"+D.l.updated+": "+new Date(updated).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+"</span>":"")+"</div>";
+}
+function seasonStrip(months){
+  var now=new Date().getMonth()+1,D=d();
+  var cells="";
+  for(var i=1;i<=12;i++){cells+='<div class="m'+((months||[]).indexOf(i)>=0?" on":"")+(i===now?" now":"")+'">'+D.monthsS[i-1]+"</div>"}
+  return '<div class="season">'+cells+"</div>";
+}
+function cmpPanel(m){
+  var D=d(),t=tr(m);
+  var refs=[{n:"Everest",e:8849},{n:"Mont Blanc",e:4808},{n:state.locale==="ja"?"富士山":"Mt. Fuji",e:3776}];
+  var rows=refs.filter(function(r){return Math.abs(r.e-m.elevationM)>1}).map(function(r){
+    return '<div class="row"><span class="nm">'+esc(r.n)+'</span><div class="bar"><i style="width:'+(r.e/8849*100).toFixed(1)+'%"></i></div><span class="v mono">'+r.e.toLocaleString()+"m</span></div>"});
+  var me='<div class="row me"><span class="nm">'+esc(t.name)+'</span><div class="bar"><i style="width:'+(m.elevationM/8849*100).toFixed(1)+'%"></i></div><span class="v mono">'+m.elevationM.toLocaleString()+"m</span></div>";
+  var all=[];var ins=false;
+  refs.forEach(function(r){if(!ins&&m.elevationM>=r.e){all.push(me);ins=true}if(Math.abs(r.e-m.elevationM)>1)all.push('<div class="row"><span class="nm">'+esc(r.n)+'</span><div class="bar"><i style="width:'+(r.e/8849*100).toFixed(1)+'%"></i></div><span class="v mono">'+r.e.toLocaleString()+"m</span></div>")});
+  if(!ins)all.push(me);
+  return '<div class="cmp">'+all.join("")+"</div>";
 }
 function weatherPanel(m){
   var D=d(),f=mockForecast(m.lat,m.lng,m.elevationM);
@@ -294,77 +503,123 @@ function weatherPanel(m){
   var cur=wc(f.cur.code);
   var days=f.daily.map(function(day){var w=wc(day.code);var dt=new Date(day.date);
     return '<div class="day"><div>'+(dt.getMonth()+1)+"/"+dt.getDate()+'</div><div class="i" title="'+esc(w.l)+'">'+w.i+'</div><div class="mx mono">'+Math.round(day.maxC)+'°</div><div class="mn mono">'+Math.round(day.minC)+'°</div><div class="pp mono">'+day.pp+"%</div></div>"}).join("");
-  return '<div class="card weather"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:13px;font-weight:800">'+D.w.now+'</h3><span class="badge plain">'+D.w.mock+'</span></div>'+
-    '<div class="now"><span class="ico">'+cur.i+'</span><div><div class="t mono">'+f.cur.t.toFixed(1)+'<small style="font-size:13px">°C</small></div><div class="c">'+esc(cur.l)+" · "+D.w.wind+" "+Math.round(f.cur.wind)+'m/s</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted);text-align:right">🌅 '+f.sr+"<br>🌇 "+f.ss+"</div></div>"+
-    '<div style="font-size:10px;color:var(--muted);margin-top:4px">'+D.w.est+": "+m.elevationM.toLocaleString()+'m</div>'+
-    '<h4 style="font-size:11px;font-weight:800;color:var(--muted);margin-top:12px">'+D.w.week+'</h4><div class="wk">'+days+"</div>"+
-    '<div class="notice" style="margin-top:10px;font-size:10px;padding:8px 12px">⚠ '+D.w.note+"</div></div>";
+  return '<div class="card weather"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier)">'+D.w.now+'</h3><span class="badge plain">'+D.w.mock+'</span></div>'+
+    '<div class="now"><span class="ico">'+cur.i+'</span><div><div class="t mono">'+f.cur.t.toFixed(1)+'<small>°C</small></div><div class="c">'+esc(cur.l)+" · "+D.w.wind+" "+Math.round(f.cur.wind)+'m/s</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted);text-align:right">🌅 '+f.sr+"<br>🌇 "+f.ss+"</div></div>"+
+    '<div style="font-size:10px;color:var(--muted);margin-top:5px">'+D.w.est+": "+m.elevationM.toLocaleString()+'m</div>'+
+    '<h4 style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:13px">'+D.w.week+'</h4><div class="wk">'+days+"</div>"+
+    '<div class="notice" style="margin-top:11px;font-size:10.5px;padding:9px 13px">'+D.w.note+"</div></div>";
 }
 function mapEmbed(m,label){
   var dl=0.35,bbox=(m.lng-dl)+","+(m.lat-dl)+","+(m.lng+dl)+","+(m.lat+dl);
   return '<div class="osm"><iframe loading="lazy" title="'+esc(label)+'" src="https://www.openstreetmap.org/export/embed.html?bbox='+encodeURIComponent(bbox)+'&layer=mapnik&marker='+m.lat+","+m.lng+'"></iframe><div class="cap">© OpenStreetMap — '+m.lat.toFixed(4)+", "+m.lng.toFixed(4)+"</div></div>";
+}
+function secHead(eyeKey,title,moreHtml){
+  var D=d();
+  return '<h2 class="sec"><span class="eyebrow mono">△ '+esc(D.eyebrows[eyeKey]||"")+'</span><span class="tt disp">'+esc(title)+"</span>"+(moreHtml||"")+"</h2>";
+}
+function heroSVG(){
+  return '<svg class="ridge" viewBox="0 0 1200 430" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'+
+  '<defs><radialGradient id="glow" cx="72%" cy="18%" r="52%"><stop offset="0%" stop-color="#F3C9A8" stop-opacity=".5"/><stop offset="55%" stop-color="#E9A98C" stop-opacity=".14"/><stop offset="100%" stop-color="#E9A98C" stop-opacity="0"/></radialGradient></defs>'+
+  '<rect width="1200" height="430" fill="url(#glow)"/>'+
+  '<g stroke="#FFFFFF" stroke-opacity=".05" fill="none" stroke-width="1">'+
+    '<path d="M-20,300 C200,270 380,290 620,255 S1000,235 1220,258"/>'+
+    '<path d="M-20,330 C220,300 420,318 660,286 S1020,268 1220,290"/>'+
+    '<path d="M-20,360 C240,332 460,348 700,318 S1040,300 1220,322"/>'+
+    '<path d="M-20,390 C260,364 500,378 740,350 S1060,334 1220,354"/>'+
+  '</g>'+
+  '<path d="M-20,430 L120,318 L215,362 L340,252 L432,308 L560,214 L640,268 L760,196 L858,258 L980,206 L1090,268 L1220,232 L1220,430 Z" fill="#1A2C36" opacity=".55"/>'+
+  '<path d="M-20,430 L90,352 L200,394 L330,300 L448,356 L590,268 L700,324 L830,252 L950,312 L1080,264 L1220,318 L1220,430 Z" fill="#131F27" opacity=".8"/>'+
+  '<path d="M-20,430 L140,384 L300,414 L470,342 L620,392 L790,318 L930,372 L1090,330 L1220,368 L1220,430 Z" fill="#0C161C"/>'+
+  '<path class="routeline" d="M40,404 L180,376 L300,398 L470,346 L620,384 L790,322 L888,352 L1010,300 L1096,318 L1178,282" fill="none" stroke="#E8776A" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 7"/>'+
+  '<g fill="none" stroke="#E8776A" stroke-width="1.6"><path d="M1178,282 l-6,10 h12 Z" fill="#E8776A"/></g>'+
+  '</svg>';
 }
 
 /* ====== ビュー ====== */
 function vHome(){
   var D=d();
   var featured=DATA.mountains.slice().sort(function(a,b){return b.elevationM-a.elevationM}).slice(0,6);
+  var nowM=new Date().getMonth()+1;
+  var seasonal=DATA.mountains.filter(function(m){return (m.bestSeasons||[]).indexOf(nowM)>=0}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel}).slice(0,3);
   var arts=DATA.articles.slice(0,3);
-  return '<section class="card hero"><div class="kicker">'+D.hero.k+'</div><h1>'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
-    '<div class="searchrow"><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" onkeydown="if(event.key===\'Enter\'){event.preventDefault();homeSearch()}"><button class="grad" onclick="homeSearch()">'+D.hero.go+"</button></div></section>"+
-    '<h2 class="sec">'+D.featured+'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+'</span></h2><div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
-    '<h2 class="sec">'+D.lists+'</h2><div class="grid">'+DATA.rankings.map(function(r){
-      return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">🏆 '+esc(names(r))+'</div><div class="sm">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--accent)">'+r.mountainIds.length+" "+d().l.peaks+" →</span></div></div>"}).join("")+"</div>"+
-    '<h2 class="sec">'+D.byCountry+'</h2><div class="chips">'+DATA.countries.map(function(c){
-      return '<span class="chip" onclick=\'go({name:"mountains",country:"'+c.id+'"})\'>'+esc(names(c))+"</span>"}).join("")+"</div>"+
-    '<h2 class="sec">'+D.newest+'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+'</span></h2><div class="grid">'+arts.map(articleCard).join("")+"</div>";
+  var sums=getSum();
+  var yourHtml="";
+  if(sums.length){
+    yourHtml=secHead("your",D.your)+'<div class="grid">'+DATA.rankings.map(function(r){
+      var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
+      return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">'+esc(names(r))+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
+  }
+  return '<section class="hero">'+heroSVG()+'<div class="inner"><div class="kicker mono">'+D.hero.k+'</div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
+    '<div class="searchbox"><div class="searchrow"><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" autocomplete="off" oninput="suggest(\'homeQ\',\'homeSug\')" onblur="hideSug(\'homeSug\')" onkeydown="if(event.key===\'Enter\'){event.preventDefault();homeSearch()}"><button onclick="homeSearch()">'+D.hero.go+'</button></div><div id="homeSug" class="sug" style="display:none"></div></div></section>'+
+    (seasonal.length?secHead("season",D.season_now,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+seasonal.map(mountainCard).join("")+"</div>":"")+
+    secHead("featured",D.featured,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
+    yourHtml+
+    secHead("lists",D.lists)+'<div class="grid">'+DATA.rankings.map(function(r){
+      var done=sums.length?r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length:0;
+      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">🏆 '+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--glacier)">'+r.mountainIds.length+" "+D.l.peaks+" →</span>"+(done?'<span class="badge d1">✓ '+done+"</span>":"")+"</div></div>"}).join("")+"</div>"+
+    secHead("byCountry",D.byCountry)+'<div class="chips">'+DATA.countries.map(function(c){
+      return '<span class="chip" onclick=\'go({name:"mountains",country:"'+c.id+'"})\'>'+flag(c.id)+" "+esc(names(c))+"</span>"}).join("")+"</div>"+
+    secHead("newest",D.newest,'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+"</span>")+'<div class="grid">'+arts.map(articleCard).join("")+"</div>";
 }
 function homeSearch(){var q=document.getElementById("homeQ").value;go({name:"mountains",q:q})}
 function vMountains(){
   var D=d(),f=state.filters;
   var list=filterMountains(f);
   var opts=function(sel,items){return items.map(function(it){return '<option value="'+it[0]+'"'+(sel===it[0]?" selected":"")+">"+esc(it[1])+"</option>"}).join("")};
+  var tagChips='<div class="chips" style="margin:14px 0 4px">'+['',"hyakumeizan","seven-summits","8000m","beginner"].map(function(t){
+    var lbl=t?D.tags[t]:D.f.any;
+    return '<span class="chip'+(f.tag===t?" on":"")+'" onclick="state.filters.tag=\''+t+'\';render()">'+esc(lbl)+"</span>"}).join("")+"</div>";
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains}])+
-    '<h1 style="font-size:24px;font-weight:800;margin-bottom:14px">'+D.tabs.mountains+"</h1>"+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.mountains+"</h1>"+
     '<div class="card"><div class="filters">'+
-    '<label>'+D.f.kw+'<input id="fQ" value="'+esc(f.q)+'" onkeydown="if(event.key===\'Enter\')applyFilters()"></label>'+
-    '<label>'+D.f.country+'<select id="fC">'+opts(f.country,[["",D.f.allC]].concat(DATA.countries.map(function(c){return[c.id,names(c)]})))+"</select></label>"+
-    '<label>'+D.f.elev+'<select id="fE">'+opts(f.elev,[["",D.f.any]].concat(Object.keys(BANDS).map(function(k){return[k,k+" m"]})))+"</select></label>"+
-    '<label>'+D.f.diff+'<select id="fD">'+opts(f.diff,[["",D.f.allD],["1","1 "+D.diffs[1]],["2","2 "+D.diffs[2]],["3","3 "+D.diffs[3]],["4","4 "+D.diffs[4]],["5","5 "+D.diffs[5]]])+"</select></label>"+
-    '<div style="display:flex;align-items:flex-end;gap:8px"><button class="grad" style="flex:1;border-radius:12px;padding:8px;color:#fff;font-weight:700;font-size:13px" onclick="applyFilters()">'+D.hero.go+'</button><button style="border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--muted)" onclick="resetFilters()">'+D.f.reset+"</button></div></div></div>"+
-    '<div class="count"><b style="color:var(--ink)">'+list.length+"</b> "+D.f.found+"</div>"+
-    (list.length?'<div class="grid">'+list.map(mountainCard).join("")+"</div>":'<div class="empty">🏔<br>'+D.f.none+"</div>");
+    '<label>'+D.f.kw+'<input id="fQ" value="'+esc(f.q)+'" autocomplete="off" oninput="suggest(\'fQ\',\'fSug\')" onblur="hideSug(\'fSug\')" onkeydown="if(event.key===\'Enter\')applyFilters()"><div id="fSug" class="sug" style="display:none;text-transform:none;letter-spacing:0;font-weight:400"></div></label>'+
+    '<label>'+D.f.country+'<select id="fC" onchange="applyFilters()">'+opts(f.country,[["",D.f.allC]].concat(DATA.countries.map(function(c){return[c.id,names(c)]})))+"</select></label>"+
+    '<label>'+D.f.elev+'<select id="fE" onchange="applyFilters()">'+opts(f.elev,[["",D.f.any]].concat(Object.keys(BANDS).map(function(k){return[k,k+" m"]})))+"</select></label>"+
+    '<label>'+D.f.diff+'<select id="fD" onchange="applyFilters()">'+opts(f.diff,[["",D.f.allD],["1","1 "+D.diffs[1]],["2","2 "+D.diffs[2]],["3","3 "+D.diffs[3]],["4","4 "+D.diffs[4]],["5","5 "+D.diffs[5]]])+"</select></label>"+
+    '<div style="display:flex;gap:8px"><button style="flex:1;background:var(--route);color:#fff;border-radius:10px;padding:9px 16px;font-weight:700;font-size:13px" onclick="applyFilters()">'+D.hero.go+'</button><button style="border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;color:var(--muted)" onclick="resetFilters()">'+D.f.reset+"</button></div></div>"+tagChips+"</div>"+
+    '<div class="sortrow"><span class="count" style="margin:0"><b>'+list.length+"</b> "+D.f.found+'</span><span style="margin-left:auto;font-size:12px;color:var(--muted)">'+D.sort.t+'</span><select onchange="state.filters.sort=this.value;render()">'+
+    [["elevD",D.sort.elevD],["elevA",D.sort.elevA],["diffA",D.sort.diffA],["diffD",D.sort.diffD],["name",D.sort.name]].map(function(o){return '<option value="'+o[0]+'"'+(f.sort===o[0]?" selected":"")+">"+o[1]+"</option>"}).join("")+"</select></div>"+
+    (list.length?'<div class="grid">'+list.map(mountainCard).join("")+"</div>":'<div class="empty"><div class="big">🏔</div>'+D.f.none+"</div>");
 }
-function applyFilters(){state.filters={q:document.getElementById("fQ").value,country:document.getElementById("fC").value,elev:document.getElementById("fE").value,diff:document.getElementById("fD").value};render()}
-function resetFilters(){state.filters={q:"",country:"",elev:"",diff:""};render()}
+function applyFilters(){state.filters.q=document.getElementById("fQ").value;state.filters.country=document.getElementById("fC").value;state.filters.elev=document.getElementById("fE").value;state.filters.diff=document.getElementById("fD").value;render()}
+function resetFilters(){state.filters={q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD"};render()}
+function shareLink(){
+  var D=d();
+  var done=function(){var t=document.getElementById("toast");t.textContent=D.l.shared;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1800)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(location.href).then(done,done)}else{done()}
+}
 function vMountain(slug){
   var m=DATA.mountains.find(function(x){return x.slug===slug});
   if(!m)return '<div class="empty">404 — not found</div>';
   var D=d(),t=tr(m),c=countryOf(m.countryId),r=regionOf(m.regionId);
   var routes=DATA.routes.filter(function(x){return x.mountainId===m.id&&x.status==="published"}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel});
   var near=nearby(m,4);
+  var sum=isSum(m.id);
   var sect=function(title,body){return body?'<div class="card sect"><h3>'+title+'</h3><p>'+esc(body)+"</p></div>":""};
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains,go:'go({name:"mountains"})'},{n:c?names(c):"",go:'go({name:"mountains",country:"'+m.countryId+'"})'},{n:t.name}])+
-    '<div class="card detail-hero"><div class="row"><div><h1>'+esc(t.name)+"</h1>"+(t.localName?'<div class="local">'+esc(t.localName)+"</div>":"")+
-    '<div class="badges" style="margin-top:10px">'+diffBadge(m.difficultyLevel)+tagBadges(m.tags)+seasonBadge(m.bestSeasons)+"</div></div>"+
-    '<div><div class="elv grad-text mono">'+m.elevationM.toLocaleString()+'<small>m</small></div><div class="meta mono">'+ft(m.elevationM).toLocaleString()+' ft</div><div class="meta">'+(c?esc(names(c)):"")+(r?" · "+esc(names(r)):"")+"</div></div></div>"+
-    '<p style="margin-top:14px;font-size:14px;color:var(--muted)">'+esc(t.summary)+"</p></div>"+
+    '<div class="card detail-hero"><div class="row"><div><h1 class="disp">'+esc(t.name)+"</h1>"+(t.localName?'<div class="local">'+esc(t.localName)+"</div>":"")+
+    '<div class="badges" style="margin-top:12px">'+diffBadge(m.difficultyLevel)+tagBadges(m.tags)+seasonBadge(m.bestSeasons)+"</div></div>"+
+    '<div><div class="elv mono">'+elevMain(m.elevationM)+'<small> '+elevUnit()+'</small></div><div class="meta mono">'+elevAlt(m.elevationM)+'</div><div class="meta">'+(c?flag(c.id)+" "+esc(names(c)):"")+(r?" · "+esc(names(r)):"")+"</div></div></div>"+
+    '<p style="margin-top:14px;font-size:14px;color:var(--muted);line-height:1.9">'+esc(t.summary)+"</p>"+
+    '<div class="actrow"><button class="abtn'+(sum?" done":"")+'" onclick="toggleSum(\''+m.id+'\')" title="'+(sum?D.l.unclimbed:D.l.summit)+'">'+(sum?D.l.summited:"⛰ "+D.l.summit)+'</button><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div></div>"+
     '<div class="cols"><div>'+
     sect(D.l.features,t.features)+
-    (t.history?'<div class="card sect"><h3>'+D.l.history+'</h3><p>'+esc(t.history)+"</p>"+(m.firstAscentYear?'<p style="margin-top:8px;font-size:12px;color:var(--muted);background:var(--bg);border-radius:10px;padding:8px 12px">🏔 '+D.l.firstAscent+": "+m.firstAscentYear+" — "+esc(m.firstAscentParty||"")+"</p>":"")+"</div>":"")+
+    (t.history?'<div class="card sect"><h3>'+D.l.history+'</h3><p>'+esc(t.history)+"</p>"+(m.firstAscentYear?'<p style="margin-top:10px;font-size:12px;color:var(--muted);background:var(--paper);border-radius:10px;padding:9px 13px">🏔 '+D.l.firstAscent+": "+m.firstAscentYear+" — "+esc(m.firstAscentParty||"")+"</p>":"")+"</div>":"")+
     (t.hazards?'<div class="hazard sect"><h3>'+D.l.hazards+'</h3><p>'+esc(t.hazards)+"</p></div>":"")+
     sect(D.l.access,t.access)+
     sect(D.l.equipment,t.equipment)+
     (routes.length?'<div class="card sect"><h3>'+D.l.routes+"</h3>"+routes.map(function(rt){var rtt=tr(rt);
       return '<div class="rcard" onclick="event.stopPropagation();go({name:\'route\',slug:\''+rt.slug+'\'})"><div class="rt"><span>'+esc(rtt.name)+"</span>"+diffBadge(rt.difficultyLevel)+'</div><div class="rs">'+esc(rtt.overview.slice(0,90))+'…</div><div class="rs mono">📏 '+rt.distanceKm+"km ・ ↗ "+rt.elevationGainM.toLocaleString()+"m ・ ⏱ "+fmtTime(rt.estTimeMin)+"</div></div>"}).join("")+"</div>":"")+
     disclaimer(m.updatedAt)+
-    "</div><aside>"+weatherPanel(m)+mapEmbed(m,t.name)+
-    '<div class="card" style="margin-top:14px"><h3 style="font-size:13px;font-weight:800;color:var(--accent);margin-bottom:8px">'+D.l.data+'</h3><table class="dtable"><tr><td>'+D.l.elevation+'</td><td class="mono">'+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft</td></tr>"+
+    '</div><aside class="sticky">'+weatherPanel(m)+mapEmbed(m,t.name)+
+    '<div class="card"><h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier);margin-bottom:9px">'+D.l.data+'</h3><table class="dtable"><tr><td>'+D.l.elevation+'</td><td class="mono">'+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft</td></tr>"+
     (m.prominenceM?"<tr><td>"+D.l.prominence+'</td><td class="mono">'+m.prominenceM.toLocaleString()+"m</td></tr>":"")+
     "<tr><td>"+D.l.coords+'</td><td class="mono">'+m.lat.toFixed(4)+", "+m.lng.toFixed(4)+"</td></tr>"+
-    "<tr><td>"+D.l.season+"</td><td>"+(m.bestSeasons||[]).map(function(x){return D.months[x-1]}).join(", ")+"</td></tr>"+
-    "<tr><td>"+D.l.routes+'</td><td class="mono">'+routes.length+"</td></tr></table></div></aside></div>"+
-    (near.length?'<h2 class="sec">'+D.l.nearby+'</h2><div class="grid">'+near.map(mountainCard).join("")+"</div>":"");
+    "<tr><td>"+D.l.routes+'</td><td class="mono">'+routes.length+"</td></tr></table>"+
+    '<h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier);margin:15px 0 3px">'+D.l.season+'</h3>'+seasonStrip(m.bestSeasons)+
+    '<h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier);margin:16px 0 3px">'+D.l.cmp+'</h3>'+cmpPanel(m)+
+    "</div></aside></div>"+
+    (near.length?secHead("nearby",D.l.nearby)+'<div class="grid">'+near.map(mountainCard).join("")+"</div>":"");
 }
 function vRoute(slug){
   var rt=DATA.routes.find(function(x){return x.slug===slug});
@@ -374,42 +629,47 @@ function vRoute(slug){
   var mt=m?tr(m):null;
   var stat=function(l,v){return '<div class="stat"><div class="l">'+l+'</div><div class="v mono">'+v+"</div></div>"};
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains,go:'go({name:"mountains"})'},{n:mt?mt.name:"",go:'go({name:"mountain",slug:"'+(m?m.slug:"")+'"})'},{n:t.name}])+
-    '<div class="card detail-hero">'+(m&&mt?'<a style="font-size:13px;color:var(--accent);cursor:pointer" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">⛰ '+esc(mt.name)+" ("+m.elevationM.toLocaleString()+"m)</a>":"")+
-    '<h1 style="margin-top:4px">'+esc(t.name)+'</h1><div class="badges" style="margin-top:10px">'+diffBadge(rt.difficultyLevel)+(rt.techGrade?'<span class="badge plain">'+D.l.tech+": "+esc(rt.techGrade)+"</span>":"")+seasonBadge(rt.seasons)+"</div>"+
-    '<div class="stats">'+stat(D.l.dist,rt.distanceKm+" km")+stat(D.l.gain,rt.elevationGainM.toLocaleString()+" m")+stat(D.l.time,fmtTime(rt.estTimeMin))+stat(D.l.stamina,"●".repeat(rt.staminaLevel)+"○".repeat(5-rt.staminaLevel))+"</div></div>"+
+    '<div class="card detail-hero">'+(m&&mt?'<a style="font-size:13px;color:var(--glacier);cursor:pointer;font-weight:600" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">⛰ '+esc(mt.name)+" ("+m.elevationM.toLocaleString()+"m)</a>":"")+
+    '<h1 class="disp" style="margin-top:6px">'+esc(t.name)+'</h1><div class="badges" style="margin-top:12px">'+diffBadge(rt.difficultyLevel)+(rt.techGrade?'<span class="badge plain">'+D.l.tech+": "+esc(rt.techGrade)+"</span>":"")+seasonBadge(rt.seasons)+"</div>"+
+    '<div class="stats">'+stat(D.l.dist,rt.distanceKm+" km")+stat(D.l.gain,rt.elevationGainM.toLocaleString()+" m")+stat(D.l.time,fmtTime(rt.estTimeMin))+stat(D.l.stamina,"●".repeat(rt.staminaLevel)+"○".repeat(5-rt.staminaLevel))+"</div>"+
+    '<div style="margin-top:14px">'+seasonStrip(rt.seasons)+"</div></div>"+
     '<div class="cols"><div>'+
     '<div class="card sect"><h3>'+D.l.summary+'</h3><p>'+esc(t.overview)+"</p></div>"+
     (t.hazards?'<div class="hazard sect"><h3>'+D.l.hazards+'</h3><p>'+esc(t.hazards)+"</p></div>":"")+
     (t.notes?'<div class="card sect"><h3>'+D.l.notes+'</h3><p>'+esc(t.notes)+"</p></div>":"")+
-    disclaimer(rt.updatedAt)+"</div><aside>"+(m?mapEmbed(m,t.name):"")+"</aside></div>";
+    disclaimer(rt.updatedAt)+'</div><aside class="sticky">'+(m?mapEmbed(m,t.name):"")+"</aside></div>";
 }
 function vRankings(){
-  var D=d();
+  var D=d(),sums=getSum();
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.rankings}])+
-    '<h1 style="font-size:24px;font-weight:800;margin-bottom:14px">'+D.tabs.rankings+'</h1><div class="grid">'+
-    DATA.rankings.map(function(r){return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div style="font-size:24px">🏆</div><div class="nm" style="margin-top:6px">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--accent)">'+r.mountainIds.length+" "+D.l.peaks+" →</span></div></div>"}).join("")+"</div>";
+    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.rankings+'</h1><div class="grid">'+
+    DATA.rankings.map(function(r){
+      var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
+      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div style="font-size:24px">🏆</div><div class="nm" style="margin-top:7px">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
 }
 function vRanking(slug){
   var r=DATA.rankings.find(function(x){return x.slug===slug});
   if(!r)return '<div class="empty">404</div>';
-  var D=d();
+  var D=d(),sums=getSum();
   var ms=r.mountainIds.map(function(id){return DATA.mountains.find(function(m){return m.id===id})}).filter(Boolean).sort(function(a,b){return b.elevationM-a.elevationM});
+  var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.rankings,go:'go({name:"rankings"})'},{n:names(r)}])+
-    '<div class="card detail-hero"><h1>🏆 '+esc(names(r))+'</h1><p style="margin-top:10px;font-size:14px;color:var(--muted)">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+"</p></div>"+
-    '<ol class="ranklist" style="margin-top:16px">'+ms.map(function(m,i){var t=tr(m),c=countryOf(m.countryId);
-      return '<li onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><span class="no grad-text mono">'+(i+1)+'</span><div><div class="nm">'+esc(t.name)+'</div><div class="sub">'+(c?esc(names(c)):"")+" · "+esc(t.summary.slice(0,50))+'…</div></div><div class="rgt"><div class="e mono">'+m.elevationM.toLocaleString()+"m</div>"+diffBadge(m.difficultyLevel)+"</div></li>"}).join("")+"</ol>";
+    '<div class="card detail-hero"><h1 class="disp">🏆 '+esc(names(r))+'</h1><p style="margin-top:10px;font-size:14px;color:var(--muted);line-height:1.85">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+"</p>"+
+    '<div class="progress"><div class="bar"><i style="width:'+(done/ms.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,ms.length)+"</b></span><span class='mono'>"+(done/ms.length*100).toFixed(0)+"%</span></div></div></div>"+
+    '<ol class="ranklist" style="margin-top:16px">'+ms.map(function(m,i){var t=tr(m),c=countryOf(m.countryId);var on=sums.indexOf(m.id)>=0;
+      return '<li onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><button class="ckbtn'+(on?" on":"")+'" aria-label="'+(on?D.l.unclimbed:D.l.summit)+'" onclick="event.stopPropagation();toggleSum(\''+m.id+'\')">✓</button><span class="no mono">'+(i+1)+'</span><div><div class="nm">'+esc(t.name)+'</div><div class="sub">'+(c?flag(c.id)+" "+esc(names(c)):"")+" · "+esc(t.summary.slice(0,50))+'…</div></div><div class="rgt"><div class="e mono">'+elevMain(m.elevationM)+" "+elevUnit()+"</div>"+diffBadge(m.difficultyLevel)+"</div></li>"}).join("")+"</ol>";
 }
 function articleCard(a){
   var t=tr(a),D=d();
-  return '<div class="card acard" onclick="go({name:\'article\',slug:\''+a.slug+'\'})"><div class="cat"><span>'+esc(D.cats[a.category]||a.category)+"</span>"+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+'</div><div class="ti">'+esc(t.title)+'</div><div class="ds">'+esc(t.metaDesc||t.body.slice(0,100))+"</div></div>";
+  return '<div class="card acard rv" onclick="go({name:\'article\',slug:\''+a.slug+'\'})"><div class="cat"><span>'+esc(D.cats[a.category]||a.category)+"</span>"+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+'</div><div class="ti">'+esc(t.title)+'</div><div class="ds">'+esc(t.metaDesc||t.body.slice(0,100))+"</div></div>";
 }
 function vArticles(){
   var D=d();
   var cats=Object.keys(D.cats);
   var list=DATA.articles.filter(function(a){return !state.artCat||a.category===state.artCat});
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.articles}])+
-    '<h1 style="font-size:24px;font-weight:800;margin-bottom:14px">'+D.tabs.articles+'</h1>'+
-    '<div class="chips" style="margin-bottom:16px"><span class="chip'+(state.artCat===""?" on":"")+'" onclick="state.artCat=\'\';render()">'+D.f.any+"</span>"+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.articles+'</h1>'+
+    '<div class="chips" style="margin-bottom:18px"><span class="chip'+(state.artCat===""?" on":"")+'" onclick="state.artCat=\'\';render()">'+D.f.any+"</span>"+
     cats.map(function(c){return '<span class="chip'+(state.artCat===c?" on":"")+'" onclick="state.artCat=\''+c+'\';render()">'+esc(D.cats[c])+"</span>"}).join("")+"</div>"+
     (list.length?'<div class="grid">'+list.map(articleCard).join("")+"</div>":'<div class="empty">—</div>');
 }
@@ -419,14 +679,15 @@ function vArticle(slug){
   var D=d(),t=tr(a);
   return '<div class="article-body">'+crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.articles,go:'go({name:"articles"})'},{n:t.title}])+
     '<div class="cat" style="font-size:12px;color:var(--muted)"><span class="badge plain">'+esc(D.cats[a.category]||a.category)+"</span> "+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+" · "+esc(a.authorName)+"</div>"+
-    '<h1 style="font-size:26px;font-weight:800;line-height:1.4;margin:10px 0 16px">'+esc(t.title)+"</h1>"+
+    '<h1 class="disp">'+esc(t.title)+"</h1>"+
     '<div class="card">'+t.body.split(/\n\n+/).map(function(p){return "<p>"+esc(p)+"</p>"}).join("")+"</div>"+
+    '<div style="margin-top:14px"><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div>"+
     '<div style="margin-top:14px">'+disclaimer(a.publishedAt)+"</div></div>";
 }
 
 /* ====== ルーティング ====== */
 function go(view){
-  if(view.name==="mountains"){state.filters={q:view.q||"",country:view.country||"",elev:"",diff:""}}
+  if(view.name==="mountains"){state.filters={q:view.q||"",country:view.country||"",elev:"",diff:"",tag:"",sort:"elevD"}}
   state.view=view;
   var h="#/"+state.locale+"/"+view.name+(view.slug?"/"+view.slug:"");
   if(location.hash!==h){history.pushState(null,"",h)}
@@ -438,6 +699,14 @@ function parseHash(){
   var name=p[0]||"home",slug=p[1];
   var valid={home:1,mountains:1,mountain:1,route:1,rankings:1,ranking:1,articles:1,article:1};
   state.view=valid[name]?{name:name,slug:slug}:{name:"home"};
+}
+var _obs=null;
+function reveal(){
+  var els=document.querySelectorAll(".rv:not(.in)");
+  if(!("IntersectionObserver" in window)){els.forEach?els.forEach(function(e){e.classList.add("in")}):Array.prototype.forEach.call(els,function(e){e.classList.add("in")});return}
+  if(_obs)_obs.disconnect();
+  _obs=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");_obs.unobserve(en.target)}})},{threshold:.06,rootMargin:"0px 0px -20px 0px"});
+  Array.prototype.forEach.call(els,function(e){_obs.observe(e)});
 }
 function render(){
   var D=d(),v=state.view,html="";
@@ -456,38 +725,50 @@ function render(){
   var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles]];
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
-  /* 言語ピル */
+  /* 言語・単位ピル */
   Array.prototype.forEach.call(document.querySelectorAll("#langPill button"),function(b){b.classList.toggle("on",b.dataset.l===state.locale)});
+  Array.prototype.forEach.call(document.querySelectorAll("#unitPill button"),function(b){b.classList.toggle("on",b.dataset.u===state.unit)});
   document.documentElement.lang=state.locale;
   document.getElementById("fnote").textContent=D.fnote;
   document.getElementById("fdisc").innerHTML="<b>"+D.disc.t+"</b><br>"+D.disc.b;
   document.title=(state.locale==="ja"?"Mountain Peak — 世界の山岳データベース（デモ版）":"Mountain Peak — Global Mountain Database (Demo)");
+  reveal();
 }
 
 /* ====== 初期化 ====== */
 document.getElementById("langPill").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;
   state.locale=b.dataset.l;
-  try{localStorage.setItem("mp-demo-lang",state.locale)}catch(err){}
+  store("mp-demo-lang",state.locale);
   go(state.view);
+});
+document.getElementById("unitPill").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;
+  state.unit=b.dataset.u;
+  store("mp-demo-unit",state.unit);
+  render();
 });
 document.getElementById("themeBtn").addEventListener("click",function(){
   var dark=document.documentElement.classList.toggle("dark");
   this.textContent=dark?"☀️":"🌙";
-  try{localStorage.setItem("mp-demo-theme",dark?"dark":"light")}catch(err){}
+  store("mp-demo-theme",dark?"dark":"light");
 });
+var toTop=document.getElementById("toTop");
+toTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
+window.addEventListener("scroll",function(){toTop.classList.toggle("show",window.scrollY>560)},{passive:true});
 window.addEventListener("popstate",function(){parseHash();render()});
 window.addEventListener("hashchange",function(){parseHash();render()});
-try{
-  var th=localStorage.getItem("mp-demo-theme");
-  if(th==="dark"||(!th&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark");document.getElementById("themeBtn").textContent="☀️"}
-  var lg=localStorage.getItem("mp-demo-lang");if(lg==="en"||lg==="ja")state.locale=lg;
-}catch(err){}
+(function(){
+  var th=load("mp-demo-theme");
+  if(th==="dark"||(!th&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark");document.getElementById("themeBtn").textContent="☀️"}
+  var lg=load("mp-demo-lang");if(lg==="en"||lg==="ja")state.locale=lg;
+  var un=load("mp-demo-unit");if(un==="ft"||un==="m")state.unit=un;
+})();
 parseHash();
 render();
 /* 検証用フック */
-window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA};
-window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;
+window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
+window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;
 })();
 </script>
 </body>
