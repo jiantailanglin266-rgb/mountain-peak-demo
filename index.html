@@ -517,7 +517,7 @@ function gauge(m){
 }
 var MT_PHOTOS={"mount-fuji":1,"kita-dake":1,"yarigatake":1,"okuhotaka-dake":1,"tateyama":1,"daisen":1,"mount-takao":1,"mount-everest":1,"k2":1,"annapurna":1,"mont-blanc":1,"matterhorn":1,"kilimanjaro":1,"denali":1,"aconcagua":1,"elbrus":1,"vinson-massif":1,"puncak-jaya":1};
 function mtPhoto(m,alt){
-  if(MT_PHOTOS[m.slug])return '<img loading="lazy" src="images/mountains/'+m.slug+'.jpg" alt="'+esc(alt||"")+'">';
+  if(MT_PHOTOS[m.slug])return '<img decoding="async" src="images/mountains/'+m.slug+'.jpg" alt="'+esc(alt||"")+'">';
   return '<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="#2E4A57"/><path d="M-5 78 L28 38 L44 58 L60 30 L82 62 L105 50 L105 105 L-5 105 Z" fill="#1B2A32"/><path d="M60 30 L67 40 L60 45 L53 40 Z" fill="#E7EEEA" opacity=".85"/><circle cx="79" cy="19" r="7" fill="#F3C9A8" opacity=".75"/></svg>';
 }
 function rankThumbs(r){
