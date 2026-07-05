@@ -76,6 +76,10 @@ main{min-height:70vh;padding:26px 0 64px}
 .hero .ridge{position:absolute;inset:0;width:100%;height:100%;display:block}
 .hero .inner{position:relative;z-index:2;padding:56px 40px 130px;max-width:640px}
 @media(max-width:640px){.hero .inner{padding:40px 22px 110px}}
+.hero .emblem{position:absolute;z-index:3;right:52px;top:50%;transform:translateY(-52%);width:238px;height:238px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.22),0 30px 70px -24px rgba(0,0,0,.6),0 0 90px rgba(127,184,218,.3)}
+.hero .emblem img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.045)}
+@media(max-width:1000px){.hero .emblem{width:190px;height:190px;right:28px}}
+@media(max-width:880px){.hero .emblem{width:92px;height:92px;right:20px;top:22px;transform:none}.hero .inner{padding-top:128px}}
 .hero .kicker{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#B9D2CB;margin-bottom:14px}
 .hero .kicker::before{content:"";width:22px;height:1px;background:var(--route);opacity:.9}
 .hero h1{font-size:clamp(27px,4.6vw,42px);font-weight:800;line-height:1.2;letter-spacing:-.015em}
@@ -549,7 +553,7 @@ function vHome(){
       var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
       return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">'+esc(names(r))+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
   }
-  return '<section class="hero">'+heroSVG()+'<div class="inner"><div class="kicker mono">'+D.hero.k+'</div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
+  return '<section class="hero">'+heroSVG()+'<img class="emblem" src="images/logo-emblem.jpg" alt="Mountain Peak" width="238" height="238"><div class="inner"><div class="kicker mono">'+D.hero.k+'</div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
     '<div class="searchbox"><div class="searchrow"><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" autocomplete="off" oninput="suggest(\'homeQ\',\'homeSug\')" onblur="hideSug(\'homeSug\')" onkeydown="if(event.key===\'Enter\'){event.preventDefault();homeSearch()}"><button onclick="homeSearch()">'+D.hero.go+'</button></div><div id="homeSug" class="sug" style="display:none"></div></div></section>'+
     (seasonal.length?secHead("season",D.season_now,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+seasonal.map(mountainCard).join("")+"</div>":"")+
     secHead("featured",D.featured,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
