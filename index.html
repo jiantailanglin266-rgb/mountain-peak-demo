@@ -143,7 +143,7 @@ h2.sec .more:hover{text-decoration:underline}
 
 /* ===== カード ===== */
 .card{background:var(--card);border:1px solid var(--hair);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
-.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(255px,1fr))}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
 .mcard{display:flex;flex-direction:column;cursor:pointer;transition:transform .18s,box-shadow .18s;position:relative}
 .mcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
 .mcard .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
@@ -153,6 +153,18 @@ h2.sec .more:hover{text-decoration:underline}
 .mcard .el small{font-size:11px;color:var(--muted);font-weight:500}
 .mcard .sm{font-size:12.5px;color:var(--muted);margin-top:8px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.7}
 .mcard .done{position:absolute;top:-7px;right:12px;background:var(--forest);color:#fff;font-size:10px;font-weight:700;border-radius:999px;padding:2px 9px;letter-spacing:.04em}
+/* 写真サムネイル */
+.mcard .mrow{display:flex;gap:14px;flex:1}
+.mcard .mthumb{width:118px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--hair);position:relative;min-height:138px}
+.mcard .mthumb img,.mcard .mthumb svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.mcard:hover .mthumb img{transform:scale(1.06)}
+.mcard .mbody{flex:1;min-width:0;display:flex;flex-direction:column}
+.mcard .mbody .sm{flex:1}
+.rkthumbs{display:flex;margin-bottom:12px}
+.rkthumbs .ph{width:58px;height:58px;border-radius:12px;overflow:hidden;border:2.5px solid var(--card);margin-left:-14px;position:relative;box-shadow:var(--shadow);flex-shrink:0}
+.rkthumbs .ph:first-child{margin-left:0}
+.rkthumbs .ph img,.rkthumbs .ph svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.rkthumbs .ph.more{display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);font-size:11.5px;font-weight:700;font-family:"IBM Plex Mono",monospace}
 /* 標高ゲージ（シグネチャー） */
 .gauge{margin-top:14px;padding-top:9px;position:relative}
 .gauge .base{height:2px;background:var(--hair);border-radius:2px;position:relative}
@@ -347,7 +359,7 @@ footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
     <div class="frow"><span class="tri">▲</span><span class="disp">Mountain Peak</span><span class="demo mono" style="font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px">STATIC DEMO</span></div>
     <p class="note" id="fnote"></p>
     <div class="notice" style="margin-top:14px;max-width:760px" id="fdisc"></div>
-    <div class="cr">© 2026 Mountain Peak / STELLAR</div>
+    <div class="cr">© 2026 Mountain Peak / STELLAR — Photos: Wikimedia Commons (CC) / Unsplash</div>
   </div>
 </footer>
 <button id="toTop" aria-label="Back to top">↑</button>
@@ -503,14 +515,26 @@ function gauge(m){
     '<span class="mk" style="left:'+pct.toFixed(1)+'%">▲</span></div>'+
     '<div class="lab mono"><span>0</span><span>8,849m</span></div></div>';
 }
+var MT_PHOTOS={"mount-fuji":1,"kita-dake":1,"yarigatake":1,"okuhotaka-dake":1,"tateyama":1,"daisen":1,"mount-takao":1,"mount-everest":1,"k2":1,"annapurna":1,"mont-blanc":1,"matterhorn":1,"kilimanjaro":1,"denali":1,"aconcagua":1,"elbrus":1,"vinson-massif":1,"puncak-jaya":1};
+function mtPhoto(m,alt){
+  if(MT_PHOTOS[m.slug])return '<img loading="lazy" src="images/mountains/'+m.slug+'.jpg" alt="'+esc(alt||"")+'">';
+  return '<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="#2E4A57"/><path d="M-5 78 L28 38 L44 58 L60 30 L82 62 L105 50 L105 105 L-5 105 Z" fill="#1B2A32"/><path d="M60 30 L67 40 L60 45 L53 40 Z" fill="#E7EEEA" opacity=".85"/><circle cx="79" cy="19" r="7" fill="#F3C9A8" opacity=".75"/></svg>';
+}
+function rankThumbs(r){
+  var ms=r.mountainIds.slice(0,3).map(function(id){return DATA.mountains.find(function(m){return m.id===id})}).filter(Boolean);
+  var rest=r.mountainIds.length-ms.length;
+  return '<div class="rkthumbs">'+ms.map(function(m){var mt=tr(m);return '<span class="ph">'+mtPhoto(m,mt?mt.name:"")+"</span>"}).join("")+
+    (rest>0?'<span class="ph more">+'+rest+"</span>":"")+"</div>";
+}
 function mountainCard(m){
   var t=tr(m),c=countryOf(m.countryId);
   return '<div class="card mcard rv" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">'+
     (isSum(m.id)?'<span class="done">✓ '+(state.locale==="ja"?"登頂":"Climbed")+"</span>":"")+
+    '<div class="mrow"><div class="mthumb">'+mtPhoto(m,t.name)+'</div><div class="mbody">'+
     '<div class="top"><div><div class="nm">'+esc(t.name)+'</div>'+(t.localName&&t.localName!==t.name?'<div class="ln">'+esc(t.localName)+"</div>":"")+"</div>"+
     '<div class="el mono">'+elevMain(m.elevationM)+"<small> "+elevUnit()+"</small></div></div>"+
     '<div class="sm">'+esc(t.summary)+"</div>"+
-    '<div class="badges">'+diffBadge(m.difficultyLevel)+(c?'<span class="badge plain">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+"</div>"+gauge(m)+"</div>";
+    '<div class="badges">'+diffBadge(m.difficultyLevel)+(c?'<span class="badge plain">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+"</div>"+gauge(m)+"</div></div></div>";
 }
 function crumbs(items){
   return '<div class="crumbs">'+items.map(function(it,i){
@@ -623,7 +647,7 @@ function vHome(){
     yourHtml+
     secHead("lists",D.lists)+'<div class="grid">'+DATA.rankings.map(function(r){
       var done=sums.length?r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length:0;
-      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">🏆 '+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--glacier)">'+r.mountainIds.length+" "+D.l.peaks+" →</span>"+(done?'<span class="badge d1">✓ '+done+"</span>":"")+"</div></div>"}).join("")+"</div>"+
+      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})">'+rankThumbs(r)+'<div class="nm">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--glacier)">'+r.mountainIds.length+" "+D.l.peaks+" →</span>"+(done?'<span class="badge d1">✓ '+done+"</span>":"")+"</div></div>"}).join("")+"</div>"+
     secHead("byCountry",D.byCountry)+'<div class="chips">'+DATA.countries.map(function(c){
       return '<span class="chip" onclick=\'go({name:"mountains",country:"'+c.id+'"})\'>'+flag(c.id)+" "+esc(names(c))+"</span>"}).join("")+"</div>"+
     secHead("newest",D.newest,'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+"</span>")+'<div class="grid">'+arts.map(articleCard).join("")+"</div>";
@@ -712,7 +736,7 @@ function vRankings(){
     '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.rankings+'</h1><div class="grid">'+
     DATA.rankings.map(function(r){
       var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
-      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div style="font-size:24px">🏆</div><div class="nm" style="margin-top:7px">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
+      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})">'+rankThumbs(r)+'<div class="nm">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
 }
 function vRanking(slug){
   var r=DATA.rankings.find(function(x){return x.slug===slug});
