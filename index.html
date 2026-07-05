@@ -80,6 +80,42 @@ main{min-height:70vh;padding:26px 0 64px}
 .hero .emblem img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.045)}
 @media(max-width:1000px){.hero .emblem{width:190px;height:190px;right:28px}}
 @media(max-width:880px){.hero .emblem{width:92px;height:92px;right:20px;top:22px;transform:none}.hero .inner{padding-top:128px}}
+/* ===== FV (写真ヒーロー) ===== */
+.fv .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 34%}
+.fv .scrim{position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,18,24,.84) 0%,rgba(10,18,24,.56) 36%,rgba(10,18,24,.16) 64%,rgba(10,18,24,.34) 100%),linear-gradient(0deg,rgba(8,14,18,.6) 0%,rgba(8,14,18,0) 42%)}
+.hero.fv .inner{max-width:none;padding:58px 48px 26px}
+.hero.fv h1{color:#fff;font-size:clamp(30px,4.8vw,46px);text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero.fv p.sub{color:#DCE7E4;max-width:500px;font-size:14px}
+.fv .stamp{position:absolute;z-index:2;top:34px;right:42px;width:172px;height:172px;opacity:.95;pointer-events:none;filter:drop-shadow(0 2px 12px rgba(0,0,0,.35))}
+.fv .searchbox{max-width:930px;margin-top:26px}
+.fvsearch{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:6px 6px 6px 18px;box-shadow:0 20px 55px -20px rgba(0,0,0,.6)}
+.fvsearch .mag{flex-shrink:0;color:#5C6B70}
+.fvsearch input{flex:1;border:none;background:transparent;color:#1B2A32;font-size:15px;outline:none;padding:11px 0;min-width:0}
+.fvsearch input::placeholder{color:#8A989D}
+.fvsearch button{flex-shrink:0;background:var(--route);color:#fff;font-weight:700;font-size:14.5px;border-radius:10px;padding:12px 36px;transition:filter .15s}
+.fvsearch button:hover{filter:brightness(1.08)}
+.pops{display:flex;align-items:center;gap:9px;margin-top:16px;flex-wrap:wrap}
+.pops .lb{font-size:11.5px;font-weight:600;color:rgba(235,242,240,.85);background:rgba(10,18,24,.5);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 14px;backdrop-filter:blur(4px)}
+.pops .pchip{font-size:12.5px;color:#fff;border:1px solid rgba(255,255,255,.38);border-radius:999px;padding:6px 16px;background:rgba(255,255,255,.06);backdrop-filter:blur(4px);transition:background .14s}
+.pops .pchip:hover{background:rgba(255,255,255,.18)}
+.feats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:34px;background:rgba(9,16,21,.55);border:1px solid rgba(255,255,255,.14);border-radius:16px;backdrop-filter:blur(10px)}
+.feat{padding:19px 20px;display:flex;gap:13px;align-items:flex-start;box-shadow:inset .5px 0 0 rgba(255,255,255,.09)}
+.feat:first-child{box-shadow:none}
+.feat .ic{width:32px;height:32px;flex-shrink:0;color:#fff;margin-top:2px}
+.feat .t{font-size:13.5px;font-weight:700;color:#fff}
+.feat .d{font-size:11px;color:rgba(226,236,233,.72);margin-top:4px;line-height:1.65;white-space:pre-line}
+.fv .chev{position:relative;z-index:2;display:flex;justify-content:center;padding:6px 0 14px}
+.fv .chev button{width:40px;height:40px;color:#fff;opacity:.75;animation:chevb 2.2s ease-in-out infinite}
+.fv .chev button:hover{opacity:1}
+@keyframes chevb{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@media(max-width:880px){
+  .hero.fv .inner{padding:142px 22px 20px}
+  .fv .stamp{width:104px;height:104px;top:20px;right:20px}
+  .feats{grid-template-columns:1fr 1fr}
+  .feat{box-shadow:inset .5px .5px 0 rgba(255,255,255,.09)}
+  .fvsearch button{padding:12px 20px}
+}
+@media(max-width:520px){.feats{grid-template-columns:1fr}}
 .hero .kicker{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#B9D2CB;margin-bottom:14px}
 .hero .kicker::before{content:"";width:22px;height:1px;background:var(--route);opacity:.9}
 .hero h1{font-size:clamp(27px,4.6vw,42px);font-weight:800;line-height:1.2;letter-spacing:-.015em}
@@ -325,7 +361,7 @@ var DATA = {"mountains":[{"id":"mt_fuji","slug":"mount-fuji","elevationM":3776,"
 /* ====== UI辞書 ====== */
 var DICT = {
  ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド"},
-  hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"世界中の山を、正しく引ける",s:"標高・ルート・天気・歴史 — 登山に必要な一次情報を、日本語と英語で。（このページは静的デモ版です。データはブラウザ内のみで処理され、サーバーに送信されません）",ph:"山名・キーワードで検索（例: 富士山, Everest）",go:"検索"},
+  hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"世界中の山を、<br>正しく引ける",s:"標高・ルート・天気・歴史 — 登山に必要な一次情報を、日本語と英語で。信頼できるデータで、山の計画をもっと確実に、もっと自由に。",ph:"山名・キーワードで検索（例: 富士山, Everest）",go:"検索",pop:"人気の検索",pops:["富士山","エベレスト","キリマンジャロ","アルプス"],feats:[["世界中の山を網羅","200以上の国と地域\n100,000+の山を収録"],["リアルタイム天気","登山地の最新気象情報を\nリアルタイムで取得"],["ルート・地図情報","詳細なルート・地形データで\n安全な計画をサポート"],["多言語対応","日本語・英語で利用可能\n世界中の登山者をサポート"]]},
   featured:"注目の山",lists:"リストから探す",newest:"新着記事",byCountry:"国から探す",viewAll:"すべて見る →",season_now:"今月が旬の山",your:"あなたの登頂チェックリスト",
   eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
   f:{kw:"キーワード",country:"国",allC:"すべての国",elev:"標高",any:"指定なし",diff:"難易度",allD:"すべての難易度",found:"件の山が見つかりました",none:"条件に合う山が見つかりませんでした。フィルタを変えてみてください。",reset:"リセット"},
@@ -342,7 +378,7 @@ var DICT = {
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
  en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles"},
-  hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"The world's mountains, done right",s:"Elevation, routes, weather and history — primary mountain information in English and Japanese. (This is a static demo. Everything runs in your browser; nothing is sent to a server.)",ph:"Search mountains (e.g. Everest, Fuji)",go:"Search"},
+  hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"The world's mountains,<br>done right",s:"Elevation, routes, weather and history — primary mountain information in English and Japanese. Reliable data to plan your mountains with more confidence and freedom.",ph:"Search mountains (e.g. Everest, Fuji)",go:"Search",pop:"Popular",pops:["Fuji","Everest","Kilimanjaro","Alps"],feats:[["Global Coverage","200+ countries & regions\n100,000+ peaks"],["Real-time Weather","Latest mountain conditions\nat a glance"],["Routes & Maps","Detailed route & terrain data\nfor safer planning"],["Multilingual","Japanese & English —\nfor climbers worldwide"]]},
   featured:"Featured Mountains",lists:"Browse by List",newest:"Latest Articles",byCountry:"Browse by Country",viewAll:"View all →",season_now:"In Season This Month",your:"Your Summit Checklist",
   eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
   f:{kw:"Keyword",country:"Country",allC:"All countries",elev:"Elevation",any:"Any",diff:"Difficulty",allD:"Any difficulty",found:"mountains found",none:"No mountains match your filters. Try adjusting them.",reset:"Reset"},
@@ -539,6 +575,30 @@ function heroSVG(){
   '</svg>';
 }
 
+var FEAT_ICONS=[
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 19L9 7l4.2 7.4L16 10l5.5 9z"/><path d="M7.2 10.3l1.8 2 1.8-2" stroke-opacity=".55"/></svg>',
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><g stroke="#E8776A"><circle cx="7.5" cy="7" r="2.4"/><path d="M7.5 2.4v1.2M7.5 10.4v1.2M2.9 7h1.2M10.9 7h1.2M4.2 3.7l.9.9M9.9 9.4l.9.9M10.8 3.7l-.9.9M5.1 9.4l-.9.9"/></g><path d="M8.6 17.6a4.3 4.3 0 014-5.5 4.7 4.7 0 019 1.4 3.3 3.3 0 01-.8 6.5H12a3.4 3.4 0 01-3.4-2.4z" stroke="#fff"/></svg>',
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14" stroke-opacity=".55"/></svg>',
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg>'
+];
+function stampSVG(){
+  return '<svg class="stamp" viewBox="0 0 200 200" fill="none" aria-hidden="true">'+
+  '<defs><path id="arcT" d="M28 100 A72 72 0 0 1 172 100"/><path id="arcB" d="M24 100 A76 76 0 0 0 176 100"/></defs>'+
+  '<circle cx="100" cy="100" r="93" stroke="#fff" stroke-width="2" stroke-opacity=".92"/>'+
+  '<circle cx="100" cy="100" r="86" stroke="#fff" stroke-width=".8" stroke-opacity=".5" stroke-dasharray="2 4"/>'+
+  '<circle cx="100" cy="100" r="54" stroke="#fff" stroke-width=".9" stroke-opacity=".8"/>'+
+  '<text fill="#fff" font-size="11.5" font-weight="700" letter-spacing="3.2" font-family="IBM Plex Mono, monospace"><textPath href="#arcT" startOffset="50%" text-anchor="middle">EXPLORE THE WORLD</textPath></text>'+
+  '<text fill="#fff" fill-opacity=".85" font-size="8.2" letter-spacing="1.4" font-family="IBM Plex Mono, monospace"><textPath href="#arcB" startOffset="50%" text-anchor="middle">27&#176;59&#8242;17&#8243;N 86&#176;55&#8242;31&#8243;E</textPath></text>'+
+  '<g stroke="#fff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M64 121 L86 85 L96 99 L106 80 L127 116"/><path d="M99 93 l5 8" stroke-opacity=".65"/><path d="M81 94 l4 7" stroke-opacity=".65"/></g>'+
+  '<g fill="#fff" font-size="9"><text x="60" y="72">&#10022;</text><text x="130" y="78">&#10022;</text><text x="120" y="132" font-size="7">&#10022;</text></g>'+
+  '<text x="160" y="105" fill="#E8776A" font-size="13">&#10022;</text>'+
+  '</svg>';
+}
+function scrollPastHero(){
+  var el=document.querySelector(".fv");
+  if(el){window.scrollTo({top:el.getBoundingClientRect().bottom+window.scrollY-52,behavior:"smooth"})}
+}
+
 /* ====== ビュー ====== */
 function vHome(){
   var D=d();
@@ -553,8 +613,11 @@ function vHome(){
       var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
       return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">'+esc(names(r))+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
   }
-  return '<section class="hero">'+heroSVG()+'<img class="emblem" src="images/logo-emblem.jpg" alt="Mountain Peak" width="238" height="238"><div class="inner"><div class="kicker mono">'+D.hero.k+'</div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
-    '<div class="searchbox"><div class="searchrow"><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" autocomplete="off" oninput="suggest(\'homeQ\',\'homeSug\')" onblur="hideSug(\'homeSug\')" onkeydown="if(event.key===\'Enter\'){event.preventDefault();homeSearch()}"><button onclick="homeSearch()">'+D.hero.go+'</button></div><div id="homeSug" class="sug" style="display:none"></div></div></section>'+
+  return '<section class="hero fv"><img class="bg" src="images/hero-bg.jpg" alt="" aria-hidden="true"><div class="scrim"></div>'+stampSVG()+'<div class="inner"><div class="kicker mono">'+D.hero.k+'</div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
+    '<div class="searchbox"><div class="fvsearch"><svg class="mag" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" autocomplete="off" oninput="suggest(\'homeQ\',\'homeSug\')" onblur="hideSug(\'homeSug\')" onkeydown="if(event.key===\'Enter\'){event.preventDefault();homeSearch()}"><button onclick="homeSearch()">'+D.hero.go+'</button></div><div id="homeSug" class="sug" style="display:none"></div></div>'+
+    '<div class="pops"><span class="lb">'+esc(D.hero.pop)+'</span>'+D.hero.pops.map(function(p){return '<button class="pchip" onclick="go({name:\'mountains\',q:\''+esc(p)+'\'})">'+esc(p)+'</button>'}).join("")+'</div>'+
+    '<div class="feats">'+D.hero.feats.map(function(f,i){return '<div class="feat">'+FEAT_ICONS[i]+'<div><div class="t">'+esc(f[0])+'</div><div class="d">'+esc(f[1])+'</div></div></div>'}).join("")+'</div>'+
+    '</div><div class="chev"><button aria-label="scroll down" onclick="scrollPastHero()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div></section>'+
     (seasonal.length?secHead("season",D.season_now,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+seasonal.map(mountainCard).join("")+"</div>":"")+
     secHead("featured",D.featured,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
     yourHtml+
@@ -772,7 +835,7 @@ parseHash();
 render();
 /* 検証用フック */
 window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
-window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;
+window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
 })();
 </script>
 </body>
