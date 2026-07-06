@@ -317,8 +317,40 @@ footer .frow{display:flex;align-items:baseline;gap:9px;font-weight:800}
 footer .frow .tri{color:var(--route);font-size:12px}
 footer .note{font-size:11.5px;color:var(--muted);line-height:1.9;margin-top:12px;max-width:760px}
 footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
-#toTop{position:fixed;right:20px;bottom:20px;width:42px;height:42px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:15px;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+#toTop{position:fixed;right:22px;bottom:88px;width:42px;height:42px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:15px;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
 #toTop.show{opacity:1;pointer-events:auto}
+/* ===== チャットボット ===== */
+#chatBtn{position:fixed;right:20px;bottom:20px;z-index:70;width:56px;height:56px;border-radius:999px;background:var(--route);color:#fff;box-shadow:var(--shadow-lift);display:flex;align-items:center;justify-content:center;transition:transform .18s}
+#chatBtn:hover{transform:scale(1.06)}
+#chatBtn svg{width:26px;height:26px}
+#chatPanel{position:fixed;right:20px;bottom:88px;z-index:71;width:372px;max-width:calc(100vw - 40px);height:540px;max-height:calc(100dvh - 120px);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lift);display:none;flex-direction:column;overflow:hidden}
+#chatPanel.open{display:flex}
+.chead{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--ink);color:var(--paper);flex-shrink:0}
+.chead .cico{width:32px;height:32px;border-radius:10px;background:var(--route);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.chead .ct{font-weight:800;font-size:13.5px;line-height:1.3}
+.chead .cs{font-size:9.5px;opacity:.65;letter-spacing:.04em}
+.chead .cdemo{font-size:8.5px;font-weight:700;letter-spacing:.16em;border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:1px 5px;margin-left:2px}
+.chead .cx{margin-left:auto;width:30px;height:30px;border-radius:999px;font-size:15px;opacity:.8}
+.chead .cx:hover{opacity:1;background:rgba(255,255,255,.12)}
+.cbody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+.cmsg{max-width:88%;border-radius:14px;padding:10px 13px;font-size:13px;line-height:1.75;word-break:break-word}
+.cmsg.bot{background:var(--card);border:1px solid var(--hair);align-self:flex-start;border-bottom-left-radius:4px;box-shadow:var(--shadow)}
+.cmsg.user{background:var(--ink);color:var(--paper);align-self:flex-end;border-bottom-right-radius:4px}
+.cmsg .act{display:inline-block;margin-top:7px;margin-right:10px;color:var(--glacier);font-weight:700;cursor:pointer;font-size:12px}
+.cmsg .act:hover{text-decoration:underline}
+.cmsg.typing span{display:inline-block;width:6px;height:6px;border-radius:99px;background:var(--muted);margin-right:3px;animation:cdot 1.2s infinite}
+.cmsg.typing span:nth-child(2){animation-delay:.15s}.cmsg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes cdot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.cchips{display:flex;gap:6px;padding:8px 12px;overflow-x:auto;scrollbar-width:none;background:var(--paper);border-top:1px solid var(--hair);flex-shrink:0}
+.cchips::-webkit-scrollbar{display:none}
+.cchips button{flex-shrink:0;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 13px;font-size:11.5px;color:var(--muted);transition:all .14s}
+.cchips button:hover{border-color:var(--route);color:var(--route)}
+.cfoot{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--hair);background:var(--card);flex-shrink:0}
+.cfoot input{flex:1;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:9px 15px;font-size:13px;outline:none;min-width:0}
+.cfoot input:focus{border-color:var(--glacier)}
+.cfoot button{background:var(--route);color:#fff;border-radius:999px;width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cfoot button:hover{filter:brightness(1.08)}
+@media(max-width:560px){#chatPanel{right:10px;left:10px;width:auto;bottom:84px;height:min(540px,calc(100dvh - 104px))}}
 #toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:var(--ink);color:var(--paper);border-radius:999px;padding:9px 20px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;z-index:70;box-shadow:var(--shadow-lift)}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -363,6 +395,23 @@ footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
   </div>
 </footer>
 <button id="toTop" aria-label="Back to top">↑</button>
+<button id="chatBtn" aria-label="Chat" onclick="toggleChat()">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.2 0-2.4-.25-3.4-.7L3 21l1.8-4.6A8.5 8.5 0 1121 11.5z"/><path d="M8 10l3-4 2 3 3-4" stroke-width="1.5"/></svg>
+</button>
+<div id="chatPanel" role="dialog" aria-label="AI Concierge">
+  <div class="chead">
+    <span class="cico">⛰</span>
+    <div><div class="ct" id="chatTitle"></div><div class="cs" id="chatStatus"></div></div>
+    <span class="cdemo">DEMO</span>
+    <button class="cx" onclick="toggleChat(false)" aria-label="close">✕</button>
+  </div>
+  <div class="cbody" id="chatBody"></div>
+  <div class="cchips" id="chatChips"></div>
+  <div class="cfoot">
+    <input id="chatInput" autocomplete="off" onkeydown="chatKey(event)">
+    <button onclick="chatSend()" aria-label="send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </div>
+</div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
@@ -844,6 +893,153 @@ document.getElementById("themeBtn").addEventListener("click",function(){
   this.textContent=dark?"☀️":"🌙";
   store("mp-demo-theme",dark?"dark":"light");
 });
+/* ====== AIチャットボット（デモ・ルールベース・ブラウザ内完結） ====== */
+var CHAT_T={
+ ja:{title:"AI山岳コンシェルジュ",status:"ルールベース・ブラウザ内で応答（デモ）",ph:"山・天気・装備について質問…",
+  hello:"こんにちは！Mountain Peak の<b>AI山岳コンシェルジュ</b>です。<br>収録している山の情報・天気・ルート・おすすめ・装備について答えられます。下のチップからもどうぞ。<br><span style='font-size:11px;opacity:.7'>※デモ版のためブラウザ内のルールベースで応答します。入力はサーバーに送信されません。</span>",
+  chips:["初心者におすすめの山は？","富士山の天気は？","エベレストのルートは？","装備リストを見たい","セブンサミッツを見せて"],
+  fallback:"うまく読み取れませんでした🙏 こんな質問に答えられます:<br>・「富士山について教えて」<br>・「◯◯の天気」「◯◯のルート」「◯◯の標高」<br>・「初心者におすすめの山」「今月のおすすめ」<br>・「装備リスト」「百名山」「セブンサミッツ」「8000m峰」",
+  detail:"詳細ページへ",weatherNote:"⚠ デモ用のモック天気です。実際の入山判断は必ず公式予報・現地情報で。",
+  recTitle:"初心者にはこのあたりがおすすめです ⛰",seasonTitle:"今月がベストシーズンの山です 🗓",
+  gear:"日帰り登山の<b>必携装備</b>はこちら:<br>・登山靴（履き慣らし済み）<br>・レインウェア上下<br>・ザック20〜30L / 水1〜2L<br>・ヘッドランプ（日帰りでも！）<br>・地図・コンパスまたはGPSアプリ<br>・防寒着 / 救急セット",
+  gearAct:"装備チェックリストの記事を読む",askWhich:"どの山のことでしょう？例:「富士山の天気」「エベレストのルート」",
+  wNow:"現在",wWeek:"3日間の傾向",elevLabel:"標高",diffLabel:"難易度",seasonLabel:"ベストシーズン",hazardLabel:"⚠ 危険箇所",routesFor:"の主なルート",weatherFor:"の天気（モック）",listAct:"リストを見る",noRoutes:"この山のルートデータはこのデモには未収録です。"},
+ en:{title:"AI Mountain Concierge",status:"Rule-based, runs in your browser (demo)",ph:"Ask about mountains, weather, gear…",
+  hello:"Hi! I'm the <b>AI Mountain Concierge</b> for Mountain Peak.<br>Ask me about the mountains in this database — info, weather, routes, recommendations and gear. Try the chips below.<br><span style='font-size:11px;opacity:.7'>Demo: responses are rule-based and run entirely in your browser. Nothing is sent to a server.</span>",
+  chips:["Recommend beginner mountains","Weather for Everest","Routes on Mont Blanc","Gear checklist","Show the Seven Summits"],
+  fallback:"Sorry, I didn't catch that 🙏 I can answer things like:<br>・\"Tell me about Mount Fuji\"<br>・\"Weather for ◯◯\" / \"Routes on ◯◯\"<br>・\"Recommend beginner mountains\" / \"What's in season\"<br>・\"Gear checklist\" / \"Seven Summits\" / \"8000m peaks\"",
+  detail:"Open detail page",weatherNote:"⚠ Mock weather for demo purposes. Always use official forecasts for real decisions.",
+  recTitle:"Great beginner-friendly picks ⛰",seasonTitle:"In season this month 🗓",
+  gear:"<b>Day-hike essentials</b>:<br>・Broken-in hiking boots<br>・Rain jacket & pants<br>・20–30L pack / 1–2L water<br>・Headlamp (yes, even for day hikes!)<br>・Map & compass or GPS app<br>・Insulation layer / first-aid kit",
+  gearAct:"Read the gear checklist article",askWhich:"Which mountain? e.g. \"Weather for Everest\", \"Routes on Mont Blanc\"",
+  wNow:"Now",wWeek:"Next 3 days",elevLabel:"Elevation",diffLabel:"Difficulty",seasonLabel:"Best season",hazardLabel:"⚠ Hazards",routesFor:" — main routes",weatherFor:" — weather (mock)",listAct:"Open the list",noRoutes:"No route data for this mountain in the demo yet."}
+};
+var chatMsgs=[];
+function cT(){return CHAT_T[state.locale]||CHAT_T.ja}
+function syncChatUI(){
+  var t=cT();
+  document.getElementById("chatTitle").textContent=t.title;
+  document.getElementById("chatStatus").textContent=t.status;
+  document.getElementById("chatInput").placeholder=t.ph;
+  document.getElementById("chatChips").innerHTML=t.chips.map(function(c){return "<button onclick='chatChip(this)'>"+esc(c)+"</button>"}).join("");
+}
+function chatRenderMsgs(){
+  var body=document.getElementById("chatBody");
+  body.innerHTML=chatMsgs.map(function(m){return '<div class="cmsg '+m.role+'">'+m.html+"</div>"}).join("");
+  body.scrollTop=body.scrollHeight;
+}
+function toggleChat(open){
+  var panel=document.getElementById("chatPanel");
+  var willOpen=open!==undefined?open:!panel.classList.contains("open");
+  panel.classList.toggle("open",willOpen);
+  if(willOpen){
+    syncChatUI();
+    if(chatMsgs.length===0){chatMsgs.push({role:"bot",html:cT().hello})}
+    chatRenderMsgs();
+    document.getElementById("chatInput").focus();
+  }
+}
+function chatGo(name,slug){go({name:name,slug:slug});toggleChat(false)}
+function actLink(name,slug,label){return '<br><span class="act" onclick="chatGo(\''+name+'\',\''+slug+'\')">→ '+esc(label)+"</span>"}
+function chatFindMountain(q){
+  var ql=q.toLowerCase(),best=null,bestScore=0;
+  DATA.mountains.forEach(function(m){
+    var cands=[m.slug.replace(/-/g," ")];
+    for(var loc in m.translations){var t=m.translations[loc];if(t){cands.push(t.name);if(t.localName)cands.push(t.localName)}}
+    cands.forEach(function(c){
+      if(!c)return;var cl=String(c).toLowerCase();var score=0;
+      if(cl.length>=2&&ql.indexOf(cl)>=0)score=cl.length*3;
+      else{
+        ql.split(/[^a-z0-9ぁ-んァ-ヶ一-龠ー]+/).forEach(function(tok){
+          if(tok.length>=3&&cl.indexOf(tok)>=0)score=Math.max(score,tok.length);
+          if(tok.length>=2&&/[ぁ-んァ-ヶ一-龠]/.test(tok)&&cl.indexOf(tok)>=0)score=Math.max(score,tok.length*2);
+        });
+      }
+      if(score>bestScore){best=m;bestScore=score}
+    });
+  });
+  return bestScore>=4?best:null;
+}
+function chatMtProfile(m){
+  var t=tr(m),c=countryOf(m.countryId),T=cT(),D=d();
+  var hz=t.hazards?String(t.hazards).slice(0,90):"";
+  return "<b>"+esc(t.name)+"</b>（"+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft"+(c?"・"+esc(names(c)):"")+"）<br>"+
+    esc(String(t.summary).slice(0,120))+"…<br>"+
+    T.diffLabel+": "+"▲".repeat(m.difficultyLevel)+" "+D.diffs[m.difficultyLevel]+"<br>"+
+    T.seasonLabel+": "+(m.bestSeasons||[]).map(function(x){return D.months[x-1]}).join("・")+
+    (hz?"<br>"+T.hazardLabel+": "+esc(hz)+"…":"")+
+    actLink("mountain",m.slug,T.detail);
+}
+function chatWeather(m){
+  var t=tr(m),T=cT(),f=mockForecast(m.lat,m.lng,m.elevationM);
+  var wc=function(c){var w=WCODES[c]||WCODES[3];return (w[2]||"")+(state.locale==="ja"?w[0]:w[1])};
+  var days=f.daily.slice(0,3).map(function(dd){return wc(dd.code)+" "+Math.round(dd.maxC)+"°/"+Math.round(dd.minC)+"°"}).join("　");
+  return "<b>"+esc(t.name)+"</b>"+T.weatherFor+"<br>"+
+    T.wNow+": "+f.cur.t.toFixed(1)+"°C・"+Math.round(f.cur.wind)+"m/s "+wc(f.cur.code)+"<br>"+
+    T.wWeek+": "+days+"<br><span style='font-size:11px;opacity:.75'>"+T.weatherNote+"</span>"+
+    actLink("mountain",m.slug,T.detail);
+}
+function chatRoutes(m){
+  var t=tr(m),T=cT();
+  var rts=DATA.routes.filter(function(r){return r.mountainId===m.id&&r.status==="published"});
+  if(!rts.length)return "<b>"+esc(t.name)+"</b>: "+T.noRoutes+actLink("mountain",m.slug,T.detail);
+  var lines=rts.slice(0,4).map(function(r){var rt=tr(r);return "・<b>"+esc(rt.name)+"</b>（▲"+r.difficultyLevel+"・"+r.distanceKm+"km・"+fmtTime(r.estTimeMin)+"）"});
+  return "<b>"+esc(t.name)+"</b>"+T.routesFor+":<br>"+lines.join("<br>")+actLink("mountain",m.slug,T.detail);
+}
+function chatMtList(title,ms){
+  var T=cT();
+  return "<b>"+title+"</b><br>"+ms.map(function(m){var t=tr(m);
+    return "・"+esc(t.name)+"（"+m.elevationM.toLocaleString()+"m・▲"+m.difficultyLevel+"）"+'<span class="act" style="margin:0 0 0 6px" onclick="chatGo(\'mountain\',\''+m.slug+'\')">→</span>'}).join("<br>");
+}
+function chatReply(q){
+  var T=cT(),ql=q.toLowerCase();
+  var m=chatFindMountain(q);
+  var wantWeather=/天気|気温|weather|forecast|temperature/.test(ql);
+  var wantRoute=/ルート|コース|登山道|route|trail|climb|登り方/.test(ql);
+  var wantElev=/標高|高さ|何メートル|elevation|how (high|tall)|height/.test(ql);
+  if(m&&wantWeather)return chatWeather(m);
+  if(m&&wantRoute)return chatRoutes(m);
+  if(m&&wantElev){var t=tr(m);return "<b>"+esc(t.name)+"</b> "+T.elevLabel+": <b>"+m.elevationM.toLocaleString()+"m</b>（"+ft(m.elevationM).toLocaleString()+"ft）"+actLink("mountain",m.slug,T.detail)}
+  if(m)return chatMtProfile(m);
+  if(wantWeather||wantRoute||wantElev)return T.askWhich;
+  if(/初心者|やさしい|簡単|beginner|easy|first|start/.test(ql)){
+    var easy=DATA.mountains.filter(function(x){return x.status==="published"&&x.difficultyLevel<=2}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel||a.elevationM-b.elevationM}).slice(0,3);
+    return chatMtList(T.recTitle,easy);
+  }
+  if(/今月|旬|季節|シーズン|season|now|this month/.test(ql)){
+    var nowM=new Date().getMonth()+1;
+    var sea=DATA.mountains.filter(function(x){return x.status==="published"&&(x.bestSeasons||[]).indexOf(nowM)>=0}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel}).slice(0,3);
+    if(sea.length)return chatMtList(T.seasonTitle,sea);
+  }
+  var rank=null;
+  if(/百名山|hyakumeizan/.test(ql))rank=DATA.rankings.find(function(r){return r.slug==="hyakumeizan"});
+  else if(/セブン|七大陸|seven/.test(ql))rank=DATA.rankings.find(function(r){return r.slug==="seven-summits"});
+  else if(/8000/.test(ql))rank=DATA.rankings.find(function(r){return r.slug==="8000m-peaks"});
+  if(rank)return "<b>🏆 "+esc(names(rank))+"</b><br>"+esc(rank.descriptions[state.locale]||rank.descriptions.ja)+actLink("ranking",rank.slug,T.listAct);
+  if(/装備|持ち物|ザック|gear|equipment|pack|bring/.test(ql)){
+    return T.gear+actLink("article","beginner-gear-checklist",T.gearAct);
+  }
+  if(/こんにちは|はじめまして|やあ|hello|^hi\b|help|使い方|できる/.test(ql))return T.hello;
+  return T.fallback;
+}
+function chatSend(text){
+  var input=document.getElementById("chatInput");
+  var q=(text!==undefined?text:input.value).trim();
+  if(!q)return;
+  if(text===undefined)input.value="";
+  chatMsgs.push({role:"user",html:esc(q)});
+  chatMsgs.push({role:"bot typing",html:"<span></span><span></span><span></span>"});
+  chatRenderMsgs();
+  setTimeout(function(){
+    chatMsgs.pop();
+    chatMsgs.push({role:"bot",html:chatReply(q)});
+    chatRenderMsgs();
+  },500+Math.min(600,q.length*18));
+}
+function chatChip(el){chatSend(el.textContent)}
+function chatKey(e){if(e.key==="Enter"&&!e.isComposing){e.preventDefault();chatSend()}}
+window.toggleChat=toggleChat;window.chatSend=chatSend;window.chatChip=chatChip;window.chatKey=chatKey;window.chatGo=chatGo;
+
 var toTop=document.getElementById("toTop");
 toTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
 window.addEventListener("scroll",function(){toTop.classList.toggle("show",window.scrollY>560)},{passive:true});
