@@ -320,13 +320,20 @@ footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
 #toTop{position:fixed;right:22px;bottom:88px;width:42px;height:42px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:15px;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
 #toTop.show{opacity:1;pointer-events:auto}
 /* ===== チャットボット ===== */
-#chatBtn{position:fixed;right:20px;bottom:20px;z-index:70;width:56px;height:56px;border-radius:999px;background:var(--route);color:#fff;box-shadow:var(--shadow-lift);display:flex;align-items:center;justify-content:center;transition:transform .18s}
+#chatBtn{position:fixed;right:20px;bottom:20px;z-index:70;width:58px;height:58px;border-radius:999px;background:#fff;padding:0;box-shadow:0 0 0 2px #fff,var(--shadow-lift);transition:transform .18s;overflow:visible}
 #chatBtn:hover{transform:scale(1.06)}
-#chatBtn svg{width:26px;height:26px}
+#chatBtn .cbimg{width:100%;height:100%;border-radius:999px;object-fit:cover;display:block}
+#chatBtn .cbadge{position:absolute;right:-4px;bottom:-2px;width:23px;height:23px;border-radius:999px;background:var(--route);color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid var(--paper);box-shadow:var(--shadow)}
+#chatBtn .cbadge svg{width:12px;height:12px}
 #chatPanel{position:fixed;right:20px;bottom:88px;z-index:71;width:372px;max-width:calc(100vw - 40px);height:540px;max-height:calc(100dvh - 120px);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lift);display:none;flex-direction:column;overflow:hidden}
 #chatPanel.open{display:flex}
 .chead{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--ink);color:var(--paper);flex-shrink:0}
-.chead .cico{width:32px;height:32px;border-radius:10px;background:var(--route);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.chead .cico{width:34px;height:34px;border-radius:999px;background:#fff;overflow:hidden;flex-shrink:0;box-shadow:0 0 0 1.5px rgba(255,255,255,.35)}
+.chead .cico img{width:100%;height:100%;object-fit:cover;display:block}
+.crow{display:flex;gap:7px;align-items:flex-end;align-self:flex-start;max-width:100%}
+.crow .cmsg{max-width:none}
+.crow .cav{width:26px;height:26px;border-radius:999px;overflow:hidden;flex-shrink:0;border:1px solid var(--hair);background:#fff;margin-bottom:2px}
+.crow .cav img{width:100%;height:100%;object-fit:cover;display:block}
 .chead .ct{font-weight:800;font-size:13.5px;line-height:1.3}
 .chead .cs{font-size:9.5px;opacity:.65;letter-spacing:.04em}
 .chead .cdemo{font-size:8.5px;font-weight:700;letter-spacing:.16em;border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:1px 5px;margin-left:2px}
@@ -395,12 +402,13 @@ footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
   </div>
 </footer>
 <button id="toTop" aria-label="Back to top">↑</button>
-<button id="chatBtn" aria-label="Chat" onclick="toggleChat()">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.2 0-2.4-.25-3.4-.7L3 21l1.8-4.6A8.5 8.5 0 1121 11.5z"/><path d="M8 10l3-4 2 3 3-4" stroke-width="1.5"/></svg>
+<button id="chatBtn" aria-label="AIコンシェルジュとチャット / Chat with AI Concierge" onclick="toggleChat()">
+  <img class="cbimg" src="images/logo-emblem.jpg" alt="">
+  <span class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.2 0-2.4-.25-3.4-.7L3 21l1.8-4.6A8.5 8.5 0 1121 11.5z"/></svg></span>
 </button>
 <div id="chatPanel" role="dialog" aria-label="AI Concierge">
   <div class="chead">
-    <span class="cico">⛰</span>
+    <span class="cico"><img src="images/logo-emblem.jpg" alt=""></span>
     <div><div class="ct" id="chatTitle"></div><div class="cs" id="chatStatus"></div></div>
     <span class="cdemo">DEMO</span>
     <button class="cx" onclick="toggleChat(false)" aria-label="close">✕</button>
@@ -925,7 +933,13 @@ function syncChatUI(){
 }
 function chatRenderMsgs(){
   var body=document.getElementById("chatBody");
-  body.innerHTML=chatMsgs.map(function(m){return '<div class="cmsg '+m.role+'">'+m.html+"</div>"}).join("");
+  body.innerHTML=chatMsgs.map(function(m){
+    var bubble='<div class="cmsg '+m.role+'">'+m.html+"</div>";
+    if(m.role.indexOf("bot")===0){
+      return '<div class="crow"><span class="cav"><img src="images/logo-emblem.jpg" alt=""></span>'+bubble+"</div>";
+    }
+    return bubble;
+  }).join("");
   body.scrollTop=body.scrollHeight;
 }
 function toggleChat(open){
