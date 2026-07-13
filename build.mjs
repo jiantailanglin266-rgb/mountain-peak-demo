@@ -66,6 +66,7 @@ const STATIC_TITLES = {
     "legal:terms": ["利用規約 | Mountain Peak", "Mountain Peakの利用規約。"],
     "legal:privacy": ["プライバシーポリシー | Mountain Peak", "Mountain Peakのプライバシーポリシー。"],
     "legal:disclaimer": ["安全免責事項 | Mountain Peak", "登山は自己責任です。Mountain Peakの安全免責事項と、安全に登るための推奨事項。"],
+    countries: ["国・地域から探す — 世界の山を国別・山域別に | Mountain Peak", "日本・ネパール・スイスなど国別、北アルプス・ヒマラヤなど山域別に山をまとめたハブページ。"],
   },
   en: {
     home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. Primary mountain information from the 100 Famous Japanese Mountains to the Seven Summits."],
@@ -78,6 +79,7 @@ const STATIC_TITLES = {
     "legal:terms": ["Terms of Use | Mountain Peak", "Terms of use for Mountain Peak."],
     "legal:privacy": ["Privacy Policy | Mountain Peak", "Privacy policy for Mountain Peak."],
     "legal:disclaimer": ["Safety Disclaimer | Mountain Peak", "Climbing is at your own risk. Mountain Peak's safety disclaimer and recommendations."],
+    countries: ["Browse by Country & Region | Mountain Peak", "Mountains organized by country (Japan, Nepal, Switzerland…) and range (Japan Alps, Himalaya…)."],
   },
 };
 
@@ -87,7 +89,7 @@ function push(path, l, title, desc, opts = {}) {
 
 for (const l of LOCALES) {
   const S = STATIC_TITLES[l];
-  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about"]) {
+  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries"]) {
     const p = key === "home" ? `/${l}/` : `/${l}/${key}/`;
     push(p, l, S[key][0], S[key][1], { kind: key });
   }
@@ -117,6 +119,14 @@ for (const l of LOCALES) {
   for (const k of DATA.rankings) {
     const title = l === "ja" ? `${nm(k, l)} 一覧・チェックリスト | Mountain Peak` : `${nm(k, l)} — Complete List & Checklist | Mountain Peak`;
     push(`/${l}/rankings/${k.slug}/`, l, title, String(k.descriptions[l] || k.descriptions.ja).slice(0, 155), { kind: "ranking", k });
+  }
+  for (const c of DATA.countries) {
+    const title = l === "ja" ? `${nm(c, l)}の山一覧・登山情報 | Mountain Peak` : `Mountains in ${nm(c, l)} — Climbing Guide | Mountain Peak`;
+    push(`/${l}/countries/${c.slug}/`, l, title, String(c.summaries[l] || c.summaries.ja).slice(0, 155), { kind: "country", c });
+  }
+  for (const rg of DATA.regions) {
+    const title = l === "ja" ? `${nm(rg, l)}の山と登山ルート | Mountain Peak` : `${nm(rg, l)} — Mountains & Routes | Mountain Peak`;
+    push(`/${l}/regions/${rg.slug}/`, l, title, String(rg.summaries[l] || rg.summaries.ja).slice(0, 155), { kind: "region", rg });
   }
 }
 
@@ -151,6 +161,12 @@ function jsonLd(p) {
         return m ? { "@type": "ListItem", position: i + 1, name: tr(m, p.locale).name, url: `${SITE}/${p.locale}/mountains/${m.slug}/` } : null;
       }).filter(Boolean) });
     crumbs.push({ name: nm(p.k, p.locale), item: url });
+  }
+  if (p.kind === "country" || p.kind === "region") {
+    const ms = DATA.mountains.filter((m) => m.status === "published" && (p.kind === "country" ? m.countryId === p.c.id : m.regionId === p.rg.id));
+    out.push({ "@context": "https://schema.org", "@type": "ItemList", name: p.title.replace(/ \| Mountain Peak$/, ""), url,
+      itemListElement: ms.map((m, i) => ({ "@type": "ListItem", position: i + 1, name: tr(m, p.locale).name, url: `${SITE}/${p.locale}/mountains/${m.slug}/` })) });
+    crumbs.push({ name: p.kind === "country" ? nm(p.c, p.locale) : nm(p.rg, p.locale), item: url });
   }
   if (crumbs.length > 1) {
     out.push({ "@context": "https://schema.org", "@type": "BreadcrumbList",
@@ -189,6 +205,17 @@ function prerender(p) {
     body += `<ul>` + DATA.mountains.filter((m) => m.status === "published").map((m) =>
       `<li><a href="${url(`/${l}/mountains/${m.slug}/`)}">${esc(tr(m, l).name)}</a> — ${m.elevationM.toLocaleString()}m</li>`).join("") + `</ul>` +
       `<p><a href="${url(`/${l}/rankings/`)}">Lists</a> / <a href="${url(`/${l}/articles/`)}">Articles</a> / <a href="${url(`/${l}/videos/`)}">Videos</a> / <a href="${url(`/${l}/community/`)}">Community</a> / <a href="${url(`/${l}/about/`)}">About</a></p>`;
+  } else if (p.kind === "country" || p.kind === "region") {
+    const ms = DATA.mountains.filter((m) => m.status === "published" && (p.kind === "country" ? m.countryId === p.c.id : m.regionId === p.rg.id))
+      .sort((a, b) => b.elevationM - a.elevationM);
+    body += `<ul>` + ms.map((m) => `<li><a href="${url(`/${l}/mountains/${m.slug}/`)}">${esc(tr(m, l).name)}</a> — ${m.elevationM.toLocaleString()}m</li>`).join("") + `</ul>`;
+    if (p.kind === "country") {
+      const regs = DATA.regions.filter((x) => x.countryId === p.c.id);
+      if (regs.length) body += `<p>` + regs.map((x) => `<a href="${url(`/${l}/regions/${x.slug}/`)}">${esc(nm(x, l))}</a>`).join(" / ") + `</p>`;
+    }
+  } else if (p.kind === "countries") {
+    body += `<ul>` + DATA.countries.map((c) => `<li><a href="${url(`/${l}/countries/${c.slug}/`)}">${esc(nm(c, l))}</a></li>`).join("") + `</ul>` +
+      `<p>` + DATA.regions.map((x) => `<a href="${url(`/${l}/regions/${x.slug}/`)}">${esc(nm(x, l))}</a>`).join(" / ") + `</p>`;
   } else if (p.kind === "articles") {
     body += `<ul>` + DATA.articles.map((a) => `<li><a href="${url(`/${l}/articles/${a.slug}/`)}">${esc(tr(a, l).title)}</a></li>`).join("") + `</ul>`;
   } else if (p.kind === "rankings") {

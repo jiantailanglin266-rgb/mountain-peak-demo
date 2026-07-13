@@ -201,6 +201,20 @@ h2.sec .more:hover{text-decoration:underline}
 .detail-hero .elv{font-size:36px;font-weight:600;text-align:right;line-height:1}
 .detail-hero .elv small{font-size:15px;color:var(--muted)}
 .detail-hero .meta{font-size:12px;color:var(--muted);text-align:right;margin-top:5px}
+.detail-hero .dsum{margin-top:14px;font-size:14px;color:var(--muted);line-height:1.9}
+.detail-hero .hublink{cursor:pointer}
+.detail-hero .hublink:hover{text-decoration:underline}
+.detail-hero.dphoto{color:#EFF4F2;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;border-color:transparent}
+.detail-hero.dphoto .dbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.detail-hero.dphoto .dscrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(12,21,24,.18) 0%,rgba(12,21,24,.42) 45%,rgba(12,21,24,.78) 100%)}
+.detail-hero.dphoto>*{position:relative;z-index:2}
+.detail-hero.dphoto .dbg,.detail-hero.dphoto .dscrim{z-index:0}
+.detail-hero.dphoto .dscrim{z-index:1}
+.detail-hero.dphoto h1{text-shadow:0 2px 18px rgba(0,0,0,.4)}
+.detail-hero.dphoto .local,.detail-hero.dphoto .meta,.detail-hero.dphoto .dsum{color:rgba(230,238,236,.88)}
+.detail-hero.dphoto .elv{color:#fff}
+.detail-hero.dphoto .abtn{background:rgba(255,255,255,.94);color:#1B2A32;border-color:transparent}
+.detail-hero.dphoto .abtn.done{background:var(--forest);color:#fff}
 .actrow{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 .abtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 15px;font-size:12.5px;font-weight:600;transition:all .14s}
 .abtn:hover{border-color:var(--ink)}
@@ -494,6 +508,7 @@ var DICT = {
    watch:"YouTubeで見る ↗",close:"✕ 閉じる",detailTitle:"動画で見る",
    themeBeginner:"🎒 初心者ガイド動画",theme4k:"🎬 絶景・空撮 4K",toMt:"山の詳細 →"},
   legalNav:{terms:"利用規約",privacy:"プライバシーポリシー",disclaimer:"安全免責事項",about:"運営者情報"},
+  hub:{countries:"国・地域から探す",countriesSub:"国と山域ごとに山をまとめています。エリアから次の一座を見つけよう。",regions:"山域",regionsIn:"の山域",mtsIn:"の山",country:"国",allCountries:"すべての国・地域 →",viewAll:"一覧を見る →"},
   faq:{title:"よくある質問",
    q1:function(n){return n+"は初心者でも登れますか？"},
    a1:{1:"はい。整備された道が中心で、基本的な体力があれば初心者でも十分登れます。",2:"適切な準備と装備があれば初心者でも挑戦できます。天候確認と早出早着を心がけてください。",3:"岩場や悪天リスクを含むため、登山経験を積んでからの挑戦をおすすめします。",4:"高所・技術的な区間を含む上級者向けの山です。十分な経験、またはガイドの同行を強く推奨します。",5:"遠征級・エキスパート向けの山です。高度な登攀技術と豊富な経験が必須です。"},
@@ -535,6 +550,7 @@ var DICT = {
    watch:"Watch on YouTube ↗",close:"✕ Close",detailTitle:"Watch videos",
    themeBeginner:"🎒 Beginner Guides",theme4k:"🎬 Scenic & Aerial 4K",toMt:"Mountain page →"},
   legalNav:{terms:"Terms of Use",privacy:"Privacy Policy",disclaimer:"Safety Disclaimer",about:"About"},
+  hub:{countries:"Browse by Country & Region",countriesSub:"Mountains organized by country and range — find your next peak by area.",regions:"Ranges",regionsIn:" — Ranges",mtsIn:" — Mountains",country:"Country",allCountries:"All countries & regions →",viewAll:"View all →"},
   faq:{title:"Frequently Asked Questions",
    q1:function(n){return "Can beginners climb "+n+"?"},
    a1:{1:"Yes. The trails are well maintained and suitable for beginners with basic fitness.",2:"Yes, with proper preparation and gear. Check the weather and start early.",3:"It involves rocky sections and weather risk — build up hiking experience first.",4:"An advanced mountain with exposure and technical terrain. Solid experience or a guide is strongly recommended.",5:"An expedition-grade, expert-only mountain requiring advanced skills and extensive experience."},
@@ -812,8 +828,8 @@ function vHome(){
     secHead("lists",D.lists)+'<div class="grid">'+DATA.rankings.map(function(r){
       var done=sums.length?r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length:0;
       return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})">'+rankThumbs(r)+'<div class="nm">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--glacier)">'+r.mountainIds.length+" "+D.l.peaks+" →</span>"+(done?'<span class="badge d1">✓ '+done+"</span>":"")+"</div></div>"}).join("")+"</div>"+
-    secHead("byCountry",D.byCountry)+'<div class="chips">'+DATA.countries.map(function(c){
-      return '<span class="chip" onclick=\'go({name:"mountains",country:"'+c.id+'"})\'>'+flag(c.id)+" "+esc(names(c))+"</span>"}).join("")+"</div>"+
+    secHead("byCountry",D.byCountry,'<span class="more" onclick="go({name:\'countries\'})">'+D.hub.allCountries+"</span>")+'<div class="chips">'+DATA.countries.map(function(c){
+      return '<span class="chip" onclick=\'go({name:"country",slug:"'+c.slug+'"})\'>'+flag(c.id)+" "+esc(names(c))+"</span>"}).join("")+"</div>"+
     secHead("newest",D.newest,'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+"</span>")+'<div class="grid">'+arts.map(articleCard).join("")+"</div>";
 }
 function homeSearch(){var q=document.getElementById("homeQ").value;go({name:"mountains",q:q})}
@@ -828,7 +844,7 @@ function vMountains(){
     '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.mountains+"</h1>"+
     '<div class="card"><div class="filters">'+
     '<label>'+D.f.kw+'<input id="fQ" value="'+esc(f.q)+'" autocomplete="off" oninput="suggest(\'fQ\',\'fSug\')" onblur="hideSug(\'fSug\')" onkeydown="if(event.key===\'Enter\')applyFilters()"><div id="fSug" class="sug" style="display:none;text-transform:none;letter-spacing:0;font-weight:400"></div></label>'+
-    '<label>'+D.f.country+'<select id="fC" onchange="applyFilters()">'+opts(f.country,[["",D.f.allC]].concat(DATA.countries.map(function(c){return[c.id,names(c)]})))+"</select></label>"+
+    '<label>'+D.f.country+'<select id="fC" onchange="applyFilters()">'+opts(f.country,[["",D.f.allC]].concat(DATA.countries.map(function(c){return[c.id,flag(c.id)+" "+names(c)]})))+"</select></label>"+
     '<label>'+D.f.elev+'<select id="fE" onchange="applyFilters()">'+opts(f.elev,[["",D.f.any]].concat(Object.keys(BANDS).map(function(k){return[k,k+" m"]})))+"</select></label>"+
     '<label>'+D.f.diff+'<select id="fD" onchange="applyFilters()">'+opts(f.diff,[["",D.f.allD],["1","1 "+D.diffs[1]],["2","2 "+D.diffs[2]],["3","3 "+D.diffs[3]],["4","4 "+D.diffs[4]],["5","5 "+D.diffs[5]]])+"</select></label>"+
     '<div style="display:flex;gap:8px"><button style="flex:1;background:var(--route);color:#fff;border-radius:10px;padding:9px 16px;font-weight:700;font-size:13px" onclick="applyFilters()">'+D.hero.go+'</button><button style="border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;color:var(--muted)" onclick="resetFilters()">'+D.f.reset+"</button></div></div>"+tagChips+"</div>"+
@@ -851,11 +867,14 @@ function vMountain(slug){
   var near=nearby(m,4);
   var sum=isSum(m.id);
   var sect=function(title,body){return body?'<div class="card sect"><h3>'+title+'</h3><p>'+esc(body)+"</p></div>":""};
-  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains,go:'go({name:"mountains"})'},{n:c?names(c):"",go:'go({name:"mountains",country:"'+m.countryId+'"})'},{n:t.name}])+
-    '<div class="card detail-hero"><div class="row"><div><h1 class="disp">'+esc(t.name)+"</h1>"+(t.localName?'<div class="local">'+esc(t.localName)+"</div>":"")+
+  var hasPhoto=!!MT_PHOTOS[m.slug];
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains,go:'go({name:"mountains"})'},{n:c?flag(c.id)+" "+names(c):"",go:'go({name:"country",slug:"'+(c?c.slug:"")+'"})'},{n:t.name}])+
+    '<div class="card detail-hero'+(hasPhoto?" dphoto":"")+'">'+
+    (hasPhoto?'<img class="dbg" src="'+asset("images/mountains/"+m.slug+".jpg")+'" alt="'+esc(t.name)+'"><div class="dscrim"></div>':"")+
+    '<div class="row"><div><h1 class="disp">'+esc(t.name)+"</h1>"+(t.localName?'<div class="local">'+esc(t.localName)+"</div>":"")+
     '<div class="badges" style="margin-top:12px">'+diffBadge(m.difficultyLevel)+tagBadges(m.tags)+seasonBadge(m.bestSeasons)+"</div></div>"+
-    '<div><div class="elv mono">'+elevMain(m.elevationM)+'<small> '+elevUnit()+'</small></div><div class="meta mono">'+elevAlt(m.elevationM)+'</div><div class="meta">'+(c?flag(c.id)+" "+esc(names(c)):"")+(r?" · "+esc(names(r)):"")+"</div></div></div>"+
-    '<p style="margin-top:14px;font-size:14px;color:var(--muted);line-height:1.9">'+esc(t.summary)+"</p>"+
+    '<div><div class="elv mono">'+elevMain(m.elevationM)+'<small> '+elevUnit()+'</small></div><div class="meta mono">'+elevAlt(m.elevationM)+'</div><div class="meta">'+(c?'<a class="hublink" onclick="go({name:\'country\',slug:\''+c.slug+'\'})">'+flag(c.id)+" "+esc(names(c))+"</a>":"")+(r?' · <a class="hublink" onclick="go({name:\'region\',slug:\''+r.slug+'\'})">'+esc(names(r))+"</a>":"")+"</div></div></div>"+
+    '<p class="dsum">'+esc(t.summary)+"</p>"+
     '<div class="actrow"><button class="abtn'+(sum?" done":"")+'" onclick="toggleSum(\''+m.id+'\')" title="'+(sum?D.l.unclimbed:D.l.summit)+'">'+(sum?D.l.summited:"⛰ "+D.l.summit)+'</button><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div></div>"+
     '<div class="cols"><div>'+
     sect(D.l.features,t.features)+
@@ -958,7 +977,9 @@ function pathFor(view,locale){
   if(n==="article")return "/"+l+"/articles/"+view.slug+"/";
   if(n==="legal")return "/"+l+"/legal/"+view.slug+"/";
   if(n==="thread")return "/"+l+"/community/?t="+encodeURIComponent(view.slug);
-  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/"};
+  if(n==="country")return "/"+l+"/countries/"+view.slug+"/";
+  if(n==="region")return "/"+l+"/regions/"+view.slug+"/";
+  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/"};
   return "/"+l+(map[n]||"/");
 }
 function go(view){
@@ -989,13 +1010,15 @@ function parseHash(){
   if(name==="rankings"&&slug){state.view={name:"ranking",slug:slug};return}
   if(name==="articles"&&slug){state.view={name:"article",slug:slug};return}
   if(name==="legal"&&slug){state.view={name:"legal",slug:slug};return}
+  if(name==="countries"&&slug){state.view={name:"country",slug:slug};return}
+  if(name==="regions"&&slug){state.view={name:"region",slug:slug};return}
   if(name==="community"){
     var t=null;
     try{t=new URLSearchParams(location.search).get("t")}catch(e){}
     state.view=t?{name:"thread",slug:t}:{name:"community"};
     return;
   }
-  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1};
+  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1};
   state.view=valid2[name]?{name:name}:{name:"home"};
 }
 /* ビュー別タイトル（SSG生成ページのタイトル設計と同一パターン） */
@@ -1008,6 +1031,9 @@ function pageTitle(v){
     if(v.name==="ranking"){var k=DATA.rankings.find(function(x){return x.slug===v.slug});if(k)return names(k)+(ja?" 一覧・チェックリスト":" — Complete List & Checklist")+" | Mountain Peak"}
     if(v.name==="legal"&&LEGAL[v.slug])return (LEGAL[v.slug][state.locale]||LEGAL[v.slug].ja).t+" | Mountain Peak";
     if(v.name==="about")return D.legalNav.about+" | Mountain Peak";
+    if(v.name==="country"){var cc=DATA.countries.find(function(x){return x.slug===v.slug});if(cc)return names(cc)+(ja?"の山一覧・登山情報":" — Mountains & Climbing Guide")+" | Mountain Peak"}
+    if(v.name==="region"){var rr=DATA.regions.find(function(x){return x.slug===v.slug});if(rr)return names(rr)+(ja?"の山と登山ルート":" — Mountains & Routes")+" | Mountain Peak"}
+    if(v.name==="countries")return D.hub.countries+" | Mountain Peak";
     var statics={mountains:D.tabs.mountains,rankings:D.tabs.rankings,articles:D.tabs.articles,videos:D.tabs.videos,community:D.tabs.community,thread:D.tabs.community};
     if(statics[v.name])return statics[v.name]+" | Mountain Peak";
   }catch(e){}
@@ -1037,6 +1063,9 @@ function render(){
     else if(v.name==="videos")html=vVideos();
     else if(v.name==="legal")html=vLegal(v.slug);
     else if(v.name==="about")html=vAbout();
+    else if(v.name==="countries")html=vCountries();
+    else if(v.name==="country")html=vCountry(v.slug);
+    else if(v.name==="region")html=vRegion(v.slug);
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
@@ -1302,6 +1331,46 @@ function comReport(tid){
   render();
 }
 
+/* ====== 国別・山域ハブ（提案書§3-1: SEOと回遊の要） ====== */
+function hubMtGrid(list){
+  return list.length?'<div class="grid" style="margin-top:16px">'+list.map(mountainCard).join("")+"</div>":'<div class="empty"><div class="big">🏔</div>—</div>';
+}
+function vCountries(){
+  var D=d(),H=D.hub;
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800">'+H.countries+'</h1>'+
+    '<p style="font-size:13px;color:var(--muted);margin:4px 0 18px">'+H.countriesSub+"</p>"+
+    '<div class="grid">'+DATA.countries.map(function(c){
+      var cnt=DATA.mountains.filter(function(m){return m.countryId===c.id&&m.status==="published"}).length;
+      return '<div class="card mcard rv" onclick="go({name:\'country\',slug:\''+c.slug+'\'})"><div class="top"><div class="nm">'+flag(c.id)+" "+esc(names(c))+'</div><div class="el mono" style="font-size:15px">'+cnt+" "+D.l.peaks+'</div></div><div class="sm" style="-webkit-line-clamp:3">'+esc(c.summaries[state.locale]||c.summaries.ja)+"</div></div>"}).join("")+"</div>"+
+    '<h2 class="sec"><span class="tt disp">'+H.regions+'</span></h2><div class="chips">'+DATA.regions.map(function(r){
+      return '<span class="chip" onclick="go({name:\'region\',slug:\''+r.slug+'\'})">'+esc(names(r))+"</span>"}).join("")+"</div>";
+}
+function vCountry(slug){
+  var c=DATA.countries.find(function(x){return x.slug===slug});
+  if(!c)return '<div class="empty">404</div>';
+  var D=d(),H=D.hub;
+  var mts=DATA.mountains.filter(function(m){return m.countryId===c.id&&m.status==="published"}).sort(function(a,b){return b.elevationM-a.elevationM});
+  var regs=DATA.regions.filter(function(r){return r.countryId===c.id});
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries,go:'go({name:"countries"})'},{n:names(c)}])+
+    '<div class="card detail-hero"><h1 class="disp" style="font-size:clamp(22px,3.6vw,30px)">'+flag(c.id)+" "+esc(names(c))+(state.locale==="ja"?"の山":" — Mountains")+'</h1>'+
+    '<p class="dsum">'+esc(c.summaries[state.locale]||c.summaries.ja)+"</p>"+
+    (regs.length?'<div class="chips" style="margin-top:14px">'+regs.map(function(r){return '<span class="chip" onclick="go({name:\'region\',slug:\''+r.slug+'\'})">'+esc(names(r))+"</span>"}).join("")+"</div>":"")+"</div>"+
+    '<div class="count"><b>'+mts.length+"</b> "+D.l.peaks+"</div>"+hubMtGrid(mts);
+}
+function vRegion(slug){
+  var r=DATA.regions.find(function(x){return x.slug===slug});
+  if(!r)return '<div class="empty">404</div>';
+  var D=d(),H=D.hub;
+  var c=r.countryId?countryOf(r.countryId):null;
+  var mts=DATA.mountains.filter(function(m){return m.regionId===r.id&&m.status==="published"}).sort(function(a,b){return b.elevationM-a.elevationM});
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries,go:'go({name:"countries"})'},{n:c?flag(c.id)+" "+names(c):"",go:c?'go({name:"country",slug:"'+c.slug+'"})':null},{n:names(r)}].filter(function(x){return x.n}))+
+    '<div class="card detail-hero"><h1 class="disp" style="font-size:clamp(22px,3.6vw,30px)">⛰ '+esc(names(r))+'</h1>'+
+    '<p class="dsum">'+esc(r.summaries[state.locale]||r.summaries.ja)+"</p>"+
+    (c?'<p style="margin-top:12px;font-size:12.5px"><a class="hublink" style="color:var(--glacier);font-weight:700" onclick="go({name:\'country\',slug:\''+c.slug+'\'})">'+flag(c.id)+" "+esc(names(c))+" →</a></p>":"")+"</div>"+
+    '<div class="count"><b>'+mts.length+"</b> "+D.l.peaks+"</div>"+hubMtGrid(mts);
+}
+
 /* ====== 法務・About（提案書§9/§5-2: 独立ページ化・E-E-A-T） ====== */
 var LEGAL={
  terms:{
@@ -1432,7 +1501,7 @@ function chatFindMountain(q){
 function chatMtProfile(m){
   var t=tr(m),c=countryOf(m.countryId),T=cT(),D=d();
   var hz=t.hazards?String(t.hazards).slice(0,90):"";
-  return "<b>"+esc(t.name)+"</b>（"+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft"+(c?"・"+esc(names(c)):"")+"）<br>"+
+  return "<b>"+esc(t.name)+"</b>（"+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft"+(c?"・"+flag(c.id)+" "+esc(names(c)):"")+"）<br>"+
     esc(String(t.summary).slice(0,120))+"…<br>"+
     T.diffLabel+": "+"▲".repeat(m.difficultyLevel)+" "+D.diffs[m.difficultyLevel]+"<br>"+
     T.seasonLabel+": "+(m.bestSeasons||[]).map(function(x){return D.months[x-1]}).join("・")+
