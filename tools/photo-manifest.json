@@ -1,0 +1,1291 @@
+[
+ {
+  "slug": "tsurugi-dake",
+  "lang": "ja",
+  "titles": [
+   "剱岳"
+  ]
+ },
+ {
+  "slug": "shirouma-dake",
+  "lang": "ja",
+  "titles": [
+   "白馬岳"
+  ]
+ },
+ {
+  "slug": "jonen-dake",
+  "lang": "ja",
+  "titles": [
+   "常念岳"
+  ]
+ },
+ {
+  "slug": "kiso-komagatake",
+  "lang": "ja",
+  "titles": [
+   "木曽駒ヶ岳"
+  ]
+ },
+ {
+  "slug": "kai-komagatake",
+  "lang": "ja",
+  "titles": [
+   "甲斐駒ヶ岳"
+  ]
+ },
+ {
+  "slug": "senjo-ga-take",
+  "lang": "ja",
+  "titles": [
+   "仙丈ヶ岳"
+  ]
+ },
+ {
+  "slug": "aka-dake",
+  "lang": "ja",
+  "titles": [
+   "赤岳 (八ヶ岳山系)",
+   "八ヶ岳"
+  ]
+ },
+ {
+  "slug": "tanigawa-dake",
+  "lang": "ja",
+  "titles": [
+   "谷川岳"
+  ]
+ },
+ {
+  "slug": "tsukuba-san",
+  "lang": "ja",
+  "titles": [
+   "筑波山"
+  ]
+ },
+ {
+  "slug": "miyanoura-dake",
+  "lang": "ja",
+  "titles": [
+   "宮之浦岳"
+  ]
+ },
+ {
+  "slug": "rishiri-zan",
+  "lang": "ja",
+  "titles": [
+   "利尻山"
+  ]
+ },
+ {
+  "slug": "rausu-dake",
+  "lang": "ja",
+  "titles": [
+   "羅臼岳"
+  ]
+ },
+ {
+  "slug": "shari-dake",
+  "lang": "ja",
+  "titles": [
+   "斜里岳"
+  ]
+ },
+ {
+  "slug": "akan-dake",
+  "lang": "ja",
+  "titles": [
+   "雌阿寒岳",
+   "阿寒岳"
+  ]
+ },
+ {
+  "slug": "daisetsuzan",
+  "lang": "ja",
+  "titles": [
+   "旭岳",
+   "大雪山"
+  ]
+ },
+ {
+  "slug": "tomuraushi-yama",
+  "lang": "ja",
+  "titles": [
+   "トムラウシ山"
+  ]
+ },
+ {
+  "slug": "tokachi-dake",
+  "lang": "ja",
+  "titles": [
+   "十勝岳"
+  ]
+ },
+ {
+  "slug": "poroshiri-dake",
+  "lang": "ja",
+  "titles": [
+   "幌尻岳"
+  ]
+ },
+ {
+  "slug": "yotei-zan",
+  "lang": "ja",
+  "titles": [
+   "後方羊蹄山"
+  ]
+ },
+ {
+  "slug": "iwaki-san",
+  "lang": "ja",
+  "titles": [
+   "岩木山"
+  ]
+ },
+ {
+  "slug": "hakkoda-san",
+  "lang": "ja",
+  "titles": [
+   "八甲田山"
+  ]
+ },
+ {
+  "slug": "hachimantai",
+  "lang": "ja",
+  "titles": [
+   "八幡平"
+  ]
+ },
+ {
+  "slug": "iwate-san",
+  "lang": "ja",
+  "titles": [
+   "岩手山"
+  ]
+ },
+ {
+  "slug": "hayachine-san",
+  "lang": "ja",
+  "titles": [
+   "早池峰山"
+  ]
+ },
+ {
+  "slug": "chokai-san",
+  "lang": "ja",
+  "titles": [
+   "鳥海山"
+  ]
+ },
+ {
+  "slug": "gassan",
+  "lang": "ja",
+  "titles": [
+   "月山"
+  ]
+ },
+ {
+  "slug": "oasahi-dake",
+  "lang": "ja",
+  "titles": [
+   "大朝日岳",
+   "朝日連峰"
+  ]
+ },
+ {
+  "slug": "zao-san",
+  "lang": "ja",
+  "titles": [
+   "蔵王山"
+  ]
+ },
+ {
+  "slug": "iide-san",
+  "lang": "ja",
+  "titles": [
+   "飯豊山"
+  ]
+ },
+ {
+  "slug": "azuma-san",
+  "lang": "ja",
+  "titles": [
+   "西吾妻山",
+   "吾妻山"
+  ]
+ },
+ {
+  "slug": "adatara-yama",
+  "lang": "ja",
+  "titles": [
+   "安達太良山"
+  ]
+ },
+ {
+  "slug": "bandai-san",
+  "lang": "ja",
+  "titles": [
+   "磐梯山"
+  ]
+ },
+ {
+  "slug": "aizukoma-gatake",
+  "lang": "ja",
+  "titles": [
+   "会津駒ヶ岳"
+  ]
+ },
+ {
+  "slug": "echigokoma-gatake",
+  "lang": "ja",
+  "titles": [
+   "越後駒ヶ岳"
+  ]
+ },
+ {
+  "slug": "hiragatake",
+  "lang": "ja",
+  "titles": [
+   "平ヶ岳"
+  ]
+ },
+ {
+  "slug": "makihata-yama",
+  "lang": "ja",
+  "titles": [
+   "巻機山"
+  ]
+ },
+ {
+  "slug": "hiuchiga-take",
+  "lang": "ja",
+  "titles": [
+   "燧ヶ岳"
+  ]
+ },
+ {
+  "slug": "shibutsu-san",
+  "lang": "ja",
+  "titles": [
+   "至仏山"
+  ]
+ },
+ {
+  "slug": "amakazari-yama",
+  "lang": "ja",
+  "titles": [
+   "雨飾山"
+  ]
+ },
+ {
+  "slug": "naeba-san",
+  "lang": "ja",
+  "titles": [
+   "苗場山"
+  ]
+ },
+ {
+  "slug": "myoko-san",
+  "lang": "ja",
+  "titles": [
+   "妙高山"
+  ]
+ },
+ {
+  "slug": "hiuchi-yama",
+  "lang": "ja",
+  "titles": [
+   "火打山"
+  ]
+ },
+ {
+  "slug": "takatsuma-yama",
+  "lang": "ja",
+  "titles": [
+   "高妻山"
+  ]
+ },
+ {
+  "slug": "nasu-dake",
+  "lang": "ja",
+  "titles": [
+   "那須岳"
+  ]
+ },
+ {
+  "slug": "nantai-san",
+  "lang": "ja",
+  "titles": [
+   "男体山"
+  ]
+ },
+ {
+  "slug": "nikko-shirane-san",
+  "lang": "ja",
+  "titles": [
+   "日光白根山"
+  ]
+ },
+ {
+  "slug": "sukai-san",
+  "lang": "ja",
+  "titles": [
+   "皇海山"
+  ]
+ },
+ {
+  "slug": "hotaka-yama",
+  "lang": "ja",
+  "titles": [
+   "武尊山"
+  ]
+ },
+ {
+  "slug": "akagi-san",
+  "lang": "ja",
+  "titles": [
+   "赤城山"
+  ]
+ },
+ {
+  "slug": "kusatsu-shirane-san",
+  "lang": "ja",
+  "titles": [
+   "草津白根山"
+  ]
+ },
+ {
+  "slug": "azumaya-san",
+  "lang": "ja",
+  "titles": [
+   "四阿山"
+  ]
+ },
+ {
+  "slug": "asama-yama",
+  "lang": "ja",
+  "titles": [
+   "浅間山"
+  ]
+ },
+ {
+  "slug": "ryokami-san",
+  "lang": "ja",
+  "titles": [
+   "両神山"
+  ]
+ },
+ {
+  "slug": "kumotori-yama",
+  "lang": "ja",
+  "titles": [
+   "雲取山"
+  ]
+ },
+ {
+  "slug": "kobushiga-take",
+  "lang": "ja",
+  "titles": [
+   "甲武信ヶ岳"
+  ]
+ },
+ {
+  "slug": "kinpu-san",
+  "lang": "ja",
+  "titles": [
+   "金峰山"
+  ]
+ },
+ {
+  "slug": "mizugaki-yama",
+  "lang": "ja",
+  "titles": [
+   "瑞牆山"
+  ]
+ },
+ {
+  "slug": "daibosatsu-rei",
+  "lang": "ja",
+  "titles": [
+   "大菩薩嶺"
+  ]
+ },
+ {
+  "slug": "tanzawa-san",
+  "lang": "ja",
+  "titles": [
+   "丹沢山"
+  ]
+ },
+ {
+  "slug": "amagi-san",
+  "lang": "ja",
+  "titles": [
+   "天城山"
+  ]
+ },
+ {
+  "slug": "goryu-dake",
+  "lang": "ja",
+  "titles": [
+   "五竜岳"
+  ]
+ },
+ {
+  "slug": "kashimayari-gatake",
+  "lang": "ja",
+  "titles": [
+   "鹿島槍ヶ岳"
+  ]
+ },
+ {
+  "slug": "yakushi-dake",
+  "lang": "ja",
+  "titles": [
+   "薬師岳"
+  ]
+ },
+ {
+  "slug": "kurobegoro-dake",
+  "lang": "ja",
+  "titles": [
+   "黒部五郎岳"
+  ]
+ },
+ {
+  "slug": "suisho-dake",
+  "lang": "ja",
+  "titles": [
+   "黒岳",
+   "水晶岳"
+  ]
+ },
+ {
+  "slug": "washiba-dake",
+  "lang": "ja",
+  "titles": [
+   "鷲羽岳"
+  ]
+ },
+ {
+  "slug": "kasaga-take",
+  "lang": "ja",
+  "titles": [
+   "笠ヶ岳"
+  ]
+ },
+ {
+  "slug": "yake-dake",
+  "lang": "ja",
+  "titles": [
+   "焼岳"
+  ]
+ },
+ {
+  "slug": "norikura-dake",
+  "lang": "ja",
+  "titles": [
+   "乗鞍岳"
+  ]
+ },
+ {
+  "slug": "utsukushigahara",
+  "lang": "ja",
+  "titles": [
+   "美ヶ原"
+  ]
+ },
+ {
+  "slug": "kirigamine",
+  "lang": "ja",
+  "titles": [
+   "霧ヶ峰"
+  ]
+ },
+ {
+  "slug": "tateshina-yama",
+  "lang": "ja",
+  "titles": [
+   "蓼科山"
+  ]
+ },
+ {
+  "slug": "utsugi-dake",
+  "lang": "ja",
+  "titles": [
+   "空木岳"
+  ]
+ },
+ {
+  "slug": "ena-san",
+  "lang": "ja",
+  "titles": [
+   "恵那山"
+  ]
+ },
+ {
+  "slug": "ontake-san",
+  "lang": "ja",
+  "titles": [
+   "御嶽山"
+  ]
+ },
+ {
+  "slug": "hoo-zan",
+  "lang": "ja",
+  "titles": [
+   "鳳凰山"
+  ]
+ },
+ {
+  "slug": "ainodake",
+  "lang": "ja",
+  "titles": [
+   "間ノ岳"
+  ]
+ },
+ {
+  "slug": "shiomi-dake",
+  "lang": "ja",
+  "titles": [
+   "塩見岳"
+  ]
+ },
+ {
+  "slug": "warusawa-dake",
+  "lang": "ja",
+  "titles": [
+   "荒川東岳",
+   "悪沢岳"
+  ]
+ },
+ {
+  "slug": "akaishi-dake",
+  "lang": "ja",
+  "titles": [
+   "赤石岳"
+  ]
+ },
+ {
+  "slug": "hijiri-dake",
+  "lang": "ja",
+  "titles": [
+   "聖岳"
+  ]
+ },
+ {
+  "slug": "tekari-dake",
+  "lang": "ja",
+  "titles": [
+   "光岳"
+  ]
+ },
+ {
+  "slug": "hakusan",
+  "lang": "ja",
+  "titles": [
+   "白山"
+  ]
+ },
+ {
+  "slug": "arashima-dake",
+  "lang": "ja",
+  "titles": [
+   "荒島岳"
+  ]
+ },
+ {
+  "slug": "ibuki-yama",
+  "lang": "ja",
+  "titles": [
+   "伊吹山"
+  ]
+ },
+ {
+  "slug": "odaigahara-yama",
+  "lang": "ja",
+  "titles": [
+   "大台ヶ原山"
+  ]
+ },
+ {
+  "slug": "omine-san",
+  "lang": "ja",
+  "titles": [
+   "八経ヶ岳",
+   "大峰山"
+  ]
+ },
+ {
+  "slug": "tsurugi-san",
+  "lang": "ja",
+  "titles": [
+   "剣山"
+  ]
+ },
+ {
+  "slug": "ishizuchi-san",
+  "lang": "ja",
+  "titles": [
+   "石鎚山"
+  ]
+ },
+ {
+  "slug": "kuju-san",
+  "lang": "ja",
+  "titles": [
+   "くじゅう連山",
+   "久住山"
+  ]
+ },
+ {
+  "slug": "sobo-san",
+  "lang": "ja",
+  "titles": [
+   "祖母山"
+  ]
+ },
+ {
+  "slug": "aso-san",
+  "lang": "ja",
+  "titles": [
+   "阿蘇山"
+  ]
+ },
+ {
+  "slug": "kirishima-yama",
+  "lang": "ja",
+  "titles": [
+   "韓国岳",
+   "霧島山"
+  ]
+ },
+ {
+  "slug": "kaimon-dake",
+  "lang": "ja",
+  "titles": [
+   "開聞岳"
+  ]
+ },
+ {
+  "slug": "kangchenjunga",
+  "lang": "en",
+  "titles": [
+   "Kangchenjunga"
+  ]
+ },
+ {
+  "slug": "lhotse",
+  "lang": "en",
+  "titles": [
+   "Lhotse"
+  ]
+ },
+ {
+  "slug": "makalu",
+  "lang": "en",
+  "titles": [
+   "Makalu"
+  ]
+ },
+ {
+  "slug": "cho-oyu",
+  "lang": "en",
+  "titles": [
+   "Cho Oyu"
+  ]
+ },
+ {
+  "slug": "dhaulagiri",
+  "lang": "en",
+  "titles": [
+   "Dhaulagiri"
+  ]
+ },
+ {
+  "slug": "manaslu",
+  "lang": "en",
+  "titles": [
+   "Manaslu"
+  ]
+ },
+ {
+  "slug": "nanga-parbat",
+  "lang": "en",
+  "titles": [
+   "Nanga Parbat"
+  ]
+ },
+ {
+  "slug": "gasherbrum-i",
+  "lang": "en",
+  "titles": [
+   "Gasherbrum I"
+  ]
+ },
+ {
+  "slug": "broad-peak",
+  "lang": "en",
+  "titles": [
+   "Broad Peak"
+  ]
+ },
+ {
+  "slug": "gasherbrum-ii",
+  "lang": "en",
+  "titles": [
+   "Gasherbrum II"
+  ]
+ },
+ {
+  "slug": "shishapangma",
+  "lang": "en",
+  "titles": [
+   "Shishapangma"
+  ]
+ },
+ {
+  "slug": "ama-dablam",
+  "lang": "en",
+  "titles": [
+   "Ama Dablam"
+  ]
+ },
+ {
+  "slug": "pumori",
+  "lang": "en",
+  "titles": [
+   "Pumori"
+  ]
+ },
+ {
+  "slug": "baruntse",
+  "lang": "en",
+  "titles": [
+   "Baruntse"
+  ]
+ },
+ {
+  "slug": "island-peak",
+  "lang": "en",
+  "titles": [
+   "Island Peak",
+   "Imja Tse"
+  ]
+ },
+ {
+  "slug": "mera-peak",
+  "lang": "en",
+  "titles": [
+   "Mera Peak"
+  ]
+ },
+ {
+  "slug": "machapuchare",
+  "lang": "en",
+  "titles": [
+   "Machapuchare"
+  ]
+ },
+ {
+  "slug": "nanda-devi",
+  "lang": "en",
+  "titles": [
+   "Nanda Devi"
+  ]
+ },
+ {
+  "slug": "stok-kangri",
+  "lang": "en",
+  "titles": [
+   "Stok Kangri"
+  ]
+ },
+ {
+  "slug": "khan-tengri",
+  "lang": "en",
+  "titles": [
+   "Khan Tengri"
+  ]
+ },
+ {
+  "slug": "jengish-chokusu",
+  "lang": "en",
+  "titles": [
+   "Jengish Chokusu"
+  ]
+ },
+ {
+  "slug": "lenin-peak",
+  "lang": "en",
+  "titles": [
+   "Lenin Peak"
+  ]
+ },
+ {
+  "slug": "ismoil-somoni",
+  "lang": "en",
+  "titles": [
+   "Ismoil Somoni Peak"
+  ]
+ },
+ {
+  "slug": "muztagh-ata",
+  "lang": "en",
+  "titles": [
+   "Muztagh Ata"
+  ]
+ },
+ {
+  "slug": "yushan",
+  "lang": "en",
+  "titles": [
+   "Yushan (Jade Mountain)",
+   "Yushan"
+  ]
+ },
+ {
+  "slug": "hallasan",
+  "lang": "en",
+  "titles": [
+   "Hallasan"
+  ]
+ },
+ {
+  "slug": "fansipan",
+  "lang": "en",
+  "titles": [
+   "Fansipan"
+  ]
+ },
+ {
+  "slug": "kinabalu",
+  "lang": "en",
+  "titles": [
+   "Mount Kinabalu"
+  ]
+ },
+ {
+  "slug": "klyuchevskaya",
+  "lang": "en",
+  "titles": [
+   "Klyuchevskaya Sopka"
+  ]
+ },
+ {
+  "slug": "belukha",
+  "lang": "en",
+  "titles": [
+   "Belukha Mountain",
+   "Belukha"
+  ]
+ },
+ {
+  "slug": "damavand",
+  "lang": "en",
+  "titles": [
+   "Mount Damavand"
+  ]
+ },
+ {
+  "slug": "ararat",
+  "lang": "en",
+  "titles": [
+   "Mount Ararat"
+  ]
+ },
+ {
+  "slug": "kazbek",
+  "lang": "en",
+  "titles": [
+   "Mount Kazbek"
+  ]
+ },
+ {
+  "slug": "monte-rosa",
+  "lang": "en",
+  "titles": [
+   "Monte Rosa"
+  ]
+ },
+ {
+  "slug": "dom",
+  "lang": "en",
+  "titles": [
+   "Dom (mountain)"
+  ]
+ },
+ {
+  "slug": "weisshorn",
+  "lang": "en",
+  "titles": [
+   "Weisshorn"
+  ]
+ },
+ {
+  "slug": "dent-blanche",
+  "lang": "en",
+  "titles": [
+   "Dent Blanche"
+  ]
+ },
+ {
+  "slug": "eiger",
+  "lang": "en",
+  "titles": [
+   "Eiger"
+  ]
+ },
+ {
+  "slug": "jungfrau",
+  "lang": "en",
+  "titles": [
+   "Jungfrau"
+  ]
+ },
+ {
+  "slug": "moench",
+  "lang": "en",
+  "titles": [
+   "Mönch"
+  ]
+ },
+ {
+  "slug": "grandes-jorasses",
+  "lang": "en",
+  "titles": [
+   "Grandes Jorasses"
+  ]
+ },
+ {
+  "slug": "aiguille-verte",
+  "lang": "en",
+  "titles": [
+   "Aiguille Verte"
+  ]
+ },
+ {
+  "slug": "la-meije",
+  "lang": "en",
+  "titles": [
+   "La Meije"
+  ]
+ },
+ {
+  "slug": "gran-paradiso",
+  "lang": "en",
+  "titles": [
+   "Gran Paradiso"
+  ]
+ },
+ {
+  "slug": "piz-bernina",
+  "lang": "en",
+  "titles": [
+   "Piz Bernina"
+  ]
+ },
+ {
+  "slug": "monte-viso",
+  "lang": "en",
+  "titles": [
+   "Monte Viso"
+  ]
+ },
+ {
+  "slug": "marmolada",
+  "lang": "en",
+  "titles": [
+   "Marmolada"
+  ]
+ },
+ {
+  "slug": "grossglockner",
+  "lang": "en",
+  "titles": [
+   "Grossglockner"
+  ]
+ },
+ {
+  "slug": "wildspitze",
+  "lang": "en",
+  "titles": [
+   "Wildspitze"
+  ]
+ },
+ {
+  "slug": "zugspitze",
+  "lang": "en",
+  "titles": [
+   "Zugspitze"
+  ]
+ },
+ {
+  "slug": "triglav",
+  "lang": "en",
+  "titles": [
+   "Triglav"
+  ]
+ },
+ {
+  "slug": "ben-nevis",
+  "lang": "en",
+  "titles": [
+   "Ben Nevis"
+  ]
+ },
+ {
+  "slug": "mount-olympus",
+  "lang": "en",
+  "titles": [
+   "Mount Olympus"
+  ]
+ },
+ {
+  "slug": "mulhacen",
+  "lang": "en",
+  "titles": [
+   "Mulhacén"
+  ]
+ },
+ {
+  "slug": "aneto",
+  "lang": "en",
+  "titles": [
+   "Aneto"
+  ]
+ },
+ {
+  "slug": "galdhopiggen",
+  "lang": "en",
+  "titles": [
+   "Galdhøpiggen"
+  ]
+ },
+ {
+  "slug": "hvannadalshnukur",
+  "lang": "en",
+  "titles": [
+   "Hvannadalshnúkur"
+  ]
+ },
+ {
+  "slug": "etna",
+  "lang": "en",
+  "titles": [
+   "Mount Etna"
+  ]
+ },
+ {
+  "slug": "mount-kenya",
+  "lang": "en",
+  "titles": [
+   "Mount Kenya"
+  ]
+ },
+ {
+  "slug": "mount-meru",
+  "lang": "en",
+  "titles": [
+   "Mount Meru (Tanzania)"
+  ]
+ },
+ {
+  "slug": "ras-dashen",
+  "lang": "en",
+  "titles": [
+   "Ras Dashen"
+  ]
+ },
+ {
+  "slug": "toubkal",
+  "lang": "en",
+  "titles": [
+   "Mount Toubkal"
+  ]
+ },
+ {
+  "slug": "mount-rainier",
+  "lang": "en",
+  "titles": [
+   "Mount Rainier"
+  ]
+ },
+ {
+  "slug": "mount-shasta",
+  "lang": "en",
+  "titles": [
+   "Mount Shasta"
+  ]
+ },
+ {
+  "slug": "mount-hood",
+  "lang": "en",
+  "titles": [
+   "Mount Hood"
+  ]
+ },
+ {
+  "slug": "mount-whitney",
+  "lang": "en",
+  "titles": [
+   "Mount Whitney"
+  ]
+ },
+ {
+  "slug": "grand-teton",
+  "lang": "en",
+  "titles": [
+   "Grand Teton"
+  ]
+ },
+ {
+  "slug": "longs-peak",
+  "lang": "en",
+  "titles": [
+   "Longs Peak"
+  ]
+ },
+ {
+  "slug": "pikes-peak",
+  "lang": "en",
+  "titles": [
+   "Pikes Peak"
+  ]
+ },
+ {
+  "slug": "mount-logan",
+  "lang": "en",
+  "titles": [
+   "Mount Logan"
+  ]
+ },
+ {
+  "slug": "mount-robson",
+  "lang": "en",
+  "titles": [
+   "Mount Robson"
+  ]
+ },
+ {
+  "slug": "mount-assiniboine",
+  "lang": "en",
+  "titles": [
+   "Mount Assiniboine"
+  ]
+ },
+ {
+  "slug": "pico-de-orizaba",
+  "lang": "en",
+  "titles": [
+   "Pico de Orizaba"
+  ]
+ },
+ {
+  "slug": "iztaccihuatl",
+  "lang": "en",
+  "titles": [
+   "Iztaccíhuatl"
+  ]
+ },
+ {
+  "slug": "huascaran",
+  "lang": "en",
+  "titles": [
+   "Huascarán"
+  ]
+ },
+ {
+  "slug": "alpamayo",
+  "lang": "en",
+  "titles": [
+   "Alpamayo"
+  ]
+ },
+ {
+  "slug": "chimborazo",
+  "lang": "en",
+  "titles": [
+   "Chimborazo"
+  ]
+ },
+ {
+  "slug": "cotopaxi",
+  "lang": "en",
+  "titles": [
+   "Cotopaxi"
+  ]
+ },
+ {
+  "slug": "illimani",
+  "lang": "en",
+  "titles": [
+   "Illimani"
+  ]
+ },
+ {
+  "slug": "huayna-potosi",
+  "lang": "en",
+  "titles": [
+   "Huayna Potosí"
+  ]
+ },
+ {
+  "slug": "sajama",
+  "lang": "en",
+  "titles": [
+   "Sajama",
+   "Nevado Sajama"
+  ]
+ },
+ {
+  "slug": "ojos-del-salado",
+  "lang": "en",
+  "titles": [
+   "Ojos del Salado"
+  ]
+ },
+ {
+  "slug": "fitz-roy",
+  "lang": "en",
+  "titles": [
+   "Monte Fitz Roy"
+  ]
+ },
+ {
+  "slug": "cerro-torre",
+  "lang": "en",
+  "titles": [
+   "Cerro Torre"
+  ]
+ },
+ {
+  "slug": "villarrica",
+  "lang": "en",
+  "titles": [
+   "Villarrica (volcano)"
+  ]
+ },
+ {
+  "slug": "aoraki-mount-cook",
+  "lang": "en",
+  "titles": [
+   "Aoraki / Mount Cook",
+   "Aoraki"
+  ]
+ },
+ {
+  "slug": "mount-taranaki",
+  "lang": "en",
+  "titles": [
+   "Mount Taranaki"
+  ]
+ },
+ {
+  "slug": "kosciuszko",
+  "lang": "en",
+  "titles": [
+   "Mount Kosciuszko"
+  ]
+ }
+]
