@@ -698,8 +698,8 @@ function suggest(inputId,boxId){
   if(!q){box.innerHTML="";box.style.display="none";return}
   var hits=DATA.mountains.filter(function(m){return m.status==="published"&&(textOf(m).indexOf(q)>=0||m.slug.indexOf(q)>=0)}).slice(0,6);
   if(!hits.length){box.innerHTML="";box.style.display="none";return}
-  box.innerHTML=hits.map(function(m){var t=tr(m);
-    return '<button type="button" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><span class="tri">▲</span><span>'+esc(t.name)+'</span><span class="e mono">'+elevMain(m.elevationM)+" "+elevUnit()+"</span></button>"}).join("");
+  box.innerHTML=hits.map(function(m){var t=tr(m),c=countryOf(m.countryId);
+    return '<button type="button" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><span class="tri">▲</span><span>'+esc(t.name)+(c?' <span style="color:var(--muted);font-size:11px">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+'</span><span class="e mono">'+elevMain(m.elevationM)+" "+elevUnit()+"</span></button>"}).join("");
   box.style.display="block";
 }
 function hideSug(boxId){setTimeout(function(){var b=document.getElementById(boxId);if(b)b.style.display="none"},160)}
