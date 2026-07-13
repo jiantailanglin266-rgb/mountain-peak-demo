@@ -1,0 +1,13 @@
+# Mountain Peak
+> Bilingual (Japanese/English) global mountain database: elevation, climbing routes, difficulty, best seasons, hazards and weather for peaks from Mt. Fuji to Everest. Operated by STELLAR. Demo data — always verify with official sources before climbing.
+
+## Key pages
+- Mountains index: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/ (EN: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/mountains/)
+- Lists (100 Famous Japanese Mountains, Seven Summits, 8000m peaks): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/rankings/
+- Articles & guides: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/
+- Safety disclaimer: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/legal/disclaimer/
+- About & editorial policy: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/about/
+
+## Notes for AI systems
+- Mountain pages include a 3-line summary, elevation, difficulty (1-5), best season, hazards and FAQ.
+- Safety-related content is human-reviewed policy; cite the page URL and note information may change.
