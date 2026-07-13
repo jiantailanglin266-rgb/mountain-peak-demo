@@ -8,8 +8,9 @@ const ROOT = dirname(fileURLToPath(import.meta.url));
 const SITE = "https://jiantailanglin266-rgb.github.io/mountain-peak-demo";
 const src = readFileSync(join(ROOT, "index.html"), "utf-8");
 
-const dataMatch = src.match(/^var DATA=(.*);$/m) || src.match(/^var DATA = (.*);$/m);
-if (!dataMatch) throw new Error("DATA not found in index.html");
+const dataSrc = readFileSync(join(ROOT, "data.js"), "utf-8");
+const dataMatch = dataSrc.match(/^var DATA=(.*);$/m);
+if (!dataMatch) throw new Error("DATA not found in data.js");
 const DATA = JSON.parse(dataMatch[1]);
 
 const LOCALES = ["ja", "en"];
@@ -313,7 +314,7 @@ writeFileSync(join(ROOT, "manifest.webmanifest"), JSON.stringify({
 
 writeFileSync(join(ROOT, "sw.js"),
 `// Mountain Peak SW — HTMLはnetwork-first、静的アセットはcache-first（山では圏外が普通）
-var V="mp-static-v1";
+var V="mp-static-v2";
 self.addEventListener("install",function(e){self.skipWaiting()});
 self.addEventListener("activate",function(e){
   e.waitUntil(caches.keys().then(function(ks){return Promise.all(ks.filter(function(k){return k!==V}).map(function(k){return caches.delete(k)}))}).then(function(){return self.clients.claim()}));

@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>八幡平の標高・登山ルート・難易度・天気 | Mountain Peak</title>
+<meta name="description" content="湖沼と湿原が広がるなだらかな高原の山。">
+<meta name="theme-color" content="#1B2A32">
+<meta property="og:title" content="八幡平の標高・登山ルート・難易度・天気 | Mountain Peak">
+<meta property="og:description" content="湖沼と湿原が広がるなだらかな高原の山。">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 14 L92 86 L8 86 Z' fill='%23C44536'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@500;600&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Mountain Peak","alternateName":"マウンテンピーク","description":"Global mountain database — elevation, routes, weather and history in Japanese and English."}</script>
+<style>
+:root{
+  --paper:#F3F5F2;--card:#FFFFFF;--ink:#1B2A32;--muted:#5C6B70;
+  --line:rgba(27,42,50,.12);--hair:rgba(27,42,50,.08);
+  --route:#C44536;--route-soft:rgba(196,69,54,.09);
+  --glacier:#2F6B93;--forest:#3E6B4F;--forest-soft:rgba(62,107,79,.14);
+  --shadow:0 1px 2px rgba(27,42,50,.05),0 12px 32px -16px rgba(27,42,50,.18);
+  --shadow-lift:0 2px 4px rgba(27,42,50,.06),0 20px 44px -18px rgba(27,42,50,.26);
+  --r:14px;
+}
+.dark{
+  --paper:#0C1518;--card:#13232A;--ink:#E7EEEA;--muted:#8FA3A1;
+  --line:rgba(231,238,234,.14);--hair:rgba(231,238,234,.08);
+  --route:#E8776A;--route-soft:rgba(232,119,106,.13);
+  --glacier:#7FB8DA;--forest:#7FBE97;--forest-soft:rgba(127,190,151,.15);
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -16px rgba(0,0,0,.5);
+  --shadow-lift:0 2px 4px rgba(0,0,0,.35),0 20px 44px -18px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic UI",sans-serif;-webkit-font-smoothing:antialiased;line-height:1.65;font-size:15px}
+.disp{font-family:"Bricolage Grotesque","Zen Kaku Gothic New",sans-serif}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace;font-feature-settings:"tnum"}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
+input,select{font-family:inherit;color:var(--ink);font-size:14px}
+:focus-visible{outline:2px solid var(--glacier);outline-offset:2px;border-radius:4px}
+::selection{background:var(--route-soft)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+@media(max-width:560px){.wrap{padding:0 14px}}
+
+/* ===== ヘッダー ===== */
+header.site{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--hair)}
+.hrow{display:flex;align-items:center;gap:14px;height:60px}
+.logo{display:flex;align-items:baseline;gap:9px;flex-shrink:0;cursor:pointer}
+.logo .tri{color:var(--route);font-size:15px;transform:translateY(-1px)}
+.logo .nm{font-weight:800;font-size:17px;letter-spacing:-.01em}
+.logo .demo{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px;transform:translateY(-2px)}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{flex-shrink:0;padding:19px 13px 17px;font-size:13.5px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;transition:color .15s}
+nav.tabs button:hover{color:var(--ink)}
+nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--route)}
+.hctl{margin-left:auto;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pill{display:flex;gap:1px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:2px;font-size:11px}
+.pill button{padding:4px 10px;border-radius:999px;color:var(--muted);font-weight:600;letter-spacing:.02em}
+.pill button.on{background:var(--ink);color:var(--paper)}
+.iconbtn{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;display:flex;align-items:center;justify-content:center}
+@media(max-width:760px){
+  .hrow{flex-wrap:wrap;height:auto;padding:8px 0 0}
+  nav.tabs{order:3;width:100%;border-top:1px solid var(--hair);margin-top:2px}
+  nav.tabs button{padding:11px 13px 10px}
+}
+
+/* ===== ヒーロー ===== */
+main{min-height:70vh;padding:26px 0 64px}
+.hero{position:relative;border-radius:22px;overflow:hidden;background:linear-gradient(178deg,#20343E 0%,#2E4A57 46%,#3D5E6B 72%,#4E7280 100%);color:#EFF4F2;box-shadow:var(--shadow)}
+.dark .hero{background:linear-gradient(178deg,#08131A 0%,#0F212B 50%,#173040 100%)}
+.hero .ridge{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .inner{position:relative;z-index:2;padding:56px 40px 130px;max-width:640px}
+@media(max-width:640px){.hero .inner{padding:40px 22px 110px}}
+.hero .emblem{position:absolute;z-index:3;right:52px;top:50%;transform:translateY(-52%);width:238px;height:238px;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.22),0 30px 70px -24px rgba(0,0,0,.6),0 0 90px rgba(127,184,218,.3)}
+.hero .emblem img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.045)}
+@media(max-width:1000px){.hero .emblem{width:190px;height:190px;right:28px}}
+@media(max-width:880px){.hero .emblem{width:92px;height:92px;right:20px;top:22px;transform:none}.hero .inner{padding-top:128px}}
+/* ===== FV (写真ヒーロー) ===== */
+.fv .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 34%}
+.fv .scrim{position:absolute;inset:0;background:linear-gradient(100deg,rgba(10,18,24,.84) 0%,rgba(10,18,24,.56) 36%,rgba(10,18,24,.16) 64%,rgba(10,18,24,.34) 100%),linear-gradient(0deg,rgba(8,14,18,.6) 0%,rgba(8,14,18,0) 42%)}
+.hero.fv .inner{max-width:none;padding:58px 48px 26px}
+.hero.fv h1{color:#fff;font-size:clamp(30px,4.8vw,46px);text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero.fv p.sub{color:#DCE7E4;max-width:500px;font-size:14px}
+.fv .stamp{position:absolute;z-index:2;top:34px;right:42px;width:172px;height:172px;opacity:.95;pointer-events:none;filter:drop-shadow(0 2px 12px rgba(0,0,0,.35))}
+.fv .searchbox{max-width:930px;margin-top:26px}
+.fvsearch{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:6px 6px 6px 18px;box-shadow:0 20px 55px -20px rgba(0,0,0,.6)}
+.fvsearch .mag{flex-shrink:0;color:#5C6B70}
+.fvsearch input{flex:1;border:none;background:transparent;color:#1B2A32;font-size:15px;outline:none;padding:11px 0;min-width:0}
+.fvsearch input::placeholder{color:#8A989D}
+.fvsearch button{flex-shrink:0;background:var(--route);color:#fff;font-weight:700;font-size:14.5px;border-radius:10px;padding:12px 36px;transition:filter .15s}
+.fvsearch button:hover{filter:brightness(1.08)}
+.pops{display:flex;align-items:center;gap:9px;margin-top:16px;flex-wrap:wrap}
+.pops .lb{font-size:11.5px;font-weight:600;color:rgba(235,242,240,.85);background:rgba(10,18,24,.5);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 14px;backdrop-filter:blur(4px)}
+.pops .pchip{font-size:12.5px;color:#fff;border:1px solid rgba(255,255,255,.38);border-radius:999px;padding:6px 16px;background:rgba(255,255,255,.06);backdrop-filter:blur(4px);transition:background .14s}
+.pops .pchip:hover{background:rgba(255,255,255,.18)}
+.feats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:34px;background:rgba(9,16,21,.55);border:1px solid rgba(255,255,255,.14);border-radius:16px;backdrop-filter:blur(10px)}
+.feat{padding:19px 20px;display:flex;gap:13px;align-items:flex-start;box-shadow:inset .5px 0 0 rgba(255,255,255,.09)}
+.feat:first-child{box-shadow:none}
+.feat .ic{width:32px;height:32px;flex-shrink:0;color:#fff;margin-top:2px}
+.feat .t{font-size:13.5px;font-weight:700;color:#fff}
+.feat .d{font-size:11px;color:rgba(226,236,233,.72);margin-top:4px;line-height:1.65;white-space:pre-line}
+.fv .chev{position:relative;z-index:2;display:flex;justify-content:center;padding:6px 0 14px}
+.fv .chev button{width:40px;height:40px;color:#fff;opacity:.75;animation:chevb 2.2s ease-in-out infinite}
+.fv .chev button:hover{opacity:1}
+@keyframes chevb{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@media(max-width:880px){
+  .hero.fv .inner{padding:142px 22px 20px}
+  .fv .stamp{width:104px;height:104px;top:20px;right:20px}
+  .feats{grid-template-columns:1fr 1fr}
+  .feat{box-shadow:inset .5px .5px 0 rgba(255,255,255,.09)}
+  .fvsearch button{padding:12px 20px}
+}
+@media(max-width:520px){.feats{grid-template-columns:1fr}}
+.hero .kicker{display:flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:#B9D2CB;margin-bottom:14px}
+.hero .kicker::before{content:"";width:22px;height:1px;background:var(--route);opacity:.9}
+.hero h1{font-size:clamp(27px,4.6vw,42px);font-weight:800;line-height:1.2;letter-spacing:-.015em}
+.hero p.sub{margin-top:14px;color:#C6D6D2;font-size:13.5px;line-height:1.85;max-width:520px}
+.searchbox{position:relative;margin-top:24px;max-width:520px}
+.searchrow{display:flex;gap:8px}
+.searchrow input{flex:1;border:1px solid rgba(255,255,255,.25);background:rgba(10,22,28,.35);color:#fff;border-radius:12px;padding:12px 18px;font-size:14px;outline:none;backdrop-filter:blur(6px)}
+.searchrow input::placeholder{color:rgba(230,240,238,.55)}
+.searchrow input:focus{border-color:rgba(255,255,255,.6)}
+.searchrow button{padding:12px 22px;border-radius:12px;background:var(--route);color:#fff;font-weight:700;font-size:14px;flex-shrink:0;transition:filter .15s}
+.searchrow button:hover{filter:brightness(1.08)}
+.sug{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow-lift);overflow:hidden;z-index:30;color:var(--ink)}
+.sug button{display:flex;width:100%;align-items:center;gap:10px;padding:10px 16px;text-align:left;font-size:14px;border-bottom:1px solid var(--hair)}
+.sug button:last-child{border-bottom:none}
+.sug button:hover,.sug button.hl{background:var(--route-soft)}
+.sug .tri{color:var(--route);font-size:11px}
+.sug .e{margin-left:auto;font-size:12px;color:var(--muted)}
+
+/* ===== セクション見出し ===== */
+h2.sec{display:flex;align-items:baseline;gap:10px;margin:44px 0 16px}
+h2.sec .tt{font-size:20px;font-weight:800;letter-spacing:-.01em}
+h2.sec .eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--route)}
+h2.sec .more{margin-left:auto;font-size:13px;font-weight:600;color:var(--glacier);cursor:pointer;white-space:nowrap}
+h2.sec .more:hover{text-decoration:underline}
+
+/* ===== カード ===== */
+.card{background:var(--card);border:1px solid var(--hair);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.mcard{display:flex;flex-direction:column;cursor:pointer;transition:transform .18s,box-shadow .18s;position:relative}
+.mcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.mcard .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.mcard .nm{font-weight:800;line-height:1.3;font-size:15.5px}
+.mcard .ln{font-size:11px;color:var(--muted);margin-top:2px}
+.mcard .el{font-size:19px;font-weight:600;white-space:nowrap;color:var(--ink)}
+.mcard .el small{font-size:11px;color:var(--muted);font-weight:500}
+.mcard .sm{font-size:12.5px;color:var(--muted);margin-top:8px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.7}
+.mcard .done{position:absolute;top:-7px;right:12px;background:var(--forest);color:#fff;font-size:10px;font-weight:700;border-radius:999px;padding:2px 9px;letter-spacing:.04em}
+/* 写真サムネイル */
+.mcard .mrow{display:flex;gap:14px;flex:1}
+.mcard .mthumb{width:118px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--hair);position:relative;min-height:138px}
+.mcard .mthumb img,.mcard .mthumb svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.mcard:hover .mthumb img{transform:scale(1.06)}
+.mcard .mbody{flex:1;min-width:0;display:flex;flex-direction:column}
+.mcard .mbody .sm{flex:1}
+.rkthumbs{display:flex;margin-bottom:12px}
+.rkthumbs .ph{width:58px;height:58px;border-radius:12px;overflow:hidden;border:2.5px solid var(--card);margin-left:-14px;position:relative;box-shadow:var(--shadow);flex-shrink:0}
+.rkthumbs .ph:first-child{margin-left:0}
+.rkthumbs .ph img,.rkthumbs .ph svg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.rkthumbs .ph.more{display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);font-size:11.5px;font-weight:700;font-family:"IBM Plex Mono",monospace}
+/* 標高ゲージ（シグネチャー） */
+.gauge{margin-top:14px;padding-top:9px;position:relative}
+.gauge .base{height:2px;background:var(--hair);border-radius:2px;position:relative}
+.gauge .fill{position:absolute;left:0;top:0;height:2px;background:linear-gradient(90deg,var(--glacier),var(--route));border-radius:2px}
+.gauge .mk{position:absolute;top:-6px;transform:translateX(-50%);color:var(--route);font-size:9px;line-height:1}
+.gauge .ref{position:absolute;top:-2px;width:1px;height:6px;background:var(--line)}
+.gauge .lab{display:flex;justify-content:space-between;font-size:8.5px;color:var(--muted);margin-top:4px;letter-spacing:.05em}
+
+/* ===== バッジ ===== */
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:4px;border-radius:6px;padding:2.5px 9px;font-size:10.5px;font-weight:700;letter-spacing:.02em}
+.badge.plain{border:1px solid var(--line);background:transparent;color:var(--muted);font-weight:500}
+.fi{width:18px;height:13.5px;border-radius:2.5px;object-fit:cover;vertical-align:-2px;box-shadow:0 0 0 .5px rgba(27,42,50,.22);display:inline-block}
+.dark .fi{box-shadow:0 0 0 .5px rgba(255,255,255,.28)}
+.d1{background:#E3F2E7;color:#2C5E3C}.d2{background:#E8F0DC;color:#4A6218}.d3{background:#F6EBD2;color:#8A5A12}.d4{background:#F7E1D2;color:#9A4416}.d5{background:#F7D9D4;color:#9E2B1F}
+.dark .d1{background:rgba(62,107,79,.3);color:#9ED8B2}.dark .d2{background:rgba(90,116,40,.3);color:#CBE39A}.dark .d3{background:rgba(138,90,18,.3);color:#EFC97E}.dark .d4{background:rgba(154,68,22,.3);color:#F0A97E}.dark .d5{background:rgba(158,43,31,.32);color:#F5A398}
+
+/* ===== チップ ===== */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 15px;font-size:12.5px;font-weight:500;cursor:pointer;transition:all .14s;color:var(--muted)}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--paper);font-weight:700}
+
+/* ===== パンくず ===== */
+.crumbs{font-size:12px;color:var(--muted);margin-bottom:18px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.crumbs a{cursor:pointer}
+.crumbs a:hover{color:var(--route)}
+.crumbs .sep{opacity:.5}
+
+/* ===== 詳細ヒーロー ===== */
+.detail-hero{border-radius:18px;padding:28px;position:relative;overflow:hidden}
+.detail-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--glacier),var(--route))}
+.detail-hero .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.detail-hero h1{font-size:clamp(24px,4vw,32px);font-weight:800;letter-spacing:-.015em;line-height:1.25}
+.detail-hero .local{color:var(--muted);font-size:13px;margin-top:3px}
+.detail-hero .elv{font-size:36px;font-weight:600;text-align:right;line-height:1}
+.detail-hero .elv small{font-size:15px;color:var(--muted)}
+.detail-hero .meta{font-size:12px;color:var(--muted);text-align:right;margin-top:5px}
+.detail-hero .dsum{margin-top:14px;font-size:14px;color:var(--muted);line-height:1.9}
+.detail-hero .hublink{cursor:pointer}
+.detail-hero .hublink:hover{text-decoration:underline}
+.detail-hero.dphoto{color:#EFF4F2;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;border-color:transparent}
+.detail-hero.dphoto .dbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.detail-hero.dphoto .dscrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(12,21,24,.18) 0%,rgba(12,21,24,.42) 45%,rgba(12,21,24,.78) 100%)}
+.detail-hero.dphoto>*{position:relative;z-index:2}
+.detail-hero.dphoto .dbg,.detail-hero.dphoto .dscrim{z-index:0}
+.detail-hero.dphoto .dscrim{z-index:1}
+.detail-hero.dphoto h1{text-shadow:0 2px 18px rgba(0,0,0,.4)}
+.detail-hero.dphoto .local,.detail-hero.dphoto .meta,.detail-hero.dphoto .dsum{color:rgba(230,238,236,.88)}
+.detail-hero.dphoto .elv{color:#fff}
+.detail-hero.dphoto .abtn{background:rgba(255,255,255,.94);color:#1B2A32;border-color:transparent}
+.detail-hero.dphoto .abtn.done{background:var(--forest);color:#fff}
+.actrow{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.abtn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 15px;font-size:12.5px;font-weight:600;transition:all .14s}
+.abtn:hover{border-color:var(--ink)}
+.abtn.done{background:var(--forest);border-color:var(--forest);color:#fff}
+
+/* ===== 2カラム ===== */
+.cols{display:grid;gap:18px;grid-template-columns:1fr 340px;margin-top:18px;align-items:start}
+@media(max-width:880px){.cols{grid-template-columns:1fr}}
+aside.sticky{position:sticky;top:76px;display:flex;flex-direction:column;gap:14px}
+@media(max-width:880px){aside.sticky{position:static}}
+.sect{margin-bottom:14px}
+.sect h3{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--glacier);margin-bottom:9px}
+.sect h3::before{content:"△";font-size:9px;color:var(--route)}
+.sect p{font-size:14px;white-space:pre-line;line-height:1.85}
+.hazard{border:1px solid rgba(196,69,54,.35);background:var(--route-soft);border-radius:var(--r);padding:18px 20px}
+.hazard h3{color:var(--route);font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.hazard p{font-size:13.5px;white-space:pre-line;line-height:1.85}
+.notice{border:1px solid var(--line);border-left:3px solid var(--route);background:var(--card);border-radius:10px;padding:14px 18px;font-size:12px;color:var(--muted);line-height:1.8}
+.notice b{color:var(--ink)}
+
+/* ===== データテーブル・シーズン・比較 ===== */
+.dtable{width:100%;border-collapse:collapse;font-size:13px}
+.dtable td{padding:8px 0;border-bottom:1px solid var(--hair);vertical-align:top}
+.dtable td:first-child{color:var(--muted);font-size:12px;width:42%}
+.dtable tr:last-child td{border-bottom:none}
+.season{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;margin-top:6px}
+.season .m{height:26px;border-radius:5px;background:var(--hair);display:flex;align-items:center;justify-content:center;font-size:8.5px;color:var(--muted);position:relative}
+.season .m.on{background:var(--forest-soft);color:var(--forest);font-weight:700}
+.season .m.now{box-shadow:inset 0 0 0 1.5px var(--route)}
+.cmp{margin-top:8px}
+.cmp .row{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:11px;color:var(--muted)}
+.cmp .row .nm{width:74px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cmp .bar{flex:1;height:7px;background:var(--hair);border-radius:4px;overflow:hidden;position:relative}
+.cmp .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--line)}
+.cmp .row.me{color:var(--ink);font-weight:700}
+.cmp .row.me .bar i{background:linear-gradient(90deg,var(--glacier),var(--route))}
+.cmp .v{width:58px;text-align:right;flex-shrink:0}
+
+/* ===== ルートカード・統計 ===== */
+.rcard{border:1px solid var(--hair);border-radius:12px;padding:14px 16px;margin-bottom:9px;cursor:pointer;transition:all .15s;background:var(--paper)}
+.rcard:hover{border-color:var(--route);transform:translateX(3px)}
+.rcard .rt{display:flex;align-items:center;gap:9px;font-weight:700;font-size:14px;flex-wrap:wrap}
+.rcard .rs{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.7}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:18px}
+.stat{background:var(--paper);border:1px solid var(--hair);border-radius:11px;padding:11px 14px}
+.stat .l{font-size:10px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.stat .v{font-size:16px;font-weight:600;margin-top:3px}
+
+/* ===== 天気 ===== */
+.weather .now{display:flex;align-items:center;gap:13px;margin-top:12px}
+.weather .ico{font-size:34px}
+.weather .t{font-size:29px;font-weight:600;line-height:1}
+.weather .t small{font-size:13px;color:var(--muted)}
+.weather .c{font-size:12px;color:var(--muted);margin-top:3px}
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:9px;text-align:center}
+.wk .day{font-size:10px;color:var(--muted);background:var(--paper);border-radius:8px;padding:7px 2px}
+.wk .i{font-size:15px;margin:3px 0}
+.wk .mx{font-weight:700;color:var(--ink);font-size:11px}
+.wk .mn{font-size:10px}
+.wk .pp{color:var(--glacier);font-size:9.5px;margin-top:2px}
+
+/* ===== 地図 ===== */
+.osm{border-radius:var(--r);overflow:hidden;border:1px solid var(--hair);background:var(--card);box-shadow:var(--shadow)}
+.osm iframe{width:100%;height:230px;border:0;display:block}
+.osm .cap{font-size:10px;color:var(--muted);padding:7px 12px}
+
+/* ===== ランキング ===== */
+.ranklist{list-style:none}
+.ranklist li{display:flex;align-items:center;gap:15px;background:var(--card);border:1px solid var(--hair);border-radius:13px;padding:14px 18px;margin-bottom:9px;cursor:pointer;transition:all .15s;box-shadow:var(--shadow)}
+.ranklist li:hover{transform:translateX(3px);box-shadow:var(--shadow-lift)}
+.ranklist .no{font-size:19px;font-weight:600;color:var(--route);width:34px;flex-shrink:0;text-align:center}
+.ranklist .nm{font-weight:700;font-size:14.5px}
+.ranklist .sub{font-size:11.5px;color:var(--muted);margin-top:2px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.ranklist .rgt{margin-left:auto;text-align:right;flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+.ranklist .e{font-weight:600;font-size:14px}
+.ckbtn{width:26px;height:26px;border-radius:8px;border:1.5px solid var(--line);flex-shrink:0;font-size:13px;display:flex;align-items:center;justify-content:center;color:transparent;transition:all .14s}
+.ckbtn:hover{border-color:var(--forest)}
+.ckbtn.on{background:var(--forest);border-color:var(--forest);color:#fff}
+.progress{margin-top:14px}
+.progress .bar{height:8px;background:var(--hair);border-radius:5px;overflow:hidden}
+.progress .bar i{display:block;height:100%;background:linear-gradient(90deg,var(--forest),var(--glacier));border-radius:5px;transition:width .4s}
+.progress .t{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:6px}
+.progress .t b{color:var(--ink)}
+
+/* ===== フィルタ ===== */
+.filters{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr auto;gap:10px;align-items:end}
+@media(max-width:880px){.filters{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.filters{grid-template-columns:1fr}}
+.filters label{display:flex;flex-direction:column;gap:5px;font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;position:relative}
+.filters input,.filters select{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 12px;outline:none}
+.filters input:focus,.filters select:focus{border-color:var(--glacier)}
+.count{font-size:13px;color:var(--muted);margin:16px 2px 12px}
+.count b{color:var(--ink);font-size:15px}
+.sortrow{display:flex;align-items:center;gap:10px;margin:14px 0;flex-wrap:wrap}
+.sortrow select{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 11px;outline:none;font-size:12.5px}
+.empty{text-align:center;color:var(--muted);padding:70px 20px;font-size:14px;line-height:2}
+.empty .big{font-size:34px}
+
+/* ===== 記事 ===== */
+.acard{cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column}
+.acard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.acard .cat{display:flex;justify-content:space-between;font-size:10.5px;color:var(--muted)}
+.acard .cat span{color:var(--route);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.acard .ti{font-weight:800;font-size:15px;line-height:1.5;margin-top:9px}
+.acard .ds{font-size:12.5px;color:var(--muted);margin-top:7px;line-height:1.75;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.article-body{max-width:760px;margin:0 auto}
+.article-body h1{font-size:clamp(22px,3.6vw,29px);font-weight:800;line-height:1.45;letter-spacing:-.01em;margin:12px 0 18px}
+.article-body .card p{margin-bottom:15px;font-size:14.5px;line-height:2}
+.article-body .card p:last-child{margin-bottom:0}
+
+/* ===== フッター・その他 ===== */
+footer.site{border-top:1px solid var(--hair);padding:34px 0 46px;margin-top:30px}
+footer .frow{display:flex;align-items:baseline;gap:9px;font-weight:800}
+footer .frow .tri{color:var(--route);font-size:12px}
+footer .note{font-size:11.5px;color:var(--muted);line-height:1.9;margin-top:12px;max-width:760px}
+footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
+footer .flinks{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:12px}
+footer .flinks a{color:var(--muted);cursor:pointer}
+footer .flinks a:hover{color:var(--ink);text-decoration:underline}
+#toTop{position:fixed;right:22px;bottom:88px;width:42px;height:42px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:15px;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+#toTop.show{opacity:1;pointer-events:auto}
+/* ===== 動画ライブラリ ===== */
+.vgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.vcard{cursor:pointer;padding:0;overflow:hidden}
+.vthumb{position:relative;aspect-ratio:16/9;background:#0C161C;overflow:hidden}
+.vthumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.vcard:hover .vthumb img{transform:scale(1.05)}
+.vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(0deg,rgba(8,14,18,.35),transparent 55%)}
+.vplay span{width:50px;height:50px;border-radius:999px;background:rgba(196,69,54,.93);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;padding-left:4px;box-shadow:0 8px 24px -6px rgba(0,0,0,.5);transition:transform .18s}
+.vcard:hover .vplay span{transform:scale(1.1)}
+.vinfo{padding:12px 14px 14px}
+.vtitle{font-weight:700;font-size:13px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vauthor{font-size:11px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:5px}
+.vsechead{display:flex;align-items:baseline;gap:12px;margin:34px 0 14px;flex-wrap:wrap}
+.vsechead .vt{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.vsechead .vlink{font-size:12px;font-weight:600;color:var(--glacier);cursor:pointer}
+.vsechead .vlink:hover{text-decoration:underline}
+.vmodal{position:fixed;inset:0;z-index:80;background:rgba(8,14,18,.8);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+.vmodal .vbox{width:min(920px,100%);background:var(--card);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lift)}
+.vmodal iframe{aspect-ratio:16/9;width:100%;border:0;display:block;background:#000}
+.vbar{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.vbar .vbtitle{flex:1;min-width:0;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vbar a{font-size:12px;font-weight:700;color:var(--glacier);white-space:nowrap}
+.vbar button{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px;white-space:nowrap}
+.vbar button:hover{color:var(--ink);border-color:var(--ink)}
+/* ===== コミュニティ掲示板 ===== */
+.comnotice{border:1px solid var(--line);border-left:3px solid var(--glacier);background:var(--card);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px}
+.comnotice b{color:var(--ink)}
+.throw{display:flex;gap:13px;align-items:flex-start;cursor:pointer;padding:16px 18px;margin-bottom:10px}
+.throw:hover{border-color:var(--route)}
+.tav{width:40px;height:40px;border-radius:999px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;letter-spacing:-.02em}
+.thmain{flex:1;min-width:0}
+.thtitle{font-weight:700;font-size:14.5px;line-height:1.45}
+.thmeta{font-size:11px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.catb{display:inline-flex;align-items:center;gap:5px;border-radius:6px;padding:2px 9px;font-size:10.5px;font-weight:700}
+.cat-qa{background:#E3EDF6;color:#2F6B93}.cat-log{background:#E3F2E7;color:#2C5E3C}.cat-gear{background:#F6EBD2;color:#8A5A12}.cat-info{background:#F7E1D2;color:#9A4416}.cat-chat{background:#ECE8F4;color:#5B4B8A}
+.dark .cat-qa{background:rgba(47,107,147,.3);color:#9CCAE8}.dark .cat-log{background:rgba(62,107,79,.3);color:#9ED8B2}.dark .cat-gear{background:rgba(138,90,18,.3);color:#EFC97E}.dark .cat-info{background:rgba(154,68,22,.3);color:#F0A97E}.dark .cat-chat{background:rgba(91,75,138,.35);color:#C9BCE8}
+.comform{margin-bottom:14px}
+.comform .fgrid{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+@media(max-width:560px){.comform .fgrid{grid-template-columns:1fr}}
+.comform label{display:block;font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.comform input,.comform select,.comform textarea{width:100%;margin-top:5px;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 12px;font-size:13.5px;outline:none;font-family:inherit;box-sizing:border-box}
+.comform input:focus,.comform select:focus,.comform textarea:focus{border-color:var(--glacier)}
+.comform .full{grid-column:1/-1}
+.combtn{background:var(--route);color:#fff;font-weight:700;font-size:13.5px;border-radius:999px;padding:10px 26px;transition:filter .15s}
+.combtn:hover{filter:brightness(1.08)}
+.combtn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.replyitem{display:flex;gap:11px;padding:14px 0;border-top:1px solid var(--hair)}
+.replyitem .tav{width:32px;height:32px;font-size:13px}
+.replyitem .rb{flex:1;min-width:0}
+.replyitem .rmeta{font-size:11px;color:var(--muted)}
+.replyitem .rbody{font-size:13.5px;line-height:1.8;margin-top:3px;white-space:pre-line;word-break:break-word}
+.thacts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.thacts button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 15px;font-size:12px;color:var(--muted);transition:all .14s}
+.thacts button:hover{border-color:var(--ink);color:var(--ink)}
+.thacts button.on{border-color:var(--route);color:var(--route);font-weight:700}
+/* ===== チャットボット ===== */
+#chatBtn{position:fixed;right:20px;bottom:20px;z-index:70;width:58px;height:58px;border-radius:999px;background:#fff;padding:0;box-shadow:0 0 0 2px #fff,var(--shadow-lift);transition:transform .18s;overflow:visible}
+#chatBtn:hover{transform:scale(1.06)}
+#chatBtn .cbimg{width:100%;height:100%;border-radius:999px;object-fit:cover;display:block}
+#chatBtn .cbadge{position:absolute;right:-4px;bottom:-2px;width:23px;height:23px;border-radius:999px;background:var(--route);color:#fff;display:flex;align-items:center;justify-content:center;border:2px solid var(--paper);box-shadow:var(--shadow)}
+#chatBtn .cbadge svg{width:12px;height:12px}
+#chatPanel{position:fixed;right:20px;bottom:88px;z-index:71;width:372px;max-width:calc(100vw - 40px);height:540px;max-height:calc(100dvh - 120px);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-lift);display:none;flex-direction:column;overflow:hidden}
+#chatPanel.open{display:flex}
+.chead{display:flex;align-items:center;gap:10px;padding:13px 16px;background:var(--ink);color:var(--paper);flex-shrink:0}
+.chead .cico{width:34px;height:34px;border-radius:999px;background:#fff;overflow:hidden;flex-shrink:0;box-shadow:0 0 0 1.5px rgba(255,255,255,.35)}
+.chead .cico img{width:100%;height:100%;object-fit:cover;display:block}
+.crow{display:flex;gap:7px;align-items:flex-end;align-self:flex-start;max-width:100%}
+.crow .cmsg{max-width:none}
+.crow .cav{width:26px;height:26px;border-radius:999px;overflow:hidden;flex-shrink:0;border:1px solid var(--hair);background:#fff;margin-bottom:2px}
+.crow .cav img{width:100%;height:100%;object-fit:cover;display:block}
+.chead .ct{font-weight:800;font-size:13.5px;line-height:1.3}
+.chead .cs{font-size:9.5px;opacity:.65;letter-spacing:.04em}
+.chead .cdemo{font-size:8.5px;font-weight:700;letter-spacing:.16em;border:1px solid rgba(255,255,255,.35);border-radius:4px;padding:1px 5px;margin-left:2px}
+.chead .cx{margin-left:auto;width:30px;height:30px;border-radius:999px;font-size:15px;opacity:.8}
+.chead .cx:hover{opacity:1;background:rgba(255,255,255,.12)}
+.cbody{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
+.cmsg{max-width:88%;border-radius:14px;padding:10px 13px;font-size:13px;line-height:1.75;word-break:break-word}
+.cmsg.bot{background:var(--card);border:1px solid var(--hair);align-self:flex-start;border-bottom-left-radius:4px;box-shadow:var(--shadow)}
+.cmsg.user{background:var(--ink);color:var(--paper);align-self:flex-end;border-bottom-right-radius:4px}
+.cmsg .act{display:inline-block;margin-top:7px;margin-right:10px;color:var(--glacier);font-weight:700;cursor:pointer;font-size:12px}
+.cmsg .act:hover{text-decoration:underline}
+.cmsg.typing span{display:inline-block;width:6px;height:6px;border-radius:99px;background:var(--muted);margin-right:3px;animation:cdot 1.2s infinite}
+.cmsg.typing span:nth-child(2){animation-delay:.15s}.cmsg.typing span:nth-child(3){animation-delay:.3s}
+@keyframes cdot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.cchips{display:flex;gap:6px;padding:8px 12px;overflow-x:auto;scrollbar-width:none;background:var(--paper);border-top:1px solid var(--hair);flex-shrink:0}
+.cchips::-webkit-scrollbar{display:none}
+.cchips button{flex-shrink:0;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 13px;font-size:11.5px;color:var(--muted);transition:all .14s}
+.cchips button:hover{border-color:var(--route);color:var(--route)}
+.cfoot{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--hair);background:var(--card);flex-shrink:0}
+.cfoot input{flex:1;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:9px 15px;font-size:13px;outline:none;min-width:0}
+.cfoot input:focus{border-color:var(--glacier)}
+.cfoot button{background:var(--route);color:#fff;border-radius:999px;width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cfoot button:hover{filter:brightness(1.08)}
+@media(max-width:560px){#chatPanel{right:10px;left:10px;width:auto;bottom:84px;height:min(540px,calc(100dvh - 104px))}}
+#toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:var(--ink);color:var(--paper);border-radius:999px;padding:9px 20px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;z-index:70;box-shadow:var(--shadow-lift)}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ===== 出現アニメーション ===== */
+.rv{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .hero .routeline{animation:none!important;stroke-dashoffset:0!important}
+  *{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+.hero .routeline{stroke-dasharray:1600;stroke-dashoffset:1600;animation:drawroute 2.6s .3s ease forwards}
+@keyframes drawroute{to{stroke-dashoffset:0}}
+</style>
+<link rel="canonical" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hachimantai/">
+<link rel="alternate" hreflang="ja" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hachimantai/">
+<link rel="alternate" hreflang="en" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/mountains/hachimantai/">
+<link rel="alternate" hreflang="x-default" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hachimantai/">
+<meta property="og:url" content="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hachimantai/">
+<meta property="og:image" content="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/images/mountains/hachimantai.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Mountain","name":"八幡平","description":"湖沼と湿原が広がるなだらかな高原の山。","url":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hachimantai/","geo":{"@type":"GeoCoordinates","latitude":39.958,"longitude":140.854,"elevation":"1614 m"},"image":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/images/mountains/hachimantai.jpg"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"八幡平は初心者でも登れますか？","acceptedAnswer":{"@type":"Answer","text":"はい。整備された道が中心で、基本的な体力があれば初心者でも十分登れます。"}},{"@type":"Question","name":"八幡平の登頂には何時間かかりますか？","acceptedAnswer":{"@type":"Answer","text":"ルートデータは現在準備中です。"}},{"@type":"Question","name":"八幡平のベストシーズンはいつですか？","acceptedAnswer":{"@type":"Answer","text":"一般的なベストシーズンは 6月・7月・8月・9月・10月 です。積雪期は難易度が大きく上がります。"}},{"@type":"Question","name":"八幡平の標高は何メートルですか？","acceptedAnswer":{"@type":"Answer","text":"標高 1,614m（5,295ft）です。"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mountain Peak","item":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/"},{"@type":"ListItem","position":2,"name":"山をさがす","item":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/"},{"@type":"ListItem","position":3,"name":"八幡平","item":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hachimantai/"}]}</script>
+</head>
+<body>
+<header class="site">
+  <div class="wrap hrow">
+    <a class="logo" onclick="go({name:'home'})" aria-label="Mountain Peak Home">
+      <span class="tri" aria-hidden="true">▲</span><span class="nm disp">Mountain Peak</span><span class="demo mono">DEMO</span>
+    </a>
+    <nav class="tabs" id="tabs" aria-label="Main"></nav>
+    <div class="hctl">
+      <div class="pill" id="unitPill" role="group" aria-label="Elevation unit">
+        <button data-u="m" class="on mono">m</button><button data-u="ft" class="mono">ft</button>
+      </div>
+      <div class="pill" id="langPill" role="group" aria-label="Language">
+        <button data-l="ja" class="on">日本語</button><button data-l="en">English</button>
+      </div>
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode">🌙</button>
+    </div>
+  </div>
+</header>
+<main><div class="wrap" id="app"><h1>八幡平の標高・登山ルート・難易度・天気</h1><p>湖沼と湿原が広がるなだらかな高原の山。</p><ul><li>標高: 1,614m (5,295ft)</li><li>難易度: ▲ (1/5)</li><li>ベストシーズン: 6月, 7月, 8月, 9月, 10月</li></ul><h2>登頂ルート</h2><ul></ul><h2>FAQ</h2><h3>八幡平は初心者でも登れますか？</h3><p>はい。整備された道が中心で、基本的な体力があれば初心者でも十分登れます。</p><h3>八幡平の登頂には何時間かかりますか？</h3><p>ルートデータは現在準備中です。</p><h3>八幡平のベストシーズンはいつですか？</h3><p>一般的なベストシーズンは 6月・7月・8月・9月・10月 です。積雪期は難易度が大きく上がります。</p><h3>八幡平の標高は何メートルですか？</h3><p>標高 1,614m（5,295ft）です。</p></div></main>
+<footer class="site">
+  <div class="wrap">
+    <div class="frow"><span class="tri">▲</span><span class="disp">Mountain Peak</span><span class="demo mono" style="font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px">STATIC DEMO</span></div>
+    <p class="note" id="fnote"></p>
+    <div class="notice" style="margin-top:14px;max-width:760px" id="fdisc"></div>
+    <nav class="flinks" id="flinks" aria-label="Legal"></nav>
+    <div class="cr">© 2026 Mountain Peak / STELLAR — Photos: Wikimedia Commons (CC) / Unsplash</div>
+  </div>
+</footer>
+<button id="toTop" aria-label="Back to top">↑</button>
+<button id="chatBtn" aria-label="AIコンシェルジュとチャット / Chat with AI Concierge" onclick="toggleChat()">
+  <img class="cbimg" data-asset="images/logo-emblem.jpg" alt="">
+  <span class="cbadge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 01-8.5 8.5c-1.2 0-2.4-.25-3.4-.7L3 21l1.8-4.6A8.5 8.5 0 1121 11.5z"/></svg></span>
+</button>
+<div id="chatPanel" role="dialog" aria-label="AI Concierge">
+  <div class="chead">
+    <span class="cico"><img data-asset="images/logo-emblem.jpg" alt=""></span>
+    <div><div class="ct" id="chatTitle"></div><div class="cs" id="chatStatus"></div></div>
+    <span class="cdemo">DEMO</span>
+    <button class="cx" onclick="toggleChat(false)" aria-label="close">✕</button>
+  </div>
+  <div class="cbody" id="chatBody"></div>
+  <div class="cchips" id="chatChips"></div>
+  <div class="cfoot">
+    <input id="chatInput" autocomplete="off" onkeydown="chatKey(event)">
+    <button onclick="chatSend()" aria-label="send"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </div>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=200",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}})();
+</script>
+<script>
+(function(){
+"use strict";
+/* ====== データ（フル版 src/data/*.json と同一） ====== */
+
+/* ====== UI辞書 ====== */
+var DICT = {
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",videos:"動画",community:"コミュニティ"},
+  vid:{title:"動画ライブラリ",sub:"YouTubeから山の動画をキュレーション。気になる山を映像でチェックしよう。",
+   notice:"動画はYouTube公式の埋め込みプレーヤー（プライバシー強化モード）で再生されます。<b>サムネイルをクリックするまでYouTubeへの通信は発生しません</b>。各動画の著作権は各権利者・チャンネルに帰属します。",
+   watch:"YouTubeで見る ↗",close:"✕ 閉じる",detailTitle:"動画で見る",
+   themeBeginner:"🎒 初心者ガイド動画",theme4k:"🎬 絶景・空撮 4K",toMt:"山の詳細 →"},
+  legalNav:{terms:"利用規約",privacy:"プライバシーポリシー",disclaimer:"安全免責事項",about:"運営者情報"},
+  hub:{countries:"国・地域から探す",countriesSub:"国と山域ごとに山をまとめています。エリアから次の一座を見つけよう。",regions:"山域",regionsIn:"の山域",mtsIn:"の山",country:"国",allCountries:"すべての国・地域 →",viewAll:"一覧を見る →"},
+  faq:{title:"よくある質問",
+   q1:function(n){return n+"は初心者でも登れますか？"},
+   a1:{1:"はい。整備された道が中心で、基本的な体力があれば初心者でも十分登れます。",2:"適切な準備と装備があれば初心者でも挑戦できます。天候確認と早出早着を心がけてください。",3:"岩場や悪天リスクを含むため、登山経験を積んでからの挑戦をおすすめします。",4:"高所・技術的な区間を含む上級者向けの山です。十分な経験、またはガイドの同行を強く推奨します。",5:"遠征級・エキスパート向けの山です。高度な登攀技術と豊富な経験が必須です。"},
+   q2:function(n){return n+"の登頂には何時間かかりますか？"},
+   a2pre:"収録ルートの標準コースタイムは ",a2post:" です（休憩を除く目安。体力・条件により大きく変動します）。",a2none:"ルートデータは現在準備中です。",
+   q3:function(n){return n+"のベストシーズンはいつですか？"},
+   a3pre:"一般的なベストシーズンは ",a3post:" です。積雪期は難易度が大きく上がります。",
+   q4:function(n){return n+"の標高は何メートルですか？"},
+   a4:function(m,f){return "標高 "+m+"m（"+f+"ft）です。"}},
+  com:{title:"コミュニティ",sub:"登山者どうしの情報交換の場。スレッドを立てて質問・山行記録・装備の話をしよう。",
+   notice:"デモ版のため、あなたの投稿は<b>このブラウザ内にのみ保存</b>されます（他のユーザーには共有されません）。フル版では会員機能・通報・モデレーションとともにサーバーへ保存されます。",
+   rules:"⚠ 個人情報（住所・連絡先など）は書き込まないでください。危険箇所・残雪などの現地情報は必ず公式情報でも確認を。",
+   newThread:"＋ スレッドを立てる",cancel:"キャンセル",submit:"投稿する",submitReply:"返信する",
+   fName:"表示名",fCat:"カテゴリ",fTitle:"タイトル",fBody:"本文",replyPh:"返信を書く…（このブラウザ内にのみ保存されます）",
+   guest:"ゲスト",replies:"返信",like:"👍 いいね",liked:"👍 いいね済み",report:"⚑ 通報",reported:"✓ 通報を受け付けました（デモ）",
+   all:"すべて",empty:"このカテゴリにはまだスレッドがありません。最初のスレッドを立ててみましょう！",
+   back:"← スレッド一覧へ",noReplies:"まだ返信がありません。最初の返信を書いてみましょう。",yourPost:"あなたの投稿",
+   relMt:"関連する山",cats:{qa:"質問",log:"山行記録",gear:"装備",info:"現地情報",chat:"雑談"},
+   justNow:"たった今",minAgo:"分前",hourAgo:"時間前",dayAgo:"日前"},
+  hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"世界中の山を、<br>正しく引ける",s:"標高・ルート・天気・歴史 — 登山に必要な一次情報を、日本語と英語で。信頼できるデータで、山の計画をもっと確実に、もっと自由に。",ph:"山名・キーワードで検索（例: 富士山, Everest）",go:"検索",pop:"人気の検索",pops:["富士山","エベレスト","キリマンジャロ","アルプス"],feats:[["世界中の山を網羅","200以上の国と地域\n100,000+の山を収録"],["リアルタイム天気","登山地の最新気象情報を\nリアルタイムで取得"],["ルート・地図情報","詳細なルート・地形データで\n安全な計画をサポート"],["多言語対応","日本語・英語で利用可能\n世界中の登山者をサポート"]]},
+  featured:"注目の山",lists:"リストから探す",newest:"新着記事",byCountry:"国から探す",viewAll:"すべて見る →",season_now:"今月が旬の山",your:"あなたの登頂チェックリスト",
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
+  f:{kw:"キーワード",country:"国",allC:"すべての国",elev:"標高",any:"指定なし",diff:"難易度",allD:"すべての難易度",found:"件の山が見つかりました",none:"条件に合う山が見つかりませんでした。フィルタを変えてみてください。",reset:"リセット"},
+  sort:{t:"並び替え:",elevD:"標高が高い順",elevA:"標高が低い順",diffA:"難易度がやさしい順",diffD:"難易度が高い順",name:"名前順"},
+  l:{elevation:"標高",summary:"概要",features:"特徴",history:"歴史・初登頂",firstAscent:"初登頂",access:"登山口・アクセス",equipment:"必要装備",hazards:"⚠ 危険箇所",routes:"主な登頂ルート",weather:"天気（モック）",data:"山のデータ",coords:"緯度経度",country:"国",region:"山域",season:"ベストシーズン",prominence:"プロミネンス",nearby:"近隣・類似の山",dist:"距離",gain:"累積標高差",time:"標準コースタイム",stamina:"体力度",tech:"技術グレード",notes:"補足",updated:"最終更新",map:"地図",home:"ホーム",peaks:"座",back:"← 一覧へ戻る",cmp:"標高くらべ",share:"リンクをコピー",shared:"リンクをコピーしました",summit:"登頂済みにする",summited:"✓ 登頂済み",unclimbed:"未登頂に戻す"},
+  w:{now:"現在の天気",week:"週間予報",wind:"風速",sr:"日の出",ss:"日の入り",est:"山頂付近の推定値",mock:"デモデータ（モック）",note:"天気は参考情報です。登山の可否判断は必ず複数の情報源と現地の最新情報で行ってください。"},
+  diffs:{1:"初級",2:"初中級",3:"中級",4:"上級",5:"エキスパート"},
+  cats:{guide:"初心者ガイド",gear:"装備",season:"季節",safety:"安全",inbound:"訪日登山"},
+  months:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+  monthsS:["1","2","3","4","5","6","7","8","9","10","11","12"],
+  tags:{hyakumeizan:"日本百名山","seven-summits":"七大陸最高峰","8000m":"8000m峰",beginner:"初心者向け"},
+  disc:{t:"⚠ 安全に関する注意",b:"山岳情報は変化します。本ページの情報は参考であり、正確性・最新性を保証するものではありません。入山にあたっては必ず公式情報・最新の現地情報を確認し、自己責任で計画・行動してください。難易度の高いルートではガイドの利用をご検討ください。"},
+  fnote:"これは Mountain Peak の静的デモ版です。検索・詳細・リスト・モック天気・登頂チェックリストをブラウザ内だけで動作させています。会員機能・管理画面・実DB接続・Open-Meteo実照会はフル版（サーバー版）でのみ提供されます。入力内容がサーバーへ送信されることはありません。",
+  prog:function(n,t){return n+" / "+t+" 座 登頂"},
+  expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
+ en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",videos:"Videos",community:"Community"},
+  vid:{title:"Video Library",sub:"Curated mountain videos from YouTube — scout your next peak on screen.",
+   notice:"Videos play in YouTube's official embedded player (privacy-enhanced mode). <b>Nothing is loaded from YouTube until you click a thumbnail</b>. All videos remain the property of their creators.",
+   watch:"Watch on YouTube ↗",close:"✕ Close",detailTitle:"Watch videos",
+   themeBeginner:"🎒 Beginner Guides",theme4k:"🎬 Scenic & Aerial 4K",toMt:"Mountain page →"},
+  legalNav:{terms:"Terms of Use",privacy:"Privacy Policy",disclaimer:"Safety Disclaimer",about:"About"},
+  hub:{countries:"Browse by Country & Region",countriesSub:"Mountains organized by country and range — find your next peak by area.",regions:"Ranges",regionsIn:" — Ranges",mtsIn:" — Mountains",country:"Country",allCountries:"All countries & regions →",viewAll:"View all →"},
+  faq:{title:"Frequently Asked Questions",
+   q1:function(n){return "Can beginners climb "+n+"?"},
+   a1:{1:"Yes. The trails are well maintained and suitable for beginners with basic fitness.",2:"Yes, with proper preparation and gear. Check the weather and start early.",3:"It involves rocky sections and weather risk — build up hiking experience first.",4:"An advanced mountain with exposure and technical terrain. Solid experience or a guide is strongly recommended.",5:"An expedition-grade, expert-only mountain requiring advanced skills and extensive experience."},
+   q2:function(n){return "How long does it take to climb "+n+"?"},
+   a2pre:"Typical course times for the listed routes are ",a2post:" (excluding breaks; varies greatly with fitness and conditions).",a2none:"Route data is being prepared.",
+   q3:function(n){return "When is the best season for "+n+"?"},
+   a3pre:"The best season is generally ",a3post:". Difficulty increases sharply in snow season.",
+   q4:function(n){return "How high is "+n+"?"},
+   a4:function(m,f){return "The elevation is "+m+"m ("+f+"ft)."}},
+  com:{title:"Community",sub:"A place for climbers to share. Start a thread — questions, trip reports, gear talk.",
+   notice:"Demo: your posts are <b>stored only in this browser</b> and not shared with other users. The full version stores them server-side with accounts, reporting and moderation.",
+   rules:"⚠ Never post personal information (address, contacts). Always double-check trail conditions against official sources.",
+   newThread:"＋ New thread",cancel:"Cancel",submit:"Post",submitReply:"Reply",
+   fName:"Display name",fCat:"Category",fTitle:"Title",fBody:"Body",replyPh:"Write a reply… (saved only in this browser)",
+   guest:"Guest",replies:"replies",like:"👍 Like",liked:"👍 Liked",report:"⚑ Report",reported:"✓ Report received (demo)",
+   all:"All",empty:"No threads in this category yet. Start the first one!",
+   back:"← Back to threads",noReplies:"No replies yet. Be the first to answer.",yourPost:"Your post",
+   relMt:"Related mountain",cats:{qa:"Q&A",log:"Trip Reports",gear:"Gear",info:"Conditions",chat:"General"},
+   justNow:"just now",minAgo:"min ago",hourAgo:"h ago",dayAgo:"d ago"},
+  hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"The world's mountains,<br>done right",s:"Elevation, routes, weather and history — primary mountain information in English and Japanese. Reliable data to plan your mountains with more confidence and freedom.",ph:"Search mountains (e.g. Everest, Fuji)",go:"Search",pop:"Popular",pops:["Fuji","Everest","Kilimanjaro","Alps"],feats:[["Global Coverage","200+ countries & regions\n100,000+ peaks"],["Real-time Weather","Latest mountain conditions\nat a glance"],["Routes & Maps","Detailed route & terrain data\nfor safer planning"],["Multilingual","Japanese & English —\nfor climbers worldwide"]]},
+  featured:"Featured Mountains",lists:"Browse by List",newest:"Latest Articles",byCountry:"Browse by Country",viewAll:"View all →",season_now:"In Season This Month",your:"Your Summit Checklist",
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
+  f:{kw:"Keyword",country:"Country",allC:"All countries",elev:"Elevation",any:"Any",diff:"Difficulty",allD:"Any difficulty",found:"mountains found",none:"No mountains match your filters. Try adjusting them.",reset:"Reset"},
+  sort:{t:"Sort:",elevD:"Highest first",elevA:"Lowest first",diffA:"Easiest first",diffD:"Hardest first",name:"Name"},
+  l:{elevation:"Elevation",summary:"Overview",features:"Features",history:"History & First Ascent",firstAscent:"First ascent",access:"Access",equipment:"Equipment",hazards:"⚠ Hazards",routes:"Climbing Routes",weather:"Weather (mock)",data:"Mountain Data",coords:"Coordinates",country:"Country",region:"Range",season:"Best season",prominence:"Prominence",nearby:"Nearby & Similar Peaks",dist:"Distance",gain:"Elevation gain",time:"Typical time",stamina:"Stamina",tech:"Tech grade",notes:"Notes",updated:"Last updated",map:"Map",home:"Home",peaks:"peaks",back:"← Back to list",cmp:"Elevation Compare",share:"Copy link",shared:"Link copied",summit:"Mark as climbed",summited:"✓ Climbed",unclimbed:"Unmark"},
+  w:{now:"Current Weather",week:"7-Day Forecast",wind:"Wind",sr:"Sunrise",ss:"Sunset",est:"Estimated near summit",mock:"Demo data (mock)",note:"Weather shown here is reference only. Always make go/no-go decisions from multiple sources and current local conditions."},
+  diffs:{1:"Easy",2:"Moderate",3:"Challenging",4:"Difficult",5:"Expert"},
+  cats:{guide:"Beginner Guide",gear:"Gear",season:"Seasons",safety:"Safety",inbound:"Climbing in Japan"},
+  months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+  monthsS:["J","F","M","A","M","J","J","A","S","O","N","D"],
+  tags:{hyakumeizan:"100 Famous Japanese Mountains","seven-summits":"Seven Summits","8000m":"8000m Peak",beginner:"Beginner-friendly"},
+  disc:{t:"⚠ Safety Notice",b:"Mountain conditions change. Information on this page is for reference and is not guaranteed to be accurate or current. Always check official and up-to-date local information, plan and act at your own risk, and consider hiring a guide for difficult routes."},
+  fnote:"This is the static demo of Mountain Peak. Search, detail pages, lists, mock weather and the summit checklist all run entirely in your browser. Accounts, the admin console, a real database and live Open-Meteo queries are available only in the full (server) version. Nothing you type is sent to any server.",
+  prog:function(n,t){return n+" / "+t+" climbed"},
+  expedition:function(d){return "approx. "+d+" days (expedition)"},hm:function(h,m){return (h?h+"h":"")+(m?m+"min":"")}}
+};
+var WCODES={0:["快晴","Clear","☀️"],1:["晴れ","Mostly clear","🌤️"],2:["薄曇り","Partly cloudy","⛅"],3:["曇り","Overcast","☁️"],61:["小雨","Light rain","🌧️"],71:["小雪","Light snow","🌨️"],95:["雷雨","Thunderstorm","⛈️"]};
+/* 国旗コードは countries.isoCode から導出（全43カ国対応） */
+
+/* ====== 状態・永続化 ====== */
+var state={locale:"ja",unit:"m",view:{name:"home"},filters:{q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD"},artCat:""};
+function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function getSum(){try{return JSON.parse(load("mp-demo-summits")||"[]")}catch(e){return []}}
+function isSum(id){return getSum().indexOf(id)>=0}
+function toggleSum(id){var s=getSum();var i=s.indexOf(id);if(i>=0)s.splice(i,1);else s.push(id);store("mp-demo-summits",JSON.stringify(s));render()}
+
+/* ====== ヘルパー ====== */
+function d(){return DICT[state.locale]}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function tr(obj){return obj.translations[state.locale]||obj.translations.ja||obj.translations.en}
+function names(obj){return obj.names[state.locale]||obj.names.ja}
+function ft(m){return Math.round(m*3.28084)}
+function elevMain(m){return state.unit==="ft"?ft(m).toLocaleString():m.toLocaleString()}
+function elevUnit(){return state.unit==="ft"?"ft":"m"}
+function elevAlt(m){return state.unit==="ft"?m.toLocaleString()+" m":ft(m).toLocaleString()+" ft"}
+function countryOf(id){return DATA.countries.find(function(c){return c.id===id})}
+function regionOf(id){return DATA.regions.find(function(r){return r.id===id})}
+function flag(id){var c=countryOf(id);if(!c||!c.isoCode)return "";return '<img class="fi" src="'+asset("images/flags/"+c.isoCode.toLowerCase()+".png")+'" alt="" width="18" height="14">'}
+
+/* ====== モック天気（フル版 lib/weather/mock.ts と同一ロジック） ====== */
+function det(seed){var x=Math.sin(seed*12.9898)*43758.5453;return x-Math.floor(x)}
+function mockForecast(lat,lng,elev){
+  var now=new Date();
+  var start=Date.UTC(now.getUTCFullYear(),0,0);
+  var doy=Math.floor((now.getTime()-start)/86400000);
+  var hemi=lat>=0?1:-1;
+  var seasonal=Math.cos(((doy-200)/365)*2*Math.PI)*hemi;
+  var seaTemp=27-Math.abs(lat)*0.55+seasonal*12;
+  var base=seaTemp-(elev/100)*0.6;
+  var seedBase=lat*7+lng*13+doy;
+  var codes=[0,1,2,3,61,71,95];
+  var daily=[];
+  for(var i=0;i<7;i++){
+    var r1=det(seedBase+i*3.1),r2=det(seedBase+i*5.7+1),r3=det(seedBase+i*9.3+2);
+    var swing=(r1-0.5)*6;
+    var dt=new Date(now.getTime()+i*86400000);
+    daily.push({date:dt.toISOString().slice(0,10),minC:Math.round((base+swing-4)*10)/10,maxC:Math.round((base+swing+4)*10)/10,pp:Math.round(r2*80),wind:Math.round((3+r3*15)*10)/10,code:codes[Math.floor(r2*codes.length)]||2});
+  }
+  return {daily:daily,cur:{t:Math.round(((daily[0].minC+daily[0].maxC)/2)*10)/10,wind:daily[0].wind,code:daily[0].code},sr:"05:12",ss:"18:47"};
+}
+
+/* ====== 検索・フィルタ（フル版 lib/search.ts と同一ロジック＋タグ・並び替え拡張） ====== */
+var BANDS={"0-1999":[0,1999],"2000-2999":[2000,2999],"3000-4999":[3000,4999],"5000-7999":[5000,7999],"8000+":[8000,99999]};
+function textOf(m){var out=[];for(var k in m.translations){var t=m.translations[k];out.push(t.name,t.localName||"",t.summary)}return out.join(" ").toLowerCase()}
+function filterMountains(f){
+  var q=(f.q||"").trim().toLowerCase();
+  var list=DATA.mountains.filter(function(m){
+    if(m.status!=="published")return false;
+    if(f.country&&m.countryId!==f.country)return false;
+    if(f.diff&&m.difficultyLevel!==Number(f.diff))return false;
+    if(f.elev){var b=BANDS[f.elev];if(m.elevationM<b[0]||m.elevationM>b[1])return false}
+    if(f.tag&&(m.tags||[]).indexOf(f.tag)<0)return false;
+    if(q&&textOf(m).indexOf(q)<0&&m.slug.indexOf(q)<0)return false;
+    return true;
+  });
+  var s=f.sort||"elevD";
+  list.sort(function(a,b){
+    if(s==="elevA")return a.elevationM-b.elevationM;
+    if(s==="diffA")return a.difficultyLevel-b.difficultyLevel||b.elevationM-a.elevationM;
+    if(s==="diffD")return b.difficultyLevel-a.difficultyLevel||b.elevationM-a.elevationM;
+    if(s==="name")return tr(a).name.localeCompare(tr(b).name,state.locale);
+    return b.elevationM-a.elevationM;
+  });
+  return list;
+}
+function haversine(a,b,c,e){var R=6371,rad=function(x){return x*Math.PI/180};var dl=rad(c-a),dg=rad(e-b);var h=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(rad(a))*Math.cos(rad(c))*Math.sin(dg/2)*Math.sin(dg/2);return 2*R*Math.asin(Math.sqrt(h))}
+function nearby(target,limit){
+  return DATA.mountains.filter(function(m){return m.id!==target.id&&m.status==="published"})
+    .map(function(m){return{m:m,s:haversine(target.lat,target.lng,m.lat,m.lng)+(m.regionId===target.regionId?-5000:0)}})
+    .sort(function(a,b){return a.s-b.s}).slice(0,limit).map(function(x){return x.m});
+}
+function fmtTime(min){
+  var D=d();
+  if(min>=4320)return D.expedition(Math.round(min/1440));
+  var h=Math.floor(min/60),m=min%60;return D.hm(h,m)||m+(state.locale==="ja"?"分":"min");
+}
+
+/* ====== オートコンプリート ====== */
+function suggest(inputId,boxId){
+  var el=document.getElementById(inputId),box=document.getElementById(boxId);
+  if(!el||!box)return;
+  var q=el.value.trim().toLowerCase();
+  if(!q){box.innerHTML="";box.style.display="none";return}
+  var hits=DATA.mountains.filter(function(m){return m.status==="published"&&(textOf(m).indexOf(q)>=0||m.slug.indexOf(q)>=0)}).slice(0,6);
+  if(!hits.length){box.innerHTML="";box.style.display="none";return}
+  box.innerHTML=hits.map(function(m){var t=tr(m),c=countryOf(m.countryId);
+    return '<button type="button" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><span class="tri">▲</span><span>'+esc(t.name)+(c?' <span style="color:var(--muted);font-size:11px">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+'</span><span class="e mono">'+elevMain(m.elevationM)+" "+elevUnit()+"</span></button>"}).join("");
+  box.style.display="block";
+}
+function hideSug(boxId){setTimeout(function(){var b=document.getElementById(boxId);if(b)b.style.display="none"},160)}
+
+/* ====== HTML部品 ====== */
+function diffBadge(lv){return '<span class="badge d'+lv+'">'+"▲".repeat(lv)+" "+d().diffs[lv]+"</span>"}
+function tagBadges(tags){return (tags||[]).map(function(t){return d().tags[t]?'<span class="badge plain">'+esc(d().tags[t])+"</span>":""}).join("")}
+function seasonBadge(months){if(!months||!months.length)return "";return '<span class="badge plain">🗓 '+months.map(function(m){return d().months[m-1]}).join(" · ")+"</span>"}
+function gauge(m){
+  var pct=Math.min(100,m.elevationM/8849*100);
+  var refs=[3776,8000];
+  return '<div class="gauge" aria-hidden="true"><div class="base"><div class="fill" style="width:'+pct.toFixed(1)+'%"></div>'+
+    refs.map(function(r){return '<span class="ref" style="left:'+(r/8849*100).toFixed(1)+'%"></span>'}).join("")+
+    '<span class="mk" style="left:'+pct.toFixed(1)+'%">▲</span></div>'+
+    '<div class="lab mono"><span>0</span><span>8,849m</span></div></div>';
+}
+var MT_PHOTOS={"mount-fuji":1,"kita-dake":1,"yarigatake":1,"okuhotaka-dake":1,"tateyama":1,"daisen":1,"mount-takao":1,"mount-everest":1,"k2":1,"annapurna":1,"mont-blanc":1,"matterhorn":1,"kilimanjaro":1,"denali":1,"aconcagua":1,"elbrus":1,"vinson-massif":1,"puncak-jaya":1};
+function mtPhoto(m,alt){
+  if(MT_PHOTOS[m.slug])return '<img decoding="async" src="'+asset("images/mountains/"+m.slug+".jpg")+'" alt="'+esc(alt||"")+'">';
+  return '<svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="100" height="100" fill="#2E4A57"/><path d="M-5 78 L28 38 L44 58 L60 30 L82 62 L105 50 L105 105 L-5 105 Z" fill="#1B2A32"/><path d="M60 30 L67 40 L60 45 L53 40 Z" fill="#E7EEEA" opacity=".85"/><circle cx="79" cy="19" r="7" fill="#F3C9A8" opacity=".75"/></svg>';
+}
+function rankThumbs(r){
+  var ms=r.mountainIds.slice(0,3).map(function(id){return DATA.mountains.find(function(m){return m.id===id})}).filter(Boolean);
+  var rest=r.mountainIds.length-ms.length;
+  return '<div class="rkthumbs">'+ms.map(function(m){var mt=tr(m);return '<span class="ph">'+mtPhoto(m,mt?mt.name:"")+"</span>"}).join("")+
+    (rest>0?'<span class="ph more">+'+rest+"</span>":"")+"</div>";
+}
+function mountainCard(m){
+  var t=tr(m),c=countryOf(m.countryId);
+  return '<div class="card mcard rv" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">'+
+    (isSum(m.id)?'<span class="done">✓ '+(state.locale==="ja"?"登頂":"Climbed")+"</span>":"")+
+    '<div class="mrow"><div class="mthumb">'+mtPhoto(m,t.name)+'</div><div class="mbody">'+
+    '<div class="top"><div><div class="nm">'+esc(t.name)+'</div>'+(t.localName&&t.localName!==t.name?'<div class="ln">'+esc(t.localName)+"</div>":"")+"</div>"+
+    '<div class="el mono">'+elevMain(m.elevationM)+"<small> "+elevUnit()+"</small></div></div>"+
+    '<div class="sm">'+esc(t.summary)+"</div>"+
+    '<div class="badges">'+diffBadge(m.difficultyLevel)+(c?'<span class="badge plain">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+"</div>"+gauge(m)+"</div></div></div>";
+}
+function crumbs(items){
+  return '<div class="crumbs">'+items.map(function(it,i){
+    var s=(i?'<span class="sep">›</span> ':"")+(it.go?"<a onclick='"+it.go+"'>"+esc(it.n)+"</a>":'<span style="color:var(--ink)">'+esc(it.n)+"</span>");return s}).join(" ")+"</div>";
+}
+function disclaimer(updated){
+  var D=d();
+  return '<div class="notice"><b>'+D.disc.t+"</b><br>"+D.disc.b+(updated?"<br><span style='opacity:.75'>"+D.l.updated+": "+new Date(updated).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+"</span>":"")+"</div>";
+}
+function seasonStrip(months){
+  var now=new Date().getMonth()+1,D=d();
+  var cells="";
+  for(var i=1;i<=12;i++){cells+='<div class="m'+((months||[]).indexOf(i)>=0?" on":"")+(i===now?" now":"")+'">'+D.monthsS[i-1]+"</div>"}
+  return '<div class="season">'+cells+"</div>";
+}
+function cmpPanel(m){
+  var D=d(),t=tr(m);
+  var refs=[{n:"Everest",e:8849},{n:"Mont Blanc",e:4808},{n:state.locale==="ja"?"富士山":"Mt. Fuji",e:3776}];
+  var rows=refs.filter(function(r){return Math.abs(r.e-m.elevationM)>1}).map(function(r){
+    return '<div class="row"><span class="nm">'+esc(r.n)+'</span><div class="bar"><i style="width:'+(r.e/8849*100).toFixed(1)+'%"></i></div><span class="v mono">'+r.e.toLocaleString()+"m</span></div>"});
+  var me='<div class="row me"><span class="nm">'+esc(t.name)+'</span><div class="bar"><i style="width:'+(m.elevationM/8849*100).toFixed(1)+'%"></i></div><span class="v mono">'+m.elevationM.toLocaleString()+"m</span></div>";
+  var all=[];var ins=false;
+  refs.forEach(function(r){if(!ins&&m.elevationM>=r.e){all.push(me);ins=true}if(Math.abs(r.e-m.elevationM)>1)all.push('<div class="row"><span class="nm">'+esc(r.n)+'</span><div class="bar"><i style="width:'+(r.e/8849*100).toFixed(1)+'%"></i></div><span class="v mono">'+r.e.toLocaleString()+"m</span></div>")});
+  if(!ins)all.push(me);
+  return '<div class="cmp">'+all.join("")+"</div>";
+}
+function weatherPanel(m){
+  var D=d(),f=mockForecast(m.lat,m.lng,m.elevationM);
+  var wc=function(c){var w=WCODES[c]||WCODES[3];return{l:state.locale==="ja"?w[0]:w[1],i:w[2]}};
+  var cur=wc(f.cur.code);
+  var days=f.daily.map(function(day){var w=wc(day.code);var dt=new Date(day.date);
+    return '<div class="day"><div>'+(dt.getMonth()+1)+"/"+dt.getDate()+'</div><div class="i" title="'+esc(w.l)+'">'+w.i+'</div><div class="mx mono">'+Math.round(day.maxC)+'°</div><div class="mn mono">'+Math.round(day.minC)+'°</div><div class="pp mono">'+day.pp+"%</div></div>"}).join("");
+  return '<div class="card weather"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier)">'+D.w.now+'</h3><span class="badge plain">'+D.w.mock+'</span></div>'+
+    '<div class="now"><span class="ico">'+cur.i+'</span><div><div class="t mono">'+f.cur.t.toFixed(1)+'<small>°C</small></div><div class="c">'+esc(cur.l)+" · "+D.w.wind+" "+Math.round(f.cur.wind)+'m/s</div></div><div style="margin-left:auto;font-size:11px;color:var(--muted);text-align:right">🌅 '+f.sr+"<br>🌇 "+f.ss+"</div></div>"+
+    '<div style="font-size:10px;color:var(--muted);margin-top:5px">'+D.w.est+": "+m.elevationM.toLocaleString()+'m</div>'+
+    '<h4 style="font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:13px">'+D.w.week+'</h4><div class="wk">'+days+"</div>"+
+    '<div class="notice" style="margin-top:11px;font-size:10.5px;padding:9px 13px">'+D.w.note+"</div></div>";
+}
+function mapEmbed(m,label){
+  var dl=0.35,bbox=(m.lng-dl)+","+(m.lat-dl)+","+(m.lng+dl)+","+(m.lat+dl);
+  return '<div class="osm"><iframe loading="lazy" title="'+esc(label)+'" src="https://www.openstreetmap.org/export/embed.html?bbox='+encodeURIComponent(bbox)+'&layer=mapnik&marker='+m.lat+","+m.lng+'"></iframe><div class="cap">© OpenStreetMap — '+m.lat.toFixed(4)+", "+m.lng.toFixed(4)+"</div></div>";
+}
+function secHead(eyeKey,title,moreHtml){
+  var D=d();
+  return '<h2 class="sec"><span class="eyebrow mono">△ '+esc(D.eyebrows[eyeKey]||"")+'</span><span class="tt disp">'+esc(title)+"</span>"+(moreHtml||"")+"</h2>";
+}
+function heroSVG(){
+  return '<svg class="ridge" viewBox="0 0 1200 430" preserveAspectRatio="xMidYMax slice" aria-hidden="true">'+
+  '<defs><radialGradient id="glow" cx="72%" cy="18%" r="52%"><stop offset="0%" stop-color="#F3C9A8" stop-opacity=".5"/><stop offset="55%" stop-color="#E9A98C" stop-opacity=".14"/><stop offset="100%" stop-color="#E9A98C" stop-opacity="0"/></radialGradient></defs>'+
+  '<rect width="1200" height="430" fill="url(#glow)"/>'+
+  '<g stroke="#FFFFFF" stroke-opacity=".05" fill="none" stroke-width="1">'+
+    '<path d="M-20,300 C200,270 380,290 620,255 S1000,235 1220,258"/>'+
+    '<path d="M-20,330 C220,300 420,318 660,286 S1020,268 1220,290"/>'+
+    '<path d="M-20,360 C240,332 460,348 700,318 S1040,300 1220,322"/>'+
+    '<path d="M-20,390 C260,364 500,378 740,350 S1060,334 1220,354"/>'+
+  '</g>'+
+  '<path d="M-20,430 L120,318 L215,362 L340,252 L432,308 L560,214 L640,268 L760,196 L858,258 L980,206 L1090,268 L1220,232 L1220,430 Z" fill="#1A2C36" opacity=".55"/>'+
+  '<path d="M-20,430 L90,352 L200,394 L330,300 L448,356 L590,268 L700,324 L830,252 L950,312 L1080,264 L1220,318 L1220,430 Z" fill="#131F27" opacity=".8"/>'+
+  '<path d="M-20,430 L140,384 L300,414 L470,342 L620,392 L790,318 L930,372 L1090,330 L1220,368 L1220,430 Z" fill="#0C161C"/>'+
+  '<path class="routeline" d="M40,404 L180,376 L300,398 L470,346 L620,384 L790,322 L888,352 L1010,300 L1096,318 L1178,282" fill="none" stroke="#E8776A" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 7"/>'+
+  '<g fill="none" stroke="#E8776A" stroke-width="1.6"><path d="M1178,282 l-6,10 h12 Z" fill="#E8776A"/></g>'+
+  '</svg>';
+}
+
+var FEAT_ICONS=[
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M2.5 19L9 7l4.2 7.4L16 10l5.5 9z"/><path d="M7.2 10.3l1.8 2 1.8-2" stroke-opacity=".55"/></svg>',
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><g stroke="#E8776A"><circle cx="7.5" cy="7" r="2.4"/><path d="M7.5 2.4v1.2M7.5 10.4v1.2M2.9 7h1.2M10.9 7h1.2M4.2 3.7l.9.9M9.9 9.4l.9.9M10.8 3.7l-.9.9M5.1 9.4l-.9.9"/></g><path d="M8.6 17.6a4.3 4.3 0 014-5.5 4.7 4.7 0 019 1.4 3.3 3.3 0 01-.8 6.5H12a3.4 3.4 0 01-3.4-2.4z" stroke="#fff"/></svg>',
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14" stroke-opacity=".55"/></svg>',
+ '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3.6 9h16.8M3.6 15h16.8"/></svg>'
+];
+function stampSVG(){
+  return '<svg class="stamp" viewBox="0 0 200 200" fill="none" aria-hidden="true">'+
+  '<defs><path id="arcT" d="M28 100 A72 72 0 0 1 172 100"/><path id="arcB" d="M24 100 A76 76 0 0 0 176 100"/></defs>'+
+  '<circle cx="100" cy="100" r="93" stroke="#fff" stroke-width="2" stroke-opacity=".92"/>'+
+  '<circle cx="100" cy="100" r="86" stroke="#fff" stroke-width=".8" stroke-opacity=".5" stroke-dasharray="2 4"/>'+
+  '<circle cx="100" cy="100" r="54" stroke="#fff" stroke-width=".9" stroke-opacity=".8"/>'+
+  '<text fill="#fff" font-size="11.5" font-weight="700" letter-spacing="3.2" font-family="IBM Plex Mono, monospace"><textPath href="#arcT" startOffset="50%" text-anchor="middle">EXPLORE THE WORLD</textPath></text>'+
+  '<text fill="#fff" fill-opacity=".85" font-size="8.2" letter-spacing="1.4" font-family="IBM Plex Mono, monospace"><textPath href="#arcB" startOffset="50%" text-anchor="middle">27&#176;59&#8242;17&#8243;N 86&#176;55&#8242;31&#8243;E</textPath></text>'+
+  '<g stroke="#fff" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M64 121 L86 85 L96 99 L106 80 L127 116"/><path d="M99 93 l5 8" stroke-opacity=".65"/><path d="M81 94 l4 7" stroke-opacity=".65"/></g>'+
+  '<g fill="#fff" font-size="9"><text x="60" y="72">&#10022;</text><text x="130" y="78">&#10022;</text><text x="120" y="132" font-size="7">&#10022;</text></g>'+
+  '<text x="160" y="105" fill="#E8776A" font-size="13">&#10022;</text>'+
+  '</svg>';
+}
+function scrollPastHero(){
+  var el=document.querySelector(".fv");
+  if(el){window.scrollTo({top:el.getBoundingClientRect().bottom+window.scrollY-52,behavior:"smooth"})}
+}
+
+/* ====== ビュー ====== */
+function vHome(){
+  var D=d();
+  var featured=DATA.mountains.slice().sort(function(a,b){return b.elevationM-a.elevationM}).slice(0,6);
+  var nowM=new Date().getMonth()+1;
+  var seasonal=DATA.mountains.filter(function(m){return (m.bestSeasons||[]).indexOf(nowM)>=0}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel}).slice(0,3);
+  var arts=DATA.articles.slice(0,3);
+  var sums=getSum();
+  var yourHtml="";
+  if(sums.length){
+    yourHtml=secHead("your",D.your)+'<div class="grid">'+DATA.rankings.map(function(r){
+      var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
+      return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">'+esc(names(r))+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
+  }
+  return '<section class="hero fv"><img class="bg" src="'+asset("images/hero-bg.jpg")+'" alt="" aria-hidden="true"><div class="scrim"></div>'+stampSVG()+'<div class="inner"><div class="kicker mono">'+D.hero.k+'</div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
+    '<div class="searchbox"><div class="fvsearch"><svg class="mag" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" autocomplete="off" oninput="suggest(\'homeQ\',\'homeSug\')" onblur="hideSug(\'homeSug\')" onkeydown="if(event.key===\'Enter\'){event.preventDefault();homeSearch()}"><button onclick="homeSearch()">'+D.hero.go+'</button></div><div id="homeSug" class="sug" style="display:none"></div></div>'+
+    '<div class="pops"><span class="lb">'+esc(D.hero.pop)+'</span>'+D.hero.pops.map(function(p){return '<button class="pchip" onclick="go({name:\'mountains\',q:\''+esc(p)+'\'})">'+esc(p)+'</button>'}).join("")+'</div>'+
+    '<div class="feats">'+D.hero.feats.map(function(f,i){return '<div class="feat">'+FEAT_ICONS[i]+'<div><div class="t">'+esc(f[0])+'</div><div class="d">'+esc(f[1])+'</div></div></div>'}).join("")+'</div>'+
+    '</div><div class="chev"><button aria-label="scroll down" onclick="scrollPastHero()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div></section>'+
+    (seasonal.length?secHead("season",D.season_now,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+seasonal.map(mountainCard).join("")+"</div>":"")+
+    secHead("featured",D.featured,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
+    yourHtml+
+    secHead("lists",D.lists)+'<div class="grid">'+DATA.rankings.map(function(r){
+      var done=sums.length?r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length:0;
+      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})">'+rankThumbs(r)+'<div class="nm">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--glacier)">'+r.mountainIds.length+" "+D.l.peaks+" →</span>"+(done?'<span class="badge d1">✓ '+done+"</span>":"")+"</div></div>"}).join("")+"</div>"+
+    secHead("byCountry",D.byCountry,'<span class="more" onclick="go({name:\'countries\'})">'+D.hub.allCountries+"</span>")+'<div class="chips">'+DATA.countries.map(function(c){
+      return '<span class="chip" onclick=\'go({name:"country",slug:"'+c.slug+'"})\'>'+flag(c.id)+" "+esc(names(c))+"</span>"}).join("")+"</div>"+
+    secHead("newest",D.newest,'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+"</span>")+'<div class="grid">'+arts.map(articleCard).join("")+"</div>";
+}
+function homeSearch(){var q=document.getElementById("homeQ").value;go({name:"mountains",q:q})}
+function vMountains(){
+  var D=d(),f=state.filters;
+  var list=filterMountains(f);
+  var opts=function(sel,items){return items.map(function(it){return '<option value="'+it[0]+'"'+(sel===it[0]?" selected":"")+">"+esc(it[1])+"</option>"}).join("")};
+  var tagChips='<div class="chips" style="margin:14px 0 4px">'+['',"hyakumeizan","seven-summits","8000m","beginner"].map(function(t){
+    var lbl=t?D.tags[t]:D.f.any;
+    return '<span class="chip'+(f.tag===t?" on":"")+'" onclick="state.filters.tag=\''+t+'\';render()">'+esc(lbl)+"</span>"}).join("")+"</div>";
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.mountains+"</h1>"+
+    '<div class="card"><div class="filters">'+
+    '<label>'+D.f.kw+'<input id="fQ" value="'+esc(f.q)+'" autocomplete="off" oninput="suggest(\'fQ\',\'fSug\')" onblur="hideSug(\'fSug\')" onkeydown="if(event.key===\'Enter\')applyFilters()"><div id="fSug" class="sug" style="display:none;text-transform:none;letter-spacing:0;font-weight:400"></div></label>'+
+    '<label>'+D.f.country+(f.country?" "+flag(f.country):"")+'<select id="fC" onchange="applyFilters()">'+opts(f.country,[["",D.f.allC]].concat(DATA.countries.map(function(c){return[c.id,names(c)]})))+"</select></label>"+
+    '<label>'+D.f.elev+'<select id="fE" onchange="applyFilters()">'+opts(f.elev,[["",D.f.any]].concat(Object.keys(BANDS).map(function(k){return[k,k+" m"]})))+"</select></label>"+
+    '<label>'+D.f.diff+'<select id="fD" onchange="applyFilters()">'+opts(f.diff,[["",D.f.allD],["1","1 "+D.diffs[1]],["2","2 "+D.diffs[2]],["3","3 "+D.diffs[3]],["4","4 "+D.diffs[4]],["5","5 "+D.diffs[5]]])+"</select></label>"+
+    '<div style="display:flex;gap:8px"><button style="flex:1;background:var(--route);color:#fff;border-radius:10px;padding:9px 16px;font-weight:700;font-size:13px" onclick="applyFilters()">'+D.hero.go+'</button><button style="border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;color:var(--muted)" onclick="resetFilters()">'+D.f.reset+"</button></div></div>"+tagChips+"</div>"+
+    '<div class="sortrow"><span class="count" style="margin:0"><b>'+list.length+"</b> "+D.f.found+'</span><span style="margin-left:auto;font-size:12px;color:var(--muted)">'+D.sort.t+'</span><select onchange="state.filters.sort=this.value;render()">'+
+    [["elevD",D.sort.elevD],["elevA",D.sort.elevA],["diffA",D.sort.diffA],["diffD",D.sort.diffD],["name",D.sort.name]].map(function(o){return '<option value="'+o[0]+'"'+(f.sort===o[0]?" selected":"")+">"+o[1]+"</option>"}).join("")+"</select></div>"+
+    (list.length?'<div class="grid">'+list.map(mountainCard).join("")+"</div>":'<div class="empty"><div class="big">🏔</div>'+D.f.none+"</div>");
+}
+function applyFilters(){state.filters.q=document.getElementById("fQ").value;state.filters.country=document.getElementById("fC").value;state.filters.elev=document.getElementById("fE").value;state.filters.diff=document.getElementById("fD").value;render()}
+function resetFilters(){state.filters={q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD"};render()}
+function shareLink(){
+  var D=d();
+  var done=function(){var t=document.getElementById("toast");t.textContent=D.l.shared;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1800)};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(location.href).then(done,done)}else{done()}
+}
+function vMountain(slug){
+  var m=DATA.mountains.find(function(x){return x.slug===slug});
+  if(!m)return '<div class="empty">404 — not found</div>';
+  var D=d(),t=tr(m),c=countryOf(m.countryId),r=regionOf(m.regionId);
+  var routes=DATA.routes.filter(function(x){return x.mountainId===m.id&&x.status==="published"}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel});
+  var near=nearby(m,4);
+  var sum=isSum(m.id);
+  var sect=function(title,body){return body?'<div class="card sect"><h3>'+title+'</h3><p>'+esc(body)+"</p></div>":""};
+  var hasPhoto=!!MT_PHOTOS[m.slug];
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains,go:'go({name:"mountains"})'},{n:c?names(c):"",go:'go({name:"country",slug:"'+(c?c.slug:"")+'"})'},{n:t.name}])+
+    '<div class="card detail-hero'+(hasPhoto?" dphoto":"")+'">'+
+    (hasPhoto?'<img class="dbg" src="'+asset("images/mountains/"+m.slug+".jpg")+'" alt="'+esc(t.name)+'"><div class="dscrim"></div>':"")+
+    '<div class="row"><div><h1 class="disp">'+esc(t.name)+"</h1>"+(t.localName?'<div class="local">'+esc(t.localName)+"</div>":"")+
+    '<div class="badges" style="margin-top:12px">'+diffBadge(m.difficultyLevel)+tagBadges(m.tags)+seasonBadge(m.bestSeasons)+"</div></div>"+
+    '<div><div class="elv mono">'+elevMain(m.elevationM)+'<small> '+elevUnit()+'</small></div><div class="meta mono">'+elevAlt(m.elevationM)+'</div><div class="meta">'+(c?'<a class="hublink" onclick="go({name:\'country\',slug:\''+c.slug+'\'})">'+flag(c.id)+" "+esc(names(c))+"</a>":"")+(r?' · <a class="hublink" onclick="go({name:\'region\',slug:\''+r.slug+'\'})">'+esc(names(r))+"</a>":"")+"</div></div></div>"+
+    '<p class="dsum">'+esc(t.summary)+"</p>"+
+    '<div class="actrow"><button class="abtn'+(sum?" done":"")+'" onclick="toggleSum(\''+m.id+'\')" title="'+(sum?D.l.unclimbed:D.l.summit)+'">'+(sum?D.l.summited:"⛰ "+D.l.summit)+'</button><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div></div>"+
+    '<div class="cols"><div>'+
+    sect(D.l.features,t.features)+
+    (t.history?'<div class="card sect"><h3>'+D.l.history+'</h3><p>'+esc(t.history)+"</p>"+(m.firstAscentYear?'<p style="margin-top:10px;font-size:12px;color:var(--muted);background:var(--paper);border-radius:10px;padding:9px 13px">🏔 '+D.l.firstAscent+": "+m.firstAscentYear+" — "+esc(m.firstAscentParty||"")+"</p>":"")+"</div>":"")+
+    (t.hazards?'<div class="hazard sect"><h3>'+D.l.hazards+'</h3><p>'+esc(t.hazards)+"</p></div>":"")+
+    sect(D.l.access,t.access)+
+    sect(D.l.equipment,t.equipment)+
+    (routes.length?'<div class="card sect"><h3>'+D.l.routes+"</h3>"+routes.map(function(rt){var rtt=tr(rt);
+      return '<div class="rcard" onclick="event.stopPropagation();go({name:\'route\',slug:\''+rt.slug+'\'})"><div class="rt"><span>'+esc(rtt.name)+"</span>"+diffBadge(rt.difficultyLevel)+'</div><div class="rs">'+esc(rtt.overview.slice(0,90))+'…</div><div class="rs mono">📏 '+rt.distanceKm+"km ・ ↗ "+rt.elevationGainM.toLocaleString()+"m ・ ⏱ "+fmtTime(rt.estTimeMin)+"</div></div>"}).join("")+"</div>":"")+
+    faqBlock(m,t,routes)+
+    (MT_VIDEOS[m.id]&&MT_VIDEOS[m.id].length?'<div class="card sect"><h3>'+d().vid.detailTitle+"</h3>"+vidCardsHtml(MT_VIDEOS[m.id])+"</div>":"")+
+    disclaimer(m.updatedAt)+
+    '</div><aside class="sticky">'+weatherPanel(m)+mapEmbed(m,t.name)+
+    '<div class="card"><h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier);margin-bottom:9px">'+D.l.data+'</h3><table class="dtable"><tr><td>'+D.l.elevation+'</td><td class="mono">'+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft</td></tr>"+
+    (m.prominenceM?"<tr><td>"+D.l.prominence+'</td><td class="mono">'+m.prominenceM.toLocaleString()+"m</td></tr>":"")+
+    "<tr><td>"+D.l.coords+'</td><td class="mono">'+m.lat.toFixed(4)+", "+m.lng.toFixed(4)+"</td></tr>"+
+    "<tr><td>"+D.l.routes+'</td><td class="mono">'+routes.length+"</td></tr></table>"+
+    '<h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier);margin:15px 0 3px">'+D.l.season+'</h3>'+seasonStrip(m.bestSeasons)+
+    '<h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier);margin:16px 0 3px">'+D.l.cmp+'</h3>'+cmpPanel(m)+
+    "</div></aside></div>"+
+    (near.length?secHead("nearby",D.l.nearby)+'<div class="grid">'+near.map(mountainCard).join("")+"</div>":"");
+}
+function vRoute(slug){
+  var rt=DATA.routes.find(function(x){return x.slug===slug});
+  if(!rt)return '<div class="empty">404</div>';
+  var D=d(),t=tr(rt);
+  var m=DATA.mountains.find(function(x){return x.id===rt.mountainId});
+  var mt=m?tr(m):null;
+  var stat=function(l,v){return '<div class="stat"><div class="l">'+l+'</div><div class="v mono">'+v+"</div></div>"};
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains,go:'go({name:"mountains"})'},{n:mt?mt.name:"",go:'go({name:"mountain",slug:"'+(m?m.slug:"")+'"})'},{n:t.name}])+
+    '<div class="card detail-hero">'+(m&&mt?'<a style="font-size:13px;color:var(--glacier);cursor:pointer;font-weight:600" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">⛰ '+esc(mt.name)+" ("+m.elevationM.toLocaleString()+"m)</a>":"")+
+    '<h1 class="disp" style="margin-top:6px">'+esc(t.name)+'</h1><div class="badges" style="margin-top:12px">'+diffBadge(rt.difficultyLevel)+(rt.techGrade?'<span class="badge plain">'+D.l.tech+": "+esc(rt.techGrade)+"</span>":"")+seasonBadge(rt.seasons)+"</div>"+
+    '<div class="stats">'+stat(D.l.dist,rt.distanceKm+" km")+stat(D.l.gain,rt.elevationGainM.toLocaleString()+" m")+stat(D.l.time,fmtTime(rt.estTimeMin))+stat(D.l.stamina,"●".repeat(rt.staminaLevel)+"○".repeat(5-rt.staminaLevel))+"</div>"+
+    '<div style="margin-top:14px">'+seasonStrip(rt.seasons)+"</div></div>"+
+    '<div class="cols"><div>'+
+    '<div class="card sect"><h3>'+D.l.summary+'</h3><p>'+esc(t.overview)+"</p></div>"+
+    (t.hazards?'<div class="hazard sect"><h3>'+D.l.hazards+'</h3><p>'+esc(t.hazards)+"</p></div>":"")+
+    (t.notes?'<div class="card sect"><h3>'+D.l.notes+'</h3><p>'+esc(t.notes)+"</p></div>":"")+
+    disclaimer(rt.updatedAt)+'</div><aside class="sticky">'+(m?mapEmbed(m,t.name):"")+"</aside></div>";
+}
+function vRankings(){
+  var D=d(),sums=getSum();
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.rankings}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.rankings+'</h1><div class="grid">'+
+    DATA.rankings.map(function(r){
+      var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
+      return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})">'+rankThumbs(r)+'<div class="nm">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
+}
+function vRanking(slug){
+  var r=DATA.rankings.find(function(x){return x.slug===slug});
+  if(!r)return '<div class="empty">404</div>';
+  var D=d(),sums=getSum();
+  var ms=r.mountainIds.map(function(id){return DATA.mountains.find(function(m){return m.id===id})}).filter(Boolean).sort(function(a,b){return b.elevationM-a.elevationM});
+  var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.rankings,go:'go({name:"rankings"})'},{n:names(r)}])+
+    '<div class="card detail-hero"><h1 class="disp">🏆 '+esc(names(r))+'</h1><p style="margin-top:10px;font-size:14px;color:var(--muted);line-height:1.85">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+"</p>"+
+    '<div class="progress"><div class="bar"><i style="width:'+(done/ms.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,ms.length)+"</b></span><span class='mono'>"+(done/ms.length*100).toFixed(0)+"%</span></div></div></div>"+
+    '<ol class="ranklist" style="margin-top:16px">'+ms.map(function(m,i){var t=tr(m),c=countryOf(m.countryId);var on=sums.indexOf(m.id)>=0;
+      return '<li onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><button class="ckbtn'+(on?" on":"")+'" aria-label="'+(on?D.l.unclimbed:D.l.summit)+'" onclick="event.stopPropagation();toggleSum(\''+m.id+'\')">✓</button><span class="no mono">'+(i+1)+'</span><div><div class="nm">'+esc(t.name)+'</div><div class="sub">'+(c?flag(c.id)+" "+esc(names(c)):"")+" · "+esc(t.summary.slice(0,50))+'…</div></div><div class="rgt"><div class="e mono">'+elevMain(m.elevationM)+" "+elevUnit()+"</div>"+diffBadge(m.difficultyLevel)+"</div></li>"}).join("")+"</ol>";
+}
+function articleCard(a){
+  var t=tr(a),D=d();
+  return '<div class="card acard rv" onclick="go({name:\'article\',slug:\''+a.slug+'\'})"><div class="cat"><span>'+esc(D.cats[a.category]||a.category)+"</span>"+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+'</div><div class="ti">'+esc(t.title)+'</div><div class="ds">'+esc(t.metaDesc||t.body.slice(0,100))+"</div></div>";
+}
+function vArticles(){
+  var D=d();
+  var cats=Object.keys(D.cats);
+  var list=DATA.articles.filter(function(a){return !state.artCat||a.category===state.artCat});
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.articles}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.articles+'</h1>'+
+    '<div class="chips" style="margin-bottom:18px"><span class="chip'+(state.artCat===""?" on":"")+'" onclick="state.artCat=\'\';render()">'+D.f.any+"</span>"+
+    cats.map(function(c){return '<span class="chip'+(state.artCat===c?" on":"")+'" onclick="state.artCat=\''+c+'\';render()">'+esc(D.cats[c])+"</span>"}).join("")+"</div>"+
+    (list.length?'<div class="grid">'+list.map(articleCard).join("")+"</div>":'<div class="empty">—</div>');
+}
+function vArticle(slug){
+  var a=DATA.articles.find(function(x){return x.slug===slug});
+  if(!a)return '<div class="empty">404</div>';
+  var D=d(),t=tr(a);
+  return '<div class="article-body">'+crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.articles,go:'go({name:"articles"})'},{n:t.title}])+
+    '<div class="cat" style="font-size:12px;color:var(--muted)"><span class="badge plain">'+esc(D.cats[a.category]||a.category)+"</span> "+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+" · "+esc(a.authorName)+"</div>"+
+    '<h1 class="disp">'+esc(t.title)+"</h1>"+
+    '<div class="card">'+t.body.split(/\n\n+/).map(function(p){return "<p>"+esc(p)+"</p>"}).join("")+"</div>"+
+    '<div style="margin-top:14px"><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div>"+
+    '<div style="margin-top:14px">'+disclaimer(a.publishedAt)+"</div></div>";
+}
+
+/* ====== ルーティング（実URL・SSG対応。旧#URLは自動移行） ====== */
+var BASE=(function(){
+  var p=location.pathname;
+  var m=p.match(/^(.*?)\/(ja|en)(\/|$)/);
+  if(m)return m[1];
+  return p.replace(/\/index\.html$/,"").replace(/\/$/,"");
+})();
+function asset(p){return BASE+"/"+p}
+function pathFor(view,locale){
+  var l=locale||state.locale,n=view.name;
+  if(n==="mountain")return "/"+l+"/mountains/"+view.slug+"/";
+  if(n==="route")return "/"+l+"/routes/"+view.slug+"/";
+  if(n==="ranking")return "/"+l+"/rankings/"+view.slug+"/";
+  if(n==="article")return "/"+l+"/articles/"+view.slug+"/";
+  if(n==="legal")return "/"+l+"/legal/"+view.slug+"/";
+  if(n==="thread")return "/"+l+"/community/?t="+encodeURIComponent(view.slug);
+  if(n==="country")return "/"+l+"/countries/"+view.slug+"/";
+  if(n==="region")return "/"+l+"/regions/"+view.slug+"/";
+  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/"};
+  return "/"+l+(map[n]||"/");
+}
+function go(view){
+  if(view.name==="mountains"){state.filters={q:view.q||"",country:view.country||"",elev:"",diff:"",tag:"",sort:"elevD"}}
+  state.view=view;
+  var url=BASE+pathFor(view);
+  if(location.pathname+location.search!==url){try{history.pushState(null,"",url)}catch(e){}}
+  render();window.scrollTo(0,0);
+}
+function parseHash(){
+  // 旧ハッシュURL互換（#/ja/mountain/x → /ja/mountains/x/ へ移行）
+  var h=(location.hash||"").replace(/^#\/?/,"");
+  if(h){
+    var hp=h.split("/");
+    if(hp[0]==="ja"||hp[0]==="en"){state.locale=hp[0];hp.shift()}
+    var nm=hp[0]||"home";
+    var valid={home:1,mountains:1,mountain:1,route:1,rankings:1,ranking:1,articles:1,article:1,community:1,thread:1,videos:1,legal:1,about:1};
+    state.view=valid[nm]?{name:nm,slug:hp[1]}:{name:"home"};
+    try{history.replaceState(null,"",BASE+pathFor(state.view))}catch(e){}
+    return;
+  }
+  var rest=location.pathname.slice(BASE.length);
+  var seg=rest.split("/").filter(function(s){return s&&s!=="index.html"});
+  if(seg[0]==="ja"||seg[0]==="en"){state.locale=seg[0];seg.shift()}
+  var name=seg[0]||"home",slug=seg[1];
+  if(name==="mountains"&&slug){state.view={name:"mountain",slug:slug};return}
+  if(name==="routes"&&slug){state.view={name:"route",slug:slug};return}
+  if(name==="rankings"&&slug){state.view={name:"ranking",slug:slug};return}
+  if(name==="articles"&&slug){state.view={name:"article",slug:slug};return}
+  if(name==="legal"&&slug){state.view={name:"legal",slug:slug};return}
+  if(name==="countries"&&slug){state.view={name:"country",slug:slug};return}
+  if(name==="regions"&&slug){state.view={name:"region",slug:slug};return}
+  if(name==="community"){
+    var t=null;
+    try{t=new URLSearchParams(location.search).get("t")}catch(e){}
+    state.view=t?{name:"thread",slug:t}:{name:"community"};
+    return;
+  }
+  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1};
+  state.view=valid2[name]?{name:name}:{name:"home"};
+}
+/* ビュー別タイトル（SSG生成ページのタイトル設計と同一パターン） */
+function pageTitle(v){
+  var ja=state.locale==="ja",D=d();
+  try{
+    if(v.name==="mountain"){var m=DATA.mountains.find(function(x){return x.slug===v.slug});if(m){var t=tr(m);return ja?t.name+"の標高・登山ルート・難易度・天気 | Mountain Peak":t.name+" — Elevation, Climbing Routes, Difficulty & Weather | Mountain Peak"}}
+    if(v.name==="route"){var r=DATA.routes.find(function(x){return x.slug===v.slug});if(r){var mt=DATA.mountains.find(function(x){return x.id===r.mountainId});var rn=tr(r).name,mn=mt?tr(mt).name:"";return ja?mn+" "+rn+" — コースタイム・難易度・危険箇所 | Mountain Peak":rn+" on "+mn+" — Course Time, Difficulty & Hazards | Mountain Peak"}}
+    if(v.name==="article"){var a=DATA.articles.find(function(x){return x.slug===v.slug});if(a)return tr(a).title+" | Mountain Peak"}
+    if(v.name==="ranking"){var k=DATA.rankings.find(function(x){return x.slug===v.slug});if(k)return names(k)+(ja?" 一覧・チェックリスト":" — Complete List & Checklist")+" | Mountain Peak"}
+    if(v.name==="legal"&&LEGAL[v.slug])return (LEGAL[v.slug][state.locale]||LEGAL[v.slug].ja).t+" | Mountain Peak";
+    if(v.name==="about")return D.legalNav.about+" | Mountain Peak";
+    if(v.name==="country"){var cc=DATA.countries.find(function(x){return x.slug===v.slug});if(cc)return names(cc)+(ja?"の山一覧・登山情報":" — Mountains & Climbing Guide")+" | Mountain Peak"}
+    if(v.name==="region"){var rr=DATA.regions.find(function(x){return x.slug===v.slug});if(rr)return names(rr)+(ja?"の山と登山ルート":" — Mountains & Routes")+" | Mountain Peak"}
+    if(v.name==="countries")return D.hub.countries+" | Mountain Peak";
+    var statics={mountains:D.tabs.mountains,rankings:D.tabs.rankings,articles:D.tabs.articles,videos:D.tabs.videos,community:D.tabs.community,thread:D.tabs.community};
+    if(statics[v.name])return statics[v.name]+" | Mountain Peak";
+  }catch(e){}
+  return ja?"Mountain Peak — 世界の山岳データベース（デモ版）":"Mountain Peak — Global Mountain Database (Demo)";
+}
+var _obs=null;
+function reveal(){
+  var els=document.querySelectorAll(".rv:not(.in)");
+  if(!("IntersectionObserver" in window)){els.forEach?els.forEach(function(e){e.classList.add("in")}):Array.prototype.forEach.call(els,function(e){e.classList.add("in")});return}
+  if(_obs)_obs.disconnect();
+  _obs=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");_obs.unobserve(en.target)}})},{threshold:.06,rootMargin:"0px 0px -20px 0px"});
+  Array.prototype.forEach.call(els,function(e){_obs.observe(e)});
+}
+function render(){
+  var D=d(),v=state.view,html="";
+  try{
+    if(v.name==="home")html=vHome();
+    else if(v.name==="mountains")html=vMountains();
+    else if(v.name==="mountain")html=vMountain(v.slug);
+    else if(v.name==="route")html=vRoute(v.slug);
+    else if(v.name==="rankings")html=vRankings();
+    else if(v.name==="ranking")html=vRanking(v.slug);
+    else if(v.name==="articles")html=vArticles();
+    else if(v.name==="article")html=vArticle(v.slug);
+    else if(v.name==="community")html=vCommunity();
+    else if(v.name==="thread")html=vThread(v.slug);
+    else if(v.name==="videos")html=vVideos();
+    else if(v.name==="legal")html=vLegal(v.slug);
+    else if(v.name==="about")html=vAbout();
+    else if(v.name==="countries")html=vCountries();
+    else if(v.name==="country")html=vCountry(v.slug);
+    else if(v.name==="region")html=vRegion(v.slug);
+  }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
+  document.getElementById("app").innerHTML=html;
+  /* タブ */
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["videos",D.tabs.videos],["community",D.tabs.community]];
+  var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
+  document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
+  /* 言語・単位ピル */
+  Array.prototype.forEach.call(document.querySelectorAll("#langPill button"),function(b){b.classList.toggle("on",b.dataset.l===state.locale)});
+  Array.prototype.forEach.call(document.querySelectorAll("#unitPill button"),function(b){b.classList.toggle("on",b.dataset.u===state.unit)});
+  document.documentElement.lang=state.locale;
+  document.getElementById("flinks").innerHTML=[["legal","terms"],["legal","privacy"],["legal","disclaimer"],["about",""]].map(function(x){
+    var label=x[0]==="about"?D.legalNav.about:D.legalNav[x[1]];
+    var arg=x[0]==="about"?'{name:"about"}':'{name:"legal",slug:"'+x[1]+'"}';
+    return "<a onclick='go("+arg+")'>"+label+"</a>";
+  }).join("");
+  document.getElementById("fnote").textContent=D.fnote;
+  document.getElementById("fdisc").innerHTML="<b>"+D.disc.t+"</b><br>"+D.disc.b;
+  document.title=pageTitle(v);
+  reveal();
+}
+
+/* ====== 初期化 ====== */
+document.getElementById("langPill").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;
+  state.locale=b.dataset.l;
+  store("mp-demo-lang",state.locale);
+  go(state.view);
+});
+document.getElementById("unitPill").addEventListener("click",function(e){
+  var b=e.target.closest("button");if(!b)return;
+  state.unit=b.dataset.u;
+  store("mp-demo-unit",state.unit);
+  render();
+});
+document.getElementById("themeBtn").addEventListener("click",function(){
+  var dark=document.documentElement.classList.toggle("dark");
+  this.textContent=dark?"☀️":"🌙";
+  store("mp-demo-theme",dark?"dark":"light");
+});
+/* ====== 動画ライブラリ（YouTube公式埋め込み・クリック時のみロード） ====== */
+var MT_VIDEOS={
+ "mt_fuji":[{"id":"UfWFWWtUDsU","title":"日帰り富士山登頂 吉田ルートで剣ヶ峰まで","author":"noicoyamaico"}],
+ "mt_kita":[{"id":"hqwN9y5vVlA","title":"【北岳】広河原ルートをサクッと解説。","author":"信州山日和"},{"id":"Kl1kas43aJw","title":"【北岳・登山】広河原〜草すべりコース","author":"やまみちナビ"}],
+ "mt_yari":[{"id":"CEmjihZshAA","title":"1分で分かる「槍ヶ岳」登山ルート【新穂高ルート】","author":"YuYaアウトドア旅~OutdoorJourney~"},{"id":"H1vyX0AHmyg","title":"絶景　北アルプス　槍ヶ岳　山頂直下","author":"兄弟チャンネル・ときどき山登り"}],
+ "mt_okuhotaka":[{"id":"hvgB5aSl7eI","title":"【ザイテングラート・徹底解説】涸沢小屋から穂高岳山荘までのルートを解説","author":"山と旅と音"}],
+ "mt_tateyama":[{"id":"KNb1L53dQNQ","title":"【立山登山】2時間で3000ｍの絶景へ！立山雄山〜浄土山縦走。雷鳥の親子にも！","author":"オトナ女子の山登り"}],
+ "mt_daisen":[{"id":"qD0Z64KUXhI","title":"【1分で日本百名山登山】山陰最高峰 伯耆富士こと大山登頂記 鳥取県編","author":"お金が無いから旅に出た〜日本一周歩き旅〜"},{"id":"NhyId1ePsko","title":"1分で分かる「伯耆大山」登山ルート【夏山登山口ルート】","author":"YuYaアウトドア旅~OutdoorJourney~"}],
+ "mt_takao":[{"id":"_O4U55-Pg6E","title":"【高尾山】1号路／ケーブルカーを使って山頂まで。見どころたくさん、一番人気の観光コース","author":"高尾山マガジン"}],
+ "mt_everest":[{"id":"gCr4Pg9mEA4","title":"Behind The First Summit of The World's Tallest Mountain (Full Episode) | Lost on Everest","author":"National Geographic"}],
+ "mt_k2":[{"id":"cvFt2Xcuois","title":"Breathtaking: K2 - The World's Most Dangerous Mountain | Eddie Bauer","author":"Eddie Bauer"}],
+ "mt_matterhorn":[{"id":"wPwmueSDznQ","title":"Matterhorn Climb Hornli Ridge - Mountaineering in Switzerland","author":"Ledged Up"}],
+ "mt_blanc":[{"id":"lUK2zyorrN0","title":"Mont Blanc - Beginner climbs Western Europe's Highest Peak (Goûter Route in 4K)","author":"David P. McEntee"}],
+ "mt_kilimanjaro":[{"id":"IjAFsy4ThNY","title":"Kilimanjaro Machame Route 7-Day. Everything you need to know!","author":"Oli France"}],
+ "mt_denali":[{"id":"DWzNl_H_7Kw","title":"The Denali Experience","author":"JoeyVidaLoca"}],
+ "mt_aconcagua":[{"id":"vSS-JrOK-u0","title":"AMG's Expedition on the Normal Route","author":"Aconcagua Mountain Guides"},{"id":"EFbiV7xWJFE","title":"Aconcagua Expedition Normal Route","author":"Inka Expediciones"}],
+ "theme_beginner":[{"id":"TtkRHJ8P4vA","title":"【登山初心者必見！】登山装備、最初に何を買えばいいのか解説！","author":"ヤマレコ社長の絶対遭難させないチャンネル"}],
+ "theme_4k":[{"id":"lGUkdNDv4Zw","title":"2023 富士と日本アルプス- ANA087便 (4K-HDR) Mt. Fuji & Japan Alps From Flight ANA087","author":"Yutaka Nagai"}]
+};
+var VID_ORDER=["mt_fuji","mt_kita","mt_yari","mt_okuhotaka","mt_tateyama","mt_daisen","mt_takao","mt_everest","mt_k2","mt_matterhorn","mt_blanc","mt_kilimanjaro","mt_denali","mt_aconcagua"];
+function vidIndex(id){
+  for(var k in MT_VIDEOS){var hit=MT_VIDEOS[k].find(function(v){return v.id===id});if(hit)return hit}
+  return null;
+}
+function vidCardsHtml(list){
+  return '<div class="vgrid">'+list.map(function(v){
+    return '<div class="card vcard rv" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="vidOpen(\''+v.id+'\')">'+
+    '<div class="vthumb"><img src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="'+esc(v.title)+'" decoding="async"><div class="vplay"><span>▶</span></div></div>'+
+    '<div class="vinfo"><div class="vtitle">'+esc(v.title)+'</div><div class="vauthor">▶ '+esc(v.author)+" · YouTube</div></div></div>";
+  }).join("")+"</div>";
+}
+function vVideos(){
+  var D=d(),V=D.vid;
+  var secs=VID_ORDER.filter(function(k){return MT_VIDEOS[k]&&MT_VIDEOS[k].length}).map(function(k){
+    var m=DATA.mountains.find(function(x){return x.id===k});
+    var name=m?tr(m).name:k;
+    return '<div class="vsechead"><span class="vt disp">⛰ '+esc(name)+"</span>"+
+      (m?'<span class="vlink" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">'+V.toMt+"</span>":"")+"</div>"+
+      vidCardsHtml(MT_VIDEOS[k]);
+  }).join("");
+  var themes='<div class="vsechead"><span class="vt disp">'+V.themeBeginner+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_beginner)+
+    '<div class="vsechead"><span class="vt disp">'+V.theme4k+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_4k);
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:V.title}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;letter-spacing:-.01em">'+V.title+'</h1>'+
+    '<p style="font-size:13px;color:var(--muted);margin-top:4px">'+V.sub+"</p>"+
+    '<div class="comnotice" style="margin-top:14px">'+V.notice+"</div>"+
+    themes+secs;
+}
+function vidOpen(id){
+  var v=vidIndex(id),V=d().vid;
+  if(!v)return;
+  vidClose();
+  var overlay=document.createElement("div");
+  overlay.className="vmodal";
+  overlay.id="vidModal";
+  overlay.innerHTML='<div class="vbox">'+
+    '<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="'+esc(v.title)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'+
+    '<div class="vbar"><span class="vbtitle">'+esc(v.title)+'</span>'+
+    '<a href="https://www.youtube.com/watch?v='+id+'" target="_blank" rel="noopener noreferrer">'+V.watch+"</a>"+
+    '<button onclick="vidClose()">'+V.close+"</button></div></div>";
+  overlay.addEventListener("click",function(e){if(e.target===overlay)vidClose()});
+  document.body.appendChild(overlay);
+  document.body.style.overflow="hidden";
+}
+function vidClose(){
+  var m=document.getElementById("vidModal");
+  if(m)m.remove();
+  document.body.style.overflow="";
+}
+
+/* ====== コミュニティ掲示板（デモ: シード+ブラウザ内保存） ====== */
+var COM_SEED=[
+ {id:"th_fuji_crowd",cat:"qa",author:"やまのぼり太郎",createdAt:"2026-07-04T09:20:00+09:00",likes:12,mountainId:"mt_fuji",
+  title:"富士山 吉田ルート、今週末の混雑状況どうですか？",
+  body:"今週末に初めての富士山を計画しています。吉田ルートの混雑（特に山頂直下の渋滞）は最近どんな感じでしょうか？\n山小屋は八合目で予約済みです。",
+  replies:[
+   {author:"ふじさん常連",createdAt:"2026-07-04T12:05:00+09:00",body:"先週末は御来光前の九合目〜山頂で30分待ちくらいでした。金曜夜発など平日絡みだとだいぶ楽になりますよ。"},
+   {author:"Mt.Lover",createdAt:"2026-07-05T08:41:00+09:00",body:"渋滞を避けるなら山頂御来光にこだわらず、八合目付近で見るのもおすすめです。十分きれいです。"}]},
+ {id:"th_karasawa_tent",cat:"log",author:"テント泊デビュー",createdAt:"2026-07-02T21:12:00+09:00",likes:23,mountainId:"mt_okuhotaka",
+  title:"初テント泊で涸沢〜奥穂高岳に行ってきました⛺",
+  body:"上高地→横尾→涸沢の定番ルートでテント泊デビューしてきました。ザイテングラートは想像より高度感がありましたが、無事に奥穂まで登頂。\n朝焼けのモルゲンロートは一生モノの景色でした…！",
+  replies:[
+   {author:"アルプス好き",createdAt:"2026-07-03T07:30:00+09:00",body:"登頂おめでとうございます！秋の紅葉シーズンの涸沢もぜひ。激混みですが、それでも見る価値があります。"}]},
+ {id:"th_kili_january",cat:"info",author:"TrekkerSam",createdAt:"2026-06-28T18:00:00+09:00",likes:8,mountainId:"mt_kilimanjaro",
+  title:"Kilimanjaro in January — conditions and tips?",
+  body:"Planning a Machame route climb next January. How were conditions on your climbs? Any tips on acclimatization days?",
+  replies:[
+   {author:"KiliGuideFan",createdAt:"2026-06-29T02:15:00+09:00",body:"January is one of the best windows — clear mornings, clouds in the afternoon. Take the 7-day itinerary; the extra acclimatization day is worth every dollar."},
+   {author:"山旅人",createdAt:"2026-06-30T22:03:00+09:00",body:"1月に登りました。山頂アタック夜は-12℃前後、防寒はスキーウェア級で。ガイドの言う Pole pole（ゆっくり）が本当に大事です。"}]},
+ {id:"th_sleepingbag",cat:"gear",author:"道具沼",createdAt:"2026-06-25T20:45:00+09:00",likes:15,
+  title:"3シーズン用シュラフ、結局どれがいい？",
+  body:"北アルプスの夏〜秋テント泊用にシュラフを新調予定です。ダウン600FPクラスで迷っています。皆さんの使用感を教えてください。",
+  replies:[
+   {author:"軽量化マン",createdAt:"2026-06-26T08:10:00+09:00",body:"涸沢の9月末は氷点下になる年もあるので、コンフォート0℃前後を選んでおくと後悔しないです。"}]},
+ {id:"th_tateyama_snow",cat:"info",author:"らいちょう",createdAt:"2026-07-05T15:30:00+09:00",likes:6,mountainId:"mt_tateyama",
+  title:"立山 雷鳥沢〜一の越の残雪情報（7月上旬）",
+  body:"7/5時点、一の越直下に雪渓が2箇所残っています。軽アイゼンがあると安心です。室堂平はほぼ夏道が出ています。\n※あくまで当日の状況です。最新情報は必ず公式でご確認を。",
+  replies:[]}
+];
+function comStore(){try{return JSON.parse(localStorage.getItem("mp-com-v1"))||{}}catch(e){return{}}}
+function comSave(s){try{localStorage.setItem("mp-com-v1",JSON.stringify(s))}catch(e){}}
+function comAll(){
+  var s=comStore();
+  var mine=s.threads||[];
+  return COM_SEED.concat(mine).map(function(t){
+    var extra=(s.replies&&s.replies[t.id])||[];
+    return {t:t,replies:(t.replies||[]).concat(extra),likes:(t.likes||0)+((s.likes||{})[t.id]?1:0),liked:!!((s.likes||{})[t.id]),mine:mine.indexOf(t)>=0};
+  });
+}
+function comLastAct(x){var last=x.t.createdAt;x.replies.forEach(function(r){if(r.createdAt>last)last=r.createdAt});return last}
+function comTime(iso){
+  var C=d().com,diff=(Date.now()-new Date(iso).getTime())/60000;
+  if(diff<1)return C.justNow;
+  if(diff<60)return Math.floor(diff)+C.minAgo;
+  if(diff<1440)return Math.floor(diff/60)+C.hourAgo;
+  return Math.floor(diff/1440)+C.dayAgo;
+}
+function comAvatar(name,size){
+  var h=0;for(var i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))>>>0;
+  var hue=h%360;
+  return '<span class="tav" style="background:hsl('+hue+',38%,'+(document.documentElement.classList.contains("dark")?"38%":"52%")+')">'+esc(name.charAt(0).toUpperCase())+"</span>";
+}
+function catBadge(cat){var C=d().com;return '<span class="catb cat-'+cat+'">'+esc(C.cats[cat]||cat)+"</span>"}
+function vCommunity(){
+  var D=d(),C=D.com;
+  var list=comAll().filter(function(x){return !state.comCat||x.t.cat===state.comCat});
+  list.sort(function(a,b){return comLastAct(b).localeCompare(comLastAct(a))});
+  var catKeys=Object.keys(C.cats);
+  var form='<div class="card comform" id="comForm" style="display:none">'+
+    '<div class="fgrid">'+
+    '<div><label>'+C.fName+'</label><input id="cfName" maxlength="20" value="'+esc(comStore().name||"")+'" placeholder="'+C.guest+'"></div>'+
+    '<div><label>'+C.fCat+'</label><select id="cfCat">'+catKeys.map(function(k){return '<option value="'+k+'">'+esc(C.cats[k])+"</option>"}).join("")+"</select></div>"+
+    '<div class="full"><label>'+C.fTitle+'</label><input id="cfTitle" maxlength="100"></div>'+
+    '<div class="full"><label>'+C.fBody+'</label><textarea id="cfBody" rows="5" maxlength="2000"></textarea></div>'+
+    '</div><p style="font-size:11px;color:var(--muted);margin-top:10px">'+C.rules+'</p>'+
+    '<div style="display:flex;gap:8px;margin-top:12px"><button class="combtn" onclick="comSubmit()">'+C.submit+'</button><button class="combtn ghost" onclick="comToggleForm(false)">'+C.cancel+"</button></div></div>";
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:C.title}])+
+    '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px">'+
+    '<div><h1 class="disp" style="font-size:26px;font-weight:800;letter-spacing:-.01em">'+C.title+'</h1><p style="font-size:13px;color:var(--muted);margin-top:4px">'+C.sub+"</p></div>"+
+    '<button class="combtn" onclick="comToggleForm()">'+C.newThread+"</button></div>"+
+    '<div class="comnotice">'+C.notice+"</div>"+form+
+    '<div class="chips" style="margin-bottom:14px"><span class="chip'+(!state.comCat?" on":"")+'" onclick="state.comCat=\'\';render()">'+C.all+"</span>"+
+    catKeys.map(function(k){return '<span class="chip'+(state.comCat===k?" on":"")+'" onclick="state.comCat=\''+k+'\';render()">'+esc(C.cats[k])+"</span>"}).join("")+"</div>"+
+    (list.length?list.map(function(x){
+      return '<div class="card throw rv" onclick="go({name:\'thread\',slug:\''+x.t.id+'\'})">'+comAvatar(x.t.author)+
+      '<div class="thmain"><div class="thtitle">'+esc(x.t.title)+'</div>'+
+      '<div class="thmeta">'+catBadge(x.t.cat)+"<span>"+esc(x.t.author)+(x.mine?' <b style="color:var(--forest)">('+C.yourPost+")</b>":"")+"</span><span>🕒 "+comTime(comLastAct(x))+"</span><span>💬 "+x.replies.length+"</span><span>👍 "+x.likes+"</span></div></div></div>";
+    }).join(""):'<div class="empty"><div class="big">🏕</div>'+C.empty+"</div>");
+}
+function vThread(id){
+  var D=d(),C=D.com;
+  var x=comAll().find(function(y){return y.t.id===id});
+  if(!x)return '<div class="empty">404</div>';
+  var t=x.t;
+  var mt=t.mountainId?DATA.mountains.find(function(m){return m.id===t.mountainId}):null;
+  var reported=!!(comStore().reported||{})[t.id];
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:C.title,go:'go({name:"community"})'},{n:t.title.slice(0,24)+(t.title.length>24?"…":"")}])+
+    '<div class="card" style="padding:24px">'+
+    '<div style="display:flex;gap:12px;align-items:flex-start">'+comAvatar(t.author)+
+    '<div style="flex:1;min-width:0"><div class="thmeta" style="margin:0 0 6px">'+catBadge(t.cat)+"<span>"+esc(t.author)+"</span><span>🕒 "+comTime(t.createdAt)+"</span></div>"+
+    '<h1 class="disp" style="font-size:21px;font-weight:800;line-height:1.4">'+esc(t.title)+"</h1></div></div>"+
+    '<p style="font-size:14px;line-height:1.9;margin-top:14px;white-space:pre-line;word-break:break-word">'+esc(t.body)+"</p>"+
+    (mt?'<p style="margin-top:12px;font-size:12px">'+C.relMt+': <span class="act" style="color:var(--glacier);font-weight:700;cursor:pointer" onclick="go({name:\'mountain\',slug:\''+mt.slug+'\'})">⛰ '+esc(tr(mt).name)+" →</span></p>":"")+
+    '<div class="thacts">'+
+    '<button class="'+(x.liked?"on":"")+'" onclick="comLike(\''+t.id+'\')">'+(x.liked?C.liked:C.like)+" "+x.likes+"</button>"+
+    '<button class="'+(reported?"on":"")+'" onclick="comReport(\''+t.id+'\')">'+(reported?C.reported:C.report)+"</button></div></div>"+
+    '<h2 style="font-size:15px;font-weight:800;margin:22px 0 4px">💬 '+C.replies+"（"+x.replies.length+"）</h2>"+
+    '<div class="card" style="padding:6px 20px">'+
+    (x.replies.length?x.replies.map(function(r){
+      return '<div class="replyitem">'+comAvatar(r.author)+'<div class="rb"><div class="rmeta"><b style="color:var(--ink)">'+esc(r.author)+"</b> · "+comTime(r.createdAt)+'</div><div class="rbody">'+esc(r.body)+"</div></div></div>";
+    }).join(""):'<p style="padding:16px 0;font-size:13px;color:var(--muted)">'+C.noReplies+"</p>")+"</div>"+
+    '<div class="card comform" style="margin-top:14px">'+
+    '<div class="fgrid"><div><label>'+C.fName+'</label><input id="crName" maxlength="20" value="'+esc(comStore().name||"")+'" placeholder="'+C.guest+'"></div></div>'+
+    '<div class="full" style="margin-top:10px"><label>'+C.fBody+'</label><textarea id="crBody" rows="3" maxlength="2000" placeholder="'+esc(C.replyPh)+'"></textarea></div>'+
+    '<div style="display:flex;gap:8px;margin-top:12px;align-items:center"><button class="combtn" onclick="comReply(\''+t.id+'\')">'+C.submitReply+'</button><span style="font-size:11px;color:var(--muted)">'+C.rules+"</span></div></div>"+
+    '<p style="margin-top:16px"><span class="act" style="color:var(--glacier);font-weight:700;cursor:pointer" onclick="go({name:\'community\'})">'+C.back+"</span></p>";
+}
+function comToggleForm(show){
+  var f=document.getElementById("comForm");
+  if(!f)return;
+  var willShow=show!==undefined?show:f.style.display==="none";
+  f.style.display=willShow?"block":"none";
+  if(willShow){var el=document.getElementById("cfTitle");if(el)el.focus()}
+}
+function comSubmit(){
+  var C=d().com;
+  var name=(document.getElementById("cfName").value.trim()||C.guest).slice(0,20);
+  var title=document.getElementById("cfTitle").value.trim();
+  var body=document.getElementById("cfBody").value.trim();
+  var cat=document.getElementById("cfCat").value;
+  if(!title||!body){document.getElementById(!title?"cfTitle":"cfBody").focus();return}
+  var s=comStore();
+  s.name=name;
+  s.threads=s.threads||[];
+  var id="th_u_"+Date.now().toString(36);
+  s.threads.push({id:id,cat:cat,author:name,createdAt:new Date().toISOString(),likes:0,title:title.slice(0,100),body:body.slice(0,2000),replies:[]});
+  comSave(s);
+  go({name:"thread",slug:id});
+}
+function comReply(tid){
+  var C=d().com;
+  var name=(document.getElementById("crName").value.trim()||C.guest).slice(0,20);
+  var body=document.getElementById("crBody").value.trim();
+  if(!body){document.getElementById("crBody").focus();return}
+  var s=comStore();
+  s.name=name;
+  s.replies=s.replies||{};
+  (s.replies[tid]=s.replies[tid]||[]).push({author:name,createdAt:new Date().toISOString(),body:body.slice(0,2000)});
+  comSave(s);
+  render();
+}
+function comLike(tid){
+  var s=comStore();
+  s.likes=s.likes||{};
+  if(s.likes[tid])delete s.likes[tid];else s.likes[tid]=true;
+  comSave(s);
+  render();
+}
+function comReport(tid){
+  var s=comStore();
+  s.reported=s.reported||{};
+  s.reported[tid]=true;
+  comSave(s);
+  render();
+}
+
+/* ====== 国別・山域ハブ（提案書§3-1: SEOと回遊の要） ====== */
+function hubMtGrid(list){
+  return list.length?'<div class="grid" style="margin-top:16px">'+list.map(mountainCard).join("")+"</div>":'<div class="empty"><div class="big">🏔</div>—</div>';
+}
+function vCountries(){
+  var D=d(),H=D.hub;
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800">'+H.countries+'</h1>'+
+    '<p style="font-size:13px;color:var(--muted);margin:4px 0 18px">'+H.countriesSub+"</p>"+
+    '<div class="grid">'+DATA.countries.map(function(c){
+      var cnt=DATA.mountains.filter(function(m){return m.countryId===c.id&&m.status==="published"}).length;
+      return '<div class="card mcard rv" onclick="go({name:\'country\',slug:\''+c.slug+'\'})"><div class="top"><div class="nm">'+flag(c.id)+" "+esc(names(c))+'</div><div class="el mono" style="font-size:15px">'+cnt+" "+D.l.peaks+'</div></div><div class="sm" style="-webkit-line-clamp:3">'+esc(c.summaries[state.locale]||c.summaries.ja)+"</div></div>"}).join("")+"</div>"+
+    '<h2 class="sec"><span class="tt disp">'+H.regions+'</span></h2><div class="chips">'+DATA.regions.map(function(r){
+      return '<span class="chip" onclick="go({name:\'region\',slug:\''+r.slug+'\'})">'+esc(names(r))+"</span>"}).join("")+"</div>";
+}
+function vCountry(slug){
+  var c=DATA.countries.find(function(x){return x.slug===slug});
+  if(!c)return '<div class="empty">404</div>';
+  var D=d(),H=D.hub;
+  var mts=DATA.mountains.filter(function(m){return m.countryId===c.id&&m.status==="published"}).sort(function(a,b){return b.elevationM-a.elevationM});
+  var regs=DATA.regions.filter(function(r){return r.countryId===c.id});
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries,go:'go({name:"countries"})'},{n:names(c)}])+
+    '<div class="card detail-hero"><h1 class="disp" style="font-size:clamp(22px,3.6vw,30px)">'+flag(c.id)+" "+esc(names(c))+(state.locale==="ja"?"の山":" — Mountains")+'</h1>'+
+    '<p class="dsum">'+esc(c.summaries[state.locale]||c.summaries.ja)+"</p>"+
+    (regs.length?'<div class="chips" style="margin-top:14px">'+regs.map(function(r){return '<span class="chip" onclick="go({name:\'region\',slug:\''+r.slug+'\'})">'+esc(names(r))+"</span>"}).join("")+"</div>":"")+"</div>"+
+    '<div class="count"><b>'+mts.length+"</b> "+D.l.peaks+"</div>"+hubMtGrid(mts);
+}
+function vRegion(slug){
+  var r=DATA.regions.find(function(x){return x.slug===slug});
+  if(!r)return '<div class="empty">404</div>';
+  var D=d(),H=D.hub;
+  var c=r.countryId?countryOf(r.countryId):null;
+  var mts=DATA.mountains.filter(function(m){return m.regionId===r.id&&m.status==="published"}).sort(function(a,b){return b.elevationM-a.elevationM});
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries,go:'go({name:"countries"})'},{n:c?names(c):"",go:c?'go({name:"country",slug:"'+c.slug+'"})':null},{n:names(r)}].filter(function(x){return x.n}))+
+    '<div class="card detail-hero"><h1 class="disp" style="font-size:clamp(22px,3.6vw,30px)">⛰ '+esc(names(r))+'</h1>'+
+    '<p class="dsum">'+esc(r.summaries[state.locale]||r.summaries.ja)+"</p>"+
+    (c?'<p style="margin-top:12px;font-size:12.5px"><a class="hublink" style="color:var(--glacier);font-weight:700" onclick="go({name:\'country\',slug:\''+c.slug+'\'})">'+flag(c.id)+" "+esc(names(c))+" →</a></p>":"")+"</div>"+
+    '<div class="count"><b>'+mts.length+"</b> "+D.l.peaks+"</div>"+hubMtGrid(mts);
+}
+
+/* ====== 法務・About（提案書§9/§5-2: 独立ページ化・E-E-A-T） ====== */
+var LEGAL={
+ terms:{
+  ja:{t:"利用規約",s:[["第1条（適用）","本規約は、Mountain Peak（以下「本サービス」）の利用条件を定めるものです。利用者は本規約に同意の上、本サービスを利用するものとします。"],["第2条（情報の性質）","本サービスが提供する山岳情報（標高・ルート・難易度・天気等）は参考情報であり、正確性・完全性・最新性を保証しません。登山の計画・実行は利用者自身の責任で行ってください。"],["第3条（禁止事項）","法令違反、第三者の権利侵害、虚偽情報の投稿、本サービスの運営を妨害する行為、コンテンツの無断転載・自動収集を禁止します。"],["第4条（免責）","本サービスの利用または利用不能により生じた損害（登山中の事故・遭難を含む）について、運営者は一切の責任を負いません。詳細は安全免責事項をご確認ください。"],["第5条（規約の変更）","運営者は必要に応じて本規約を変更でき、変更後の規約は本ページに掲示した時点で効力を生じます。"]]},
+  en:{t:"Terms of Use",s:[["1. Scope","These Terms govern the use of Mountain Peak (the 'Service'). By using the Service, you agree to these Terms."],["2. Nature of Information","Mountain information provided by the Service is for reference and is not guaranteed to be accurate, complete or current. You plan and climb at your own risk."],["3. Prohibited Conduct","Violating laws, infringing third-party rights, posting false information, interfering with operations, and unauthorized scraping are prohibited."],["4. Limitation of Liability","The operator assumes no liability for damages arising from use of the Service, including climbing accidents. See the Safety Disclaimer."],["5. Changes","The operator may amend these Terms; amendments take effect when posted on this page."]]}},
+ privacy:{
+  ja:{t:"プライバシーポリシー",s:[["1. 収集する情報","本デモ版はサーバーに情報を送信しません。表示名・投稿・登頂チェック等はお使いのブラウザ（localStorage）内にのみ保存されます。"],["2. Cookie等","言語・テーマ・単位設定の保持にローカルストレージを使用します。アクセス解析を導入する場合は本ページで告知し、同意管理を実装します。"],["3. 外部サービス","動画再生時はYouTube（プライバシー強化モード）、地図表示はOpenStreetMapに接続します。各サービスのポリシーが適用されます。"],["4. 第三者提供","法令に基づく場合を除き、本人の同意なく個人情報を第三者に提供しません。"],["5. 開示・訂正・削除","保有情報に関するご要望は運営者情報ページ記載の窓口までご連絡ください。EU圏の利用者にはGDPRに基づく権利が適用されます。"]]},
+  en:{t:"Privacy Policy",s:[["1. Information We Collect","This demo sends nothing to a server. Display names, posts and summit checklists are stored only in your browser (localStorage)."],["2. Local Storage","Local storage keeps your language, theme and unit preferences. If analytics are introduced, this page will be updated with consent management."],["3. Third-Party Services","Video playback connects to YouTube (privacy-enhanced mode) and maps to OpenStreetMap; their policies apply."],["4. Disclosure","We do not disclose personal information to third parties without consent, except as required by law."],["5. Your Rights","Contact us via the About page for data requests. EU users have rights under the GDPR."]]}},
+ disclaimer:{
+  ja:{t:"安全免責事項",s:[["登山は自己責任です","登山・ハイキング・クライミングは、死亡または重傷に至る危険を本質的に伴う活動です。本サービスの情報は、利用者自身の判断・技術・経験を代替するものではありません。"],["情報は変化します","登山道・山小屋・交通・規制・気象などの情報は常に変化します。掲載内容が最新の現地状況と異なる場合があります。入山前に必ず公式情報・現地の最新情報を確認してください。"],["天気情報について","本サービスの天気表示は参考情報（デモ版はモックデータ）です。登山の可否判断に単独で用いないでください。山岳気象は急変します。"],["推奨事項","登山届の提出、山岳保険への加入、適切な装備の携行、経験に応じた山選び、難ルートでのガイド利用を強く推奨します。緊急時は現地の救助機関（日本では警察110）へ連絡してください。"],["損害の免責","本サービスの情報の利用により生じたいかなる損害（遭難・事故・逸失利益等）についても、運営者は責任を負いません。"]]},
+  en:{t:"Safety Disclaimer",s:[["Climbing Is at Your Own Risk","Mountaineering, hiking and climbing are inherently dangerous activities that can result in serious injury or death. Information on this Service is no substitute for your own judgment, skills and experience."],["Conditions Change","Trails, huts, access, regulations and weather change constantly. Always check official, up-to-date local sources before entering the mountains."],["About Weather Information","Weather shown here is reference information (mock data in this demo). Never rely on it alone for go/no-go decisions."],["Recommendations","File a climbing plan, carry rescue insurance, pack appropriate equipment, choose objectives that match your experience, and hire guides for difficult routes. In an emergency, contact local rescue services (110/119 in Japan)."],["Limitation of Liability","The operator accepts no liability for any damages arising from use of information on this Service."]]}}
+};
+function vLegal(doc){
+  var D=d(),c=LEGAL[doc]&&(LEGAL[doc][state.locale]||LEGAL[doc].ja);
+  if(!c)return '<div class="empty">404</div>';
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:c.t}])+
+    '<div style="max-width:760px;margin:0 auto"><h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px">'+esc(c.t)+"</h1>"+
+    c.s.map(function(sec){return '<div class="card" style="margin-bottom:12px"><h2 style="font-size:14.5px;font-weight:800">'+esc(sec[0])+'</h2><p style="font-size:13.5px;color:var(--muted);line-height:1.9;margin-top:8px">'+esc(sec[1])+"</p></div>"}).join("")+
+    '<p style="font-size:11px;color:var(--muted);margin-top:14px">'+(state.locale==="ja"?"制定日: 2026年7月1日 / 運営: STELLAR":"Effective: July 1, 2026 / Operator: STELLAR")+"</p></div>";
+}
+function vAbout(){
+  var D=d(),ja=state.locale==="ja";
+  var secs=ja?[
+   ["運営者","Mountain Peak は STELLAR が企画・運営するグローバル山岳情報プラットフォームです。本サイトはその静的デモ版で、フル版（会員・サーバーDB・実天気連携）を開発中です。"],
+   ["運営方針","①安全に関わる情報（難易度・危険箇所・コースタイム）は出典を確認できたもののみ掲載する ②各ページに最終更新の考え方を明示する ③免責と注意喚起を機能要件として全ページに置く — この3点を編集の柱としています。"],
+   ["データポリシー","山・ルートのデータは公的情報・ガイドブック等を基に編集し、AIによる下書きを使用する場合も必ず人間によるレビューを経て公開します。本デモ版のデータはサンプルであり、実際の登山判断には使用しないでください。"],
+   ["写真・動画のクレジット","写真は Wikimedia Commons（CC）・Unsplash のライセンスに基づき使用しています。動画はYouTube公式埋め込みプレーヤーで再生され、各権利は権利者に帰属します。"],
+   ["訂正・お問い合わせ","掲載情報の誤りを見つけた場合は、コミュニティの「現地情報」カテゴリへの投稿、またはフル版のお問い合わせ窓口（準備中）からご連絡ください。安全に関わる訂正は最優先で対応します。"]
+  ]:[
+   ["Operator","Mountain Peak is a global mountain information platform planned and operated by STELLAR. This site is the static demo; the full version (accounts, server database, live weather) is in development."],
+   ["Editorial Policy","1) Safety-related information (difficulty, hazards, course times) is published only when sources can be verified. 2) Update practices are stated on each page. 3) Disclaimers and safety notices are treated as core features on every page."],
+   ["Data Policy","Mountain and route data are edited from official sources and guidebooks. Where AI drafting is used, every entry is human-reviewed before publication. Demo data is sample content — do not use it for real climbing decisions."],
+   ["Photo & Video Credits","Photos are used under Wikimedia Commons (CC) and Unsplash licenses. Videos play via YouTube's official embedded player; all rights remain with their owners."],
+   ["Corrections & Contact","If you find an error, please post in the Community 'Conditions' category or use the full version's contact form (coming soon). Safety-related corrections are prioritized."]
+  ];
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.legalNav.about}])+
+    '<div style="max-width:760px;margin:0 auto"><h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px">'+esc(D.legalNav.about)+"</h1>"+
+    secs.map(function(sec){return '<div class="card" style="margin-bottom:12px"><h2 style="font-size:14.5px;font-weight:800">'+esc(sec[0])+'</h2><p style="font-size:13.5px;color:var(--muted);line-height:1.9;margin-top:8px">'+esc(sec[1])+"</p></div>"}).join("")+"</div>";
+}
+/* ====== FAQ（山詳細・提案書§2-2: リッチリザルト/LLMO） ====== */
+function faqBlock(m,t,routes){
+  var D=d(),F=D.faq;
+  var times=routes.map(function(r){return r.estTimeMin}).filter(Boolean);
+  var a2=times.length?F.a2pre+fmtTime(Math.min.apply(null,times))+(times.length>1?" 〜 "+fmtTime(Math.max.apply(null,times)):"")+F.a2post:F.a2none;
+  var qa=[
+   [F.q1(t.name),F.a1[m.difficultyLevel]||F.a1[3]],
+   [F.q2(t.name),a2],
+   [F.q3(t.name),F.a3pre+(m.bestSeasons||[]).map(function(x){return D.months[x-1]}).join("・")+F.a3post],
+   [F.q4(t.name),F.a4(m.elevationM.toLocaleString(),ft(m.elevationM).toLocaleString())]
+  ];
+  return '<div class="card sect"><h3>'+F.title+"</h3>"+qa.map(function(x){
+    return '<details style="border-bottom:1px solid var(--hair);padding:9px 0"><summary style="font-size:13.5px;font-weight:700;cursor:pointer">'+esc(x[0])+'</summary><p style="font-size:13px;color:var(--muted);line-height:1.85;margin-top:8px">'+esc(x[1])+"</p></details>"}).join("")+"</div>";
+}
+
+/* ====== AIチャットボット（デモ・ルールベース・ブラウザ内完結） ====== */
+var CHAT_T={
+ ja:{title:"AI山岳コンシェルジュ",status:"ルールベース・ブラウザ内で応答（デモ）",ph:"山・天気・装備について質問…",
+  hello:"こんにちは！Mountain Peak の<b>AI山岳コンシェルジュ</b>です。<br>収録している山の情報・天気・ルート・おすすめ・装備について答えられます。下のチップからもどうぞ。<br><span style='font-size:11px;opacity:.7'>※デモ版のためブラウザ内のルールベースで応答します。入力はサーバーに送信されません。</span>",
+  chips:["初心者におすすめの山は？","富士山の天気は？","エベレストのルートは？","装備リストを見たい","セブンサミッツを見せて"],
+  fallback:"うまく読み取れませんでした🙏 こんな質問に答えられます:<br>・「富士山について教えて」<br>・「◯◯の天気」「◯◯のルート」「◯◯の標高」<br>・「初心者におすすめの山」「今月のおすすめ」<br>・「装備リスト」「百名山」「セブンサミッツ」「8000m峰」",
+  detail:"詳細ページへ",weatherNote:"⚠ デモ用のモック天気です。実際の入山判断は必ず公式予報・現地情報で。",
+  recTitle:"初心者にはこのあたりがおすすめです ⛰",seasonTitle:"今月がベストシーズンの山です 🗓",
+  gear:"日帰り登山の<b>必携装備</b>はこちら:<br>・登山靴（履き慣らし済み）<br>・レインウェア上下<br>・ザック20〜30L / 水1〜2L<br>・ヘッドランプ（日帰りでも！）<br>・地図・コンパスまたはGPSアプリ<br>・防寒着 / 救急セット",
+  gearAct:"装備チェックリストの記事を読む",askWhich:"どの山のことでしょう？例:「富士山の天気」「エベレストのルート」",
+  wNow:"現在",wWeek:"3日間の傾向",elevLabel:"標高",diffLabel:"難易度",seasonLabel:"ベストシーズン",hazardLabel:"⚠ 危険箇所",routesFor:"の主なルート",weatherFor:"の天気（モック）",listAct:"リストを見る",noRoutes:"この山のルートデータはこのデモには未収録です。"},
+ en:{title:"AI Mountain Concierge",status:"Rule-based, runs in your browser (demo)",ph:"Ask about mountains, weather, gear…",
+  hello:"Hi! I'm the <b>AI Mountain Concierge</b> for Mountain Peak.<br>Ask me about the mountains in this database — info, weather, routes, recommendations and gear. Try the chips below.<br><span style='font-size:11px;opacity:.7'>Demo: responses are rule-based and run entirely in your browser. Nothing is sent to a server.</span>",
+  chips:["Recommend beginner mountains","Weather for Everest","Routes on Mont Blanc","Gear checklist","Show the Seven Summits"],
+  fallback:"Sorry, I didn't catch that 🙏 I can answer things like:<br>・\"Tell me about Mount Fuji\"<br>・\"Weather for ◯◯\" / \"Routes on ◯◯\"<br>・\"Recommend beginner mountains\" / \"What's in season\"<br>・\"Gear checklist\" / \"Seven Summits\" / \"8000m peaks\"",
+  detail:"Open detail page",weatherNote:"⚠ Mock weather for demo purposes. Always use official forecasts for real decisions.",
+  recTitle:"Great beginner-friendly picks ⛰",seasonTitle:"In season this month 🗓",
+  gear:"<b>Day-hike essentials</b>:<br>・Broken-in hiking boots<br>・Rain jacket & pants<br>・20–30L pack / 1–2L water<br>・Headlamp (yes, even for day hikes!)<br>・Map & compass or GPS app<br>・Insulation layer / first-aid kit",
+  gearAct:"Read the gear checklist article",askWhich:"Which mountain? e.g. \"Weather for Everest\", \"Routes on Mont Blanc\"",
+  wNow:"Now",wWeek:"Next 3 days",elevLabel:"Elevation",diffLabel:"Difficulty",seasonLabel:"Best season",hazardLabel:"⚠ Hazards",routesFor:" — main routes",weatherFor:" — weather (mock)",listAct:"Open the list",noRoutes:"No route data for this mountain in the demo yet."}
+};
+var chatMsgs=[];
+function cT(){return CHAT_T[state.locale]||CHAT_T.ja}
+function syncChatUI(){
+  var t=cT();
+  document.getElementById("chatTitle").textContent=t.title;
+  document.getElementById("chatStatus").textContent=t.status;
+  document.getElementById("chatInput").placeholder=t.ph;
+  document.getElementById("chatChips").innerHTML=t.chips.map(function(c){return "<button onclick='chatChip(this)'>"+esc(c)+"</button>"}).join("");
+}
+function chatRenderMsgs(){
+  var body=document.getElementById("chatBody");
+  body.innerHTML=chatMsgs.map(function(m){
+    var bubble='<div class="cmsg '+m.role+'">'+m.html+"</div>";
+    if(m.role.indexOf("bot")===0){
+      return '<div class="crow"><span class="cav"><img src="'+asset("images/logo-emblem.jpg")+'" alt=""></span>'+bubble+"</div>";
+    }
+    return bubble;
+  }).join("");
+  body.scrollTop=body.scrollHeight;
+}
+function toggleChat(open){
+  var panel=document.getElementById("chatPanel");
+  var willOpen=open!==undefined?open:!panel.classList.contains("open");
+  panel.classList.toggle("open",willOpen);
+  if(willOpen){
+    syncChatUI();
+    if(chatMsgs.length===0){chatMsgs.push({role:"bot",html:cT().hello})}
+    chatRenderMsgs();
+    document.getElementById("chatInput").focus();
+  }
+}
+function chatGo(name,slug){go({name:name,slug:slug});toggleChat(false)}
+function actLink(name,slug,label){return '<br><span class="act" onclick="chatGo(\''+name+'\',\''+slug+'\')">→ '+esc(label)+"</span>"}
+function chatFindMountain(q){
+  var ql=q.toLowerCase(),best=null,bestScore=0;
+  DATA.mountains.forEach(function(m){
+    var cands=[m.slug.replace(/-/g," ")];
+    for(var loc in m.translations){var t=m.translations[loc];if(t){cands.push(t.name);if(t.localName)cands.push(t.localName)}}
+    cands.forEach(function(c){
+      if(!c)return;var cl=String(c).toLowerCase();var score=0;
+      if(cl.length>=2&&ql.indexOf(cl)>=0)score=cl.length*3;
+      else{
+        ql.split(/[^a-z0-9ぁ-んァ-ヶ一-龠ー]+/).forEach(function(tok){
+          if(tok.length>=3&&cl.indexOf(tok)>=0)score=Math.max(score,tok.length);
+          if(tok.length>=2&&/[ぁ-んァ-ヶ一-龠]/.test(tok)&&cl.indexOf(tok)>=0)score=Math.max(score,tok.length*2);
+        });
+      }
+      if(score>bestScore){best=m;bestScore=score}
+    });
+  });
+  return bestScore>=4?best:null;
+}
+function chatMtProfile(m){
+  var t=tr(m),c=countryOf(m.countryId),T=cT(),D=d();
+  var hz=t.hazards?String(t.hazards).slice(0,90):"";
+  return "<b>"+esc(t.name)+"</b>（"+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft"+(c?"・"+flag(c.id)+" "+esc(names(c)):"")+"）<br>"+
+    esc(String(t.summary).slice(0,120))+"…<br>"+
+    T.diffLabel+": "+"▲".repeat(m.difficultyLevel)+" "+D.diffs[m.difficultyLevel]+"<br>"+
+    T.seasonLabel+": "+(m.bestSeasons||[]).map(function(x){return D.months[x-1]}).join("・")+
+    (hz?"<br>"+T.hazardLabel+": "+esc(hz)+"…":"")+
+    actLink("mountain",m.slug,T.detail);
+}
+function chatWeather(m){
+  var t=tr(m),T=cT(),f=mockForecast(m.lat,m.lng,m.elevationM);
+  var wc=function(c){var w=WCODES[c]||WCODES[3];return (w[2]||"")+(state.locale==="ja"?w[0]:w[1])};
+  var days=f.daily.slice(0,3).map(function(dd){return wc(dd.code)+" "+Math.round(dd.maxC)+"°/"+Math.round(dd.minC)+"°"}).join("　");
+  return "<b>"+esc(t.name)+"</b>"+T.weatherFor+"<br>"+
+    T.wNow+": "+f.cur.t.toFixed(1)+"°C・"+Math.round(f.cur.wind)+"m/s "+wc(f.cur.code)+"<br>"+
+    T.wWeek+": "+days+"<br><span style='font-size:11px;opacity:.75'>"+T.weatherNote+"</span>"+
+    actLink("mountain",m.slug,T.detail);
+}
+function chatRoutes(m){
+  var t=tr(m),T=cT();
+  var rts=DATA.routes.filter(function(r){return r.mountainId===m.id&&r.status==="published"});
+  if(!rts.length)return "<b>"+esc(t.name)+"</b>: "+T.noRoutes+actLink("mountain",m.slug,T.detail);
+  var lines=rts.slice(0,4).map(function(r){var rt=tr(r);return "・<b>"+esc(rt.name)+"</b>（▲"+r.difficultyLevel+"・"+r.distanceKm+"km・"+fmtTime(r.estTimeMin)+"）"});
+  return "<b>"+esc(t.name)+"</b>"+T.routesFor+":<br>"+lines.join("<br>")+actLink("mountain",m.slug,T.detail);
+}
+function chatMtList(title,ms){
+  var T=cT();
+  return "<b>"+title+"</b><br>"+ms.map(function(m){var t=tr(m);
+    return "・"+esc(t.name)+"（"+m.elevationM.toLocaleString()+"m・▲"+m.difficultyLevel+"）"+'<span class="act" style="margin:0 0 0 6px" onclick="chatGo(\'mountain\',\''+m.slug+'\')">→</span>'}).join("<br>");
+}
+function chatReply(q){
+  var T=cT(),ql=q.toLowerCase();
+  var m=chatFindMountain(q);
+  var wantWeather=/天気|気温|weather|forecast|temperature/.test(ql);
+  var wantRoute=/ルート|コース|登山道|route|trail|climb|登り方/.test(ql);
+  var wantElev=/標高|高さ|何メートル|elevation|how (high|tall)|height/.test(ql);
+  if(m&&wantWeather)return chatWeather(m);
+  if(m&&wantRoute)return chatRoutes(m);
+  if(m&&wantElev){var t=tr(m);return "<b>"+esc(t.name)+"</b> "+T.elevLabel+": <b>"+m.elevationM.toLocaleString()+"m</b>（"+ft(m.elevationM).toLocaleString()+"ft）"+actLink("mountain",m.slug,T.detail)}
+  if(m)return chatMtProfile(m);
+  if(wantWeather||wantRoute||wantElev)return T.askWhich;
+  if(/初心者|やさしい|簡単|beginner|easy|first|start/.test(ql)){
+    var easy=DATA.mountains.filter(function(x){return x.status==="published"&&x.difficultyLevel<=2}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel||a.elevationM-b.elevationM}).slice(0,3);
+    return chatMtList(T.recTitle,easy);
+  }
+  if(/今月|旬|季節|シーズン|season|now|this month/.test(ql)){
+    var nowM=new Date().getMonth()+1;
+    var sea=DATA.mountains.filter(function(x){return x.status==="published"&&(x.bestSeasons||[]).indexOf(nowM)>=0}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel}).slice(0,3);
+    if(sea.length)return chatMtList(T.seasonTitle,sea);
+  }
+  var rank=null;
+  if(/百名山|hyakumeizan/.test(ql))rank=DATA.rankings.find(function(r){return r.slug==="hyakumeizan"});
+  else if(/セブン|七大陸|seven/.test(ql))rank=DATA.rankings.find(function(r){return r.slug==="seven-summits"});
+  else if(/8000/.test(ql))rank=DATA.rankings.find(function(r){return r.slug==="8000m-peaks"});
+  if(rank)return "<b>🏆 "+esc(names(rank))+"</b><br>"+esc(rank.descriptions[state.locale]||rank.descriptions.ja)+actLink("ranking",rank.slug,T.listAct);
+  if(/装備|持ち物|ザック|gear|equipment|pack|bring/.test(ql)){
+    return T.gear+actLink("article","beginner-gear-checklist",T.gearAct);
+  }
+  if(/こんにちは|はじめまして|やあ|hello|^hi\b|help|使い方|できる/.test(ql))return T.hello;
+  return T.fallback;
+}
+function chatSend(text){
+  var input=document.getElementById("chatInput");
+  var q=(text!==undefined?text:input.value).trim();
+  if(!q)return;
+  if(text===undefined)input.value="";
+  chatMsgs.push({role:"user",html:esc(q)});
+  chatMsgs.push({role:"bot typing",html:"<span></span><span></span><span></span>"});
+  chatRenderMsgs();
+  setTimeout(function(){
+    chatMsgs.pop();
+    chatMsgs.push({role:"bot",html:chatReply(q)});
+    chatRenderMsgs();
+  },500+Math.min(600,q.length*18));
+}
+function chatChip(el){chatSend(el.textContent)}
+function chatKey(e){if(e.key==="Enter"&&!e.isComposing){e.preventDefault();chatSend()}}
+window.toggleChat=toggleChat;window.chatSend=chatSend;window.chatChip=chatChip;window.chatKey=chatKey;window.chatGo=chatGo;
+window.comToggleForm=comToggleForm;window.comSubmit=comSubmit;window.comReply=comReply;window.comLike=comLike;window.comReport=comReport;
+window.vidOpen=vidOpen;window.vidClose=vidClose;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")vidClose()});
+
+var toTop=document.getElementById("toTop");
+toTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
+window.addEventListener("scroll",function(){toTop.classList.toggle("show",window.scrollY>560)},{passive:true});
+window.addEventListener("popstate",function(){parseHash();render()});
+window.addEventListener("hashchange",function(){parseHash();render()});
+(function(){
+  var th=load("mp-demo-theme");
+  if(th==="dark"||(!th&&window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark");document.getElementById("themeBtn").textContent="☀️"}
+  var lg=load("mp-demo-lang");if(lg==="en"||lg==="ja")state.locale=lg;
+  var un=load("mp-demo-unit");if(un==="ft"||un==="m")state.unit=un;
+})();
+/* data-asset画像のBASE解決（ネストURLでも壊れない） */
+Array.prototype.forEach.call(document.querySelectorAll("[data-asset]"),function(el){el.src=asset(el.getAttribute("data-asset"))});
+/* PWA: manifest + Service Worker（オフライン閲覧・https/localhostのみ） */
+(function(){
+  try{
+    var ml=document.createElement("link");ml.rel="manifest";ml.href=asset("manifest.webmanifest");document.head.appendChild(ml);
+    if("serviceWorker" in navigator&&(location.protocol==="https:"||location.hostname==="localhost"||location.hostname==="127.0.0.1")){
+      navigator.serviceWorker.register(asset("sw.js"),{scope:BASE+"/"}).catch(function(){});
+    }
+  }catch(e){}
+})();
+parseHash();
+render();
+/* 検証用フック */
+window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
+window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
+})();
+</script>
+</body>
+</html>
