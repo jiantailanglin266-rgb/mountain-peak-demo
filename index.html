@@ -319,6 +319,30 @@ footer .note{font-size:11.5px;color:var(--muted);line-height:1.9;margin-top:12px
 footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
 #toTop{position:fixed;right:22px;bottom:88px;width:42px;height:42px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:15px;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
 #toTop.show{opacity:1;pointer-events:auto}
+/* ===== 動画ライブラリ ===== */
+.vgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.vcard{cursor:pointer;padding:0;overflow:hidden}
+.vthumb{position:relative;aspect-ratio:16/9;background:#0C161C;overflow:hidden}
+.vthumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.vcard:hover .vthumb img{transform:scale(1.05)}
+.vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(0deg,rgba(8,14,18,.35),transparent 55%)}
+.vplay span{width:50px;height:50px;border-radius:999px;background:rgba(196,69,54,.93);color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;padding-left:4px;box-shadow:0 8px 24px -6px rgba(0,0,0,.5);transition:transform .18s}
+.vcard:hover .vplay span{transform:scale(1.1)}
+.vinfo{padding:12px 14px 14px}
+.vtitle{font-weight:700;font-size:13px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vauthor{font-size:11px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:5px}
+.vsechead{display:flex;align-items:baseline;gap:12px;margin:34px 0 14px;flex-wrap:wrap}
+.vsechead .vt{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.vsechead .vlink{font-size:12px;font-weight:600;color:var(--glacier);cursor:pointer}
+.vsechead .vlink:hover{text-decoration:underline}
+.vmodal{position:fixed;inset:0;z-index:80;background:rgba(8,14,18,.8);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+.vmodal .vbox{width:min(920px,100%);background:var(--card);border-radius:16px;overflow:hidden;box-shadow:var(--shadow-lift)}
+.vmodal iframe{aspect-ratio:16/9;width:100%;border:0;display:block;background:#000}
+.vbar{display:flex;align-items:center;gap:12px;padding:12px 16px}
+.vbar .vbtitle{flex:1;min-width:0;font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vbar a{font-size:12px;font-weight:700;color:var(--glacier);white-space:nowrap}
+.vbar button{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px;white-space:nowrap}
+.vbar button:hover{color:var(--ink);border-color:var(--ink)}
 /* ===== コミュニティ掲示板 ===== */
 .comnotice{border:1px solid var(--line);border-left:3px solid var(--glacier);background:var(--card);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px}
 .comnotice b{color:var(--ink)}
@@ -460,7 +484,11 @@ var DATA = {"mountains":[{"id":"mt_fuji","slug":"mount-fuji","elevationM":3776,"
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",community:"コミュニティ"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",videos:"動画",community:"コミュニティ"},
+  vid:{title:"動画ライブラリ",sub:"YouTubeから山の動画をキュレーション。気になる山を映像でチェックしよう。",
+   notice:"動画はYouTube公式の埋め込みプレーヤー（プライバシー強化モード）で再生されます。<b>サムネイルをクリックするまでYouTubeへの通信は発生しません</b>。各動画の著作権は各権利者・チャンネルに帰属します。",
+   watch:"YouTubeで見る ↗",close:"✕ 閉じる",detailTitle:"動画で見る",
+   themeBeginner:"🎒 初心者ガイド動画",theme4k:"🎬 絶景・空撮 4K",toMt:"山の詳細 →"},
   com:{title:"コミュニティ",sub:"登山者どうしの情報交換の場。スレッドを立てて質問・山行記録・装備の話をしよう。",
    notice:"デモ版のため、あなたの投稿は<b>このブラウザ内にのみ保存</b>されます（他のユーザーには共有されません）。フル版では会員機能・通報・モデレーションとともにサーバーへ保存されます。",
    rules:"⚠ 個人情報（住所・連絡先など）は書き込まないでください。危険箇所・残雪などの現地情報は必ず公式情報でも確認を。",
@@ -487,7 +515,11 @@ var DICT = {
   fnote:"これは Mountain Peak の静的デモ版です。検索・詳細・リスト・モック天気・登頂チェックリストをブラウザ内だけで動作させています。会員機能・管理画面・実DB接続・Open-Meteo実照会はフル版（サーバー版）でのみ提供されます。入力内容がサーバーへ送信されることはありません。",
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
- en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",community:"Community"},
+ en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",videos:"Videos",community:"Community"},
+  vid:{title:"Video Library",sub:"Curated mountain videos from YouTube — scout your next peak on screen.",
+   notice:"Videos play in YouTube's official embedded player (privacy-enhanced mode). <b>Nothing is loaded from YouTube until you click a thumbnail</b>. All videos remain the property of their creators.",
+   watch:"Watch on YouTube ↗",close:"✕ Close",detailTitle:"Watch videos",
+   themeBeginner:"🎒 Beginner Guides",theme4k:"🎬 Scenic & Aerial 4K",toMt:"Mountain page →"},
   com:{title:"Community",sub:"A place for climbers to share. Start a thread — questions, trip reports, gear talk.",
    notice:"Demo: your posts are <b>stored only in this browser</b> and not shared with other users. The full version stores them server-side with accounts, reporting and moderation.",
    rules:"⚠ Never post personal information (address, contacts). Always double-check trail conditions against official sources.",
@@ -809,6 +841,7 @@ function vMountain(slug){
     sect(D.l.equipment,t.equipment)+
     (routes.length?'<div class="card sect"><h3>'+D.l.routes+"</h3>"+routes.map(function(rt){var rtt=tr(rt);
       return '<div class="rcard" onclick="event.stopPropagation();go({name:\'route\',slug:\''+rt.slug+'\'})"><div class="rt"><span>'+esc(rtt.name)+"</span>"+diffBadge(rt.difficultyLevel)+'</div><div class="rs">'+esc(rtt.overview.slice(0,90))+'…</div><div class="rs mono">📏 '+rt.distanceKm+"km ・ ↗ "+rt.elevationGainM.toLocaleString()+"m ・ ⏱ "+fmtTime(rt.estTimeMin)+"</div></div>"}).join("")+"</div>":"")+
+    (MT_VIDEOS[m.id]&&MT_VIDEOS[m.id].length?'<div class="card sect"><h3>'+d().vid.detailTitle+"</h3>"+vidCardsHtml(MT_VIDEOS[m.id])+"</div>":"")+
     disclaimer(m.updatedAt)+
     '</div><aside class="sticky">'+weatherPanel(m)+mapEmbed(m,t.name)+
     '<div class="card"><h3 style="font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--glacier);margin-bottom:9px">'+D.l.data+'</h3><table class="dtable"><tr><td>'+D.l.elevation+'</td><td class="mono">'+m.elevationM.toLocaleString()+"m / "+ft(m.elevationM).toLocaleString()+"ft</td></tr>"+
@@ -896,7 +929,7 @@ function parseHash(){
   var p=(location.hash||"").replace(/^#\/?/,"").split("/");
   if(p[0]==="ja"||p[0]==="en"){state.locale=p[0];p.shift()}
   var name=p[0]||"home",slug=p[1];
-  var valid={home:1,mountains:1,mountain:1,route:1,rankings:1,ranking:1,articles:1,article:1,community:1,thread:1};
+  var valid={home:1,mountains:1,mountain:1,route:1,rankings:1,ranking:1,articles:1,article:1,community:1,thread:1,videos:1};
   state.view=valid[name]?{name:name,slug:slug}:{name:"home"};
 }
 var _obs=null;
@@ -920,10 +953,11 @@ function render(){
     else if(v.name==="article")html=vArticle(v.slug);
     else if(v.name==="community")html=vCommunity();
     else if(v.name==="thread")html=vThread(v.slug);
+    else if(v.name==="videos")html=vVideos();
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
-  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["community",D.tabs.community]];
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["videos",D.tabs.videos],["community",D.tabs.community]];
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
@@ -954,6 +988,76 @@ document.getElementById("themeBtn").addEventListener("click",function(){
   this.textContent=dark?"☀️":"🌙";
   store("mp-demo-theme",dark?"dark":"light");
 });
+/* ====== 動画ライブラリ（YouTube公式埋め込み・クリック時のみロード） ====== */
+var MT_VIDEOS={
+ "mt_fuji":[{"id":"UfWFWWtUDsU","title":"日帰り富士山登頂 吉田ルートで剣ヶ峰まで","author":"noicoyamaico"}],
+ "mt_kita":[{"id":"hqwN9y5vVlA","title":"【北岳】広河原ルートをサクッと解説。","author":"信州山日和"},{"id":"Kl1kas43aJw","title":"【北岳・登山】広河原〜草すべりコース","author":"やまみちナビ"}],
+ "mt_yari":[{"id":"CEmjihZshAA","title":"1分で分かる「槍ヶ岳」登山ルート【新穂高ルート】","author":"YuYaアウトドア旅~OutdoorJourney~"},{"id":"H1vyX0AHmyg","title":"絶景　北アルプス　槍ヶ岳　山頂直下","author":"兄弟チャンネル・ときどき山登り"}],
+ "mt_okuhotaka":[{"id":"hvgB5aSl7eI","title":"【ザイテングラート・徹底解説】涸沢小屋から穂高岳山荘までのルートを解説","author":"山と旅と音"}],
+ "mt_tateyama":[{"id":"KNb1L53dQNQ","title":"【立山登山】2時間で3000ｍの絶景へ！立山雄山〜浄土山縦走。雷鳥の親子にも！","author":"オトナ女子の山登り"}],
+ "mt_daisen":[{"id":"qD0Z64KUXhI","title":"【1分で日本百名山登山】山陰最高峰 伯耆富士こと大山登頂記 鳥取県編","author":"お金が無いから旅に出た〜日本一周歩き旅〜"},{"id":"NhyId1ePsko","title":"1分で分かる「伯耆大山」登山ルート【夏山登山口ルート】","author":"YuYaアウトドア旅~OutdoorJourney~"}],
+ "mt_takao":[{"id":"_O4U55-Pg6E","title":"【高尾山】1号路／ケーブルカーを使って山頂まで。見どころたくさん、一番人気の観光コース","author":"高尾山マガジン"}],
+ "mt_everest":[{"id":"gCr4Pg9mEA4","title":"Behind The First Summit of The World's Tallest Mountain (Full Episode) | Lost on Everest","author":"National Geographic"}],
+ "mt_k2":[{"id":"cvFt2Xcuois","title":"Breathtaking: K2 - The World's Most Dangerous Mountain | Eddie Bauer","author":"Eddie Bauer"}],
+ "mt_matterhorn":[{"id":"wPwmueSDznQ","title":"Matterhorn Climb Hornli Ridge - Mountaineering in Switzerland","author":"Ledged Up"}],
+ "mt_blanc":[{"id":"lUK2zyorrN0","title":"Mont Blanc - Beginner climbs Western Europe's Highest Peak (Goûter Route in 4K)","author":"David P. McEntee"}],
+ "mt_kilimanjaro":[{"id":"IjAFsy4ThNY","title":"Kilimanjaro Machame Route 7-Day. Everything you need to know!","author":"Oli France"}],
+ "mt_denali":[{"id":"DWzNl_H_7Kw","title":"The Denali Experience","author":"JoeyVidaLoca"}],
+ "mt_aconcagua":[{"id":"vSS-JrOK-u0","title":"AMG's Expedition on the Normal Route","author":"Aconcagua Mountain Guides"},{"id":"EFbiV7xWJFE","title":"Aconcagua Expedition Normal Route","author":"Inka Expediciones"}],
+ "theme_beginner":[{"id":"TtkRHJ8P4vA","title":"【登山初心者必見！】登山装備、最初に何を買えばいいのか解説！","author":"ヤマレコ社長の絶対遭難させないチャンネル"}],
+ "theme_4k":[{"id":"lGUkdNDv4Zw","title":"2023 富士と日本アルプス- ANA087便 (4K-HDR) Mt. Fuji & Japan Alps From Flight ANA087","author":"Yutaka Nagai"}]
+};
+var VID_ORDER=["mt_fuji","mt_kita","mt_yari","mt_okuhotaka","mt_tateyama","mt_daisen","mt_takao","mt_everest","mt_k2","mt_matterhorn","mt_blanc","mt_kilimanjaro","mt_denali","mt_aconcagua"];
+function vidIndex(id){
+  for(var k in MT_VIDEOS){var hit=MT_VIDEOS[k].find(function(v){return v.id===id});if(hit)return hit}
+  return null;
+}
+function vidCardsHtml(list){
+  return '<div class="vgrid">'+list.map(function(v){
+    return '<div class="card vcard rv" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="vidOpen(\''+v.id+'\')">'+
+    '<div class="vthumb"><img src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="'+esc(v.title)+'" decoding="async"><div class="vplay"><span>▶</span></div></div>'+
+    '<div class="vinfo"><div class="vtitle">'+esc(v.title)+'</div><div class="vauthor">▶ '+esc(v.author)+" · YouTube</div></div></div>";
+  }).join("")+"</div>";
+}
+function vVideos(){
+  var D=d(),V=D.vid;
+  var secs=VID_ORDER.filter(function(k){return MT_VIDEOS[k]&&MT_VIDEOS[k].length}).map(function(k){
+    var m=DATA.mountains.find(function(x){return x.id===k});
+    var name=m?tr(m).name:k;
+    return '<div class="vsechead"><span class="vt disp">⛰ '+esc(name)+"</span>"+
+      (m?'<span class="vlink" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">'+V.toMt+"</span>":"")+"</div>"+
+      vidCardsHtml(MT_VIDEOS[k]);
+  }).join("");
+  var themes='<div class="vsechead"><span class="vt disp">'+V.themeBeginner+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_beginner)+
+    '<div class="vsechead"><span class="vt disp">'+V.theme4k+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_4k);
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:V.title}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;letter-spacing:-.01em">'+V.title+'</h1>'+
+    '<p style="font-size:13px;color:var(--muted);margin-top:4px">'+V.sub+"</p>"+
+    '<div class="comnotice" style="margin-top:14px">'+V.notice+"</div>"+
+    themes+secs;
+}
+function vidOpen(id){
+  var v=vidIndex(id),V=d().vid;
+  if(!v)return;
+  vidClose();
+  var overlay=document.createElement("div");
+  overlay.className="vmodal";
+  overlay.id="vidModal";
+  overlay.innerHTML='<div class="vbox">'+
+    '<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0" title="'+esc(v.title)+'" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'+
+    '<div class="vbar"><span class="vbtitle">'+esc(v.title)+'</span>'+
+    '<a href="https://www.youtube.com/watch?v='+id+'" target="_blank" rel="noopener noreferrer">'+V.watch+"</a>"+
+    '<button onclick="vidClose()">'+V.close+"</button></div></div>";
+  overlay.addEventListener("click",function(e){if(e.target===overlay)vidClose()});
+  document.body.appendChild(overlay);
+  document.body.style.overflow="hidden";
+}
+function vidClose(){
+  var m=document.getElementById("vidModal");
+  if(m)m.remove();
+  document.body.style.overflow="";
+}
+
 /* ====== コミュニティ掲示板（デモ: シード+ブラウザ内保存） ====== */
 var COM_SEED=[
  {id:"th_fuji_crowd",cat:"qa",author:"やまのぼり太郎",createdAt:"2026-07-04T09:20:00+09:00",likes:12,mountainId:"mt_fuji",
@@ -1263,6 +1367,8 @@ function chatChip(el){chatSend(el.textContent)}
 function chatKey(e){if(e.key==="Enter"&&!e.isComposing){e.preventDefault();chatSend()}}
 window.toggleChat=toggleChat;window.chatSend=chatSend;window.chatChip=chatChip;window.chatKey=chatKey;window.chatGo=chatGo;
 window.comToggleForm=comToggleForm;window.comSubmit=comSubmit;window.comReply=comReply;window.comLike=comLike;window.comReport=comReport;
+window.vidOpen=vidOpen;window.vidClose=vidClose;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")vidClose()});
 
 var toTop=document.getElementById("toTop");
 toTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
