@@ -319,6 +319,37 @@ footer .note{font-size:11.5px;color:var(--muted);line-height:1.9;margin-top:12px
 footer .cr{font-size:11px;color:var(--muted);margin-top:18px}
 #toTop{position:fixed;right:22px;bottom:88px;width:42px;height:42px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:15px;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
 #toTop.show{opacity:1;pointer-events:auto}
+/* ===== コミュニティ掲示板 ===== */
+.comnotice{border:1px solid var(--line);border-left:3px solid var(--glacier);background:var(--card);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px}
+.comnotice b{color:var(--ink)}
+.throw{display:flex;gap:13px;align-items:flex-start;cursor:pointer;padding:16px 18px;margin-bottom:10px}
+.throw:hover{border-color:var(--route)}
+.tav{width:40px;height:40px;border-radius:999px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:16px;letter-spacing:-.02em}
+.thmain{flex:1;min-width:0}
+.thtitle{font-weight:700;font-size:14.5px;line-height:1.45}
+.thmeta{font-size:11px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center}
+.catb{display:inline-flex;align-items:center;gap:5px;border-radius:6px;padding:2px 9px;font-size:10.5px;font-weight:700}
+.cat-qa{background:#E3EDF6;color:#2F6B93}.cat-log{background:#E3F2E7;color:#2C5E3C}.cat-gear{background:#F6EBD2;color:#8A5A12}.cat-info{background:#F7E1D2;color:#9A4416}.cat-chat{background:#ECE8F4;color:#5B4B8A}
+.dark .cat-qa{background:rgba(47,107,147,.3);color:#9CCAE8}.dark .cat-log{background:rgba(62,107,79,.3);color:#9ED8B2}.dark .cat-gear{background:rgba(138,90,18,.3);color:#EFC97E}.dark .cat-info{background:rgba(154,68,22,.3);color:#F0A97E}.dark .cat-chat{background:rgba(91,75,138,.35);color:#C9BCE8}
+.comform{margin-bottom:14px}
+.comform .fgrid{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+@media(max-width:560px){.comform .fgrid{grid-template-columns:1fr}}
+.comform label{display:block;font-size:10.5px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.comform input,.comform select,.comform textarea{width:100%;margin-top:5px;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:9px 12px;font-size:13.5px;outline:none;font-family:inherit;box-sizing:border-box}
+.comform input:focus,.comform select:focus,.comform textarea:focus{border-color:var(--glacier)}
+.comform .full{grid-column:1/-1}
+.combtn{background:var(--route);color:#fff;font-weight:700;font-size:13.5px;border-radius:999px;padding:10px 26px;transition:filter .15s}
+.combtn:hover{filter:brightness(1.08)}
+.combtn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.replyitem{display:flex;gap:11px;padding:14px 0;border-top:1px solid var(--hair)}
+.replyitem .tav{width:32px;height:32px;font-size:13px}
+.replyitem .rb{flex:1;min-width:0}
+.replyitem .rmeta{font-size:11px;color:var(--muted)}
+.replyitem .rbody{font-size:13.5px;line-height:1.8;margin-top:3px;white-space:pre-line;word-break:break-word}
+.thacts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.thacts button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 15px;font-size:12px;color:var(--muted);transition:all .14s}
+.thacts button:hover{border-color:var(--ink);color:var(--ink)}
+.thacts button.on{border-color:var(--route);color:var(--route);font-weight:700}
 /* ===== チャットボット ===== */
 #chatBtn{position:fixed;right:20px;bottom:20px;z-index:70;width:58px;height:58px;border-radius:999px;background:#fff;padding:0;box-shadow:0 0 0 2px #fff,var(--shadow-lift);transition:transform .18s;overflow:visible}
 #chatBtn:hover{transform:scale(1.06)}
@@ -429,7 +460,17 @@ var DATA = {"mountains":[{"id":"mt_fuji","slug":"mount-fuji","elevationM":3776,"
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",community:"コミュニティ"},
+  com:{title:"コミュニティ",sub:"登山者どうしの情報交換の場。スレッドを立てて質問・山行記録・装備の話をしよう。",
+   notice:"デモ版のため、あなたの投稿は<b>このブラウザ内にのみ保存</b>されます（他のユーザーには共有されません）。フル版では会員機能・通報・モデレーションとともにサーバーへ保存されます。",
+   rules:"⚠ 個人情報（住所・連絡先など）は書き込まないでください。危険箇所・残雪などの現地情報は必ず公式情報でも確認を。",
+   newThread:"＋ スレッドを立てる",cancel:"キャンセル",submit:"投稿する",submitReply:"返信する",
+   fName:"表示名",fCat:"カテゴリ",fTitle:"タイトル",fBody:"本文",replyPh:"返信を書く…（このブラウザ内にのみ保存されます）",
+   guest:"ゲスト",replies:"返信",like:"👍 いいね",liked:"👍 いいね済み",report:"⚑ 通報",reported:"✓ 通報を受け付けました（デモ）",
+   all:"すべて",empty:"このカテゴリにはまだスレッドがありません。最初のスレッドを立ててみましょう！",
+   back:"← スレッド一覧へ",noReplies:"まだ返信がありません。最初の返信を書いてみましょう。",yourPost:"あなたの投稿",
+   relMt:"関連する山",cats:{qa:"質問",log:"山行記録",gear:"装備",info:"現地情報",chat:"雑談"},
+   justNow:"たった今",minAgo:"分前",hourAgo:"時間前",dayAgo:"日前"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"世界中の山を、<br>正しく引ける",s:"標高・ルート・天気・歴史 — 登山に必要な一次情報を、日本語と英語で。信頼できるデータで、山の計画をもっと確実に、もっと自由に。",ph:"山名・キーワードで検索（例: 富士山, Everest）",go:"検索",pop:"人気の検索",pops:["富士山","エベレスト","キリマンジャロ","アルプス"],feats:[["世界中の山を網羅","200以上の国と地域\n100,000+の山を収録"],["リアルタイム天気","登山地の最新気象情報を\nリアルタイムで取得"],["ルート・地図情報","詳細なルート・地形データで\n安全な計画をサポート"],["多言語対応","日本語・英語で利用可能\n世界中の登山者をサポート"]]},
   featured:"注目の山",lists:"リストから探す",newest:"新着記事",byCountry:"国から探す",viewAll:"すべて見る →",season_now:"今月が旬の山",your:"あなたの登頂チェックリスト",
   eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
@@ -446,7 +487,17 @@ var DICT = {
   fnote:"これは Mountain Peak の静的デモ版です。検索・詳細・リスト・モック天気・登頂チェックリストをブラウザ内だけで動作させています。会員機能・管理画面・実DB接続・Open-Meteo実照会はフル版（サーバー版）でのみ提供されます。入力内容がサーバーへ送信されることはありません。",
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
- en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles"},
+ en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",community:"Community"},
+  com:{title:"Community",sub:"A place for climbers to share. Start a thread — questions, trip reports, gear talk.",
+   notice:"Demo: your posts are <b>stored only in this browser</b> and not shared with other users. The full version stores them server-side with accounts, reporting and moderation.",
+   rules:"⚠ Never post personal information (address, contacts). Always double-check trail conditions against official sources.",
+   newThread:"＋ New thread",cancel:"Cancel",submit:"Post",submitReply:"Reply",
+   fName:"Display name",fCat:"Category",fTitle:"Title",fBody:"Body",replyPh:"Write a reply… (saved only in this browser)",
+   guest:"Guest",replies:"replies",like:"👍 Like",liked:"👍 Liked",report:"⚑ Report",reported:"✓ Report received (demo)",
+   all:"All",empty:"No threads in this category yet. Start the first one!",
+   back:"← Back to threads",noReplies:"No replies yet. Be the first to answer.",yourPost:"Your post",
+   relMt:"Related mountain",cats:{qa:"Q&A",log:"Trip Reports",gear:"Gear",info:"Conditions",chat:"General"},
+   justNow:"just now",minAgo:"min ago",hourAgo:"h ago",dayAgo:"d ago"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"The world's mountains,<br>done right",s:"Elevation, routes, weather and history — primary mountain information in English and Japanese. Reliable data to plan your mountains with more confidence and freedom.",ph:"Search mountains (e.g. Everest, Fuji)",go:"Search",pop:"Popular",pops:["Fuji","Everest","Kilimanjaro","Alps"],feats:[["Global Coverage","200+ countries & regions\n100,000+ peaks"],["Real-time Weather","Latest mountain conditions\nat a glance"],["Routes & Maps","Detailed route & terrain data\nfor safer planning"],["Multilingual","Japanese & English —\nfor climbers worldwide"]]},
   featured:"Featured Mountains",lists:"Browse by List",newest:"Latest Articles",byCountry:"Browse by Country",viewAll:"View all →",season_now:"In Season This Month",your:"Your Summit Checklist",
   eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
@@ -845,7 +896,7 @@ function parseHash(){
   var p=(location.hash||"").replace(/^#\/?/,"").split("/");
   if(p[0]==="ja"||p[0]==="en"){state.locale=p[0];p.shift()}
   var name=p[0]||"home",slug=p[1];
-  var valid={home:1,mountains:1,mountain:1,route:1,rankings:1,ranking:1,articles:1,article:1};
+  var valid={home:1,mountains:1,mountain:1,route:1,rankings:1,ranking:1,articles:1,article:1,community:1,thread:1};
   state.view=valid[name]?{name:name,slug:slug}:{name:"home"};
 }
 var _obs=null;
@@ -867,11 +918,13 @@ function render(){
     else if(v.name==="ranking")html=vRanking(v.slug);
     else if(v.name==="articles")html=vArticles();
     else if(v.name==="article")html=vArticle(v.slug);
+    else if(v.name==="community")html=vCommunity();
+    else if(v.name==="thread")html=vThread(v.slug);
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
-  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles]];
-  var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles");
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["community",D.tabs.community]];
+  var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
   Array.prototype.forEach.call(document.querySelectorAll("#langPill button"),function(b){b.classList.toggle("on",b.dataset.l===state.locale)});
@@ -901,6 +954,162 @@ document.getElementById("themeBtn").addEventListener("click",function(){
   this.textContent=dark?"☀️":"🌙";
   store("mp-demo-theme",dark?"dark":"light");
 });
+/* ====== コミュニティ掲示板（デモ: シード+ブラウザ内保存） ====== */
+var COM_SEED=[
+ {id:"th_fuji_crowd",cat:"qa",author:"やまのぼり太郎",createdAt:"2026-07-04T09:20:00+09:00",likes:12,mountainId:"mt_fuji",
+  title:"富士山 吉田ルート、今週末の混雑状況どうですか？",
+  body:"今週末に初めての富士山を計画しています。吉田ルートの混雑（特に山頂直下の渋滞）は最近どんな感じでしょうか？\n山小屋は八合目で予約済みです。",
+  replies:[
+   {author:"ふじさん常連",createdAt:"2026-07-04T12:05:00+09:00",body:"先週末は御来光前の九合目〜山頂で30分待ちくらいでした。金曜夜発など平日絡みだとだいぶ楽になりますよ。"},
+   {author:"Mt.Lover",createdAt:"2026-07-05T08:41:00+09:00",body:"渋滞を避けるなら山頂御来光にこだわらず、八合目付近で見るのもおすすめです。十分きれいです。"}]},
+ {id:"th_karasawa_tent",cat:"log",author:"テント泊デビュー",createdAt:"2026-07-02T21:12:00+09:00",likes:23,mountainId:"mt_okuhotaka",
+  title:"初テント泊で涸沢〜奥穂高岳に行ってきました⛺",
+  body:"上高地→横尾→涸沢の定番ルートでテント泊デビューしてきました。ザイテングラートは想像より高度感がありましたが、無事に奥穂まで登頂。\n朝焼けのモルゲンロートは一生モノの景色でした…！",
+  replies:[
+   {author:"アルプス好き",createdAt:"2026-07-03T07:30:00+09:00",body:"登頂おめでとうございます！秋の紅葉シーズンの涸沢もぜひ。激混みですが、それでも見る価値があります。"}]},
+ {id:"th_kili_january",cat:"info",author:"TrekkerSam",createdAt:"2026-06-28T18:00:00+09:00",likes:8,mountainId:"mt_kilimanjaro",
+  title:"Kilimanjaro in January — conditions and tips?",
+  body:"Planning a Machame route climb next January. How were conditions on your climbs? Any tips on acclimatization days?",
+  replies:[
+   {author:"KiliGuideFan",createdAt:"2026-06-29T02:15:00+09:00",body:"January is one of the best windows — clear mornings, clouds in the afternoon. Take the 7-day itinerary; the extra acclimatization day is worth every dollar."},
+   {author:"山旅人",createdAt:"2026-06-30T22:03:00+09:00",body:"1月に登りました。山頂アタック夜は-12℃前後、防寒はスキーウェア級で。ガイドの言う Pole pole（ゆっくり）が本当に大事です。"}]},
+ {id:"th_sleepingbag",cat:"gear",author:"道具沼",createdAt:"2026-06-25T20:45:00+09:00",likes:15,
+  title:"3シーズン用シュラフ、結局どれがいい？",
+  body:"北アルプスの夏〜秋テント泊用にシュラフを新調予定です。ダウン600FPクラスで迷っています。皆さんの使用感を教えてください。",
+  replies:[
+   {author:"軽量化マン",createdAt:"2026-06-26T08:10:00+09:00",body:"涸沢の9月末は氷点下になる年もあるので、コンフォート0℃前後を選んでおくと後悔しないです。"}]},
+ {id:"th_tateyama_snow",cat:"info",author:"らいちょう",createdAt:"2026-07-05T15:30:00+09:00",likes:6,mountainId:"mt_tateyama",
+  title:"立山 雷鳥沢〜一の越の残雪情報（7月上旬）",
+  body:"7/5時点、一の越直下に雪渓が2箇所残っています。軽アイゼンがあると安心です。室堂平はほぼ夏道が出ています。\n※あくまで当日の状況です。最新情報は必ず公式でご確認を。",
+  replies:[]}
+];
+function comStore(){try{return JSON.parse(localStorage.getItem("mp-com-v1"))||{}}catch(e){return{}}}
+function comSave(s){try{localStorage.setItem("mp-com-v1",JSON.stringify(s))}catch(e){}}
+function comAll(){
+  var s=comStore();
+  var mine=s.threads||[];
+  return COM_SEED.concat(mine).map(function(t){
+    var extra=(s.replies&&s.replies[t.id])||[];
+    return {t:t,replies:(t.replies||[]).concat(extra),likes:(t.likes||0)+((s.likes||{})[t.id]?1:0),liked:!!((s.likes||{})[t.id]),mine:mine.indexOf(t)>=0};
+  });
+}
+function comLastAct(x){var last=x.t.createdAt;x.replies.forEach(function(r){if(r.createdAt>last)last=r.createdAt});return last}
+function comTime(iso){
+  var C=d().com,diff=(Date.now()-new Date(iso).getTime())/60000;
+  if(diff<1)return C.justNow;
+  if(diff<60)return Math.floor(diff)+C.minAgo;
+  if(diff<1440)return Math.floor(diff/60)+C.hourAgo;
+  return Math.floor(diff/1440)+C.dayAgo;
+}
+function comAvatar(name,size){
+  var h=0;for(var i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))>>>0;
+  var hue=h%360;
+  return '<span class="tav" style="background:hsl('+hue+',38%,'+(document.documentElement.classList.contains("dark")?"38%":"52%")+')">'+esc(name.charAt(0).toUpperCase())+"</span>";
+}
+function catBadge(cat){var C=d().com;return '<span class="catb cat-'+cat+'">'+esc(C.cats[cat]||cat)+"</span>"}
+function vCommunity(){
+  var D=d(),C=D.com;
+  var list=comAll().filter(function(x){return !state.comCat||x.t.cat===state.comCat});
+  list.sort(function(a,b){return comLastAct(b).localeCompare(comLastAct(a))});
+  var catKeys=Object.keys(C.cats);
+  var form='<div class="card comform" id="comForm" style="display:none">'+
+    '<div class="fgrid">'+
+    '<div><label>'+C.fName+'</label><input id="cfName" maxlength="20" value="'+esc(comStore().name||"")+'" placeholder="'+C.guest+'"></div>'+
+    '<div><label>'+C.fCat+'</label><select id="cfCat">'+catKeys.map(function(k){return '<option value="'+k+'">'+esc(C.cats[k])+"</option>"}).join("")+"</select></div>"+
+    '<div class="full"><label>'+C.fTitle+'</label><input id="cfTitle" maxlength="100"></div>'+
+    '<div class="full"><label>'+C.fBody+'</label><textarea id="cfBody" rows="5" maxlength="2000"></textarea></div>'+
+    '</div><p style="font-size:11px;color:var(--muted);margin-top:10px">'+C.rules+'</p>'+
+    '<div style="display:flex;gap:8px;margin-top:12px"><button class="combtn" onclick="comSubmit()">'+C.submit+'</button><button class="combtn ghost" onclick="comToggleForm(false)">'+C.cancel+"</button></div></div>";
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:C.title}])+
+    '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px">'+
+    '<div><h1 class="disp" style="font-size:26px;font-weight:800;letter-spacing:-.01em">'+C.title+'</h1><p style="font-size:13px;color:var(--muted);margin-top:4px">'+C.sub+"</p></div>"+
+    '<button class="combtn" onclick="comToggleForm()">'+C.newThread+"</button></div>"+
+    '<div class="comnotice">'+C.notice+"</div>"+form+
+    '<div class="chips" style="margin-bottom:14px"><span class="chip'+(!state.comCat?" on":"")+'" onclick="state.comCat=\'\';render()">'+C.all+"</span>"+
+    catKeys.map(function(k){return '<span class="chip'+(state.comCat===k?" on":"")+'" onclick="state.comCat=\''+k+'\';render()">'+esc(C.cats[k])+"</span>"}).join("")+"</div>"+
+    (list.length?list.map(function(x){
+      return '<div class="card throw rv" onclick="go({name:\'thread\',slug:\''+x.t.id+'\'})">'+comAvatar(x.t.author)+
+      '<div class="thmain"><div class="thtitle">'+esc(x.t.title)+'</div>'+
+      '<div class="thmeta">'+catBadge(x.t.cat)+"<span>"+esc(x.t.author)+(x.mine?' <b style="color:var(--forest)">('+C.yourPost+")</b>":"")+"</span><span>🕒 "+comTime(comLastAct(x))+"</span><span>💬 "+x.replies.length+"</span><span>👍 "+x.likes+"</span></div></div></div>";
+    }).join(""):'<div class="empty"><div class="big">🏕</div>'+C.empty+"</div>");
+}
+function vThread(id){
+  var D=d(),C=D.com;
+  var x=comAll().find(function(y){return y.t.id===id});
+  if(!x)return '<div class="empty">404</div>';
+  var t=x.t;
+  var mt=t.mountainId?DATA.mountains.find(function(m){return m.id===t.mountainId}):null;
+  var reported=!!(comStore().reported||{})[t.id];
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:C.title,go:'go({name:"community"})'},{n:t.title.slice(0,24)+(t.title.length>24?"…":"")}])+
+    '<div class="card" style="padding:24px">'+
+    '<div style="display:flex;gap:12px;align-items:flex-start">'+comAvatar(t.author)+
+    '<div style="flex:1;min-width:0"><div class="thmeta" style="margin:0 0 6px">'+catBadge(t.cat)+"<span>"+esc(t.author)+"</span><span>🕒 "+comTime(t.createdAt)+"</span></div>"+
+    '<h1 class="disp" style="font-size:21px;font-weight:800;line-height:1.4">'+esc(t.title)+"</h1></div></div>"+
+    '<p style="font-size:14px;line-height:1.9;margin-top:14px;white-space:pre-line;word-break:break-word">'+esc(t.body)+"</p>"+
+    (mt?'<p style="margin-top:12px;font-size:12px">'+C.relMt+': <span class="act" style="color:var(--glacier);font-weight:700;cursor:pointer" onclick="go({name:\'mountain\',slug:\''+mt.slug+'\'})">⛰ '+esc(tr(mt).name)+" →</span></p>":"")+
+    '<div class="thacts">'+
+    '<button class="'+(x.liked?"on":"")+'" onclick="comLike(\''+t.id+'\')">'+(x.liked?C.liked:C.like)+" "+x.likes+"</button>"+
+    '<button class="'+(reported?"on":"")+'" onclick="comReport(\''+t.id+'\')">'+(reported?C.reported:C.report)+"</button></div></div>"+
+    '<h2 style="font-size:15px;font-weight:800;margin:22px 0 4px">💬 '+C.replies+"（"+x.replies.length+"）</h2>"+
+    '<div class="card" style="padding:6px 20px">'+
+    (x.replies.length?x.replies.map(function(r){
+      return '<div class="replyitem">'+comAvatar(r.author)+'<div class="rb"><div class="rmeta"><b style="color:var(--ink)">'+esc(r.author)+"</b> · "+comTime(r.createdAt)+'</div><div class="rbody">'+esc(r.body)+"</div></div></div>";
+    }).join(""):'<p style="padding:16px 0;font-size:13px;color:var(--muted)">'+C.noReplies+"</p>")+"</div>"+
+    '<div class="card comform" style="margin-top:14px">'+
+    '<div class="fgrid"><div><label>'+C.fName+'</label><input id="crName" maxlength="20" value="'+esc(comStore().name||"")+'" placeholder="'+C.guest+'"></div></div>'+
+    '<div class="full" style="margin-top:10px"><label>'+C.fBody+'</label><textarea id="crBody" rows="3" maxlength="2000" placeholder="'+esc(C.replyPh)+'"></textarea></div>'+
+    '<div style="display:flex;gap:8px;margin-top:12px;align-items:center"><button class="combtn" onclick="comReply(\''+t.id+'\')">'+C.submitReply+'</button><span style="font-size:11px;color:var(--muted)">'+C.rules+"</span></div></div>"+
+    '<p style="margin-top:16px"><span class="act" style="color:var(--glacier);font-weight:700;cursor:pointer" onclick="go({name:\'community\'})">'+C.back+"</span></p>";
+}
+function comToggleForm(show){
+  var f=document.getElementById("comForm");
+  if(!f)return;
+  var willShow=show!==undefined?show:f.style.display==="none";
+  f.style.display=willShow?"block":"none";
+  if(willShow){var el=document.getElementById("cfTitle");if(el)el.focus()}
+}
+function comSubmit(){
+  var C=d().com;
+  var name=(document.getElementById("cfName").value.trim()||C.guest).slice(0,20);
+  var title=document.getElementById("cfTitle").value.trim();
+  var body=document.getElementById("cfBody").value.trim();
+  var cat=document.getElementById("cfCat").value;
+  if(!title||!body){document.getElementById(!title?"cfTitle":"cfBody").focus();return}
+  var s=comStore();
+  s.name=name;
+  s.threads=s.threads||[];
+  var id="th_u_"+Date.now().toString(36);
+  s.threads.push({id:id,cat:cat,author:name,createdAt:new Date().toISOString(),likes:0,title:title.slice(0,100),body:body.slice(0,2000),replies:[]});
+  comSave(s);
+  go({name:"thread",slug:id});
+}
+function comReply(tid){
+  var C=d().com;
+  var name=(document.getElementById("crName").value.trim()||C.guest).slice(0,20);
+  var body=document.getElementById("crBody").value.trim();
+  if(!body){document.getElementById("crBody").focus();return}
+  var s=comStore();
+  s.name=name;
+  s.replies=s.replies||{};
+  (s.replies[tid]=s.replies[tid]||[]).push({author:name,createdAt:new Date().toISOString(),body:body.slice(0,2000)});
+  comSave(s);
+  render();
+}
+function comLike(tid){
+  var s=comStore();
+  s.likes=s.likes||{};
+  if(s.likes[tid])delete s.likes[tid];else s.likes[tid]=true;
+  comSave(s);
+  render();
+}
+function comReport(tid){
+  var s=comStore();
+  s.reported=s.reported||{};
+  s.reported[tid]=true;
+  comSave(s);
+  render();
+}
+
 /* ====== AIチャットボット（デモ・ルールベース・ブラウザ内完結） ====== */
 var CHAT_T={
  ja:{title:"AI山岳コンシェルジュ",status:"ルールベース・ブラウザ内で応答（デモ）",ph:"山・天気・装備について質問…",
@@ -1053,6 +1262,7 @@ function chatSend(text){
 function chatChip(el){chatSend(el.textContent)}
 function chatKey(e){if(e.key==="Enter"&&!e.isComposing){e.preventDefault();chatSend()}}
 window.toggleChat=toggleChat;window.chatSend=chatSend;window.chatChip=chatChip;window.chatKey=chatKey;window.chatGo=chatGo;
+window.comToggleForm=comToggleForm;window.comSubmit=comSubmit;window.comReply=comReply;window.comLike=comLike;window.comReport=comReport;
 
 var toTop=document.getElementById("toTop");
 toTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
