@@ -87,6 +87,37 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 .mqitem.mqv:hover .vp{transform:translate(-50%,-58%) scale(1.12)}
 @media(max-width:640px){.mqitem{width:170px;height:106px;margin-right:9px}.mqitem.mqp{width:108px;height:138px}.mqitem.mqv .vp{width:30px;height:30px;font-size:11px}.mq::before,.mq::after{width:34px}}
 @media(prefers-reduced-motion:reduce){.mqtrack{animation:none}}
+/* アフィリエイト（PR表記=景表法対応） */
+.prb{display:inline-block;font-size:8.5px;font-weight:700;letter-spacing:.16em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 4px;vertical-align:2px;margin-left:6px}
+.afnote{font-size:11px;color:var(--muted);margin-top:10px}
+.afcard .ttl{font-size:14.5px;font-weight:800}
+.afcard .pt{font-size:12.5px;color:var(--muted);line-height:1.75;margin:8px 0 10px;min-height:44px}
+.afcard .pm{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);margin-bottom:11px;flex-wrap:wrap}
+.afbtns{display:flex;gap:6px;flex-wrap:wrap}
+.afbtn{font-size:11px;font-weight:700;padding:6px 10px;border-radius:8px;border:1px solid var(--line);cursor:pointer;text-decoration:none;color:inherit;background:var(--paper);transition:transform .15s,box-shadow .15s;white-space:nowrap}
+.afbtn:hover{transform:translateY(-1px);box-shadow:var(--shadow)}
+.afbtn.amz{border-color:rgba(255,153,0,.55)}
+.afbtn.rak{border-color:rgba(191,0,0,.45)}
+.afbtn.yah{border-color:rgba(255,0,51,.4)}
+.afbtn.ins{border-color:rgba(46,107,143,.5);color:var(--glacier);font-weight:800}
+.afmt .afrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.afmt .afrow .n{font-size:13px;font-weight:600}
+.afmt .afrow .b{display:flex;gap:6px}
+.aflinks{display:flex;gap:18px;margin-top:12px;flex-wrap:wrap}
+.aflink{font-size:12.5px;font-weight:700;color:var(--glacier);cursor:pointer}
+.aflink:hover{text-decoration:underline}
+.afcta{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+.afcta .ic{font-size:26px}
+.afcta .tx{flex:1;min-width:200px;display:flex;flex-direction:column;gap:3px}
+.afcta .tx span{font-size:12px;color:var(--muted)}
+.afstrip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 4px}
+@media(max-width:640px){.afstrip{grid-template-columns:1fr}}
+.afb{display:flex;align-items:center;gap:12px;cursor:pointer}
+.afb .ic{font-size:24px}
+.afb>div{flex:1;display:flex;flex-direction:column;gap:2px}
+.afb b{font-size:14px}
+.afb>div span{font-size:11.5px;color:var(--muted)}
+.afb .arw{font-weight:800;color:var(--glacier)}
 /* ===== 言語セレクタ（41言語） ===== */
 .langwrap{position:relative}
 .langbtn{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
@@ -582,7 +613,7 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",videos:"動画",climbers:"登山家",community:"コミュニティ"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",gear:"装備",videos:"動画",climbers:"登山家",community:"コミュニティ"},
   clm:{title:"世界の登山家名鑑",sub:"黄金期の開拓者から現代のアルパインクライマーまで、世界の著名登山家300名を紹介。",
    notice:"各登山家の紹介文・肖像画像は <b>Wikipedia（日本語版・英語版）からの引用</b>で、ライセンスは CC BY-SA 4.0 です。カード内のリンクから原典記事をご覧いただけます。動画はYouTube公式埋め込みプレーヤーで再生されます。",
    searchPh:"名前で検索（例: メスナー, Honnold）",all:"すべて",found:"名",
@@ -632,7 +663,7 @@ var DICT = {
   fnote:"これは Mountain Peak の静的デモ版です。検索・詳細・リスト・モック天気・登頂チェックリストをブラウザ内だけで動作させています。会員機能・管理画面・実DB接続・Open-Meteo実照会はフル版（サーバー版）でのみ提供されます。入力内容がサーバーへ送信されることはありません。",
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
- en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",videos:"Videos",climbers:"Climbers",community:"Community"},
+ en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",gear:"Gear",videos:"Videos",climbers:"Climbers",community:"Community"},
   clm:{title:"Great Mountaineers of the World",sub:"300 celebrated climbers, from golden-age pioneers to today's alpinists.",
    notice:"Biographies and portraits are <b>quoted from Wikipedia (Japanese & English editions)</b> under CC BY-SA 4.0. Follow the links on each card to the original articles. Videos play via YouTube's official embedded player.",
    searchPh:"Search by name (e.g. Messner, Honnold)",all:"All",found:"climbers",
@@ -927,6 +958,7 @@ function vHome(){
     secHead("lists",D.lists)+'<div class="grid">'+DATA.rankings.map(function(r){
       var done=sums.length?r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length:0;
       return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})">'+rankThumbs(r)+'<div class="nm">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--glacier)">'+r.mountainIds.length+" "+D.l.peaks+" →</span>"+(done?'<span class="badge d1">✓ '+done+"</span>":"")+"</div></div>"}).join("")+"</div>"+
+    afHomeStrip()+
     secHead("byCountry",D.byCountry,'<span class="more" onclick="go({name:\'countries\'})">'+D.hub.allCountries+"</span>")+'<div class="chips">'+DATA.countries.map(function(c){
       return '<span class="chip" onclick=\'go({name:"country",slug:"'+c.slug+'"})\'>'+flag(c.id)+" "+esc(names(c))+"</span>"}).join("")+"</div>"+
     secHead("films",state.locale==="ja"?"動画で旅する名峰":"Mountains on Film",'<span class="more" onclick="go({name:\'videos\'})">'+D.viewAll+"</span>")+
@@ -983,6 +1015,7 @@ function vMountain(slug){
     (t.hazards?'<div class="hazard sect"><h3>'+D.l.hazards+'</h3><p>'+esc(t.hazards)+"</p></div>":"")+
     sect(D.l.access,t.access)+
     sect(D.l.equipment,t.equipment)+
+    afGearBox(m)+
     (routes.length?'<div class="card sect"><h3>'+D.l.routes+"</h3>"+routes.map(function(rt){var rtt=tr(rt);
       return '<div class="rcard" onclick="event.stopPropagation();go({name:\'route\',slug:\''+rt.slug+'\'})"><div class="rt"><span>'+esc(rtt.name)+"</span>"+diffBadge(rt.difficultyLevel)+'</div><div class="rs">'+esc(rtt.overview.slice(0,90))+'…</div><div class="rs mono">📏 '+rt.distanceKm+"km ・ ↗ "+rt.elevationGainM.toLocaleString()+"m ・ ⏱ "+fmtTime(rt.estTimeMin)+"</div></div>"}).join("")+"</div>":"")+
     faqBlock(m,t,routes)+
@@ -1058,6 +1091,7 @@ function vArticle(slug){
     '<div class="cat" style="font-size:12px;color:var(--muted)"><span class="badge plain">'+esc(D.cats[a.category]||a.category)+"</span> "+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+" · "+esc(a.authorName)+"</div>"+
     '<h1 class="disp">'+esc(t.title)+"</h1>"+
     '<div class="card">'+t.body.split(/\n\n+/).map(function(p){return "<p>"+esc(p)+"</p>"}).join("")+"</div>"+
+    afArticleCta(a.category)+
     '<div style="margin-top:14px"><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div>"+
     '<div style="margin-top:14px">'+disclaimer(a.publishedAt)+"</div></div>";
 }
@@ -1080,7 +1114,7 @@ function pathFor(view,locale){
   if(n==="thread")return "/"+l+"/community/?t="+encodeURIComponent(view.slug);
   if(n==="country")return "/"+l+"/countries/"+view.slug+"/";
   if(n==="region")return "/"+l+"/regions/"+view.slug+"/";
-  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/"};
+  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/",gear:"/gear/"};
   return "/"+l+(map[n]||"/");
 }
 function go(view){
@@ -1119,7 +1153,7 @@ function parseHash(){
     state.view=t?{name:"thread",slug:t}:{name:"community"};
     return;
   }
-  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1};
+  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1};
   state.view=valid2[name]?{name:name}:{name:"home"};
 }
 /* ビュー別タイトル（SSG生成ページのタイトル設計と同一パターン） */
@@ -1136,6 +1170,7 @@ function pageTitle(v){
     if(v.name==="region"){var rr=DATA.regions.find(function(x){return x.slug===v.slug});if(rr)return names(rr)+(ja?"の山と登山ルート":" — Mountains & Routes")+" | Mountain Peak"}
     if(v.name==="countries")return D.hub.countries+" | Mountain Peak";
     if(v.name==="climbers")return D.clm.title+" | Mountain Peak";
+    if(v.name==="gear")return (ja?"登山装備ガイド — 三種の神器から雪山装備まで":"Hiking Gear Guide — From the Big Three to Winter Kit")+" | Mountain Peak";
     var statics={mountains:D.tabs.mountains,rankings:D.tabs.rankings,articles:D.tabs.articles,videos:D.tabs.videos,community:D.tabs.community,thread:D.tabs.community};
     if(statics[v.name])return statics[v.name]+" | Mountain Peak";
   }catch(e){}
@@ -1169,10 +1204,11 @@ function render(){
     else if(v.name==="country")html=vCountry(v.slug);
     else if(v.name==="region")html=vRegion(v.slug);
     else if(v.name==="climbers")html=vClimbers();
+    else if(v.name==="gear")html=vGear();
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
-  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["gear",D.tabs.gear],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
@@ -1185,9 +1221,155 @@ function render(){
     return "<a onclick='go("+arg+")'>"+label+"</a>";
   }).join("");
   document.getElementById("fnote").textContent=D.fnote;
-  document.getElementById("fdisc").innerHTML="<b>"+D.disc.t+"</b><br>"+D.disc.b;
+  document.getElementById("fdisc").innerHTML="<b>"+D.disc.t+"</b><br>"+D.disc.b+'<div style="margin-top:9px"><b>'+aft().discT+"</b> "+aft().discB+"</div>";
   document.title=pageTitle(v);
   reveal();
+}
+
+/* ====== アフィリエイト（装備ガイド・山岳保険。PR表記=景表法ステマ規制対応） ====== */
+/* ▼ ASP設定 — 提携承認後にここを書き換えるだけで全リンクに反映される
+   amazonTag : Amazonアソシエイトのトラッキング ID（例 "mountainpeak-22"）
+   prefix.*  : もしも/バリューコマース等リダイレクト型リンクの前置きURL。
+               設定すると各リンクは prefix + encodeURIComponent(検索URL) になる
+   ins[].url : 保険・捜索サービスは公式サイトURLをASP計測リンクへ差し替える */
+var AF_CONF={amazonTag:"",prefix:{amz:"",rak:"",yah:""}};
+var AF_T={
+ ja:{t:"登山装備ガイド",sub:"登山靴・ザック・レインウェアの「三種の神器」からテント泊・雪山装備まで。選び方のポイント、価格目安、その装備が必要になる難易度をまとめました。",
+  pr:"PR",prNotice:"※本ページはプロモーション（アフィリエイトリンク）を含みます。",
+  at:{amz:"Amazonで探す",rak:"楽天市場で探す",yah:"Yahoo!で探す"},
+  price:"価格目安",
+  insT:"山岳保険・遭難対策サービス",insEb:"STAY SAFE",
+  insSub:"登山届とあわせて、万一に備える保険・捜索サービスも検討を。1日単位で加入できるものもあります。",
+  insNote:"⚠ 掲載サービスは例示です。補償内容・料金・加入条件は変わることがあるため、必ず各社の公式サイトで最新情報をご確認ください。当サイトは保険の募集・仲介は行っていません。",
+  insBtn:"公式サイトを見る ↗",
+  mtBox:"この山の装備チェック",toGuide:"装備ガイドをすべて見る →",insCta:"山岳保険・捜索サービスを見る →",
+  ctaT:"装備の準備はできていますか？",ctaB:"難易度別の装備リストと選び方を装備ガイドにまとめています。",ctaBtn:"🎒 装備ガイドを開く",
+  stripIns:"山岳保険・遭難対策",stripGearS:"三種の神器から雪山装備まで、選び方と価格目安",stripInsS:"1日から入れる保険・捜索サービスの情報",
+  discT:"広告について:",discB:"当サイトはアフィリエイトプログラムにより収益を得る場合があります。該当するリンク・枠には「PR」を表示しています。",
+  gearChat:"登山装備ガイドを開く"},
+ en:{t:"Hiking Gear Guide",sub:"From the “Big Three” (boots, pack, rain shell) to overnight and winter kit: buying tips, price ranges and the difficulty level where each item becomes essential.",
+  pr:"AD",prNotice:"※This page contains promotional (affiliate) links.",
+  at:{amz:"Amazon",rak:"Rakuten",yah:"Yahoo!"},
+  price:"Price range",
+  insT:"Mountain Insurance & Rescue Services",insEb:"STAY SAFE",
+  insSub:"Alongside filing a climbing plan, consider insurance and search services. Some cover from a single day. (Services below are Japan-based.)",
+  insNote:"⚠ Listed services are examples. Coverage, prices and conditions change — always check the official sites. Mountain Peak does not sell or broker insurance.",
+  insBtn:"Official site ↗",
+  mtBox:"Gear Check for This Climb",toGuide:"Full gear guide →",insCta:"Insurance & rescue services →",
+  ctaT:"Is your gear ready?",ctaB:"Our gear guide covers checklists by difficulty and how to choose.",ctaBtn:"🎒 Open the Gear Guide",
+  stripIns:"Insurance & Rescue",stripGearS:"From the Big Three to winter kit: how to choose",stripInsS:"Day-based insurance and search services",
+  discT:"Advertising:",discB:"Mountain Peak may earn revenue via affiliate programs. Such links and blocks are labeled “AD/PR”.",
+  gearChat:"Open the gear guide"}
+};
+function aft(){return AF_T[state.locale]||AF_T.ja}
+/* 装備データ: lv=その装備が概ね必須になる難易度(1-5)。q=モール検索キーワード */
+var AF_GEAR=[
+ {eb:"BIG THREE",tj:"三種の神器",te:"The Big Three",items:[
+  {ic:"🥾",j:"登山靴",e:"Hiking Boots",q:"登山靴 トレッキングシューズ",p:"1.5〜4万円",lv:1,dj:"足首のサポートとソールの剛性で選ぶ基本装備。サイズは夕方の足で、必ず店頭でも試し履きを。",de:"Choose by ankle support and sole stiffness. Always try them on — feet swell by evening."},
+  {ic:"🎒",j:"ザック（20〜35L）",e:"Backpack (20–35L)",q:"登山 ザック 30L",p:"1〜3万円",lv:1,dj:"日帰りは20〜30L、小屋泊は30〜40Lが目安。背面長のフィッティングが最重要。",de:"20–30L for day hikes, 30–40L for hut trips. Back-length fit matters most."},
+  {ic:"🌧",j:"レインウェア上下",e:"Rain Shell (Top & Bottom)",q:"登山 レインウェア 上下 ゴアテックス",p:"2〜5万円",lv:1,dj:"上下セパレート・耐水圧20,000mm以上が目安。防寒着も兼ねる山の生命線。",de:"Separate top/bottom, ~20,000mm waterproofing. Doubles as a windproof layer."}]},
+ {eb:"LAYERING",tj:"ウェア・レイヤリング",te:"Clothing & Layering",items:[
+  {ic:"👕",j:"ベースレイヤー",e:"Base Layer",q:"登山 ベースレイヤー メリノウール",p:"0.5〜1.5万円",lv:1,dj:"綿は汗冷えの原因になるため避け、化繊かメリノウールを。夏でも替えを1枚。",de:"Avoid cotton — synthetic or merino only. Carry a spare even in summer."},
+  {ic:"🧥",j:"フリース・ミドルレイヤー",e:"Fleece / Midlayer",q:"登山 フリース ミドルレイヤー",p:"0.5〜2万円",lv:1,dj:"行動中の保温を担う中間着。脱ぎ着しやすい薄手〜中厚手が使いやすい。",de:"Your active insulation. Thin-to-mid weights are easiest to regulate."},
+  {ic:"🪶",j:"ダウン・化繊インサレーション",e:"Insulated Jacket",q:"登山 ダウンジャケット 軽量",p:"1.5〜4万円",lv:2,dj:"稜線や朝晩の冷え込み対策。休憩時に羽織る保温着として夏の高山でも有効。",de:"For ridgelines and cold mornings. Useful on high summer peaks at rest stops."},
+  {ic:"👖",j:"トレッキングパンツ",e:"Trekking Pants",q:"トレッキングパンツ ストレッチ",p:"0.8〜2万円",lv:1,dj:"ストレッチ性と速乾性を重視。ジーンズは不可。",de:"Prioritize stretch and quick-dry. No jeans."}]},
+ {eb:"SAFETY",tj:"安全装備",te:"Safety Gear",items:[
+  {ic:"🔦",j:"ヘッドランプ",e:"Headlamp",q:"登山 ヘッドランプ 防水",p:"0.3〜1万円",lv:1,dj:"日帰りでも必携。200ルーメン以上と予備電池を。下山遅れの最大の保険。",de:"Essential even for day hikes. 200+ lumens plus spare batteries."},
+  {ic:"🩹",j:"ファーストエイドキット",e:"First Aid Kit",q:"登山 ファーストエイドキット",p:"0.2〜0.5万円",lv:1,dj:"絆創膏・テーピング・常備薬など。市販キットに自分用の薬を足すのが定番。",de:"Bandages, tape and personal meds — start with a kit and customize."},
+  {ic:"🛟",j:"エマージェンシーシート",e:"Emergency Blanket",q:"エマージェンシーシート 登山",p:"0.1〜0.3万円",lv:1,dj:"ビバーク時の低体温症対策。数百円・数十グラムで命を守る装備。",de:"Hypothermia protection for unplanned bivouacs. Grams and pennies, life-saving."},
+  {ic:"⛑",j:"ヘルメット",e:"Climbing Helmet",q:"登山 ヘルメット",p:"0.8〜2万円",lv:3,dj:"岩稜帯・落石リスクのあるルートで。着用推奨エリアが指定されている山域もあります。",de:"For rocky ridges and rockfall zones. Some areas officially recommend one."},
+  {ic:"🔋",j:"モバイルバッテリー",e:"Power Bank",q:"モバイルバッテリー 10000mAh 軽量",p:"0.3〜0.8万円",lv:1,dj:"地図アプリ利用の前提装備。10,000mAh前後・軽量モデルを。",de:"Mandatory if your map is your phone. ~10,000mAh lightweight models."}]},
+ {eb:"NAVIGATION",tj:"ナビゲーション",te:"Navigation",items:[
+  {ic:"🗺",j:"紙地図・コンパス",e:"Paper Map & Compass",q:"山と高原地図",p:"0.1〜0.5万円",lv:1,dj:"スマホの電池切れ・故障に備えるバックアップ。エリア別の登山地図が定番。",de:"Backup for a dead phone. Regional hiking map series are the standard."},
+  {ic:"⌚",j:"GPSウォッチ",e:"GPS Watch",q:"GPSウォッチ 登山",p:"3〜10万円",lv:2,dj:"ルートナビ・高度・心拍を手元で確認。ロングルートや縦走で真価を発揮。",de:"Route, altitude and heart rate on your wrist. Shines on long traverses."}]},
+ {eb:"ACCESSORIES",tj:"小物・行動用品",te:"Accessories",items:[
+  {ic:"🥢",j:"トレッキングポール",e:"Trekking Poles",q:"トレッキングポール",p:"0.5〜2万円",lv:1,dj:"下りの膝への負担を大きく軽減。長時間歩行の疲労対策にも。",de:"Big knee-saver on descents and fatigue reducer on long days."},
+  {ic:"🧤",j:"帽子・グローブ",e:"Hat & Gloves",q:"登山 グローブ",p:"0.2〜1万円",lv:1,dj:"日差し・岩場・寒さから守る消耗品。季節に合わせて使い分けを。",de:"Sun, rock and cold protection. Swap by season."},
+  {ic:"🕶",j:"サングラス",e:"Sunglasses",q:"登山 サングラス",p:"0.5〜2万円",lv:2,dj:"高所・雪面の強い紫外線対策。UVカット率とフィット感で選ぶ。",de:"UV at altitude and on snow is fierce. Choose by UV rating and fit."},
+  {ic:"💧",j:"水筒・ハイドレーション",e:"Bottles & Hydration",q:"ハイドレーション 登山",p:"0.3〜1万円",lv:1,dj:"目安は1時間あたり500ml。歩きながら飲めるハイドレーションも人気。",de:"Budget ~500ml per hour. Hydration systems let you drink on the move."}]},
+ {eb:"ADVANCED",tj:"テント泊・雪山装備",te:"Overnight & Winter",items:[
+  {ic:"⛺",j:"テント",e:"Tent",q:"登山 テント 軽量 ソロ",p:"3〜8万円",lv:3,dj:"山岳用は耐風性と軽さのバランスで選ぶ。ソロは1.5kg前後が主流。",de:"Balance wind resistance and weight. Solo tents around 1.5kg are standard."},
+  {ic:"🛌",j:"シュラフ・マット",e:"Sleeping Bag & Pad",q:"シュラフ 登山 マット",p:"2〜6万円",lv:3,dj:"快適使用温度は行き先の最低気温より低めに。マットの断熱(R値)も忘れずに。",de:"Comfort rating below expected lows; don't forget pad R-value."},
+  {ic:"🔥",j:"バーナー・クッカー",e:"Stove & Cookset",q:"登山 バーナー クッカー",p:"0.8〜2万円",lv:3,dj:"お湯が沸かせるだけで行動の自由度が大きく上がる。指定地以外での火気厳禁。",de:"Hot water changes everything. Use only where fires are permitted."},
+  {ic:"🧗",j:"アイゼン（12本爪）",e:"Crampons (12-point)",q:"アイゼン 12本爪",p:"1〜3万円",lv:4,dj:"雪山・残雪期の必須装備。軽アイゼンとは別物。登山靴との相性確認を。",de:"Essential on snow. Not the same as microspikes — check boot compatibility."},
+  {ic:"⛏",j:"ピッケル",e:"Ice Axe",q:"ピッケル 登山",p:"1〜2.5万円",lv:4,dj:"滑落停止と支点確保に。使い方は講習で学んでから実戦投入を。",de:"For self-arrest and anchoring. Take a course before relying on one."}]}
+];
+/* 保険・捜索サービス（例示。urlをASP計測リンクに差し替え可） */
+var AF_INS=[
+ {id:"cocoheli",n:"ココヘリ",en:"COCOHELI",tag:"会員制捜索サービス",tage:"Search membership",url:"https://hitococo.com/cocoheli/",
+  d:"会員証型の発信機で捜索を支援する会員制サービス。自治体・警察の捜索網と連携し、山岳保険とのセットプランも提供されています。",
+  de:"Membership beacon service that helps rescue teams locate you, often bundled with insurance plans."},
+ {id:"jro",n:"jRO（日本山岳救助機構）",en:"jRO (Japan Rescue Organization)",tag:"捜索・救助費用の互助制度",tage:"Rescue cost mutual aid",url:"https://www.sangakujro.com/",
+  d:"遭難時の捜索・救助費用を会員の事後分担でまかなう互助制度。年会費型で本格的に山に通う人の定番。",
+  de:"Mutual-aid scheme covering search & rescue costs, a staple among frequent climbers."},
+ {id:"montbell",n:"モンベル 野あそび保険",en:"mont-bell Outdoor Insurance",tag:"1日から入れる保険",tage:"From single-day coverage",url:"https://hoken.montbell.jp/",
+  d:"日帰り1日から加入できる外遊び向け保険シリーズ。山行の頻度に合わせてプランを選べます。",
+  de:"Outdoor insurance you can buy per day, with plans matching how often you climb."},
+ {id:"yamap",n:"YAMAP登山保険",en:"YAMAP Insurance",tag:"アプリから加入",tage:"Buy in-app",url:"https://yamap.com/insurances",
+  d:"登山アプリYAMAPから加入できる保険。アプリの登山計画・見守り機能と組み合わせやすいのが特徴。",
+  de:"Insurance purchasable inside the YAMAP app, pairing well with its trip-plan features."}
+];
+function afURL(mc,q){
+  var enc=encodeURIComponent(q);
+  var url=mc==="amz"?"https://www.amazon.co.jp/s?k="+enc
+    :mc==="rak"?"https://search.rakuten.co.jp/search/mall/"+enc+"/"
+    :"https://shopping.yahoo.co.jp/search?p="+enc;
+  if(mc==="amz"&&AF_CONF.amazonTag)url+="&tag="+encodeURIComponent(AF_CONF.amazonTag);
+  if(AF_CONF.prefix[mc])url=AF_CONF.prefix[mc]+encodeURIComponent(url);
+  return url;
+}
+function afTrack(id){try{(window.dataLayer=window.dataLayer||[]).push({event:"af_click",af_id:id,page:location.pathname})}catch(e){}}
+function afA(mc,q,id){
+  return '<a class="afbtn '+mc+'" href="'+afURL(mc,q)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\''+esc(id)+':'+mc+'\')">'+aft().at[mc]+"</a>";
+}
+function prBadge(){return '<span class="prb mono">'+aft().pr+"</span>"}
+function gearGo(anchor){go({name:"gear"});if(anchor)setTimeout(function(){var el=document.getElementById("af-"+anchor);if(el)el.scrollIntoView()},80)}
+function vGear(){
+  var D=d(),T=aft(),ja=state.locale==="ja";
+  var cats=AF_GEAR.map(function(cat){
+    return '<h2 class="sec"><span class="eyebrow mono">△ '+cat.eb+'</span><span class="tt disp">'+esc(ja?cat.tj:cat.te)+"</span></h2>"+
+    '<div class="grid afgrid">'+cat.items.map(function(it){
+      var name=ja?it.j:it.e;
+      return '<div class="card afcard rv"><div class="ttl">'+it.ic+" "+esc(name)+" "+prBadge()+'</div><div class="pt">'+esc(ja?it.dj:it.de)+"</div>"+
+      '<div class="pm"><span class="mono">'+T.price+" "+it.p+"</span>"+(it.lv>1?'<span class="badge d'+it.lv+'">'+esc(D.diffs[it.lv])+(ja?"〜":"+")+"</span>":"")+"</div>"+
+      '<div class="afbtns">'+afA("amz",it.q,it.e)+afA("rak",it.q,it.e)+afA("yah",it.q,it.e)+"</div></div>";
+    }).join("")+"</div>";
+  }).join("");
+  var ins='<div id="af-ins"></div><h2 class="sec"><span class="eyebrow mono">△ '+T.insEb+'</span><span class="tt disp">'+esc(T.insT)+"</span></h2>"+
+    '<p style="font-size:13.5px;color:var(--muted);margin:-6px 0 14px;line-height:1.8">'+esc(T.insSub)+"</p>"+
+    '<div class="grid afgrid">'+AF_INS.map(function(s){
+      return '<div class="card afcard rv"><div class="ttl">🛡 '+esc(ja?s.n:s.en)+" "+prBadge()+'</div><div class="pt">'+esc(ja?s.d:s.de)+'</div><div class="pm"><span class="badge plain">'+esc(ja?s.tag:s.tage)+"</span></div>"+
+      '<div class="afbtns"><a class="afbtn ins" href="'+s.url+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'ins:'+s.id+'\')">'+T.insBtn+"</a></div></div>";
+    }).join("")+"</div>"+
+    '<div class="notice" style="margin-top:16px">'+esc(T.insNote)+"</div>";
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.gear}])+
+    '<div class="card detail-hero"><h1 class="disp">🎒 '+esc(T.t)+'</h1><p class="dsum">'+esc(T.sub)+'</p><p class="afnote">'+esc(T.prNotice)+"</p></div>"+cats+ins;
+}
+/* 山詳細: 難易度に応じた装備ピック */
+function afGearBox(m){
+  var T=aft(),D=d(),ja=state.locale==="ja";
+  var picks=[];
+  AF_GEAR.forEach(function(c){c.items.forEach(function(it){if(it.lv<=m.difficultyLevel)picks.push(it)})});
+  if(!picks.length)return "";
+  picks.sort(function(a,b){return b.lv-a.lv});
+  picks=picks.slice(0,6);
+  return '<div class="card sect afmt"><h3>🎒 '+esc(T.mtBox)+" "+diffBadge(m.difficultyLevel)+" "+prBadge()+"</h3>"+
+    picks.map(function(it){return '<div class="afrow"><span class="n">'+it.ic+" "+esc(ja?it.j:it.e)+'</span><span class="b">'+afA("amz",it.q,"mt_"+m.slug)+afA("rak",it.q,"mt_"+m.slug)+"</span></div>"}).join("")+
+    '<div class="aflinks"><span class="aflink" onclick="go({name:\'gear\'})">'+esc(T.toGuide)+'</span><span class="aflink" onclick="gearGo(\'ins\')">🛡 '+esc(T.insCta)+"</span></div>"+
+    '<p class="afnote" style="margin-top:9px">'+esc(T.prNotice)+"</p></div>";
+}
+/* 記事下CTA（装備・ガイド系カテゴリのみ） */
+function afArticleCta(cat){
+  if(["gear","guide","safety","season"].indexOf(cat)<0)return "";
+  var T=aft();
+  return '<div class="card afcta rv"><span class="ic">🎒</span><div class="tx"><b>'+esc(T.ctaT)+" "+prBadge()+"</b><span>"+esc(T.ctaB)+'</span></div><button class="abtn" onclick="go({name:\'gear\'})">'+T.ctaBtn+"</button></div>";
+}
+/* ホーム: 装備ガイド/保険への導線ストリップ */
+function afHomeStrip(){
+  var T=aft();
+  return '<div class="afstrip">'+
+    '<div class="card afb rv" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="go({name:\'gear\'})"><span class="ic">🎒</span><div><b>'+esc(T.t)+" "+prBadge()+"</b><span>"+esc(T.stripGearS)+'</span></div><span class="arw">→</span></div>'+
+    '<div class="card afb rv" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="gearGo(\'ins\')"><span class="ic">🛡</span><div><b>'+esc(T.stripIns)+" "+prBadge()+"</b><span>"+esc(T.stripInsS)+'</span></div><span class="arw">→</span></div></div>';
 }
 
 /* ====== FVマーキー（Wikipedia引用写真 12枚x2段・上段右回り/下段左回り） ====== */
@@ -1907,7 +2089,7 @@ function chatReply(q){
   else if(/8000/.test(ql))rank=DATA.rankings.find(function(r){return r.slug==="8000m-peaks"});
   if(rank)return "<b>🏆 "+esc(names(rank))+"</b><br>"+esc(rank.descriptions[state.locale]||rank.descriptions.ja)+actLink("ranking",rank.slug,T.listAct);
   if(/装備|持ち物|ザック|gear|equipment|pack|bring/.test(ql)){
-    return T.gear+actLink("article","beginner-gear-checklist",T.gearAct);
+    return T.gear+actLink("article","beginner-gear-checklist",T.gearAct)+actLink("gear","",aft().gearChat);
   }
   if(/こんにちは|はじめまして|やあ|hello|^hi\b|help|使い方|できる/.test(ql))return T.hello;
   return T.fallback;
@@ -1961,6 +2143,7 @@ parseHash();
 render();
 /* 検証用フック */
 window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
+window.afTrack=afTrack;window.gearGo=gearGo;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
 })();
 </script>
