@@ -639,6 +639,16 @@ body.chatlock{overflow:hidden}
 .logform .lsug{position:relative;display:block}
 .logform .lsug .sug{top:calc(100% + 4px)}
 @media(max-width:640px){.logform{grid-template-columns:1fr}.logform input,.logform select,.logform textarea{font-size:16px}}
+/* ログ写真（IndexedDB保存・タップで拡大） */
+.lphs{display:flex;gap:8px;flex-wrap:wrap}
+.lph{position:relative;width:66px;height:66px;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+.lph img{width:100%;height:100%;object-fit:cover;display:block}
+.lph button{position:absolute;top:2px;right:2px;width:20px;height:20px;border-radius:999px;background:rgba(10,18,24,.72);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center}
+.logphs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.logph{width:84px;height:84px;border-radius:10px;object-fit:cover;cursor:zoom-in;box-shadow:var(--shadow);background:var(--hair)}
+#phview{position:fixed;inset:0;background:rgba(6,12,16,.92);display:none;align-items:center;justify-content:center;z-index:90;cursor:zoom-out}
+#phview.show{display:flex}
+#phview img{max-width:92vw;max-height:90vh;border-radius:12px;box-shadow:var(--shadow-lift)}
 /* 動画ページPC: 多段組みで縦長を解消（スマホ=900px未満は従来どおり縦一列） */
 @media(min-width:900px){
   .vsecs{columns:3;column-gap:18px;margin-top:6px}
@@ -1396,6 +1406,7 @@ function render(){
   document.title=pageTitle(v);
   reveal();
   if(v.name==="home")typeCoord();
+  if(v.name==="logbook")logPhotosHydrate();
 }
 
 /* ====== ブラッシュアップFX（ゼロ依存・reduced-motion尊重） ====== */
@@ -1464,7 +1475,8 @@ function typeCoord(){
 /* ====== サミットログ（山行記録。ブラウザ内保存・JSON書き出し/読み込み対応） ====== */
 var LOG_T={
  ja:{t:"登山記録（サミットログ）",sub:"登った山を記録して、自分だけの登山史をつくろう。記録した山は登頂チェックリストにも自動反映されます。",
-  notice:"記録は<b>お使いのブラウザ内にのみ保存</b>されます。機種変更や別ブラウザへの引き継ぎには「書き出し」でJSONを保存し、「読み込み」で復元してください。",
+  notice:"記録は<b>お使いのブラウザ内にのみ保存</b>されます。機種変更や別ブラウザへの引き継ぎには「書き出し」でJSONを保存し、「読み込み」で復元してください（写真は端末内保存のためJSONには含まれません）。",
+  fPhoto:"写真（任意・最大4枚）",fPhotoBtn:"＋ 写真を追加",
   stats:{n:"記録",uniq:"登った山",elev:"登頂標高の合計",year:"今年の記録"},
   chartT:"の月別記録",
   addT:"＋ 記録を追加",fMt:"山（検索して選択）",fMtPh:"山名で検索（例: 富士山）",fDate:"日付",fW:"天気",fRoute:"ルート・コース（任意）",fRoutePh:"例: 吉田ルート",fMemo:"メモ（任意）",fMemoPh:"同行者・コースタイム・感想など",
@@ -1473,7 +1485,8 @@ var LOG_T={
   exp:"⬇ 書き出し(JSON)",imp:"⬆ 読み込み",imported:"件の記録を読み込みました",impErr:"読み込みに失敗しました（JSON形式を確認してください）",
   empty:"まだ記録がありません。最初の一座を記録してみましょう！",logBtn:"📓 記録を書く",w:["","☀️ 快晴","⛅ 晴れ/曇り","🌧 雨","🌨 雪","💨 強風"]},
  en:{t:"Summit Log",sub:"Log every climb and build your own mountaineering history. Logged peaks are also marked on your summit checklist.",
-  notice:"Logs are <b>stored only in this browser</b>. Use Export/Import (JSON) to move them to another device.",
+  notice:"Logs are <b>stored only in this browser</b>. Use Export/Import (JSON) to move them to another device (photos stay on this device and are not included in the JSON).",
+  fPhoto:"Photos (optional, up to 4)",fPhotoBtn:"＋ Add photos",
   stats:{n:"Entries",uniq:"Peaks climbed",elev:"Total elevation logged",year:"This year"},
   chartT:" by month",
   addT:"＋ Add an entry",fMt:"Mountain (search & pick)",fMtPh:"Search by name (e.g. Fuji)",fDate:"Date",fW:"Weather",fRoute:"Route (optional)",fRoutePh:"e.g. Yoshida Route",fMemo:"Notes (optional)",fMemoPh:"Partners, course time, thoughts…",
@@ -1518,8 +1531,12 @@ function logAdd(){
   var dt=document.getElementById("ld").value;
   if(!dt){toast(T.needDate);return}
   var logs=getLogs();
+  var staged=state.logPhotos||[];
   logs.push({i:Date.now().toString(36)+Math.random().toString(36).slice(2,6),m:pick,d:dt,
-    w:document.getElementById("lw").value,r:(document.getElementById("lr").value||"").slice(0,80),t:(document.getElementById("lm").value||"").slice(0,600),c:new Date().toISOString()});
+    w:document.getElementById("lw").value,r:(document.getElementById("lr").value||"").slice(0,80),t:(document.getElementById("lm").value||"").slice(0,600),
+    p:staged.map(function(x){return x.id}),c:new Date().toISOString()});
+  staged.forEach(function(x){phPut(x.id,x.data)});
+  state.logPhotos=[];
   saveLogs(logs);
   var s=getSum();if(s.indexOf(pick)<0){s.push(pick);store("mp-demo-summits",JSON.stringify(s))}
   state.logPick=null;
@@ -1528,7 +1545,10 @@ function logAdd(){
 function logDel(id){
   var T=lgt();
   if(!confirm(T.delConfirm))return;
-  saveLogs(getLogs().filter(function(x){return x.i!==id}));
+  var logs=getLogs();
+  var target=logs.find(function(x){return x.i===id});
+  if(target&&target.p)target.p.forEach(phDel);
+  saveLogs(logs.filter(function(x){return x.i!==id}));
   render();toast(T.deleted);
 }
 function logExport(){
@@ -1553,6 +1573,67 @@ function logImportFile(ev){
   rd.readAsText(f);
 }
 function logQuick(mtId){state.logPrefill=mtId;go({name:"logbook"})}
+/* 写真はIndexedDBに保存（localStorageの容量制限を回避）。保存前にcanvasで自動縮小 */
+var _idb=null;
+function idb(cb){
+  if(_idb)return cb(_idb);
+  if(!window.indexedDB)return cb(null);
+  var req=indexedDB.open("mp-log",1);
+  req.onupgradeneeded=function(e){e.target.result.createObjectStore("photos",{keyPath:"id"})};
+  req.onsuccess=function(e){_idb=e.target.result;cb(_idb)};
+  req.onerror=function(){cb(null)};
+}
+function phPut(id,data){idb(function(db){if(!db)return;db.transaction("photos","readwrite").objectStore("photos").put({id:id,data:data})})}
+function phGet(id,cb){idb(function(db){if(!db)return cb(null);var r=db.transaction("photos").objectStore("photos").get(id);r.onsuccess=function(){cb(r.result?r.result.data:null)};r.onerror=function(){cb(null)}})}
+function phDel(id){idb(function(db){if(db)db.transaction("photos","readwrite").objectStore("photos").delete(id)})}
+function logPhotoAdd(ev){
+  var files=Array.prototype.slice.call(ev.target.files||[]);
+  ev.target.value="";
+  var room=4-(state.logPhotos?state.logPhotos.length:0);
+  files.slice(0,Math.max(0,room)).forEach(function(f){
+    if(!/^image\//.test(f.type))return;
+    var rd=new FileReader();
+    rd.onload=function(){
+      var img=new Image();
+      img.onload=function(){
+        var max=1200,w=img.width,h=img.height; // 長辺1200pxに縮小・JPEG78%
+        if(w>max||h>max){var k=max/Math.max(w,h);w=Math.round(w*k);h=Math.round(h*k)}
+        var cv=document.createElement("canvas");cv.width=w;cv.height=h;
+        cv.getContext("2d").drawImage(img,0,0,w,h);
+        (state.logPhotos=state.logPhotos||[]).push({id:"ph_"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),data:cv.toDataURL("image/jpeg",.78)});
+        logPhotosPreview();
+      };
+      img.src=rd.result;
+    };
+    rd.readAsDataURL(f);
+  });
+}
+function logPhotosPreview(){
+  var box=document.getElementById("lphotos");if(!box)return;
+  box.innerHTML=(state.logPhotos||[]).map(function(p,i){
+    return '<span class="lph"><img src="'+p.data+'" alt=""><button type="button" aria-label="remove photo" onclick="logPhotoRm('+i+')">✕</button></span>'}).join("");
+}
+function logPhotoRm(i){(state.logPhotos||[]).splice(i,1);logPhotosPreview()}
+/* 描画後にIndexedDBから記録写真を流し込む */
+function logPhotosHydrate(){
+  Array.prototype.forEach.call(document.querySelectorAll("img.logph[data-pid]"),function(el){
+    var pid=el.getAttribute("data-pid");el.removeAttribute("data-pid");
+    phGet(pid,function(data){if(data){el.src=data}else{el.parentNode&&el.parentNode.removeChild(el)}});
+  });
+  logPhotosPreview();
+}
+function phView(src){
+  var ov=document.getElementById("phview");
+  if(!ov){
+    ov=document.createElement("div");ov.id="phview";
+    ov.innerHTML='<img alt="">';
+    ov.addEventListener("click",function(){ov.classList.remove("show")});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape")ov.classList.remove("show")});
+    document.body.appendChild(ov);
+  }
+  ov.querySelector("img").src=src;
+  ov.classList.add("show");
+}
 function vLogbook(){
   var D=d(),T=lgt(),ja=state.locale==="ja";
   var logs=getLogs().slice().sort(function(a,b){return b.d.localeCompare(a.d)});
@@ -1578,7 +1659,8 @@ function vLogbook(){
     rows+='<div class="logrow"><span class="dt mono">'+esc(x.d)+"</span>"+
       '<div class="bd"><span class="nm" onclick="go({name:\'mountain\',slug:\''+(m?m.slug:"")+'\'})">'+esc(m?tr(m).name:"?")+"</span>"+
       '<div class="meta">'+(m?m.elevationM.toLocaleString()+"m":"")+(x.w?" · "+esc(x.w):"")+(x.r?" · "+esc(x.r):"")+"</div>"+
-      (x.t?'<div class="memo">'+esc(x.t)+"</div>":"")+"</div>"+
+      (x.t?'<div class="memo">'+esc(x.t)+"</div>":"")+
+      (x.p&&x.p.length?'<div class="logphs">'+x.p.map(function(pid){return '<img class="logph" data-pid="'+esc(pid)+'" alt="" onclick="if(this.src)phView(this.src)">'}).join("")+"</div>":"")+"</div>"+
       '<span class="del" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="logDel(\''+x.i+'\')">✕</span></div>';
   });
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:T.t}])+
@@ -1594,6 +1676,7 @@ function vLogbook(){
     "<label>"+T.fW+'<select id="lw">'+T.w.map(function(w){return '<option value="'+esc(w)+'">'+(w||"—")+"</option>"}).join("")+"</select></label>"+
     '<label class="full">'+T.fRoute+'<input id="lr" placeholder="'+T.fRoutePh+'"></label>'+
     '<label class="full">'+T.fMemo+'<textarea id="lm" placeholder="'+T.fMemoPh+'"></textarea></label>'+
+    '<div class="full"><div style="font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase;margin-bottom:6px">'+T.fPhoto+'</div><div id="lphotos" class="lphs"></div><label class="abtn" style="cursor:pointer;display:inline-flex;margin-top:8px">'+T.fPhotoBtn+'<input type="file" accept="image/*" multiple style="display:none" onchange="logPhotoAdd(event)"></label></div>'+
     '<div class="full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="abtn" style="background:var(--route);color:#fff;border-color:var(--route)" onclick="logAdd()">'+T.save+'</button>'+
     '<button class="abtn" onclick="logExport()">'+T.exp+'</button>'+
     '<label class="abtn" style="cursor:pointer">'+T.imp+'<input type="file" accept="application/json,.json" style="display:none" onchange="logImportFile(event)"></label></div>'+
@@ -2657,6 +2740,7 @@ render();
 window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
 window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;
 window.logSug=logSug;window.logPick=logPick;window.logAdd=logAdd;window.logDel=logDel;window.logExport=logExport;window.logImportFile=logImportFile;window.logQuick=logQuick;
+window.logPhotoAdd=logPhotoAdd;window.logPhotoRm=logPhotoRm;window.phView=phView;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
 })();
 </script>
