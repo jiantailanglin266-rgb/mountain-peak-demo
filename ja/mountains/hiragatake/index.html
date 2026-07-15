@@ -568,7 +568,6 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
 .cfoot input:focus{border-color:var(--glacier)}
 .cfoot button{background:var(--route);color:#fff;border-radius:999px;width:40px;height:40px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .cfoot button:hover{filter:brightness(1.08)}
-@media(max-width:560px){#chatPanel{right:10px;left:10px;width:auto;bottom:84px;height:min(540px,calc(100dvh - 104px))}}
 #toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,14px);background:var(--ink);color:var(--paper);border-radius:999px;padding:9px 20px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:all .25s;z-index:70;box-shadow:var(--shadow-lift)}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 
@@ -583,6 +582,36 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
 }
 .hero .routeline{stroke-dasharray:1600;stroke-dashoffset:1600;animation:drawroute 2.6s .3s ease forwards}
 @keyframes drawroute{to{stroke-dashoffset:0}}
+/* ====== モバイル最適化（チャット=ボトムシート・タップ44px・iOSズーム抑止）
+   ※ベースのチャットCSSより後に置くこと（同一詳細度は後勝ちのため） ====== */
+#chatPanel.open{display:flex;animation:chatIn .3s cubic-bezier(.22,1,.36,1)}
+@keyframes chatIn{from{opacity:0;transform:translateY(16px)}}
+body.chatlock{overflow:hidden}
+@media(max-width:560px){
+  /* チャットボタン/トップへ戻る: セーフエリア対応+右下の整列 */
+  #chatBtn{width:52px;height:52px;right:14px;bottom:calc(14px + env(safe-area-inset-bottom))}
+  #chatBtn .cbadge{width:21px;height:21px}
+  #toTop{right:14px;bottom:calc(78px + env(safe-area-inset-bottom));width:40px;height:40px}
+  /* チャットパネル: 全幅ボトムシート化（つまみ付き・ホームバー回避） */
+  #chatPanel{left:0;right:0;bottom:0;width:auto;max-width:none;border-radius:20px 20px 0 0;border-left:none;border-right:none;border-bottom:none;height:min(76dvh,620px);max-height:calc(100dvh - 52px)}
+  #chatPanel::after{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:44px;height:4px;border-radius:2px;background:rgba(255,255,255,.35);pointer-events:none}
+  .chead{padding:16px 16px 13px}
+  .chead .cx{width:40px;height:40px;font-size:17px}
+  .cbody{padding:12px;gap:9px}
+  .cchips{padding:9px 12px}
+  .cchips button{padding:9px 15px;font-size:12.5px}
+  .cfoot{padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+  .cfoot input{font-size:16px;padding:11px 16px}
+  .cfoot button{width:46px;height:46px}
+}
+@media(max-width:640px){
+  /* 16px未満の入力はiOSがフォーカス時に自動ズームするため主要入力を16pxに */
+  .fvsearch input,.filters input,.filters select,.comform input,.comform textarea,.comform select{font-size:16px}
+  .fvsearch input{padding:13px 0}
+  /* ナビ・言語ボタンのタップターゲット確保 */
+  nav.tabs button{min-height:44px}
+  .langbtn{min-height:40px}
+}
 </style>
 <link rel="canonical" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hiragatake/">
 <link rel="alternate" hreflang="ja" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/hiragatake/">
@@ -2257,11 +2286,14 @@ function toggleChat(open){
   var panel=document.getElementById("chatPanel");
   var willOpen=open!==undefined?open:!panel.classList.contains("open");
   panel.classList.toggle("open",willOpen);
+  /* モバイル: シート表示中は背面スクロールをロック */
+  document.body.classList.toggle("chatlock",willOpen&&window.innerWidth<=560);
   if(willOpen){
     syncChatUI();
     if(chatMsgs.length===0){chatMsgs.push({role:"bot",html:cT().hello})}
     chatRenderMsgs();
-    document.getElementById("chatInput").focus();
+    /* モバイルでは自動フォーカスしない（キーボードが即出て画面を覆うため） */
+    if(window.innerWidth>640)document.getElementById("chatInput").focus();
   }
 }
 function chatGo(name,slug){go({name:name,slug:slug});toggleChat(false)}
