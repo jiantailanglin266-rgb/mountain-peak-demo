@@ -799,7 +799,7 @@ var WCODES={0:["快晴","Clear","☀️"],1:["晴れ","Mostly clear","🌤️"],
 /* 国旗コードは countries.isoCode から導出（全43カ国対応） */
 
 /* ====== 状態・永続化 ====== */
-var state={locale:"ja",unit:"m",view:{name:"home"},filters:{q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD"},artCat:""};
+var state={locale:"ja",unit:"m",view:{name:"home"},filters:{q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"},artCat:""};
 function store(k,v){try{localStorage.setItem(k,v)}catch(e){}}
 function load(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function getSum(){try{return JSON.parse(load("mp-demo-summits")||"[]")}catch(e){return []}}
@@ -853,6 +853,8 @@ function filterMountains(f){
     if(f.elev){var b=BANDS[f.elev];if(m.elevationM<b[0]||m.elevationM>b[1])return false}
     if(f.tag&&(m.tags||[]).indexOf(f.tag)<0)return false;
     if(q&&textOf(m).indexOf(q)<0&&m.slug.indexOf(q)<0)return false;
+    /* 写真ありに絞る（デフォルトON）。キーワード検索時は全収録から探せるよう適用しない */
+    if(f.photo==="1"&&!q&&!MT_PHOTOS[m.slug])return false;
     return true;
   });
   var s=f.sort||"elevD";
@@ -1094,7 +1096,8 @@ function vMountains(){
   var opts=function(sel,items){return items.map(function(it){return '<option value="'+it[0]+'"'+(sel===it[0]?" selected":"")+">"+esc(it[1])+"</option>"}).join("")};
   var tagChips='<div class="chips" style="margin:14px 0 4px">'+['',"hyakumeizan","seven-summits","8000m","beginner"].map(function(t){
     var lbl=t?D.tags[t]:D.f.any;
-    return '<span class="chip'+(f.tag===t?" on":"")+'" onclick="state.filters.tag=\''+t+'\';render()">'+esc(lbl)+"</span>"}).join("")+"</div>";
+    return '<span class="chip'+(f.tag===t?" on":"")+'" onclick="state.filters.tag=\''+t+'\';render()">'+esc(lbl)+"</span>"}).join("")+
+    '<span class="chip'+(f.photo==="1"?" on":"")+'" role="switch" aria-checked="'+(f.photo==="1")+'" onclick="state.filters.photo=state.filters.photo===\'1\'?\'\':\'1\';render()">📷 '+(state.locale==="ja"?"写真がある山のみ":"With photos only")+"</span></div>";
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains}])+
     '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em">'+D.tabs.mountains+"</h1>"+
     '<div class="difflegend"><span class="lb">'+(state.locale==="ja"?"難易度の凡例:":"Difficulty legend:")+"</span>"+[1,2,3,4,5].map(diffBadge).join("")+"</div>"+
@@ -1109,7 +1112,7 @@ function vMountains(){
     (list.length?moreGrid(list):'<div class="empty"><div class="big">🏔</div>'+D.f.none+"</div>");
 }
 function applyFilters(){state.filters.q=document.getElementById("fQ").value;state.filters.country=document.getElementById("fC").value;state.filters.elev=document.getElementById("fE").value;state.filters.diff=document.getElementById("fD").value;render()}
-function resetFilters(){state.filters={q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD"};render()}
+function resetFilters(){state.filters={q:"",country:"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"};render()}
 function shareLink(){
   var D=d();
   var done=function(){var t=document.getElementById("toast");t.textContent=D.l.shared;t.classList.add("show");setTimeout(function(){t.classList.remove("show")},1800)};
@@ -1243,7 +1246,7 @@ function pathFor(view,locale){
   return "/"+l+(map[n]||"/");
 }
 function go(view){
-  if(view.name==="mountains"){state.filters={q:view.q||"",country:view.country||"",elev:"",diff:"",tag:"",sort:"elevD"}}
+  if(view.name==="mountains"){state.filters={q:view.q||"",country:view.country||"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"}}
   state.cardLimit=48;
   state.view=view;
   var url=BASE+pathFor(view);
@@ -1282,7 +1285,7 @@ function parseHash(){
   if(name==="mountains"&&!slug){
     var q0="";try{q0=new URLSearchParams(location.search).get("q")||""}catch(e){}
     state.view={name:"mountains"};
-    if(q0)state.filters={q:q0,country:"",elev:"",diff:"",tag:"",sort:"elevD"};
+    if(q0)state.filters={q:q0,country:"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"};
     return;
   }
   var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1};
