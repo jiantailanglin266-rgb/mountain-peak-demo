@@ -68,6 +68,7 @@ const STATIC_TITLES = {
     "legal:privacy": ["プライバシーポリシー | Mountain Peak", "Mountain Peakのプライバシーポリシー。"],
     "legal:disclaimer": ["安全免責事項 | Mountain Peak", "登山は自己責任です。Mountain Peakの安全免責事項と、安全に登るための推奨事項。"],
     countries: ["国・地域から探す — 世界の山を国別・山域別に | Mountain Peak", "日本・ネパール・スイスなど国別、北アルプス・ヒマラヤなど山域別に山をまとめたハブページ。"],
+    climbers: ["世界の登山家名鑑 — 著名クライマー300名 | Mountain Peak", "ウィンパーやメスナーから植村直己、アレックス・オノルドまで。世界の著名登山家300名をWikipedia引用の経歴・肖像・関連動画つきで紹介。"],
   },
   en: {
     home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. Primary mountain information from the 100 Famous Japanese Mountains to the Seven Summits."],
@@ -81,6 +82,7 @@ const STATIC_TITLES = {
     "legal:privacy": ["Privacy Policy | Mountain Peak", "Privacy policy for Mountain Peak."],
     "legal:disclaimer": ["Safety Disclaimer | Mountain Peak", "Climbing is at your own risk. Mountain Peak's safety disclaimer and recommendations."],
     countries: ["Browse by Country & Region | Mountain Peak", "Mountains organized by country (Japan, Nepal, Switzerland…) and range (Japan Alps, Himalaya…)."],
+    climbers: ["Great Mountaineers of the World — 300 Famous Climbers | Mountain Peak", "From Whymper and Messner to Naomi Uemura and Alex Honnold: 300 celebrated climbers with Wikipedia-sourced bios, portraits and videos."],
   },
 };
 
@@ -90,7 +92,7 @@ function push(path, l, title, desc, opts = {}) {
 
 for (const l of LOCALES) {
   const S = STATIC_TITLES[l];
-  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries"]) {
+  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries", "climbers"]) {
     const p = key === "home" ? `/${l}/` : `/${l}/${key}/`;
     push(p, l, S[key][0], S[key][1], { kind: key });
   }
@@ -217,6 +219,12 @@ function prerender(p) {
   } else if (p.kind === "countries") {
     body += `<ul>` + DATA.countries.map((c) => `<li><a href="${url(`/${l}/countries/${c.slug}/`)}">${esc(nm(c, l))}</a></li>`).join("") + `</ul>` +
       `<p>` + DATA.regions.map((x) => `<a href="${url(`/${l}/regions/${x.slug}/`)}">${esc(nm(x, l))}</a>`).join(" / ") + `</p>`;
+  } else if (p.kind === "climbers") {
+    try {
+      const CLIMBERS = JSON.parse(readFileSync(join(ROOT, "climbers.js"), "utf-8").match(/^var CLIMBERS=(.*);$/m)[1]);
+      body += `<p>${l === "ja" ? "テキスト・画像はWikipediaからの引用（CC BY-SA 4.0）です。" : "Bios and portraits quoted from Wikipedia (CC BY-SA 4.0)."}</p><ul>` +
+        CLIMBERS.map((c) => `<li>${esc(l === "ja" ? c.nj : (c.ne || c.nj))}${c.ne && l === "ja" ? " (" + esc(c.ne) + ")" : ""}</li>`).join("") + `</ul>`;
+    } catch {}
   } else if (p.kind === "articles") {
     body += `<ul>` + DATA.articles.map((a) => `<li><a href="${url(`/${l}/articles/${a.slug}/`)}">${esc(tr(a, l).title)}</a></li>`).join("") + `</ul>`;
   } else if (p.kind === "rankings") {

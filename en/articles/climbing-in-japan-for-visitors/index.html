@@ -362,6 +362,39 @@ footer .flinks a:hover{color:var(--ink);text-decoration:underline}
 .vbar a{font-size:12px;font-weight:700;color:var(--glacier);white-space:nowrap}
 .vbar button{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:6px 13px;white-space:nowrap}
 .vbar button:hover{color:var(--ink);border-color:var(--ink)}
+/* ===== 登山家名鑑 ===== */
+.clgrid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.clcard{cursor:pointer;padding:0;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.clcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.clstar{position:absolute;top:8px;right:10px;z-index:2;color:#F3C24A;font-size:15px;text-shadow:0 1px 4px rgba(0,0,0,.4)}
+.clthumb{width:100%;aspect-ratio:3/3.4;object-fit:cover;object-position:center 20%;display:block;background:var(--hair)}
+.clph{display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#2E4A57,#1B2A32)}
+.clph span{font-size:44px;font-weight:800;color:rgba(255,255,255,.85)}
+.clinfo{padding:11px 13px 13px}
+.clname{font-weight:800;font-size:14px;line-height:1.35}
+.clsub{font-size:10.5px;color:var(--muted);margin-top:2px}
+.clmeta{font-size:11px;color:var(--muted);margin-top:6px;display:flex;align-items:center;gap:5px}
+.cltags{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.cltags span{font-size:9.5px;font-weight:700;border:1px solid var(--line);border-radius:5px;padding:1px 7px;color:var(--muted)}
+.clbox{max-height:calc(100dvh - 60px);overflow-y:auto}
+.clhead{display:flex;gap:14px;align-items:flex-start;padding:18px 20px 0}
+.clface{width:86px;height:86px;border-radius:14px;object-fit:cover;object-position:center 20%;flex-shrink:0;background:var(--hair)}
+div.clface{display:flex;align-items:center;justify-content:center}
+div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
+.clht{flex:1;min-width:0}
+.clhead .cx{width:32px;height:32px;border-radius:999px;font-size:15px;flex-shrink:0}
+.clhead .cx:hover{background:var(--hair)}
+.clbody{padding:14px 20px 20px}
+.clnote{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:8px;padding:7px 11px;margin-bottom:10px}
+.clex{font-size:13.5px;line-height:1.9;white-space:pre-line}
+.clvid{margin-top:14px}
+.clvid h4{font-size:12px;font-weight:800;color:var(--glacier);margin-bottom:8px}
+.clvid iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
+.clvt{font-size:11px;color:var(--muted);margin-top:6px}
+.cllinks{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px}
+.cllinks a{font-size:12.5px;font-weight:700;color:var(--glacier)}
+.cllinks a:hover{text-decoration:underline}
+.clcredit{font-size:10.5px;color:var(--muted);margin-top:14px;border-top:1px solid var(--hair);padding-top:10px}
 /* ===== コミュニティ掲示板 ===== */
 .comnotice{border:1px solid var(--line);border-left:3px solid var(--glacier);background:var(--card);border-radius:10px;padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px}
 .comnotice b{color:var(--ink)}
@@ -518,7 +551,15 @@ The main season is July–September. Outside it, Japanese mountains turn serious
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",videos:"動画",community:"コミュニティ"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",videos:"動画",climbers:"登山家",community:"コミュニティ"},
+  clm:{title:"世界の登山家名鑑",sub:"黄金期の開拓者から現代のアルパインクライマーまで、世界の著名登山家300名を紹介。",
+   notice:"各登山家の紹介文・肖像画像は <b>Wikipedia（日本語版・英語版）からの引用</b>で、ライセンスは CC BY-SA 4.0 です。カード内のリンクから原典記事をご覧いただけます。動画はYouTube公式埋め込みプレーヤーで再生されます。",
+   searchPh:"名前で検索（例: メスナー, Honnold）",all:"すべて",found:"名",
+   tags:{pioneer:"黄金期・開拓","8000m":"8000m峰・ヒマラヤ",alpine:"アルパイン",rock:"ロック・フリー","free-solo":"フリーソロ",explorer:"冒険・極地",sherpa:"シェルパ・ガイド",female:"女性登山家"},
+   nat:"国籍",allNat:"すべての国",featured:"注目",
+   wikiJa:"Wikipedia 日本語版で読む ↗",wikiEn:"Read on English Wikipedia ↗",ytSearch:"YouTubeで動画を探す ↗",video:"関連動画",
+   noJa:"日本語の概要が未整備のため、英語版Wikipediaの概要を表示しています。",credit:"テキスト・画像: Wikipedia / CC BY-SA 4.0",close:"✕ 閉じる",
+   empty:"該当する登山家が見つかりませんでした"},
   vid:{title:"動画ライブラリ",sub:"YouTubeから山の動画をキュレーション。気になる山を映像でチェックしよう。",
    notice:"動画はYouTube公式の埋め込みプレーヤー（プライバシー強化モード）で再生されます。<b>サムネイルをクリックするまでYouTubeへの通信は発生しません</b>。各動画の著作権は各権利者・チャンネルに帰属します。",
    watch:"YouTubeで見る ↗",close:"✕ 閉じる",detailTitle:"動画で見る",
@@ -560,7 +601,15 @@ var DICT = {
   fnote:"これは Mountain Peak の静的デモ版です。検索・詳細・リスト・モック天気・登頂チェックリストをブラウザ内だけで動作させています。会員機能・管理画面・実DB接続・Open-Meteo実照会はフル版（サーバー版）でのみ提供されます。入力内容がサーバーへ送信されることはありません。",
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
- en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",videos:"Videos",community:"Community"},
+ en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",videos:"Videos",climbers:"Climbers",community:"Community"},
+  clm:{title:"Great Mountaineers of the World",sub:"300 celebrated climbers, from golden-age pioneers to today's alpinists.",
+   notice:"Biographies and portraits are <b>quoted from Wikipedia (Japanese & English editions)</b> under CC BY-SA 4.0. Follow the links on each card to the original articles. Videos play via YouTube's official embedded player.",
+   searchPh:"Search by name (e.g. Messner, Honnold)",all:"All",found:"climbers",
+   tags:{pioneer:"Golden Age & Pioneers","8000m":"8000ers & Himalaya",alpine:"Alpinism",rock:"Rock & Free","free-solo":"Free Solo",explorer:"Exploration & Polar",sherpa:"Sherpas & Guides",female:"Women Climbers"},
+   nat:"Nationality",allNat:"All countries",featured:"Featured",
+   wikiJa:"Read on Japanese Wikipedia ↗",wikiEn:"Read on English Wikipedia ↗",ytSearch:"Search videos on YouTube ↗",video:"Related Video",
+   noJa:"Japanese summary not available — showing the English Wikipedia extract.",credit:"Text & images: Wikipedia / CC BY-SA 4.0",close:"✕ Close",
+   empty:"No climbers match your filters"},
   vid:{title:"Video Library",sub:"Curated mountain videos from YouTube — scout your next peak on screen.",
    notice:"Videos play in YouTube's official embedded player (privacy-enhanced mode). <b>Nothing is loaded from YouTube until you click a thumbnail</b>. All videos remain the property of their creators.",
    watch:"Watch on YouTube ↗",close:"✕ Close",detailTitle:"Watch videos",
@@ -995,7 +1044,7 @@ function pathFor(view,locale){
   if(n==="thread")return "/"+l+"/community/?t="+encodeURIComponent(view.slug);
   if(n==="country")return "/"+l+"/countries/"+view.slug+"/";
   if(n==="region")return "/"+l+"/regions/"+view.slug+"/";
-  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/"};
+  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/"};
   return "/"+l+(map[n]||"/");
 }
 function go(view){
@@ -1034,7 +1083,7 @@ function parseHash(){
     state.view=t?{name:"thread",slug:t}:{name:"community"};
     return;
   }
-  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1};
+  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1};
   state.view=valid2[name]?{name:name}:{name:"home"};
 }
 /* ビュー別タイトル（SSG生成ページのタイトル設計と同一パターン） */
@@ -1050,6 +1099,7 @@ function pageTitle(v){
     if(v.name==="country"){var cc=DATA.countries.find(function(x){return x.slug===v.slug});if(cc)return names(cc)+(ja?"の山一覧・登山情報":" — Mountains & Climbing Guide")+" | Mountain Peak"}
     if(v.name==="region"){var rr=DATA.regions.find(function(x){return x.slug===v.slug});if(rr)return names(rr)+(ja?"の山と登山ルート":" — Mountains & Routes")+" | Mountain Peak"}
     if(v.name==="countries")return D.hub.countries+" | Mountain Peak";
+    if(v.name==="climbers")return D.clm.title+" | Mountain Peak";
     var statics={mountains:D.tabs.mountains,rankings:D.tabs.rankings,articles:D.tabs.articles,videos:D.tabs.videos,community:D.tabs.community,thread:D.tabs.community};
     if(statics[v.name])return statics[v.name]+" | Mountain Peak";
   }catch(e){}
@@ -1082,10 +1132,11 @@ function render(){
     else if(v.name==="countries")html=vCountries();
     else if(v.name==="country")html=vCountry(v.slug);
     else if(v.name==="region")html=vRegion(v.slug);
+    else if(v.name==="climbers")html=vClimbers();
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
-  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["videos",D.tabs.videos],["community",D.tabs.community]];
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
@@ -1187,6 +1238,117 @@ function vidOpen(id){
 }
 function vidClose(){
   var m=document.getElementById("vidModal");
+  if(m)m.remove();
+  document.body.style.overflow="";
+}
+
+/* ====== 世界の登山家名鑑（本文・肖像はWikipedia引用 CC BY-SA 4.0） ====== */
+var ISO_NAMES={jp:["日本","Japan"],gb:["イギリス","UK"],it:["イタリア","Italy"],fr:["フランス","France"],us:["アメリカ","USA"],at:["オーストリア","Austria"],de:["ドイツ","Germany"],ch:["スイス","Switzerland"],nz:["ニュージーランド","New Zealand"],np:["ネパール","Nepal"],pl:["ポーランド","Poland"],kz:["カザフスタン","Kazakhstan"],mx:["メキシコ","Mexico"],es:["スペイン","Spain"],ru:["ロシア","Russia"],si:["スロベニア","Slovenia"],ca:["カナダ","Canada"],ar:["アルゼンチン","Argentina"],se:["スウェーデン","Sweden"],cz:["チェコ","Czechia"],no:["ノルウェー","Norway"],au:["オーストラリア","Australia"],kr:["韓国","South Korea"],cn:["中国","China"],in:["インド","India"],pk:["パキスタン","Pakistan"]};
+function flagIso(iso){return iso?'<img class="fi" src="'+asset("images/flags/"+iso+".png")+'" alt="" width="18" height="14" onerror="this.style.display=\'none\'">':""}
+function natName(iso){var n=ISO_NAMES[iso];return n?(state.locale==="ja"?n[0]:n[1]):(iso||"").toUpperCase()}
+function ensureClimbers(){
+  if(window.CLIMBERS)return true;
+  try{
+    var x=new XMLHttpRequest();
+    x.open("GET",asset("climbers.js?v=1"),false);
+    x.send();
+    if(x.status===200||x.status===0){(0,eval)(x.responseText);return !!window.CLIMBERS}
+  }catch(e){console.error("climbers.js load failed",e)}
+  return false;
+}
+function clPortrait(c,cls){
+  if(c.img)return '<img class="'+cls+'" src="'+asset("images/climbers/"+c.id+".jpg")+'" alt="'+esc(c.nj)+'" decoding="async">';
+  var initial=(state.locale==="ja"?c.nj:(c.ne||c.nj)).charAt(0);
+  return '<div class="'+cls+' clph"><span>'+esc(initial)+"</span></div>";
+}
+function vClimbers(){
+  var D=d(),C=D.clm;
+  if(!ensureClimbers())return '<div class="empty">climbers data unavailable</div>';
+  var q=(state.clQ||"").toLowerCase();
+  var list=window.CLIMBERS.filter(function(c){
+    if(state.clTag&&(c.tags||[]).indexOf(state.clTag)<0)return false;
+    if(state.clNat&&c.nat!==state.clNat)return false;
+    if(q&&((c.nj||"")+" "+(c.ne||"")).toLowerCase().indexOf(q)<0)return false;
+    return true;
+  });
+  var tagKeys=Object.keys(C.tags);
+  var nats=[];
+  window.CLIMBERS.forEach(function(c){if(c.nat&&nats.indexOf(c.nat)<0)nats.push(c.nat)});
+  nats.sort(function(a,b){return natName(a).localeCompare(natName(b),state.locale)});
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:C.title}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800">'+C.title+'</h1>'+
+    '<p style="font-size:13px;color:var(--muted);margin:4px 0 14px">'+C.sub+"</p>"+
+    '<div class="comnotice">'+C.notice+"</div>"+
+    '<div class="card" style="padding:14px 16px;margin-bottom:14px"><div class="filters" style="grid-template-columns:2fr 1fr auto">'+
+    '<label>'+D.f.kw+'<input id="clQ" value="'+esc(state.clQ||"")+'" placeholder="'+esc(C.searchPh)+'" oninput="state.clQ=this.value;clRefresh()"></label>'+
+    '<label>'+C.nat+(state.clNat?" "+flagIso(state.clNat):"")+'<select onchange="state.clNat=this.value;render()"><option value="">'+C.allNat+"</option>"+
+    nats.map(function(n){return '<option value="'+n+'"'+(state.clNat===n?" selected":"")+">"+esc(natName(n))+"</option>"}).join("")+"</select></label>"+
+    '<div style="display:flex;align-items:flex-end"><button style="border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-size:13px;color:var(--muted)" onclick="state.clQ=\'\';state.clTag=\'\';state.clNat=\'\';render()">'+D.f.reset+"</button></div></div>"+
+    '<div class="chips" style="margin-top:10px"><span class="chip'+(!state.clTag?" on":"")+'" onclick="state.clTag=\'\';render()">'+C.all+"</span>"+
+    tagKeys.map(function(t){return '<span class="chip'+(state.clTag===t?" on":"")+'" onclick="state.clTag=\''+t+'\';render()">'+esc(C.tags[t])+"</span>"}).join("")+"</div></div>"+
+    '<div class="count"><b id="clCount">'+list.length+"</b> "+C.found+'</div><div class="clgrid" id="clGrid">'+list.map(clCard).join("")+"</div>"+
+    (list.length?"":'<div class="empty"><div class="big">🧗</div>'+C.empty+"</div>");
+}
+function clCard(c){
+  var D=d().clm;
+  var name=state.locale==="ja"?c.nj:(c.ne||c.nj);
+  var sub=state.locale==="ja"?(c.ne||""):(c.ne?c.nj:"");
+  return '<div class="card clcard rv" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="clOpen(\''+c.id+'\')">'+
+    (c.f?'<span class="clstar" title="'+D.featured+'">★</span>':"")+
+    clPortrait(c,"clthumb")+
+    '<div class="clinfo"><div class="clname">'+esc(name)+"</div>"+
+    (sub?'<div class="clsub">'+esc(sub)+"</div>":"")+
+    '<div class="clmeta">'+flagIso(c.nat)+" <span>"+esc(natName(c.nat))+"</span></div>"+
+    ((c.tags||[]).length?'<div class="cltags">'+(c.tags||[]).slice(0,2).map(function(t){return '<span>'+esc(D.tags[t]||t)+"</span>"}).join("")+"</div>":"")+
+    "</div></div>";
+}
+function clRefresh(){
+  var D=d().clm,q=(state.clQ||"").toLowerCase();
+  var list=window.CLIMBERS.filter(function(c){
+    if(state.clTag&&(c.tags||[]).indexOf(state.clTag)<0)return false;
+    if(state.clNat&&c.nat!==state.clNat)return false;
+    if(q&&((c.nj||"")+" "+(c.ne||"")).toLowerCase().indexOf(q)<0)return false;
+    return true;
+  });
+  var g=document.getElementById("clGrid"),n=document.getElementById("clCount");
+  if(g)g.innerHTML=list.map(clCard).join("");
+  if(n)n.textContent=list.length;
+  reveal();
+}
+function clOpen(id){
+  if(!ensureClimbers())return;
+  var c=window.CLIMBERS.find(function(x){return x.id===id});
+  if(!c)return;
+  var D=d().clm;
+  var name=state.locale==="ja"?c.nj:(c.ne||c.nj);
+  var extract=state.locale==="ja"?(c.xj||c.xe):(c.xe||c.xj);
+  var fallbackNote=state.locale==="ja"&&!c.xj&&c.xe;
+  var ytQ=encodeURIComponent((state.locale==="ja"?c.nj:(c.ne||c.nj))+" "+(state.locale==="ja"?"登山":"climbing"));
+  vidClose();
+  var ov=document.createElement("div");
+  ov.className="vmodal";ov.id="clModal";
+  ov.innerHTML='<div class="vbox clbox">'+
+    '<div class="clhead">'+clPortrait(c,"clface")+
+    '<div class="clht"><div class="clname" style="font-size:19px">'+esc(name)+"</div>"+
+    (c.ne&&state.locale==="ja"?'<div class="clsub">'+esc(c.ne)+"</div>":"")+
+    '<div class="clmeta" style="margin-top:6px">'+flagIso(c.nat)+" "+esc(natName(c.nat))+
+    ((c.tags||[]).length?" ・ "+(c.tags||[]).map(function(t){return esc(D.tags[t]||t)}).join(" / "):"")+"</div></div>"+
+    '<button class="cx" style="color:var(--ink)" onclick="clClose()" aria-label="close">✕</button></div>'+
+    '<div class="clbody">'+
+    (fallbackNote?'<p class="clnote">ℹ '+D.noJa+"</p>":"")+
+    '<p class="clex">'+esc(extract||"—")+"</p>"+
+    (c.v?'<div class="clvid"><h4>▶ '+D.video+'</h4><iframe src="https://www.youtube-nocookie.com/embed/'+c.v+'?rel=0" title="'+esc(c.vt||"")+'" allow="encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe>'+(c.vt?'<p class="clvt">'+esc(c.vt)+" · YouTube</p>":"")+"</div>":"")+
+    '<div class="cllinks">'+
+    (c.uj?'<a href="'+esc(c.uj)+'" target="_blank" rel="noopener noreferrer">'+D.wikiJa+"</a>":"")+
+    (c.ue?'<a href="'+esc(c.ue)+'" target="_blank" rel="noopener noreferrer">'+D.wikiEn+"</a>":"")+
+    '<a href="https://www.youtube.com/results?search_query='+ytQ+'" target="_blank" rel="noopener noreferrer">'+D.ytSearch+"</a></div>"+
+    '<p class="clcredit">'+D.credit+"</p></div></div>";
+  ov.addEventListener("click",function(e){if(e.target===ov)clClose()});
+  document.body.appendChild(ov);
+  document.body.style.overflow="hidden";
+}
+function clClose(){
+  var m=document.getElementById("clModal");
   if(m)m.remove();
   document.body.style.overflow="";
 }
@@ -1595,7 +1757,8 @@ function chatKey(e){if(e.key==="Enter"&&!e.isComposing){e.preventDefault();chatS
 window.toggleChat=toggleChat;window.chatSend=chatSend;window.chatChip=chatChip;window.chatKey=chatKey;window.chatGo=chatGo;
 window.comToggleForm=comToggleForm;window.comSubmit=comSubmit;window.comReply=comReply;window.comLike=comLike;window.comReport=comReport;
 window.vidOpen=vidOpen;window.vidClose=vidClose;
-document.addEventListener("keydown",function(e){if(e.key==="Escape")vidClose()});
+window.clOpen=clOpen;window.clClose=clClose;window.clRefresh=clRefresh;
+document.addEventListener("keydown",function(e){if(e.key==="Escape"){vidClose();clClose()}});
 
 var toTop=document.getElementById("toTop");
 toTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});

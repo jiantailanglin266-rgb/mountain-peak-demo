@@ -1,0 +1,3891 @@
+{
+ "entries": [
+  {
+   "id": "cl_001",
+   "nameJa": "エドワード・ウィンパー",
+   "nameEn": "Edward Whymper",
+   "wikiJa": "エドワード・ウィンパー",
+   "wikiEn": "Edward Whymper",
+   "nat": "gb",
+   "tags": [
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_002",
+   "nameJa": "ジャン＝アントワーヌ・カレル",
+   "nameEn": "Jean-Antoine Carrel",
+   "wikiJa": null,
+   "wikiEn": "Jean-Antoine Carrel",
+   "nat": "it",
+   "tags": [
+    "pioneer",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_003",
+   "nameJa": "ミシェル・クロ",
+   "nameEn": "Michel Croz",
+   "wikiJa": null,
+   "wikiEn": "Michel Croz",
+   "nat": "fr",
+   "tags": [
+    "pioneer",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_004",
+   "nameJa": "アルバート・マンメリー",
+   "nameEn": "Albert Frederick Mummery",
+   "wikiJa": "アルバート・フレデリック・マンメリー",
+   "wikiEn": "Albert Frederick Mummery",
+   "nat": "gb",
+   "tags": [
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_005",
+   "nameJa": "パウル・プロイス",
+   "nameEn": "Paul Preuss",
+   "wikiJa": null,
+   "wikiEn": "Paul Preuss (climber)",
+   "nat": "at",
+   "tags": [
+    "pioneer",
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_006",
+   "nameJa": "エミリオ・コミチ",
+   "nameEn": "Emilio Comici",
+   "wikiJa": null,
+   "wikiEn": "Emilio Comici",
+   "nat": "it",
+   "tags": [
+    "pioneer",
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_007",
+   "nameJa": "ジョージ・マロリー",
+   "nameEn": "George Mallory",
+   "wikiJa": "ジョージ・マロリー",
+   "wikiEn": "George Mallory",
+   "nat": "gb",
+   "tags": [
+    "pioneer",
+    "8000m"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_008",
+   "nameJa": "アンドリュー・アーヴィン",
+   "nameEn": "Andrew Irvine",
+   "wikiJa": "アンドリュー・アーヴィン (登山家)",
+   "wikiEn": "Andrew Irvine (mountaineer)",
+   "nat": "gb",
+   "tags": [
+    "pioneer",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_009",
+   "nameJa": "ノエル・オデール",
+   "nameEn": "Noel Odell",
+   "wikiJa": null,
+   "wikiEn": "Noel Odell",
+   "nat": "gb",
+   "tags": [
+    "pioneer",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_010",
+   "nameJa": "エドワード・ノートン",
+   "nameEn": "Edward Norton",
+   "wikiJa": null,
+   "wikiEn": "Edward Norton (British Army officer)",
+   "nat": "gb",
+   "tags": [
+    "pioneer",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_011",
+   "nameJa": "エリック・シプトン",
+   "nameEn": "Eric Shipton",
+   "wikiJa": "エリック・シプトン",
+   "wikiEn": "Eric Shipton",
+   "nat": "gb",
+   "tags": [
+    "pioneer",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_012",
+   "nameJa": "ビル・ティルマン",
+   "nameEn": "Bill Tilman",
+   "wikiJa": null,
+   "wikiEn": "Bill Tilman",
+   "nat": "gb",
+   "tags": [
+    "pioneer",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_013",
+   "nameJa": "フランク・スマイス",
+   "nameEn": "Frank Smythe",
+   "wikiJa": null,
+   "wikiEn": "Frank Smythe",
+   "nat": "gb",
+   "tags": [
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_014",
+   "nameJa": "アンリエット・ダンジュヴィル",
+   "nameEn": "Henriette d'Angeville",
+   "wikiJa": null,
+   "wikiEn": "Henriette d'Angeville",
+   "nat": "fr",
+   "tags": [
+    "pioneer",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_015",
+   "nameJa": "ルーシー・ウォーカー",
+   "nameEn": "Lucy Walker",
+   "wikiJa": null,
+   "wikiEn": "Lucy Walker (climber)",
+   "nat": "gb",
+   "tags": [
+    "pioneer",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_016",
+   "nameJa": "ファニー・ブロック・ワークマン",
+   "nameEn": "Fanny Bullock Workman",
+   "wikiJa": null,
+   "wikiEn": "Fanny Bullock Workman",
+   "nat": "us",
+   "tags": [
+    "pioneer",
+    "female",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_017",
+   "nameJa": "アニー・スミス・ペック",
+   "nameEn": "Annie Smith Peck",
+   "wikiJa": null,
+   "wikiEn": "Annie Smith Peck",
+   "nat": "us",
+   "tags": [
+    "pioneer",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_018",
+   "nameJa": "アンデルル・ヘックマイアー",
+   "nameEn": "Anderl Heckmair",
+   "wikiJa": null,
+   "wikiEn": "Anderl Heckmair",
+   "nat": "de",
+   "tags": [
+    "pioneer",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_019",
+   "nameJa": "ハインリヒ・ハラー",
+   "nameEn": "Heinrich Harrer",
+   "wikiJa": "ハインリヒ・ハラー",
+   "wikiEn": "Heinrich Harrer",
+   "nat": "at",
+   "tags": [
+    "pioneer",
+    "alpine",
+    "explorer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_020",
+   "nameJa": "リカルド・カシン",
+   "nameEn": "Riccardo Cassin",
+   "wikiJa": null,
+   "wikiEn": "Riccardo Cassin",
+   "nat": "it",
+   "tags": [
+    "pioneer",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_021",
+   "nameJa": "ジュスト・ジェルヴァズッティ",
+   "nameEn": "Giusto Gervasutti",
+   "wikiJa": null,
+   "wikiEn": "Giusto Gervasutti",
+   "nat": "it",
+   "tags": [
+    "pioneer",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_022",
+   "nameJa": "モーリス・エルゾーグ",
+   "nameEn": "Maurice Herzog",
+   "wikiJa": "モーリス・エルゾーグ",
+   "wikiEn": "Maurice Herzog",
+   "nat": "fr",
+   "tags": [
+    "8000m",
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_023",
+   "nameJa": "ルイ・ラシュナル",
+   "nameEn": "Louis Lachenal",
+   "wikiJa": null,
+   "wikiEn": "Louis Lachenal",
+   "nat": "fr",
+   "tags": [
+    "8000m",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_024",
+   "nameJa": "リオネル・テレイ",
+   "nameEn": "Lionel Terray",
+   "wikiJa": "リオネル・テレイ",
+   "wikiEn": "Lionel Terray",
+   "nat": "fr",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_025",
+   "nameJa": "ガストン・レビュファ",
+   "nameEn": "Gaston Rébuffat",
+   "wikiJa": "ガストン・レビュファ",
+   "wikiEn": "Gaston Rébuffat",
+   "nat": "fr",
+   "tags": [
+    "alpine",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_026",
+   "nameJa": "エドモンド・ヒラリー",
+   "nameEn": "Edmund Hillary",
+   "wikiJa": "エドモンド・ヒラリー",
+   "wikiEn": "Edmund Hillary",
+   "nat": "nz",
+   "tags": [
+    "8000m",
+    "pioneer",
+    "explorer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_027",
+   "nameJa": "テンジン・ノルゲイ",
+   "nameEn": "Tenzing Norgay",
+   "wikiJa": "テンジン・ノルゲイ",
+   "wikiEn": "Tenzing Norgay",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa",
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_028",
+   "nameJa": "ジョン・ハント",
+   "nameEn": "John Hunt",
+   "wikiJa": "ジョン・ハント",
+   "wikiEn": "John Hunt, Baron Hunt",
+   "nat": "gb",
+   "tags": [
+    "8000m",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_029",
+   "nameJa": "アキッレ・コンパニョーニ",
+   "nameEn": "Achille Compagnoni",
+   "wikiJa": null,
+   "wikiEn": "Achille Compagnoni",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_030",
+   "nameJa": "リーノ・ラチェデッリ",
+   "nameEn": "Lino Lacedelli",
+   "wikiJa": null,
+   "wikiEn": "Lino Lacedelli",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_031",
+   "nameJa": "ヘルマン・ブール",
+   "nameEn": "Hermann Buhl",
+   "wikiJa": "ヘルマン・ブール",
+   "wikiEn": "Hermann Buhl",
+   "nat": "at",
+   "tags": [
+    "8000m",
+    "alpine",
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_032",
+   "nameJa": "クルト・ディームベルガー",
+   "nameEn": "Kurt Diemberger",
+   "wikiJa": null,
+   "wikiEn": "Kurt Diemberger",
+   "nat": "at",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_033",
+   "nameJa": "ヴァルテル・ボナッティ",
+   "nameEn": "Walter Bonatti",
+   "wikiJa": "ワルテル・ボナッティ",
+   "wikiEn": "Walter Bonatti",
+   "nat": "it",
+   "tags": [
+    "alpine",
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_034",
+   "nameJa": "チェーザレ・マエストリ",
+   "nameEn": "Cesare Maestri",
+   "wikiJa": null,
+   "wikiEn": "Cesare Maestri",
+   "nat": "it",
+   "tags": [
+    "alpine",
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_035",
+   "nameJa": "トニー・エッガー",
+   "nameEn": "Toni Egger",
+   "wikiJa": null,
+   "wikiEn": "Toni Egger",
+   "nat": "at",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_036",
+   "nameJa": "フリッツ・ヴィースナー",
+   "nameEn": "Fritz Wiessner",
+   "wikiJa": null,
+   "wikiEn": "Fritz Wiessner",
+   "nat": "us",
+   "tags": [
+    "8000m",
+    "rock",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_037",
+   "nameJa": "チャールズ・ヒューストン",
+   "nameEn": "Charles Houston",
+   "wikiJa": null,
+   "wikiEn": "Charles Snead Houston",
+   "nat": "us",
+   "tags": [
+    "8000m",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_038",
+   "nameJa": "ブラッドフォード・ウォッシュバーン",
+   "nameEn": "Bradford Washburn",
+   "wikiJa": null,
+   "wikiEn": "Bradford Washburn",
+   "nat": "us",
+   "tags": [
+    "explorer",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_039",
+   "nameJa": "アルディート・デジオ",
+   "nameEn": "Ardito Desio",
+   "wikiJa": null,
+   "wikiEn": "Ardito Desio",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_040",
+   "nameJa": "ウィリー・アンゾルト",
+   "nameEn": "Willi Unsoeld",
+   "wikiJa": null,
+   "wikiEn": "Willi Unsoeld",
+   "nat": "us",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_041",
+   "nameJa": "トム・ホーンバイン",
+   "nameEn": "Tom Hornbein",
+   "wikiJa": null,
+   "wikiEn": "Tom Hornbein",
+   "nat": "us",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_042",
+   "nameJa": "ジム・ウィテカー",
+   "nameEn": "Jim Whittaker",
+   "wikiJa": null,
+   "wikiEn": "Jim Whittaker",
+   "nat": "us",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_043",
+   "nameJa": "ノーマン・ディーレンファース",
+   "nameEn": "Norman Dyhrenfurth",
+   "wikiJa": null,
+   "wikiEn": "Norman Dyhrenfurth",
+   "nat": "ch",
+   "tags": [
+    "8000m",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_044",
+   "nameJa": "ジョー・ブラウン",
+   "nameEn": "Joe Brown",
+   "wikiJa": "ジョー・ブラウン (登山家)",
+   "wikiEn": "Joe Brown (climber)",
+   "nat": "gb",
+   "tags": [
+    "rock",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_045",
+   "nameJa": "ドン・ウィランス",
+   "nameEn": "Don Whillans",
+   "wikiJa": null,
+   "wikiEn": "Don Whillans",
+   "nat": "gb",
+   "tags": [
+    "rock",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_046",
+   "nameJa": "クリス・ボニントン",
+   "nameEn": "Chris Bonington",
+   "wikiJa": "クリス・ボニントン",
+   "wikiEn": "Chris Bonington",
+   "nat": "gb",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_047",
+   "nameJa": "ダグ・スコット",
+   "nameEn": "Doug Scott",
+   "wikiJa": null,
+   "wikiEn": "Doug Scott",
+   "nat": "gb",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_048",
+   "nameJa": "ドゥーガル・ハストン",
+   "nameEn": "Dougal Haston",
+   "wikiJa": null,
+   "wikiEn": "Dougal Haston",
+   "nat": "gb",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_049",
+   "nameJa": "ピーター・ボードマン",
+   "nameEn": "Peter Boardman",
+   "wikiJa": null,
+   "wikiEn": "Peter Boardman",
+   "nat": "gb",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_050",
+   "nameJa": "ジョー・タスカー",
+   "nameEn": "Joe Tasker",
+   "wikiJa": null,
+   "wikiEn": "Joe Tasker",
+   "nat": "gb",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_051",
+   "nameJa": "アレックス・マッキンタイア",
+   "nameEn": "Alex MacIntyre",
+   "wikiJa": null,
+   "wikiEn": "Alex MacIntyre",
+   "nat": "gb",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_052",
+   "nameJa": "ミック・ファウラー",
+   "nameEn": "Mick Fowler",
+   "wikiJa": null,
+   "wikiEn": "Mick Fowler",
+   "nat": "gb",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_053",
+   "nameJa": "ポール・ラムスデン",
+   "nameEn": "Paul Ramsden",
+   "wikiJa": null,
+   "wikiEn": "Paul Ramsden (climber)",
+   "nat": "gb",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_054",
+   "nameJa": "ジョー・シンプソン",
+   "nameEn": "Joe Simpson",
+   "wikiJa": "ジョー・シンプソン (登山家)",
+   "wikiEn": "Joe Simpson (mountaineer)",
+   "nat": "gb",
+   "tags": [
+    "alpine"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_055",
+   "nameJa": "サイモン・イェーツ",
+   "nameEn": "Simon Yates",
+   "wikiJa": null,
+   "wikiEn": "Simon Yates (mountaineer)",
+   "nat": "gb",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_056",
+   "nameJa": "レオ・ホールディング",
+   "nameEn": "Leo Houlding",
+   "wikiJa": null,
+   "wikiEn": "Leo Houlding",
+   "nat": "gb",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_057",
+   "nameJa": "アンディ・ケイヴ",
+   "nameEn": "Andy Cave",
+   "wikiJa": null,
+   "wikiEn": "Andy Cave",
+   "nat": "gb",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_058",
+   "nameJa": "ラインホルト・メスナー",
+   "nameEn": "Reinhold Messner",
+   "wikiJa": "ラインホルト・メスナー",
+   "wikiEn": "Reinhold Messner",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_059",
+   "nameJa": "ペーター・ハーベラー",
+   "nameEn": "Peter Habeler",
+   "wikiJa": "ペーター・ハーベラー",
+   "wikiEn": "Peter Habeler",
+   "nat": "at",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_060",
+   "nameJa": "ハンス・カマランダー",
+   "nameEn": "Hans Kammerlander",
+   "wikiJa": null,
+   "wikiEn": "Hans Kammerlander",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_061",
+   "nameJa": "イェジ・ククチカ",
+   "nameEn": "Jerzy Kukuczka",
+   "wikiJa": "イェジ・ククチカ",
+   "wikiEn": "Jerzy Kukuczka",
+   "nat": "pl",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_062",
+   "nameJa": "ヴォイテク・クルティカ",
+   "nameEn": "Voytek Kurtyka",
+   "wikiJa": "ヴォイテク・クルティカ",
+   "wikiEn": "Voytek Kurtyka",
+   "nat": "pl",
+   "tags": [
+    "alpine",
+    "8000m"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_063",
+   "nameJa": "クシシュトフ・ヴィエリツキ",
+   "nameEn": "Krzysztof Wielicki",
+   "wikiJa": null,
+   "wikiEn": "Krzysztof Wielicki",
+   "nat": "pl",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_064",
+   "nameJa": "アンジェイ・ザヴァダ",
+   "nameEn": "Andrzej Zawada",
+   "wikiJa": null,
+   "wikiEn": "Andrzej Zawada",
+   "nat": "pl",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_065",
+   "nameJa": "ワンダ・ルトキェヴィチ",
+   "nameEn": "Wanda Rutkiewicz",
+   "wikiJa": "ワンダ・ルトキエヴィッチ",
+   "wikiEn": "Wanda Rutkiewicz",
+   "nat": "pl",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_066",
+   "nameJa": "アルトゥル・ハイゼル",
+   "nameEn": "Artur Hajzer",
+   "wikiJa": null,
+   "wikiEn": "Artur Hajzer",
+   "nat": "pl",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_067",
+   "nameJa": "アダム・ビエレツキ",
+   "nameEn": "Adam Bielecki",
+   "wikiJa": null,
+   "wikiEn": "Adam Bielecki (climber)",
+   "nat": "pl",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_068",
+   "nameJa": "エアハルト・ロレタン",
+   "nameEn": "Erhard Loretan",
+   "wikiJa": null,
+   "wikiEn": "Erhard Loretan",
+   "nat": "ch",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_069",
+   "nameJa": "ジャン・トロワイエ",
+   "nameEn": "Jean Troillet",
+   "wikiJa": null,
+   "wikiEn": "Jean Troillet",
+   "nat": "ch",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_070",
+   "nameJa": "カルロス・カルソリオ",
+   "nameEn": "Carlos Carsolio",
+   "wikiJa": null,
+   "wikiEn": "Carlos Carsolio",
+   "nat": "mx",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_071",
+   "nameJa": "エド・ビエスターズ",
+   "nameEn": "Ed Viesturs",
+   "wikiJa": "エド・ビエスターズ",
+   "wikiEn": "Ed Viesturs",
+   "nat": "us",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_072",
+   "nameJa": "フアニート・オヤルサバル",
+   "nameEn": "Juanito Oiarzabal",
+   "wikiJa": null,
+   "wikiEn": "Juanito Oiarzabal",
+   "nat": "es",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_073",
+   "nameJa": "アルベルト・イヌラテギ",
+   "nameEn": "Alberto Iñurrategi",
+   "wikiJa": null,
+   "wikiEn": "Alberto Iñurrategi",
+   "nat": "es",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_074",
+   "nameJa": "デニス・ウルブコ",
+   "nameEn": "Denis Urubko",
+   "wikiJa": null,
+   "wikiEn": "Denis Urubko",
+   "nat": "kz",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_075",
+   "nameJa": "セルヒオ・マルティニ",
+   "nameEn": "Sergio Martini",
+   "wikiJa": null,
+   "wikiEn": "Sergio Martini",
+   "nat": "it",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_076",
+   "nameJa": "シルヴィオ・モンディネッリ",
+   "nameEn": "Silvio Mondinelli",
+   "wikiJa": null,
+   "wikiEn": "Silvio Mondinelli",
+   "nat": "it",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_077",
+   "nameJa": "ラルフ・ドゥイモビッツ",
+   "nameEn": "Ralf Dujmovits",
+   "wikiJa": null,
+   "wikiEn": "Ralf Dujmovits",
+   "nat": "de",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_078",
+   "nameJa": "ダビド・ゲットラー",
+   "nameEn": "David Göttler",
+   "wikiJa": null,
+   "wikiEn": "David Göttler",
+   "nat": "de",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_079",
+   "nameJa": "ルネ・デメゾン",
+   "nameEn": "René Desmaison",
+   "wikiJa": null,
+   "wikiEn": "René Desmaison",
+   "nat": "fr",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_080",
+   "nameJa": "クリストフ・プロフィ",
+   "nameEn": "Christophe Profit",
+   "wikiJa": null,
+   "wikiEn": "Christophe Profit",
+   "nat": "fr",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_081",
+   "nameJa": "ピエール・ベガン",
+   "nameEn": "Pierre Béghin",
+   "wikiJa": null,
+   "wikiEn": "Pierre Béghin",
+   "nat": "fr",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_082",
+   "nameJa": "ジャン＝クリストフ・ラファイユ",
+   "nameEn": "Jean-Christophe Lafaille",
+   "wikiJa": "ジャン＝クリストフ・ラファイユ",
+   "wikiEn": "Jean-Christophe Lafaille",
+   "nat": "fr",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_083",
+   "nameJa": "マルク・バタール",
+   "nameEn": "Marc Batard",
+   "wikiJa": null,
+   "wikiEn": "Marc Batard",
+   "nat": "fr",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_084",
+   "nameJa": "ブノワ・シャムー",
+   "nameEn": "Benoît Chamoux",
+   "wikiJa": null,
+   "wikiEn": "Benoît Chamoux",
+   "nat": "fr",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_085",
+   "nameJa": "パトリック・ベロー",
+   "nameEn": "Patrick Berhault",
+   "wikiJa": null,
+   "wikiEn": "Patrick Berhault",
+   "nat": "fr",
+   "tags": [
+    "alpine",
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_086",
+   "nameJa": "パトリック・エドランジェ",
+   "nameEn": "Patrick Edlinger",
+   "wikiJa": "パトリック・エドランジェ",
+   "wikiEn": "Patrick Edlinger",
+   "nat": "fr",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_087",
+   "nameJa": "カトリーヌ・デスティベル",
+   "nameEn": "Catherine Destivelle",
+   "wikiJa": "カトリーヌ・デスティベル",
+   "wikiEn": "Catherine Destivelle",
+   "nat": "fr",
+   "tags": [
+    "rock",
+    "alpine",
+    "female"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_088",
+   "nameJa": "エリザベート・ルヴォル",
+   "nameEn": "Élisabeth Revol",
+   "wikiJa": null,
+   "wikiEn": "Élisabeth Revol",
+   "nat": "fr",
+   "tags": [
+    "8000m",
+    "alpine",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_089",
+   "nameJa": "リオネル・ドーデ",
+   "nameEn": "Lionel Daudet",
+   "wikiJa": null,
+   "wikiEn": "Lionel Daudet",
+   "nat": "fr",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_090",
+   "nameJa": "トマシュ・フマル",
+   "nameEn": "Tomaž Humar",
+   "wikiJa": null,
+   "wikiEn": "Tomaž Humar",
+   "nat": "si",
+   "tags": [
+    "alpine",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_091",
+   "nameJa": "マルコ・プレゼリ",
+   "nameEn": "Marko Prezelj",
+   "wikiJa": null,
+   "wikiEn": "Marko Prezelj",
+   "nat": "si",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_092",
+   "nameJa": "シルヴォ・カロ",
+   "nameEn": "Silvo Karo",
+   "wikiJa": null,
+   "wikiEn": "Silvo Karo",
+   "nat": "si",
+   "tags": [
+    "alpine",
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_093",
+   "nameJa": "ネイツ・ザプロトニク",
+   "nameEn": "Nejc Zaplotnik",
+   "wikiJa": null,
+   "wikiEn": "Nejc Zaplotnik",
+   "nat": "si",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_094",
+   "nameJa": "アレシュ・チェセン",
+   "nameEn": "Aleš Česen",
+   "wikiJa": null,
+   "wikiEn": "Aleš Česen",
+   "nat": "si",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_095",
+   "nameJa": "アナトリ・ブクレーエフ",
+   "nameEn": "Anatoli Boukreev",
+   "wikiJa": "アナトリ・ブクレーエフ",
+   "wikiEn": "Anatoli Boukreev",
+   "nat": "kz",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_096",
+   "nameJa": "ヴァレリー・ババノフ",
+   "nameEn": "Valery Babanov",
+   "wikiJa": null,
+   "wikiEn": "Valery Babanov",
+   "nat": "ru",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_097",
+   "nameJa": "トメク・マツキェヴィチ",
+   "nameEn": "Tomasz Mackiewicz",
+   "wikiJa": null,
+   "wikiEn": "Tomasz Mackiewicz",
+   "nat": "pl",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_098",
+   "nameJa": "ウーリー・ステック",
+   "nameEn": "Ueli Steck",
+   "wikiJa": "ウーリー・ステック",
+   "wikiEn": "Ueli Steck",
+   "nat": "ch",
+   "tags": [
+    "alpine",
+    "8000m"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_099",
+   "nameJa": "ダニ・アーノルド",
+   "nameEn": "Dani Arnold",
+   "wikiJa": null,
+   "wikiEn": "Dani Arnold (climber)",
+   "nat": "ch",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_100",
+   "nameJa": "キリアン・ジョルネ",
+   "nameEn": "Kilian Jornet",
+   "wikiJa": "キリアン・ジョルネ",
+   "wikiEn": "Kilian Jornet",
+   "nat": "es",
+   "tags": [
+    "alpine",
+    "explorer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_101",
+   "nameJa": "シモーネ・モーロ",
+   "nameEn": "Simone Moro",
+   "wikiJa": "シモーネ・モーロ",
+   "wikiEn": "Simone Moro",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_102",
+   "nameJa": "タマラ・ルンガー",
+   "nameEn": "Tamara Lunger",
+   "wikiJa": null,
+   "wikiEn": "Tamara Lunger",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_103",
+   "nameJa": "ハンスイェルク・アウアー",
+   "nameEn": "Hansjörg Auer",
+   "wikiJa": null,
+   "wikiEn": "Hansjörg Auer",
+   "nat": "at",
+   "tags": [
+    "alpine",
+    "free-solo"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_104",
+   "nameJa": "ダビド・ラマ",
+   "nameEn": "David Lama",
+   "wikiJa": "ダビド・ラマ",
+   "wikiEn": "David Lama",
+   "nat": "at",
+   "tags": [
+    "alpine",
+    "rock"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_105",
+   "nameJa": "シュテファン・グロヴァッツ",
+   "nameEn": "Stefan Glowacz",
+   "wikiJa": null,
+   "wikiEn": "Stefan Glowacz",
+   "nat": "de",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_106",
+   "nameJa": "トーマス・フーバー",
+   "nameEn": "Thomas Huber",
+   "wikiJa": null,
+   "wikiEn": "Thomas Huber (climber)",
+   "nat": "de",
+   "tags": [
+    "rock",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_107",
+   "nameJa": "アレクサンダー・フーバー",
+   "nameEn": "Alexander Huber",
+   "wikiJa": null,
+   "wikiEn": "Alexander Huber (climber)",
+   "nat": "de",
+   "tags": [
+    "rock",
+    "alpine",
+    "free-solo"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_108",
+   "nameJa": "スティーブ・ハウス",
+   "nameEn": "Steve House",
+   "wikiJa": null,
+   "wikiEn": "Steve House",
+   "nat": "us",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_109",
+   "nameJa": "ヴィンス・アンダーソン",
+   "nameEn": "Vince Anderson",
+   "wikiJa": null,
+   "wikiEn": "Vince Anderson (climber)",
+   "nat": "us",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_110",
+   "nameJa": "マーク・トワイト",
+   "nameEn": "Mark Twight",
+   "wikiJa": null,
+   "wikiEn": "Mark Twight",
+   "nat": "us",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_111",
+   "nameJa": "バリー・ブランチャード",
+   "nameEn": "Barry Blanchard",
+   "wikiJa": null,
+   "wikiEn": "Barry Blanchard",
+   "nat": "ca",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_112",
+   "nameJa": "ウィル・ガッド",
+   "nameEn": "Will Gadd",
+   "wikiJa": null,
+   "wikiEn": "Will Gadd",
+   "nat": "ca",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_113",
+   "nameJa": "イネス・パパート",
+   "nameEn": "Ines Papert",
+   "wikiJa": null,
+   "wikiEn": "Ines Papert",
+   "nat": "de",
+   "tags": [
+    "alpine",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_114",
+   "nameJa": "コリン・ヘイリー",
+   "nameEn": "Colin Haley",
+   "wikiJa": null,
+   "wikiEn": "Colin Haley",
+   "nat": "us",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_115",
+   "nameJa": "マーク＝アンドレ・ルクレール",
+   "nameEn": "Marc-André Leclerc",
+   "wikiJa": "マーク＝アンドレ・ルクレール",
+   "wikiEn": "Marc-André Leclerc",
+   "nat": "ca",
+   "tags": [
+    "alpine",
+    "free-solo"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_116",
+   "nameJa": "ロランド・ガリボッティ",
+   "nameEn": "Rolando Garibotti",
+   "wikiJa": null,
+   "wikiEn": "Rolando Garibotti",
+   "nat": "ar",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_117",
+   "nameJa": "ロブ・ホール",
+   "nameEn": "Rob Hall",
+   "wikiJa": "ロブ・ホール",
+   "wikiEn": "Rob Hall",
+   "nat": "nz",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_118",
+   "nameJa": "スコット・フィッシャー",
+   "nameEn": "Scott Fischer",
+   "wikiJa": "スコット・フィッシャー",
+   "wikiEn": "Scott Fischer",
+   "nat": "us",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_119",
+   "nameJa": "デイヴィッド・ブリーシアーズ",
+   "nameEn": "David Breashears",
+   "wikiJa": null,
+   "wikiEn": "David Breashears",
+   "nat": "us",
+   "tags": [
+    "8000m",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_120",
+   "nameJa": "イェラン・クロップ",
+   "nameEn": "Göran Kropp",
+   "wikiJa": null,
+   "wikiEn": "Göran Kropp",
+   "nat": "se",
+   "tags": [
+    "8000m",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_121",
+   "nameJa": "アパ・シェルパ",
+   "nameEn": "Apa Sherpa",
+   "wikiJa": "アパ・シェルパ",
+   "wikiEn": "Apa Sherpa",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_122",
+   "nameJa": "アン・リタ・シェルパ",
+   "nameEn": "Ang Rita Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Ang Rita",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_123",
+   "nameJa": "カミ・リタ・シェルパ",
+   "nameEn": "Kami Rita Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Kami Rita",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_124",
+   "nameJa": "パサン・ラム・シェルパ",
+   "nameEn": "Pasang Lhamu Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Pasang Lhamu Sherpa",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_125",
+   "nameJa": "ラクパ・シェルパ",
+   "nameEn": "Lhakpa Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Lhakpa Sherpa",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_126",
+   "nameJa": "サヌ・シェルパ",
+   "nameEn": "Sanu Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Sanu Sherpa",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_127",
+   "nameJa": "ニルマル・プルジャ",
+   "nameEn": "Nirmal Purja",
+   "wikiJa": "ニルマル・プルジャ",
+   "wikiEn": "Nirmal Purja",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_128",
+   "nameJa": "ミンマ・デビッド・シェルパ",
+   "nameEn": "Mingma David Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Mingma David Sherpa",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_129",
+   "nameJa": "ミンマ・ギャルジェ・シェルパ",
+   "nameEn": "Mingma Gyalje Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Mingma Gyalje Sherpa",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_130",
+   "nameJa": "アン・タルカイ",
+   "nameEn": "Ang Tharkay",
+   "wikiJa": null,
+   "wikiEn": "Ang Tharkay",
+   "nat": "np",
+   "tags": [
+    "sherpa",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_131",
+   "nameJa": "バブ・チリ・シェルパ",
+   "nameEn": "Babu Chiri Sherpa",
+   "wikiJa": null,
+   "wikiEn": "Babu Chiri Sherpa",
+   "nat": "np",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_132",
+   "nameJa": "ムハンマド・アリ・サドパラ",
+   "nameEn": "Muhammad Ali Sadpara",
+   "wikiJa": null,
+   "wikiEn": "Muhammad Ali Sadpara",
+   "nat": "pk",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_133",
+   "nameJa": "厳弘吉",
+   "nameEn": "Um Hong-gil",
+   "wikiJa": null,
+   "wikiEn": "Um Hong-gil",
+   "nat": "kr",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_134",
+   "nameJa": "朴英碩",
+   "nameEn": "Park Young-seok",
+   "wikiJa": null,
+   "wikiEn": "Park Young-seok",
+   "nat": "kr",
+   "tags": [
+    "8000m",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_135",
+   "nameJa": "呉銀善",
+   "nameEn": "Oh Eun-sun",
+   "wikiJa": null,
+   "wikiEn": "Oh Eun-sun",
+   "nat": "kr",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_136",
+   "nameJa": "金昌浩",
+   "nameEn": "Kim Chang-ho",
+   "wikiJa": null,
+   "wikiEn": "Kim Chang-ho (climber)",
+   "nat": "kr",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_137",
+   "nameJa": "ゲルリンデ・カルテンブルンナー",
+   "nameEn": "Gerlinde Kaltenbrunner",
+   "wikiJa": "ゲルリンデ・カルテンブルンナー",
+   "wikiEn": "Gerlinde Kaltenbrunner",
+   "nat": "at",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_138",
+   "nameJa": "エドゥルネ・パサバン",
+   "nameEn": "Edurne Pasaban",
+   "wikiJa": "エドゥルネ・パサバン",
+   "wikiEn": "Edurne Pasaban",
+   "nat": "es",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_139",
+   "nameJa": "ニベス・メロイ",
+   "nameEn": "Nives Meroi",
+   "wikiJa": null,
+   "wikiEn": "Nives Meroi",
+   "nat": "it",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_140",
+   "nameJa": "アリソン・ハーグリーブス",
+   "nameEn": "Alison Hargreaves",
+   "wikiJa": null,
+   "wikiEn": "Alison Hargreaves",
+   "nat": "gb",
+   "tags": [
+    "8000m",
+    "alpine",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_141",
+   "nameJa": "シャンタル・モデュイ",
+   "nameEn": "Chantal Mauduit",
+   "wikiJa": null,
+   "wikiEn": "Chantal Mauduit",
+   "nat": "fr",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_142",
+   "nameJa": "アルレーネ・ブルム",
+   "nameEn": "Arlene Blum",
+   "wikiJa": null,
+   "wikiEn": "Arlene Blum",
+   "nat": "us",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_143",
+   "nameJa": "クリスティン・ハリラ",
+   "nameEn": "Kristin Harila",
+   "wikiJa": null,
+   "wikiEn": "Kristin Harila",
+   "nat": "no",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_144",
+   "nameJa": "セシリエ・スコグ",
+   "nameEn": "Cecilie Skog",
+   "wikiJa": null,
+   "wikiEn": "Cecilie Skog",
+   "nat": "no",
+   "tags": [
+    "8000m",
+    "female",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_145",
+   "nameJa": "ヒラリー・ネルソン",
+   "nameEn": "Hilaree Nelson",
+   "wikiJa": null,
+   "wikiEn": "Hilaree Nelson",
+   "nat": "us",
+   "tags": [
+    "alpine",
+    "female",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_146",
+   "nameJa": "ロイヤル・ロビンス",
+   "nameEn": "Royal Robbins",
+   "wikiJa": null,
+   "wikiEn": "Royal Robbins",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_147",
+   "nameJa": "ウォーレン・ハーディング",
+   "nameEn": "Warren Harding",
+   "wikiJa": "ウォーレン・ハーディング (登山家)",
+   "wikiEn": "Warren Harding (climber)",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_148",
+   "nameJa": "イヴォン・シュイナード",
+   "nameEn": "Yvon Chouinard",
+   "wikiJa": "イヴォン・シュイナード",
+   "wikiEn": "Yvon Chouinard",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_149",
+   "nameJa": "ジム・ブリッドウェル",
+   "nameEn": "Jim Bridwell",
+   "wikiJa": null,
+   "wikiEn": "Jim Bridwell",
+   "nat": "us",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_150",
+   "nameJa": "ジョン・バーカー",
+   "nameEn": "John Bachar",
+   "wikiJa": null,
+   "wikiEn": "John Bachar",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "free-solo"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_151",
+   "nameJa": "ピーター・クロフト",
+   "nameEn": "Peter Croft",
+   "wikiJa": null,
+   "wikiEn": "Peter Croft (climber)",
+   "nat": "ca",
+   "tags": [
+    "rock",
+    "free-solo"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_152",
+   "nameJa": "フレッド・ベッキー",
+   "nameEn": "Fred Beckey",
+   "wikiJa": null,
+   "wikiEn": "Fred Beckey",
+   "nat": "us",
+   "tags": [
+    "alpine",
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_153",
+   "nameJa": "ディーン・ポッター",
+   "nameEn": "Dean Potter",
+   "wikiJa": "ディーン・ポッター",
+   "wikiEn": "Dean Potter",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "free-solo"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_154",
+   "nameJa": "ステフ・デイヴィス",
+   "nameEn": "Steph Davis",
+   "wikiJa": null,
+   "wikiEn": "Steph Davis",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "free-solo",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_155",
+   "nameJa": "リン・ヒル",
+   "nameEn": "Lynn Hill",
+   "wikiJa": "リン・ヒル",
+   "wikiEn": "Lynn Hill",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "female"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_156",
+   "nameJa": "ヴォルフガング・ギュリッヒ",
+   "nameEn": "Wolfgang Güllich",
+   "wikiJa": "ヴォルフガング・ギュリッヒ",
+   "wikiEn": "Wolfgang Güllich",
+   "nat": "de",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_157",
+   "nameJa": "クルト・アルベルト",
+   "nameEn": "Kurt Albert",
+   "wikiJa": null,
+   "wikiEn": "Kurt Albert",
+   "nat": "de",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_158",
+   "nameJa": "ジェリー・モファット",
+   "nameEn": "Jerry Moffatt",
+   "wikiJa": null,
+   "wikiEn": "Jerry Moffatt",
+   "nat": "gb",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_159",
+   "nameJa": "ベン・ムーン",
+   "nameEn": "Ben Moon",
+   "wikiJa": null,
+   "wikiEn": "Ben Moon (climber)",
+   "nat": "gb",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_160",
+   "nameJa": "クリス・シャーマ",
+   "nameEn": "Chris Sharma",
+   "wikiJa": "クリス・シャーマ",
+   "wikiEn": "Chris Sharma",
+   "nat": "us",
+   "tags": [
+    "rock"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_161",
+   "nameJa": "アダム・オンドラ",
+   "nameEn": "Adam Ondra",
+   "wikiJa": "アダム・オンドラ",
+   "wikiEn": "Adam Ondra",
+   "nat": "cz",
+   "tags": [
+    "rock"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_162",
+   "nameJa": "アレックス・メゴス",
+   "nameEn": "Alexander Megos",
+   "wikiJa": null,
+   "wikiEn": "Alexander Megos",
+   "nat": "de",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_163",
+   "nameJa": "ヤンヤ・ガンブレット",
+   "nameEn": "Janja Garnbret",
+   "wikiJa": "ヤンヤ・ガンブレット",
+   "wikiEn": "Janja Garnbret",
+   "nat": "si",
+   "tags": [
+    "rock",
+    "female"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_164",
+   "nameJa": "アレックス・オノルド",
+   "nameEn": "Alex Honnold",
+   "wikiJa": "アレックス・オノルド",
+   "wikiEn": "Alex Honnold",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "free-solo"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_165",
+   "nameJa": "トミー・コールドウェル",
+   "nameEn": "Tommy Caldwell",
+   "wikiJa": "トミー・コールドウェル",
+   "wikiEn": "Tommy Caldwell",
+   "nat": "us",
+   "tags": [
+    "rock"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_166",
+   "nameJa": "ケビン・ジョージソン",
+   "nameEn": "Kevin Jorgeson",
+   "wikiJa": null,
+   "wikiEn": "Kevin Jorgeson",
+   "nat": "us",
+   "tags": [
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_167",
+   "nameJa": "サッシャ・ディジュリアン",
+   "nameEn": "Sasha DiGiulian",
+   "wikiJa": null,
+   "wikiEn": "Sasha DiGiulian",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_168",
+   "nameJa": "エミリー・ハリントン",
+   "nameEn": "Emily Harrington",
+   "wikiJa": null,
+   "wikiEn": "Emily Harrington",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_169",
+   "nameJa": "白石阿島",
+   "nameEn": "Ashima Shiraishi",
+   "wikiJa": "白石阿島",
+   "wikiEn": "Ashima Shiraishi",
+   "nat": "us",
+   "tags": [
+    "rock",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_170",
+   "nameJa": "アンジェラ・アイター",
+   "nameEn": "Angela Eiter",
+   "wikiJa": null,
+   "wikiEn": "Angela Eiter",
+   "nat": "at",
+   "tags": [
+    "rock",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_171",
+   "nameJa": "コンラッド・アンカー",
+   "nameEn": "Conrad Anker",
+   "wikiJa": "コンラッド・アンカー",
+   "wikiEn": "Conrad Anker",
+   "nat": "us",
+   "tags": [
+    "alpine",
+    "explorer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_172",
+   "nameJa": "ジミー・チン",
+   "nameEn": "Jimmy Chin",
+   "wikiJa": "ジミー・チン",
+   "wikiEn": "Jimmy Chin",
+   "nat": "us",
+   "tags": [
+    "alpine",
+    "explorer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_173",
+   "nameJa": "アレックス・ロー",
+   "nameEn": "Alex Lowe",
+   "wikiJa": null,
+   "wikiEn": "Alex Lowe",
+   "nat": "us",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_174",
+   "nameJa": "ジョン・ロスケリー",
+   "nameEn": "John Roskelley",
+   "wikiJa": null,
+   "wikiEn": "John Roskelley",
+   "nat": "us",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_175",
+   "nameJa": "グレッグ・チャイルド",
+   "nameEn": "Greg Child",
+   "wikiJa": null,
+   "wikiEn": "Greg Child",
+   "nat": "au",
+   "tags": [
+    "alpine",
+    "rock"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_176",
+   "nameJa": "ティム・マッカートニー＝スネイプ",
+   "nameEn": "Tim Macartney-Snape",
+   "wikiJa": null,
+   "wikiEn": "Tim Macartney-Snape",
+   "nat": "au",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_177",
+   "nameJa": "ピーター・ヒラリー",
+   "nameEn": "Peter Hillary",
+   "wikiJa": null,
+   "wikiEn": "Peter Hillary",
+   "nat": "nz",
+   "tags": [
+    "8000m",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_178",
+   "nameJa": "植村直己",
+   "nameEn": "Naomi Uemura",
+   "wikiJa": "植村直己",
+   "wikiEn": "Naomi Uemura",
+   "nat": "jp",
+   "tags": [
+    "explorer",
+    "8000m"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_179",
+   "nameJa": "田部井淳子",
+   "nameEn": "Junko Tabei",
+   "wikiJa": "田部井淳子",
+   "wikiEn": "Junko Tabei",
+   "nat": "jp",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_180",
+   "nameJa": "槇有恒",
+   "nameEn": "Yuko Maki",
+   "wikiJa": "槇有恒",
+   "wikiEn": "Yūkō Maki",
+   "nat": "jp",
+   "tags": [
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_181",
+   "nameJa": "加藤文太郎",
+   "nameEn": "Buntaro Kato",
+   "wikiJa": "加藤文太郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_182",
+   "nameJa": "松浦輝夫",
+   "nameEn": "Teruo Matsuura",
+   "wikiJa": "松浦輝夫",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_183",
+   "nameJa": "西堀栄三郎",
+   "nameEn": "Eizaburo Nishibori",
+   "wikiJa": "西堀栄三郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "explorer",
+    "pioneer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_184",
+   "nameJa": "今西錦司",
+   "nameEn": "Kinji Imanishi",
+   "wikiJa": "今西錦司",
+   "wikiEn": "Kinji Imanishi",
+   "nat": "jp",
+   "tags": [
+    "pioneer",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_185",
+   "nameJa": "深田久弥",
+   "nameEn": "Kyuya Fukada",
+   "wikiJa": "深田久弥",
+   "wikiEn": "Kyūya Fukada",
+   "nat": "jp",
+   "tags": [
+    "pioneer"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_186",
+   "nameJa": "加藤保男",
+   "nameEn": "Yasuo Kato",
+   "wikiJa": "加藤保男",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_187",
+   "nameJa": "長谷川恒男",
+   "nameEn": "Tsuneo Hasegawa",
+   "wikiJa": "長谷川恒男",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_188",
+   "nameJa": "森田勝",
+   "nameEn": "Masaru Morita",
+   "wikiJa": "森田勝",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_189",
+   "nameJa": "小西政継",
+   "nameEn": "Masatsugu Konishi",
+   "wikiJa": "小西政継",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_190",
+   "nameJa": "山田昇",
+   "nameEn": "Noboru Yamada",
+   "wikiJa": "山田昇",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_191",
+   "nameJa": "名塚秀二",
+   "nameEn": "Hideji Nazuka",
+   "wikiJa": "名塚秀二",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_192",
+   "nameJa": "山野井泰史",
+   "nameEn": "Yasushi Yamanoi",
+   "wikiJa": "山野井泰史",
+   "wikiEn": "Yasushi Yamanoi",
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_193",
+   "nameJa": "山野井妙子",
+   "nameEn": "Taeko Yamanoi",
+   "wikiJa": "山野井妙子",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_194",
+   "nameJa": "竹内洋岳",
+   "nameEn": "Hirotaka Takeuchi",
+   "wikiJa": "竹内洋岳",
+   "wikiEn": "Hirotaka Takeuchi",
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_195",
+   "nameJa": "平出和也",
+   "nameEn": "Kazuya Hiraide",
+   "wikiJa": "平出和也",
+   "wikiEn": "Kazuya Hiraide",
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_196",
+   "nameJa": "中島健郎",
+   "nameEn": "Kenro Nakajima",
+   "wikiJa": "中島健郎",
+   "wikiEn": "Kenro Nakajima",
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_197",
+   "nameJa": "谷口けい",
+   "nameEn": "Kei Taniguchi",
+   "wikiJa": "谷口けい",
+   "wikiEn": "Kei Taniguchi",
+   "nat": "jp",
+   "tags": [
+    "alpine",
+    "female"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_198",
+   "nameJa": "三浦雄一郎",
+   "nameEn": "Yuichiro Miura",
+   "wikiJa": "三浦雄一郎",
+   "wikiEn": "Yuichiro Miura",
+   "nat": "jp",
+   "tags": [
+    "explorer",
+    "8000m"
+   ],
+   "featured": true,
+   "auto": false
+  },
+  {
+   "id": "cl_199",
+   "nameJa": "野口健",
+   "nameEn": "Ken Noguchi",
+   "wikiJa": "野口健",
+   "wikiEn": "Ken Noguchi",
+   "nat": "jp",
+   "tags": [
+    "8000m",
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_200",
+   "nameJa": "今井通子",
+   "nameEn": "Michiko Imai",
+   "wikiJa": "今井通子",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_201",
+   "nameJa": "若山美子",
+   "nameEn": "Yoshiko Wakayama",
+   "wikiJa": "若山美子",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_202",
+   "nameJa": "栗城史多",
+   "nameEn": "Nobukazu Kuriki",
+   "wikiJa": "栗城史多",
+   "wikiEn": "Nobukazu Kuriki",
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_203",
+   "nameJa": "南谷真鈴",
+   "nameEn": "Marin Minamiya",
+   "wikiJa": "南谷真鈴",
+   "wikiEn": "Marin Minamiya",
+   "nat": "jp",
+   "tags": [
+    "explorer",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_204",
+   "nameJa": "石川直樹",
+   "nameEn": "Naoki Ishikawa",
+   "wikiJa": "石川直樹 (写真家)",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "explorer",
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_205",
+   "nameJa": "倉岡裕之",
+   "nameEn": "Hiroyuki Kuraoka",
+   "wikiJa": "倉岡裕之",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_206",
+   "nameJa": "近藤謙司",
+   "nameEn": "Kenji Kondo",
+   "wikiJa": "近藤謙司",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m",
+    "sherpa"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_207",
+   "nameJa": "花谷泰広",
+   "nameEn": "Yasuhiro Hanatani",
+   "wikiJa": "花谷泰広",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_208",
+   "nameJa": "天野和明",
+   "nameEn": "Kazuaki Amano",
+   "wikiJa": "天野和明",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_209",
+   "nameJa": "佐藤裕介",
+   "nameEn": "Yusuke Sato",
+   "wikiJa": "佐藤裕介 (登山家)",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_210",
+   "nameJa": "尾崎隆",
+   "nameEn": "Takashi Ozaki",
+   "wikiJa": "尾崎隆",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m",
+    "alpine"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_211",
+   "nameJa": "河野兵市",
+   "nameEn": "Hyoichi Kono",
+   "wikiJa": "河野兵市",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "explorer"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_212",
+   "nameJa": "大蔵喜福",
+   "nameEn": "Yoshitomi Okura",
+   "wikiJa": "大蔵喜福",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_213",
+   "nameJa": "重廣恒夫",
+   "nameEn": "Tsuneo Shigehiro",
+   "wikiJa": "重廣恒夫",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_214",
+   "nameJa": "村口徳行",
+   "nameEn": "Noriyuki Muraguchi",
+   "wikiJa": "村口徳行",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [
+    "8000m"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_215",
+   "nameJa": "渡邉玉枝",
+   "nameEn": "Tamae Watanabe",
+   "wikiJa": "渡邉玉枝",
+   "wikiEn": "Tamae Watanabe",
+   "nat": "jp",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_216",
+   "nameJa": "難波康子",
+   "nameEn": "Yasuko Namba",
+   "wikiJa": "難波康子",
+   "wikiEn": "Yasuko Namba",
+   "nat": "jp",
+   "tags": [
+    "8000m",
+    "female"
+   ],
+   "featured": false,
+   "auto": false
+  },
+  {
+   "id": "cl_217",
+   "nameJa": "青木達哉",
+   "nameEn": "",
+   "wikiJa": "青木達哉",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_218",
+   "nameJa": "青木章",
+   "nameEn": "",
+   "wikiJa": "青木章",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_219",
+   "nameJa": "青柳健",
+   "nameEn": "",
+   "wikiJa": "青柳健",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_220",
+   "nameJa": "安曇潤平",
+   "nameEn": "",
+   "wikiJa": "安曇潤平",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_221",
+   "nameJa": "安東浩正",
+   "nameEn": "",
+   "wikiJa": "安東浩正",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_222",
+   "nameJa": "池沼慧",
+   "nameEn": "",
+   "wikiJa": "池沼慧",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_223",
+   "nameJa": "石川富康",
+   "nameEn": "",
+   "wikiJa": "石川富康",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_224",
+   "nameJa": "石原周次",
+   "nameEn": "",
+   "wikiJa": "石原周次",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_225",
+   "nameJa": "市毛良枝",
+   "nameEn": "",
+   "wikiJa": "市毛良枝",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_226",
+   "nameJa": "岩崎元郎",
+   "nameEn": "",
+   "wikiJa": "岩崎元郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_227",
+   "nameJa": "江本悠滋",
+   "nameEn": "",
+   "wikiJa": "江本悠滋",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_228",
+   "nameJa": "遠藤由加",
+   "nameEn": "",
+   "wikiJa": "遠藤由加",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_229",
+   "nameJa": "大石明弘",
+   "nameEn": "",
+   "wikiJa": "大石明弘",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_230",
+   "nameJa": "大内尚樹",
+   "nameEn": "",
+   "wikiJa": "大内尚樹",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_231",
+   "nameJa": "大城和恵",
+   "nameEn": "",
+   "wikiJa": "大城和恵",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_232",
+   "nameJa": "小川さゆり",
+   "nameEn": "",
+   "wikiJa": "小川さゆり (登山家)",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_233",
+   "nameJa": "奥田仁一",
+   "nameEn": "",
+   "wikiJa": "奥田仁一",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_234",
+   "nameJa": "海津正彦",
+   "nameEn": "",
+   "wikiJa": "海津正彦",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_235",
+   "nameJa": "角幡唯介",
+   "nameEn": "",
+   "wikiJa": "角幡唯介",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_236",
+   "nameJa": "柏澄子",
+   "nameEn": "",
+   "wikiJa": "柏澄子",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_237",
+   "nameJa": "片山右京",
+   "nameEn": "",
+   "wikiJa": "片山右京",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_238",
+   "nameJa": "加藤慶信",
+   "nameEn": "",
+   "wikiJa": "加藤慶信",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_239",
+   "nameJa": "角谷道弘",
+   "nameEn": "",
+   "wikiJa": "角谷道弘",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_240",
+   "nameJa": "川崎実",
+   "nameEn": "",
+   "wikiJa": "川崎実",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_241",
+   "nameJa": "北上四郎",
+   "nameEn": "",
+   "wikiJa": "北上四郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_242",
+   "nameJa": "北村俊之",
+   "nameEn": "",
+   "wikiJa": "北村俊之",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_243",
+   "nameJa": "木下徳彦",
+   "nameEn": "",
+   "wikiJa": "木下徳彦",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_244",
+   "nameJa": "木村憲司",
+   "nameEn": "",
+   "wikiJa": "木村憲司",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_245",
+   "nameJa": "木本哲",
+   "nameEn": "",
+   "wikiJa": "木本哲",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_246",
+   "nameJa": "栗秋正寿",
+   "nameEn": "",
+   "wikiJa": "栗秋正寿",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_247",
+   "nameJa": "黒田正夫",
+   "nameEn": "",
+   "wikiJa": "黒田正夫",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_248",
+   "nameJa": "河野千鶴子",
+   "nameEn": "",
+   "wikiJa": "河野千鶴子",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_249",
+   "nameJa": "小阪健一郎",
+   "nameEn": "",
+   "wikiJa": "小阪健一郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_250",
+   "nameJa": "後藤文明",
+   "nameEn": "",
+   "wikiJa": "後藤文明",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_251",
+   "nameJa": "小西浩文",
+   "nameEn": "",
+   "wikiJa": "小西浩文",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_252",
+   "nameJa": "小林喜作",
+   "nameEn": "",
+   "wikiJa": "小林喜作",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_253",
+   "nameJa": "小松由佳",
+   "nameEn": "",
+   "wikiJa": "小松由佳 (登山家)",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_254",
+   "nameJa": "小峰直城",
+   "nameEn": "",
+   "wikiJa": "小峰直城",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_255",
+   "nameJa": "近藤和美",
+   "nameEn": "",
+   "wikiJa": "近藤和美 (登山家)",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_256",
+   "nameJa": "佐藤光由",
+   "nameEn": "",
+   "wikiJa": "佐藤光由",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_257",
+   "nameJa": "鈴木昇己",
+   "nameEn": "",
+   "wikiJa": "鈴木昇己",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_258",
+   "nameJa": "鈴木ともこ",
+   "nameEn": "",
+   "wikiJa": "鈴木ともこ",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_259",
+   "nameJa": "高橋和弘",
+   "nameEn": "",
+   "wikiJa": "高橋和弘",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_260",
+   "nameJa": "高橋庄太郎",
+   "nameEn": "",
+   "wikiJa": "高橋庄太郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_261",
+   "nameJa": "多賀谷治",
+   "nameEn": "",
+   "wikiJa": "多賀谷治",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_262",
+   "nameJa": "田中陽希",
+   "nameEn": "",
+   "wikiJa": "田中陽希",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_263",
+   "nameJa": "田辺治",
+   "nameEn": "",
+   "wikiJa": "田辺治",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_264",
+   "nameJa": "谷川太郎",
+   "nameEn": "",
+   "wikiJa": "谷川太郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_265",
+   "nameJa": "田村聡",
+   "nameEn": "",
+   "wikiJa": "田村聡",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_266",
+   "nameJa": "田村真司",
+   "nameEn": "",
+   "wikiJa": "田村真司",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_267",
+   "nameJa": "長岡健一",
+   "nameEn": "",
+   "wikiJa": "長岡健一",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_268",
+   "nameJa": "長久保浩司",
+   "nameEn": "",
+   "wikiJa": "長久保浩司",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_269",
+   "nameJa": "長澤奏喜",
+   "nameEn": "",
+   "wikiJa": "長澤奏喜",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_270",
+   "nameJa": "中島道郎",
+   "nameEn": "",
+   "wikiJa": "中島道郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_271",
+   "nameJa": "中山寛樹",
+   "nameEn": "",
+   "wikiJa": "中山寛樹",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_272",
+   "nameJa": "成瀬陽一",
+   "nameEn": "",
+   "wikiJa": "成瀬陽一",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_273",
+   "nameJa": "貫田宗男",
+   "nameEn": "",
+   "wikiJa": "貫田宗男",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_274",
+   "nameJa": "根深誠",
+   "nameEn": "",
+   "wikiJa": "根深誠",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_275",
+   "nameJa": "野中到",
+   "nameEn": "",
+   "wikiJa": "野中到 (気象学者)",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_276",
+   "nameJa": "野村良太",
+   "nameEn": "",
+   "wikiJa": "野村良太",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_277",
+   "nameJa": "服部文祥",
+   "nameEn": "",
+   "wikiJa": "服部文祥",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_278",
+   "nameJa": "原真",
+   "nameEn": "",
+   "wikiJa": "原真",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_279",
+   "nameJa": "春山慶彦",
+   "nameEn": "",
+   "wikiJa": "春山慶彦",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_280",
+   "nameJa": "久末眞紀子",
+   "nameEn": "",
+   "wikiJa": "久末眞紀子",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_281",
+   "nameJa": "びしょっぷ英郎",
+   "nameEn": "",
+   "wikiJa": "びしょっぷ英郎",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_282",
+   "nameJa": "平井一正",
+   "nameEn": "",
+   "wikiJa": "平井一正 (工学者)",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_283",
+   "nameJa": "平山善吉",
+   "nameEn": "",
+   "wikiJa": "平山善吉",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_284",
+   "nameJa": "福島博憲",
+   "nameEn": "",
+   "wikiJa": "福島博憲",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_285",
+   "nameJa": "星野龍史",
+   "nameEn": "",
+   "wikiJa": "星野龍史",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_286",
+   "nameJa": "穂高健一",
+   "nameEn": "",
+   "wikiJa": "穂高健一",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_287",
+   "nameJa": "増井行照",
+   "nameEn": "",
+   "wikiJa": "増井行照",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_288",
+   "nameJa": "増永迪男",
+   "nameEn": "",
+   "wikiJa": "増永迪男",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_289",
+   "nameJa": "増本さやか",
+   "nameEn": "",
+   "wikiJa": "増本さやか",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_290",
+   "nameJa": "松田宏也",
+   "nameEn": "",
+   "wikiJa": "松田宏也",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_291",
+   "nameJa": "松本龍雄",
+   "nameEn": "",
+   "wikiJa": "松本龍雄",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_292",
+   "nameJa": "馬目弘仁",
+   "nameEn": "",
+   "wikiJa": "馬目弘仁",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_293",
+   "nameJa": "三浦豪太",
+   "nameEn": "",
+   "wikiJa": "三浦豪太",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_294",
+   "nameJa": "三戸呂拓也",
+   "nameEn": "",
+   "wikiJa": "三戸呂拓也",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_295",
+   "nameJa": "南博人",
+   "nameEn": "",
+   "wikiJa": "南博人",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_296",
+   "nameJa": "宮崎勉",
+   "nameEn": "",
+   "wikiJa": "宮崎勉",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_297",
+   "nameJa": "望月力",
+   "nameEn": "",
+   "wikiJa": "望月力",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_298",
+   "nameJa": "八木原圀明",
+   "nameEn": "",
+   "wikiJa": "八木原圀明",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_299",
+   "nameJa": "山岸慎英",
+   "nameEn": "",
+   "wikiJa": "山岸慎英",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  },
+  {
+   "id": "cl_300",
+   "nameJa": "山田淳",
+   "nameEn": "",
+   "wikiJa": "山田淳",
+   "wikiEn": null,
+   "nat": "jp",
+   "tags": [],
+   "featured": false,
+   "auto": true
+  }
+ ]
+}
