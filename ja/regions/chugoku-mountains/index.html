@@ -53,6 +53,9 @@ header.site{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--
 .logo .tri{color:var(--route);font-size:15px;transform:translateY(-1px)}
 .logo .nm{font-weight:800;font-size:17px;letter-spacing:-.01em}
 .logo .demo{font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px;transform:translateY(-2px)}
+.wordmark{height:24px;width:auto;display:block}
+.dark .wordmark{filter:brightness(1.25) saturate(.92)}
+footer .wordmark.fw{height:20px}
 nav.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
 nav.tabs::-webkit-scrollbar{display:none}
 nav.tabs button{flex-shrink:0;padding:19px 13px 17px;font-size:13.5px;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;transition:color .15s}
@@ -527,7 +530,7 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
 <header class="site">
   <div class="wrap hrow">
     <a class="logo" onclick="go({name:'home'})" aria-label="Mountain Peak Home">
-      <span class="tri" aria-hidden="true">▲</span><span class="nm disp">Mountain Peak</span><span class="demo mono">DEMO</span>
+      <img class="wordmark" data-asset="images/logo-wordmark.png" alt="Mountain Peak" height="24"><span class="demo mono">DEMO</span>
     </a>
     <nav class="tabs" id="tabs" aria-label="Main"></nav>
     <div class="hctl">
@@ -547,7 +550,7 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
 <main><div class="wrap" id="app"><h1>中国山地の山と登山ルート</h1><p>西日本の名峰・大山（伯耆富士）を擁する山域。</p><ul><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/daisen/">大山</a> — 1,729m</li></ul></div></main>
 <footer class="site">
   <div class="wrap">
-    <div class="frow"><span class="tri">▲</span><span class="disp">Mountain Peak</span><span class="demo mono" style="font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px">STATIC DEMO</span></div>
+    <div class="frow"><img class="wordmark fw" data-asset="images/logo-wordmark.png" alt="Mountain Peak" height="20"><span class="demo mono" style="font-size:9px;font-weight:600;letter-spacing:.18em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:1px 5px">STATIC DEMO</span></div>
     <p class="note" id="fnote"></p>
     <div class="notice" style="margin-top:14px;max-width:760px" id="fdisc"></div>
     <nav class="flinks" id="flinks" aria-label="Legal"></nav>
