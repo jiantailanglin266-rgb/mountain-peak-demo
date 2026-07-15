@@ -70,6 +70,7 @@ const STATIC_TITLES = {
     countries: ["国・地域から探す — 世界の山を国別・山域別に | Mountain Peak", "日本・ネパール・スイスなど国別、北アルプス・ヒマラヤなど山域別に山をまとめたハブページ。"],
     climbers: ["世界の登山家名鑑 — 著名クライマー300名 | Mountain Peak", "ウィンパーやメスナーから植村直己、アレックス・オノルドまで。世界の著名登山家300名をWikipedia引用の経歴・肖像・関連動画つきで紹介。"],
     gear: ["登山装備ガイド — 三種の神器から雪山装備まで | Mountain Peak", "登山靴・ザック・レインウェアの三種の神器からテント泊・雪山装備まで。難易度別の装備リスト、選び方と価格目安、山岳保険の情報。"],
+    logbook: ["登山記録（サミットログ） — 山行を記録しよう | Mountain Peak", "登った山・日付・ルート・天気・メモを記録して自分だけの登山史に。統計とJSON書き出し対応、データはブラウザ内にのみ保存。"],
   },
   en: {
     home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. About 2,000 peaks from the 100 Famous Japanese Mountains to every 8000er, in English and Japanese."],
@@ -85,6 +86,7 @@ const STATIC_TITLES = {
     countries: ["Browse by Country & Region | Mountain Peak", "Mountains organized by country (Japan, Nepal, Switzerland…) and range (Japan Alps, Himalaya…)."],
     climbers: ["Great Mountaineers of the World — 300 Famous Climbers | Mountain Peak", "From Whymper and Messner to Naomi Uemura and Alex Honnold: 300 celebrated climbers with Wikipedia-sourced bios, portraits and videos."],
     gear: ["Hiking Gear Guide — From the Big Three to Winter Kit | Mountain Peak", "Boots, packs and rain shells to tents and crampons: gear checklists by difficulty, buying tips, price ranges and mountain insurance basics."],
+    logbook: ["Summit Log — Track Your Climbs | Mountain Peak", "Log every climb with date, route, weather and notes. Stats and JSON export; data stays in your browser."],
   },
 };
 
@@ -94,7 +96,7 @@ function push(path, l, title, desc, opts = {}) {
 
 for (const l of LOCALES) {
   const S = STATIC_TITLES[l];
-  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries", "climbers", "gear"]) {
+  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries", "climbers", "gear", "logbook"]) {
     const p = key === "home" ? `/${l}/` : `/${l}/${key}/`;
     push(p, l, S[key][0], S[key][1], { kind: key });
   }

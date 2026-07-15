@@ -612,6 +612,33 @@ body.chatlock{overflow:hidden}
   nav.tabs button{min-height:44px}
   .langbtn{min-height:40px}
 }
+/* サミットログ */
+.logstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0 14px}
+.logstats .card{padding:14px 16px}
+.logstats .v{font-size:22px;font-weight:800}
+.logstats .k{font-size:10.5px;color:var(--muted);letter-spacing:.06em;margin-top:3px}
+.logchart{display:flex;gap:6px;align-items:flex-end;height:92px;padding:12px 4px 0}
+.logchart .b{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%}
+.logchart .bar{width:100%;background:linear-gradient(180deg,var(--glacier),var(--route));border-radius:4px 4px 0 0;min-height:2px;transition:height .6s cubic-bezier(.22,1,.36,1)}
+.logchart .m{font-size:9px;color:var(--muted)}
+.logrow{display:flex;gap:12px;align-items:flex-start;padding:13px 4px;border-bottom:1px dashed var(--line)}
+.logrow .dt{font-size:11.5px;color:var(--muted);white-space:nowrap;min-width:88px;padding-top:2px}
+.logrow .bd{flex:1;min-width:0}
+.logrow .nm{font-weight:700;font-size:14px;color:var(--glacier);cursor:pointer}
+.logrow .nm:hover{text-decoration:underline}
+.logrow .meta{font-size:11.5px;color:var(--muted);margin-top:2px}
+.logrow .memo{font-size:12.5px;margin-top:6px;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+.logrow .del{font-size:12px;color:var(--muted);cursor:pointer;padding:4px 7px;border-radius:6px}
+.logrow .del:hover{color:#fff;background:var(--route)}
+.logform{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.logform label{display:flex;flex-direction:column;gap:6px;font-size:10.5px;font-weight:700;letter-spacing:.07em;color:var(--muted);text-transform:uppercase}
+.logform input,.logform select,.logform textarea{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:9px 12px;font-size:14px;color:inherit;outline:none;font-family:inherit}
+.logform input:focus,.logform select:focus,.logform textarea:focus{border-color:var(--glacier)}
+.logform textarea{min-height:76px;resize:vertical}
+.logform .full{grid-column:1/-1}
+.logform .lsug{position:relative;display:block}
+.logform .lsug .sug{top:calc(100% + 4px)}
+@media(max-width:640px){.logform{grid-template-columns:1fr}.logform input,.logform select,.logform textarea{font-size:16px}}
 /* 動画ページPC: 多段組みで縦長を解消（スマホ=900px未満は従来どおり縦一列） */
 @media(min-width:900px){
   .vsecs{columns:3;column-gap:18px;margin-top:6px}
@@ -692,7 +719,7 @@ try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOStri
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",articles:"記事・ガイド",gear:"装備",videos:"動画",climbers:"登山家",community:"コミュニティ"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",logbook:"記録",articles:"記事・ガイド",gear:"装備",videos:"動画",climbers:"登山家",community:"コミュニティ"},
   clm:{title:"世界の登山家名鑑",sub:"黄金期の開拓者から現代のアルパインクライマーまで、世界の著名登山家300名を紹介。",
    notice:"各登山家の紹介文・肖像画像は <b>Wikipedia（日本語版・英語版）からの引用</b>で、ライセンスは CC BY-SA 4.0 です。カード内のリンクから原典記事をご覧いただけます。動画はYouTube公式埋め込みプレーヤーで再生されます。",
    searchPh:"名前で検索（例: メスナー, Honnold）",all:"すべて",found:"名",
@@ -742,7 +769,7 @@ var DICT = {
   fnote:"Mountain Peak は、世界の山の標高・ルート・天気の目安・歴史を日本語と英語でまとめる山岳情報プラットフォームです。登頂チェックリストや掲示板への投稿はお使いのブラウザ内に保存され、入力内容がサーバーへ送信されることはありません。",
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
- en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",articles:"Articles",gear:"Gear",videos:"Videos",climbers:"Climbers",community:"Community"},
+ en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",logbook:"Log",articles:"Articles",gear:"Gear",videos:"Videos",climbers:"Climbers",community:"Community"},
   clm:{title:"Great Mountaineers of the World",sub:"300 celebrated climbers, from golden-age pioneers to today's alpinists.",
    notice:"Biographies and portraits are <b>quoted from Wikipedia (Japanese & English editions)</b> under CC BY-SA 4.0. Follow the links on each card to the original articles. Videos play via YouTube's official embedded player.",
    searchPh:"Search by name (e.g. Messner, Honnold)",all:"All",found:"climbers",
@@ -1133,7 +1160,7 @@ function vMountain(slug){
     '<div><div class="elv mono">'+elevMain(m.elevationM)+'<small> '+elevUnit()+'</small></div><div class="meta mono">'+elevAlt(m.elevationM)+'</div><div class="meta">'+(c?'<a class="hublink" onclick="go({name:\'country\',slug:\''+c.slug+'\'})">'+flag(c.id)+" "+esc(names(c))+"</a>":"")+(r?' · <a class="hublink" onclick="go({name:\'region\',slug:\''+r.slug+'\'})">'+esc(names(r))+"</a>":"")+"</div></div></div>"+
     '<p class="dsum">'+esc(t.summary)+"</p>"+
     (m.cat?'<div class="comnotice" style="margin-top:12px">'+(state.locale==="ja"?"この山は現在、基礎データ（名称・標高・座標 — 出典: Wikidata/Wikipedia）のみを収録しています。ルート・難易度などの詳細は順次拡充予定です。":"Basic data only for now (name, elevation, coordinates — source: Wikidata/Wikipedia). Routes and difficulty details are being added over time.")+"</div>":"")+
-    '<div class="actrow"><button class="abtn'+(sum?" done":"")+'" onclick="toggleSum(\''+m.id+'\')" title="'+(sum?D.l.unclimbed:D.l.summit)+'">'+(sum?D.l.summited:"⛰ "+D.l.summit)+'</button><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div></div>"+
+    '<div class="actrow"><button class="abtn'+(sum?" done":"")+'" onclick="toggleSum(\''+m.id+'\')" title="'+(sum?D.l.unclimbed:D.l.summit)+'">'+(sum?D.l.summited:"⛰ "+D.l.summit)+'</button><button class="abtn" onclick="logQuick(\''+m.id+'\')">'+lgt().logBtn+'</button><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div></div>"+
     '<div class="cols"><div>'+
     sect(D.l.features,t.features)+
     (t.history?'<div class="card sect"><h3>'+D.l.history+'</h3><p>'+esc(t.history)+"</p>"+(m.firstAscentYear?'<p style="margin-top:10px;font-size:12px;color:var(--muted);background:var(--paper);border-radius:10px;padding:9px 13px">🏔 '+D.l.firstAscent+": "+m.firstAscentYear+" — "+esc(m.firstAscentParty||"")+"</p>":"")+"</div>":"")+
@@ -1240,7 +1267,7 @@ function pathFor(view,locale){
   if(n==="thread")return "/"+l+"/community/?t="+encodeURIComponent(view.slug);
   if(n==="country")return "/"+l+"/countries/"+view.slug+"/";
   if(n==="region")return "/"+l+"/regions/"+view.slug+"/";
-  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/",gear:"/gear/"};
+  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/",gear:"/gear/",logbook:"/logbook/"};
   return "/"+l+(map[n]||"/");
 }
 function go(view){
@@ -1286,7 +1313,7 @@ function parseHash(){
     if(q0)state.filters={q:q0,country:"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"};
     return;
   }
-  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1};
+  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1,logbook:1};
   state.view=valid2[name]?{name:name}:{name:"home"};
 }
 /* ビュー別タイトル（SSG生成ページのタイトル設計と同一パターン） */
@@ -1304,6 +1331,7 @@ function pageTitle(v){
     if(v.name==="countries")return D.hub.countries+" | Mountain Peak";
     if(v.name==="climbers")return D.clm.title+" | Mountain Peak";
     if(v.name==="gear")return (ja?"登山装備ガイド — 三種の神器から雪山装備まで":"Hiking Gear Guide — From the Big Three to Winter Kit")+" | Mountain Peak";
+    if(v.name==="logbook")return (ja?"登山記録（サミットログ） — 山行を記録しよう":"Summit Log — Track Your Climbs")+" | Mountain Peak";
     var statics={mountains:D.tabs.mountains,rankings:D.tabs.rankings,articles:D.tabs.articles,videos:D.tabs.videos,community:D.tabs.community,thread:D.tabs.community};
     if(statics[v.name])return statics[v.name]+" | Mountain Peak";
   }catch(e){}
@@ -1349,10 +1377,11 @@ function render(){
     else if(v.name==="region")html=vRegion(v.slug);
     else if(v.name==="climbers")html=vClimbers();
     else if(v.name==="gear")html=vGear();
+    else if(v.name==="logbook")html=vLogbook();
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
-  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["articles",D.tabs.articles],["gear",D.tabs.gear],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["logbook",D.tabs.logbook],["articles",D.tabs.articles],["gear",D.tabs.gear],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
@@ -1432,6 +1461,146 @@ function typeCoord(){
   el.textContent="";
   var i=0;
   window.__coordT=setInterval(function(){el.textContent=s.slice(0,++i);if(i>=s.length)clearInterval(window.__coordT)},46);
+}
+
+/* ====== サミットログ（山行記録。ブラウザ内保存・JSON書き出し/読み込み対応） ====== */
+var LOG_T={
+ ja:{t:"登山記録（サミットログ）",sub:"登った山を記録して、自分だけの登山史をつくろう。記録した山は登頂チェックリストにも自動反映されます。",
+  notice:"記録は<b>お使いのブラウザ内にのみ保存</b>されます。機種変更や別ブラウザへの引き継ぎには「書き出し」でJSONを保存し、「読み込み」で復元してください。",
+  stats:{n:"記録",uniq:"登った山",elev:"登頂標高の合計",year:"今年の記録"},
+  chartT:"の月別記録",
+  addT:"＋ 記録を追加",fMt:"山（検索して選択）",fMtPh:"山名で検索（例: 富士山）",fDate:"日付",fW:"天気",fRoute:"ルート・コース（任意）",fRoutePh:"例: 吉田ルート",fMemo:"メモ（任意）",fMemoPh:"同行者・コースタイム・感想など",
+  save:"記録する",saved:"記録を保存しました",delConfirm:"この記録を削除しますか？",deleted:"記録を削除しました",
+  needMt:"山を検索して選択してください",needDate:"日付を入力してください",
+  exp:"⬇ 書き出し(JSON)",imp:"⬆ 読み込み",imported:"件の記録を読み込みました",impErr:"読み込みに失敗しました（JSON形式を確認してください）",
+  empty:"まだ記録がありません。最初の一座を記録してみましょう！",logBtn:"📓 記録を書く",w:["","☀️ 快晴","⛅ 晴れ/曇り","🌧 雨","🌨 雪","💨 強風"]},
+ en:{t:"Summit Log",sub:"Log every climb and build your own mountaineering history. Logged peaks are also marked on your summit checklist.",
+  notice:"Logs are <b>stored only in this browser</b>. Use Export/Import (JSON) to move them to another device.",
+  stats:{n:"Entries",uniq:"Peaks climbed",elev:"Total elevation logged",year:"This year"},
+  chartT:" by month",
+  addT:"＋ Add an entry",fMt:"Mountain (search & pick)",fMtPh:"Search by name (e.g. Fuji)",fDate:"Date",fW:"Weather",fRoute:"Route (optional)",fRoutePh:"e.g. Yoshida Route",fMemo:"Notes (optional)",fMemoPh:"Partners, course time, thoughts…",
+  save:"Save entry",saved:"Entry saved",delConfirm:"Delete this entry?",deleted:"Entry deleted",
+  needMt:"Search and pick a mountain first",needDate:"Please set a date",
+  exp:"⬇ Export (JSON)",imp:"⬆ Import",imported:" entries imported",impErr:"Import failed — check the JSON file",
+  empty:"No entries yet. Log your first summit!",logBtn:"📓 Log this climb",w:["","☀️ Clear","⛅ Fair/Cloudy","🌧 Rain","🌨 Snow","💨 Windy"]}
+};
+function lgt(){return LOG_T[state.locale]||LOG_T.ja}
+function toast(msg){var t=document.getElementById("toast");if(!t)return;t.textContent=msg;t.classList.add("show");clearTimeout(window.__toastT);window.__toastT=setTimeout(function(){t.classList.remove("show")},2000)}
+function getLogs(){try{return JSON.parse(load("mp-log-v1")||"[]")}catch(e){return []}}
+function saveLogs(a){store("mp-log-v1",JSON.stringify(a))}
+/* 山選択サジェスト（ログ用: 選ぶだけで遷移しない） */
+function logSug(){
+  var el=document.getElementById("lq"),box=document.getElementById("lsugbox");
+  if(!el||!box)return;
+  state.logPick=null;
+  var q=el.value.trim().toLowerCase();
+  if(!q){box.innerHTML="";box.style.display="none";return}
+  var hits=DATA.mountains.filter(function(m){return m.status==="published"&&(textOf(m).indexOf(q)>=0||m.slug.indexOf(q)>=0)}).slice(0,6);
+  if(!hits.length){box.innerHTML="";box.style.display="none";return}
+  box.innerHTML=hits.map(function(m){var t=tr(m);
+    return '<button type="button" onclick="logPick(\''+m.id+'\')"><span class="tri">▲</span><span>'+esc(t.name)+'</span><span class="e mono">'+m.elevationM.toLocaleString()+"m</span></button>"}).join("");
+  box.style.display="block";
+}
+function logPick(id){
+  var m=DATA.mountains.find(function(x){return x.id===id});
+  if(!m)return;
+  state.logPick=id;
+  var el=document.getElementById("lq");if(el)el.value=tr(m).name;
+  var box=document.getElementById("lsugbox");if(box){box.innerHTML="";box.style.display="none"}
+}
+function logAdd(){
+  var T=lgt();
+  var pick=state.logPick;
+  if(!pick){ // 完全一致名でも許容
+    var q=(document.getElementById("lq").value||"").trim().toLowerCase();
+    var m0=DATA.mountains.find(function(m){var t=m.translations;return (t.ja&&t.ja.name.toLowerCase()===q)||(t.en&&t.en.name.toLowerCase()===q)});
+    if(m0)pick=m0.id;
+  }
+  if(!pick){toast(T.needMt);return}
+  var dt=document.getElementById("ld").value;
+  if(!dt){toast(T.needDate);return}
+  var logs=getLogs();
+  logs.push({i:Date.now().toString(36)+Math.random().toString(36).slice(2,6),m:pick,d:dt,
+    w:document.getElementById("lw").value,r:(document.getElementById("lr").value||"").slice(0,80),t:(document.getElementById("lm").value||"").slice(0,600),c:new Date().toISOString()});
+  saveLogs(logs);
+  var s=getSum();if(s.indexOf(pick)<0){s.push(pick);store("mp-demo-summits",JSON.stringify(s))}
+  state.logPick=null;
+  render();toast(T.saved);
+}
+function logDel(id){
+  var T=lgt();
+  if(!confirm(T.delConfirm))return;
+  saveLogs(getLogs().filter(function(x){return x.i!==id}));
+  render();toast(T.deleted);
+}
+function logExport(){
+  var blob=new Blob([JSON.stringify({app:"mountain-peak-summit-log",v:1,logs:getLogs()},null,1)],{type:"application/json"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="mountain-peak-log.json";a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href)},2000);
+}
+function logImportFile(ev){
+  var T=lgt(),f=ev.target.files&&ev.target.files[0];
+  if(!f)return;
+  var rd=new FileReader();
+  rd.onload=function(){
+    try{
+      var j=JSON.parse(rd.result);
+      var arr=j.logs||j; if(!Array.isArray(arr))throw 0;
+      var cur=getLogs(),ids={},n=0;
+      cur.forEach(function(x){ids[x.i]=1});
+      arr.forEach(function(x){if(x&&x.m&&x.d&&!ids[x.i]){cur.push(x);n++}});
+      saveLogs(cur);render();toast(n+T.imported);
+    }catch(e){toast(T.impErr)}
+  };
+  rd.readAsText(f);
+}
+function logQuick(mtId){state.logPrefill=mtId;go({name:"logbook"})}
+function vLogbook(){
+  var D=d(),T=lgt(),ja=state.locale==="ja";
+  var logs=getLogs().slice().sort(function(a,b){return b.d.localeCompare(a.d)});
+  var uniq={};logs.forEach(function(x){uniq[x.m]=1});
+  var elevSum=logs.reduce(function(n,x){var m=DATA.mountains.find(function(y){return y.id===x.m});return n+(m?m.elevationM:0)},0);
+  var yearNow=new Date().getFullYear();
+  var thisYear=logs.filter(function(x){return x.d.slice(0,4)==yearNow}).length;
+  var byMonth=[0,0,0,0,0,0,0,0,0,0,0,0];
+  logs.forEach(function(x){if(x.d.slice(0,4)==yearNow)byMonth[+x.d.slice(5,7)-1]++});
+  var maxM=Math.max.apply(null,byMonth.concat([1]));
+  var stat=function(v,k){return '<div class="card"><div class="v mono">'+v+'</div><div class="k">'+k+"</div></div>"};
+  /* 山詳細からの「記録を書く」プリフィル */
+  var pre=state.logPrefill?DATA.mountains.find(function(m){return m.id===state.logPrefill}):null;
+  if(pre)state.logPick=pre.id;
+  state.logPrefill=null;
+  var today=new Date();
+  var todayS=today.getFullYear()+"-"+("0"+(today.getMonth()+1)).slice(-2)+"-"+("0"+today.getDate()).slice(-2);
+  var rows="",lastYear="";
+  logs.forEach(function(x){
+    var m=DATA.mountains.find(function(y){return y.id===x.m});
+    var y=x.d.slice(0,4);
+    if(y!==lastYear){rows+='<h2 class="sec" style="margin:22px 0 4px"><span class="eyebrow mono">△ '+y+'</span><span class="tt disp" style="font-size:17px">'+y+(ja?"年":"")+"</span></h2>";lastYear=y}
+    rows+='<div class="logrow"><span class="dt mono">'+esc(x.d)+"</span>"+
+      '<div class="bd"><span class="nm" onclick="go({name:\'mountain\',slug:\''+(m?m.slug:"")+'\'})">'+esc(m?tr(m).name:"?")+"</span>"+
+      '<div class="meta">'+(m?m.elevationM.toLocaleString()+"m":"")+(x.w?" · "+esc(x.w):"")+(x.r?" · "+esc(x.r):"")+"</div>"+
+      (x.t?'<div class="memo">'+esc(x.t)+"</div>":"")+"</div>"+
+      '<span class="del" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="logDel(\''+x.i+'\')">✕</span></div>';
+  });
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:T.t}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;letter-spacing:-.01em">📓 '+T.t+'</h1>'+
+    '<p style="font-size:13px;color:var(--muted);margin-top:4px">'+T.sub+"</p>"+
+    '<div class="comnotice" style="margin-top:12px">'+T.notice+"</div>"+
+    '<div class="logstats">'+stat(logs.length,T.stats.n)+stat(Object.keys(uniq).length,T.stats.uniq)+stat(elevSum.toLocaleString()+"m",T.stats.elev)+stat(thisYear,T.stats.year)+"</div>"+
+    '<div class="card"><h3 style="font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--glacier)">'+yearNow+T.chartT+'</h3><div class="logchart">'+
+      byMonth.map(function(n,i){return '<div class="b"><div class="bar" style="height:'+(n/maxM*62)+'px" title="'+n+'"></div><span class="m mono">'+(i+1)+"</span></div>"}).join("")+"</div></div>"+
+    '<div class="card" style="margin-top:14px"><h3 style="font-size:14px;font-weight:800;margin-bottom:12px">'+T.addT+'</h3><div class="logform">'+
+    '<label class="full">'+T.fMt+'<span class="lsug"><input id="lq" autocomplete="off" placeholder="'+T.fMtPh+'" value="'+(pre?esc(tr(pre).name):"")+'" oninput="logSug()" onblur="setTimeout(function(){var b=document.getElementById(\'lsugbox\');if(b)b.style.display=\'none\'},160)"><div id="lsugbox" class="sug" style="display:none"></div></span></label>'+
+    "<label>"+T.fDate+'<input id="ld" type="date" value="'+todayS+'" max="'+todayS+'"></label>'+
+    "<label>"+T.fW+'<select id="lw">'+T.w.map(function(w){return '<option value="'+esc(w)+'">'+(w||"—")+"</option>"}).join("")+"</select></label>"+
+    '<label class="full">'+T.fRoute+'<input id="lr" placeholder="'+T.fRoutePh+'"></label>'+
+    '<label class="full">'+T.fMemo+'<textarea id="lm" placeholder="'+T.fMemoPh+'"></textarea></label>'+
+    '<div class="full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="abtn" style="background:var(--route);color:#fff;border-color:var(--route)" onclick="logAdd()">'+T.save+'</button>'+
+    '<button class="abtn" onclick="logExport()">'+T.exp+'</button>'+
+    '<label class="abtn" style="cursor:pointer">'+T.imp+'<input type="file" accept="application/json,.json" style="display:none" onchange="logImportFile(event)"></label></div>'+
+    "</div></div>"+
+    (logs.length?rows:'<div class="empty" style="margin-top:20px"><div class="big">📓</div>'+T.empty+"</div>");
 }
 
 /* ====== アフィリエイト（装備ガイド・山岳保険。PR表記=景表法ステマ規制対応） ====== */
@@ -2489,6 +2658,7 @@ render();
 /* 検証用フック */
 window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
 window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;
+window.logSug=logSug;window.logPick=logPick;window.logAdd=logAdd;window.logDel=logDel;window.logExport=logExport;window.logImportFile=logImportFile;window.logQuick=logQuick;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
 })();
 </script>
