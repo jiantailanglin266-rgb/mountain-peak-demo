@@ -161,7 +161,7 @@ const DEFS = [
 
 const rankings = [...keep];
 for (const [slug, ja, en, dja, den, filter, sort] of DEFS) {
-  const ms = M.filter(filter).sort(sort || byElevD);
+  const ms = M.filter(filter).sort(sort || byElevD).slice(0, 100); // 1リスト最大100座
   if (ms.length < 4) { console.log(`skip ${slug}: only ${ms.length}`); continue; }
   rankings.push({
     id: "rank_" + slug.replace(/-/g, "_"), slug,

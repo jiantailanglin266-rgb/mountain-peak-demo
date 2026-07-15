@@ -1,8 +1,8 @@
 # Mountain Peak
-> Bilingual (Japanese/English) global mountain database: elevation, climbing routes, difficulty (1-5), best seasons, hazards, reference weather and history for 200 peaks — all 100 Famous Japanese Mountains plus the world's great peaks including every 8000er. Always verify with official sources before climbing.
+> Bilingual (Japanese/English) global mountain database covering about 2,000 peaks: 200 curated in depth (climbing routes, difficulty 1-5, best seasons, hazards, reference weather, history) — including all 100 Famous Japanese Mountains and every 8000er — plus base data (name, elevation, coordinates, sourced from Wikidata/Wikipedia) for the rest. Always verify with official sources before climbing.
 
 ## Key pages
-- Mountains index (200 peaks): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/ (EN: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/mountains/)
+- Mountains index (~2,000 peaks, 200 curated in depth): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/ (EN: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/mountains/)
 - Lists (100 Famous Japanese Mountains, Seven Summits, 8000m peaks): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/rankings/
 - Browse by country & region (43 countries, 40 ranges): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/countries/
 - Famous climbers encyclopedia (280+ mountaineers, Wikipedia-sourced CC BY-SA): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/climbers/

@@ -57,8 +57,8 @@ function mountainFaq(m, l) {
 const pages = [];
 const STATIC_TITLES = {
   ja: {
-    home: ["Mountain Peak — 世界中の山を、多言語で、正しく引ける山岳データベース", "標高・ルート・天気・歴史。登山に必要な一次情報を日本語と英語で。日本百名山からセブンサミッツまで。"],
-    mountains: ["山をさがす — 標高・難易度・国で絞り込み | Mountain Peak", "世界の山を標高・難易度・国・タグで検索。日本百名山から8000m峰まで、登山に必要な一次情報を収録。"],
+    home: ["Mountain Peak — 世界中の山を、多言語で、正しく引ける山岳データベース", "標高・ルート・天気・歴史。登山に必要な一次情報を日本語と英語で。日本百名山から8000m峰まで約2,000座を収録。"],
+    mountains: ["山をさがす — 約2,000座を標高・難易度・国で絞り込み | Mountain Peak", "日本と世界の約2,000座を標高・難易度・国・タグで検索。日本百名山から8000m峰まで、登山に必要な一次情報を収録。"],
     rankings: ["山のリスト — 百名山・セブンサミッツから山域別・テーマ別まで34選 | Mountain Peak", "日本百名山、七大陸最高峰、8000m峰から、山域別・標高別・難易度別・季節別のテーマリストまで34パターン。登頂チェックリスト付き。"],
     articles: ["記事・ガイド — 登山の始め方から装備まで | Mountain Peak", "登山初心者の始め方、装備チェックリスト、季節別おすすめ、山岳気象の読み方など実用ガイド。"],
     videos: ["山の動画ライブラリ — YouTubeキュレーション | Mountain Peak", "富士山からエベレストまで、山のYouTube動画をキュレーション。ルート解説・絶景4K・初心者ガイド。"],
@@ -72,8 +72,8 @@ const STATIC_TITLES = {
     gear: ["登山装備ガイド — 三種の神器から雪山装備まで | Mountain Peak", "登山靴・ザック・レインウェアの三種の神器からテント泊・雪山装備まで。難易度別の装備リスト、選び方と価格目安、山岳保険の情報。"],
   },
   en: {
-    home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. Primary mountain information from the 100 Famous Japanese Mountains to the Seven Summits."],
-    mountains: ["Find Mountains — Filter by Elevation, Difficulty & Country | Mountain Peak", "Search the world's mountains by elevation, difficulty, country and tags."],
+    home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. About 2,000 peaks from the 100 Famous Japanese Mountains to every 8000er, in English and Japanese."],
+    mountains: ["Find Mountains — Search ~2,000 Peaks by Elevation, Difficulty & Country | Mountain Peak", "Search about 2,000 peaks worldwide by elevation, difficulty, country and tags."],
     rankings: ["Mountain Lists — 34 Collections from the Seven Summits to Seasonal Picks | Mountain Peak", "The Seven Summits, 8000ers and Japan's 100 Famous Mountains, plus 30+ themed lists by range, elevation, difficulty and season — with summit checklists."],
     articles: ["Articles & Guides | Mountain Peak", "How to start hiking, gear checklists, seasonal picks and mountain weather guides."],
     videos: ["Mountain Video Library | Mountain Peak", "Curated YouTube videos from Fuji to Everest: route guides, scenic 4K and beginner tips."],
@@ -102,6 +102,7 @@ for (const l of LOCALES) {
     push(`/${l}/legal/${doc}/`, l, S[`legal:${doc}`][0], S[`legal:${doc}`][1], { kind: "legal" });
   }
   for (const m of DATA.mountains) {
+    if (m.cat) continue; // カタログ級（wd_）は静的ページを生成しない（SPA+404フォールバックで表示）
     const t = tr(m, l);
     const title = l === "ja"
       ? `${t.name}の標高・登山ルート・難易度・天気 | Mountain Peak`
@@ -199,18 +200,26 @@ function prerender(p) {
     const t = tr(p.a, l);
     body += t.body.split(/\n\n+/).slice(0, 4).map((x) => `<p>${esc(x)}</p>`).join("");
   } else if (p.kind === "ranking") {
+    // カタログ級（cat）は静的ページが無いためリンクせずテキストで列挙
     body += `<ol>` + p.k.mountainIds.map((id) => {
       const m = DATA.mountains.find((x) => x.id === id);
-      return m ? `<li><a href="${url(`/${l}/mountains/${m.slug}/`)}">${esc(tr(m, l).name)}</a> — ${m.elevationM.toLocaleString()}m</li>` : "";
+      if (!m) return "";
+      const nm = esc(tr(m, l).name) + ` — ${m.elevationM.toLocaleString()}m`;
+      return m.cat ? `<li>${nm}</li>` : `<li><a href="${url(`/${l}/mountains/${m.slug}/`)}">${esc(tr(m, l).name)}</a> — ${m.elevationM.toLocaleString()}m</li>`;
     }).join("") + `</ol>`;
   } else if (p.kind === "mountains" || p.kind === "home") {
-    body += `<ul>` + DATA.mountains.filter((m) => m.status === "published").map((m) =>
+    const curated = DATA.mountains.filter((m) => m.status === "published" && !m.cat);
+    const total = DATA.mountains.filter((m) => m.status === "published").length;
+    body += `<ul>` + curated.map((m) =>
       `<li><a href="${url(`/${l}/mountains/${m.slug}/`)}">${esc(tr(m, l).name)}</a> — ${m.elevationM.toLocaleString()}m</li>`).join("") + `</ul>` +
+      `<p>${l === "ja" ? `ほか計${total.toLocaleString()}座を収録（サイト内検索で探せます）` : `${total.toLocaleString()} peaks in total — use on-site search to find them all`}</p>` +
       `<p><a href="${url(`/${l}/rankings/`)}">Lists</a> / <a href="${url(`/${l}/articles/`)}">Articles</a> / <a href="${url(`/${l}/videos/`)}">Videos</a> / <a href="${url(`/${l}/community/`)}">Community</a> / <a href="${url(`/${l}/about/`)}">About</a></p>`;
   } else if (p.kind === "country" || p.kind === "region") {
     const ms = DATA.mountains.filter((m) => m.status === "published" && (p.kind === "country" ? m.countryId === p.c.id : m.regionId === p.rg.id))
       .sort((a, b) => b.elevationM - a.elevationM);
-    body += `<ul>` + ms.map((m) => `<li><a href="${url(`/${l}/mountains/${m.slug}/`)}">${esc(tr(m, l).name)}</a> — ${m.elevationM.toLocaleString()}m</li>`).join("") + `</ul>`;
+    body += `<ul>` + ms.map((m) => m.cat
+      ? `<li>${esc(tr(m, l).name)} — ${m.elevationM.toLocaleString()}m</li>`
+      : `<li><a href="${url(`/${l}/mountains/${m.slug}/`)}">${esc(tr(m, l).name)}</a> — ${m.elevationM.toLocaleString()}m</li>`).join("") + `</ul>`;
     if (p.kind === "country") {
       const regs = DATA.regions.filter((x) => x.countryId === p.c.id);
       if (regs.length) body += `<p>` + regs.map((x) => `<a href="${url(`/${l}/regions/${x.slug}/`)}">${esc(nm(x, l))}</a>`).join(" / ") + `</p>`;
@@ -296,10 +305,10 @@ Sitemap: ${SITE}/sitemap.xml
 // ---- llms.txt ----
 writeFileSync(join(ROOT, "llms.txt"),
 `# Mountain Peak
-> Bilingual (Japanese/English) global mountain database: elevation, climbing routes, difficulty (1-5), best seasons, hazards, reference weather and history for 200 peaks — all 100 Famous Japanese Mountains plus the world's great peaks including every 8000er. Always verify with official sources before climbing.
+> Bilingual (Japanese/English) global mountain database covering about 2,000 peaks: 200 curated in depth (climbing routes, difficulty 1-5, best seasons, hazards, reference weather, history) — including all 100 Famous Japanese Mountains and every 8000er — plus base data (name, elevation, coordinates, sourced from Wikidata/Wikipedia) for the rest. Always verify with official sources before climbing.
 
 ## Key pages
-- Mountains index (200 peaks): ${SITE}/ja/mountains/ (EN: ${SITE}/en/mountains/)
+- Mountains index (~2,000 peaks, 200 curated in depth): ${SITE}/ja/mountains/ (EN: ${SITE}/en/mountains/)
 - Lists (100 Famous Japanese Mountains, Seven Summits, 8000m peaks): ${SITE}/ja/rankings/
 - Browse by country & region (43 countries, 40 ranges): ${SITE}/ja/countries/
 - Famous climbers encyclopedia (280+ mountaineers, Wikipedia-sourced CC BY-SA): ${SITE}/ja/climbers/
