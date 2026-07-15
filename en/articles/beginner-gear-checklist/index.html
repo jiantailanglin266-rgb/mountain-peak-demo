@@ -1059,7 +1059,7 @@ function scrollPastHero(){
 /* ====== ビュー ====== */
 function vHome(){
   var D=d();
-  var featured=DATA.mountains.slice().sort(function(a,b){return b.elevationM-a.elevationM}).slice(0,6);
+  var featured=DATA.mountains.filter(function(m){return MT_PHOTOS[m.slug]}).sort(function(a,b){return b.elevationM-a.elevationM}).slice(0,6);
   var nowM=new Date().getMonth()+1;
   var seasonal=DATA.mountains.filter(function(m){return (m.bestSeasons||[]).indexOf(nowM)>=0}).sort(function(a,b){return a.difficultyLevel-b.difficultyLevel}).slice(0,3);
   var arts=DATA.articles.slice(0,3);
