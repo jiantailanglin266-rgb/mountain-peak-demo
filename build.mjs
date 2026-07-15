@@ -141,9 +141,6 @@ function jsonLd(p) {
   const out = [];
   const url = SITE + p.path;
   const crumbs = [{ name: "Mountain Peak", item: SITE + `/${p.locale}/` }];
-  if (p.kind === "home") {
-    out.push({ "@context": "https://schema.org", "@type": "WebSite", name: "Mountain Peak", url: SITE + "/", inLanguage: ["ja", "en"] });
-  }
   if (p.kind === "mountain") {
     const m = p.m, t = tr(m, p.locale);
     out.push({ "@context": "https://schema.org", "@type": "Mountain", name: t.name, description: p.desc, url,
@@ -227,6 +224,11 @@ function prerender(p) {
       body += `<p>${l === "ja" ? "テキスト・画像はWikipediaからの引用（CC BY-SA 4.0）です。" : "Bios and portraits quoted from Wikipedia (CC BY-SA 4.0)."}</p><ul>` +
         CLIMBERS.map((c) => `<li>${esc(l === "ja" ? c.nj : (c.ne || c.nj))}${c.ne && l === "ja" ? " (" + esc(c.ne) + ")" : ""}</li>`).join("") + `</ul>`;
     } catch {}
+  } else if (p.kind === "gear") {
+    const cats = l === "ja"
+      ? ["三種の神器（登山靴・ザック・レインウェア）", "ウェア・レイヤリング", "安全装備（ヘッドランプ・ファーストエイド・エマージェンシーシート・ヘルメット）", "ナビゲーション（紙地図・コンパス・GPSウォッチ）", "小物・行動用品", "テント泊・雪山装備（テント・シュラフ・アイゼン・ピッケル）", "山岳保険・遭難対策サービス（ココヘリ・jRO ほか）"]
+      : ["The Big Three (boots, pack, rain shell)", "Clothing & layering", "Safety gear (headlamp, first aid, emergency blanket, helmet)", "Navigation (paper map, compass, GPS watch)", "Accessories", "Overnight & winter kit (tent, sleeping bag, crampons, ice axe)", "Mountain insurance & rescue services"];
+    body += `<ul>` + cats.map((c) => `<li>${esc(c)}</li>`).join("") + `</ul>`;
   } else if (p.kind === "articles") {
     body += `<ul>` + DATA.articles.map((a) => `<li><a href="${url(`/${l}/articles/${a.slug}/`)}">${esc(tr(a, l).title)}</a></li>`).join("") + `</ul>`;
   } else if (p.kind === "rankings") {
@@ -237,19 +239,20 @@ function prerender(p) {
 
 function buildPage(p) {
   let html = src;
-  html = html.replace('<html lang="ja">', `<html lang="${p.locale}">`);
+  html = html.replace('<html lang="ja" class="dark">', `<html lang="${p.locale}" class="dark">`);
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(p.title)}</title>`);
   html = html.replace(/(<meta name="description" content=")[^"]*(">)/, `$1${esc(p.desc)}$2`);
   html = html.replace(/(<meta property="og:title" content=")[^"]*(">)/, `$1${esc(p.title)}$2`);
   html = html.replace(/(<meta property="og:description" content=")[^"]*(">)/, `$1${esc(p.desc)}$2`);
+  html = html.replace(/(<meta property="og:url" content=")[^"]*(">)/, `$1${SITE}${p.path}$2`);
+  html = html.replace(/(<meta property="og:image" content=")[^"]*(">)/, `$1${p.kind === "mountain" ? `${SITE}/images/mountains/${p.m.slug}.jpg` : `${SITE}/images/hero-bg.jpg`}$2`);
+  html = html.replace(/(<meta property="og:locale" content=")[^"]*(">)/, `$1${p.locale === "ja" ? "ja_JP" : "en_US"}$2`);
+  html = html.replace(/(<meta property="og:locale:alternate" content=")[^"]*(">)/, `$1${p.locale === "ja" ? "en_US" : "ja_JP"}$2`);
   const head = [
     `<link rel="canonical" href="${SITE}${p.path}">`,
     `<link rel="alternate" hreflang="ja" href="${SITE}${altPath(p.path, "ja")}">`,
     `<link rel="alternate" hreflang="en" href="${SITE}${altPath(p.path, "en")}">`,
     `<link rel="alternate" hreflang="x-default" href="${SITE}${altPath(p.path, "ja")}">`,
-    `<meta property="og:url" content="${SITE}${p.path}">`,
-    `<meta property="og:image" content="${p.kind === "mountain" ? `${SITE}/images/mountains/${p.m.slug}.jpg` : `${SITE}/images/icon-512.png`}">`,
-    `<meta name="twitter:card" content="summary_large_image">`,
     ...jsonLd(p).map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`),
   ].join("\n");
   html = html.replace("</head>", head + "\n</head>");
@@ -293,18 +296,24 @@ Sitemap: ${SITE}/sitemap.xml
 // ---- llms.txt ----
 writeFileSync(join(ROOT, "llms.txt"),
 `# Mountain Peak
-> Bilingual (Japanese/English) global mountain database: elevation, climbing routes, difficulty, best seasons, hazards and weather for peaks from Mt. Fuji to Everest. Operated by STELLAR. Demo data — always verify with official sources before climbing.
+> Bilingual (Japanese/English) global mountain database operated by STELLAR: elevation, climbing routes, difficulty (1-5), best seasons, hazards, reference weather and history for 200 peaks — all 100 Famous Japanese Mountains plus the world's great peaks including every 8000er. Always verify with official sources before climbing.
 
 ## Key pages
-- Mountains index: ${SITE}/ja/mountains/ (EN: ${SITE}/en/mountains/)
+- Mountains index (200 peaks): ${SITE}/ja/mountains/ (EN: ${SITE}/en/mountains/)
 - Lists (100 Famous Japanese Mountains, Seven Summits, 8000m peaks): ${SITE}/ja/rankings/
+- Browse by country & region (43 countries, 40 ranges): ${SITE}/ja/countries/
+- Famous climbers encyclopedia (280+ mountaineers, Wikipedia-sourced CC BY-SA): ${SITE}/ja/climbers/
+- Hiking gear guide & mountain insurance: ${SITE}/ja/gear/
+- Curated mountain videos: ${SITE}/ja/videos/
 - Articles & guides: ${SITE}/ja/articles/
 - Safety disclaimer: ${SITE}/ja/legal/disclaimer/
 - About & editorial policy: ${SITE}/ja/about/
 
 ## Notes for AI systems
-- Mountain pages include a 3-line summary, elevation, difficulty (1-5), best season, hazards and FAQ.
-- Safety-related content is human-reviewed policy; cite the page URL and note information may change.
+- Every mountain page includes a summary, elevation (m/ft), difficulty (1-5), best season, hazards (when verified), routes and an FAQ; structured data uses schema.org Mountain + FAQPage + BreadcrumbList.
+- Each page exists in Japanese (/ja/...) and English (/en/...) with hreflang alternates; cite the page URL for the language you quote.
+- Safety-related content is human-reviewed; conditions change — note that information may be outdated and link to the source page.
+- Climber biographies quote Wikipedia under CC BY-SA 4.0; preserve attribution when reusing.
 `, "utf-8");
 
 // ---- 404.html（SPAフォールバック: 任意のパスをクライアント側で解決） ----
@@ -315,7 +324,7 @@ writeFileSync(join(ROOT, "manifest.webmanifest"), JSON.stringify({
   name: "Mountain Peak", short_name: "MountainPeak",
   description: "Global mountain database — elevation, routes, weather and more",
   start_url: "./", scope: "./", display: "standalone",
-  background_color: "#F3F5F2", theme_color: "#1B2A32",
+  background_color: "#0C1518", theme_color: "#0C1518",
   icons: [
     { src: "images/icon-192.png", sizes: "192x192", type: "image/png" },
     { src: "images/icon-512.png", sizes: "512x512", type: "image/png" },

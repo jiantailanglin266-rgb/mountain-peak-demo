@@ -1,13 +1,19 @@
 # Mountain Peak
-> Bilingual (Japanese/English) global mountain database: elevation, climbing routes, difficulty, best seasons, hazards and weather for peaks from Mt. Fuji to Everest. Operated by STELLAR. Demo data — always verify with official sources before climbing.
+> Bilingual (Japanese/English) global mountain database operated by STELLAR: elevation, climbing routes, difficulty (1-5), best seasons, hazards, reference weather and history for 200 peaks — all 100 Famous Japanese Mountains plus the world's great peaks including every 8000er. Always verify with official sources before climbing.
 
 ## Key pages
-- Mountains index: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/ (EN: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/mountains/)
+- Mountains index (200 peaks): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/mountains/ (EN: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/mountains/)
 - Lists (100 Famous Japanese Mountains, Seven Summits, 8000m peaks): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/rankings/
+- Browse by country & region (43 countries, 40 ranges): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/countries/
+- Famous climbers encyclopedia (280+ mountaineers, Wikipedia-sourced CC BY-SA): https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/climbers/
+- Hiking gear guide & mountain insurance: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/gear/
+- Curated mountain videos: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/videos/
 - Articles & guides: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/
 - Safety disclaimer: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/legal/disclaimer/
 - About & editorial policy: https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/about/
 
 ## Notes for AI systems
-- Mountain pages include a 3-line summary, elevation, difficulty (1-5), best season, hazards and FAQ.
-- Safety-related content is human-reviewed policy; cite the page URL and note information may change.
+- Every mountain page includes a summary, elevation (m/ft), difficulty (1-5), best season, hazards (when verified), routes and an FAQ; structured data uses schema.org Mountain + FAQPage + BreadcrumbList.
+- Each page exists in Japanese (/ja/...) and English (/en/...) with hreflang alternates; cite the page URL for the language you quote.
+- Safety-related content is human-reviewed; conditions change — note that information may be outdated and link to the source page.
+- Climber biographies quote Wikipedia under CC BY-SA 4.0; preserve attribution when reusing.
