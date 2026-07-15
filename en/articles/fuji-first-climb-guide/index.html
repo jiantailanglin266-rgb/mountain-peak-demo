@@ -81,7 +81,9 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 .mqitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
 .mqitem:hover img{transform:scale(1.06)}
 .mqitem .nm{position:absolute;left:0;right:0;bottom:0;padding:20px 11px 8px;font-size:11.5px;font-weight:700;color:#fff;background:linear-gradient(0deg,rgba(10,18,24,.78),transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-@media(max-width:640px){.mqitem{width:170px;height:106px;margin-right:9px}.mq::before,.mq::after{width:34px}}
+.mqitem.mqp{width:138px;height:172px}
+.mqitem.mqp img{object-position:center 18%}
+@media(max-width:640px){.mqitem{width:170px;height:106px;margin-right:9px}.mqitem.mqp{width:108px;height:138px}.mq::before,.mq::after{width:34px}}
 @media(prefers-reduced-motion:reduce){.mqtrack{animation:none}}
 /* ===== 言語セレクタ（41言語） ===== */
 .langwrap{position:relative}
@@ -628,7 +630,7 @@ var DICT = {
    justNow:"たった今",minAgo:"分前",hourAgo:"時間前",dayAgo:"日前"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"世界中の山を、<br>正しく引ける",s:"標高・ルート・天気・歴史 — 登山に必要な一次情報を、日本語と英語で。信頼できるデータで、山の計画をもっと確実に、もっと自由に。",ph:"山名・キーワードで検索（例: 富士山, Everest）",go:"検索",pop:"人気の検索",pops:["富士山","エベレスト","キリマンジャロ","アルプス"],feats:[["世界中の山を網羅","200以上の国と地域\n100,000+の山を収録"],["リアルタイム天気","登山地の最新気象情報を\nリアルタイムで取得"],["ルート・地図情報","詳細なルート・地形データで\n安全な計画をサポート"],["多言語対応","日本語・英語で利用可能\n世界中の登山者をサポート"]]},
   featured:"注目の山",lists:"リストから探す",newest:"新着記事",byCountry:"国から探す",viewAll:"すべて見る →",season_now:"今月が旬の山",your:"あなたの登頂チェックリスト",
-  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY",legends:"LEGENDS"},
   f:{kw:"キーワード",country:"国",allC:"すべての国",elev:"標高",any:"指定なし",diff:"難易度",allD:"すべての難易度",found:"件の山が見つかりました",none:"条件に合う山が見つかりませんでした。フィルタを変えてみてください。",reset:"リセット"},
   sort:{t:"並び替え:",elevD:"標高が高い順",elevA:"標高が低い順",diffA:"難易度がやさしい順",diffD:"難易度が高い順",name:"名前順"},
   l:{elevation:"標高",summary:"概要",features:"特徴",history:"歴史・初登頂",firstAscent:"初登頂",access:"登山口・アクセス",equipment:"必要装備",hazards:"⚠ 危険箇所",routes:"主な登頂ルート",weather:"天気（モック）",data:"山のデータ",coords:"緯度経度",country:"国",region:"山域",season:"ベストシーズン",prominence:"プロミネンス",nearby:"近隣・類似の山",dist:"距離",gain:"累積標高差",time:"標準コースタイム",stamina:"体力度",tech:"技術グレード",notes:"補足",updated:"最終更新",map:"地図",home:"ホーム",peaks:"座",back:"← 一覧へ戻る",cmp:"標高くらべ",share:"リンクをコピー",shared:"リンクをコピーしました",summit:"登頂済みにする",summited:"✓ 登頂済み",unclimbed:"未登頂に戻す"},
@@ -678,7 +680,7 @@ var DICT = {
    justNow:"just now",minAgo:"min ago",hourAgo:"h ago",dayAgo:"d ago"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"The world's mountains,<br>done right",s:"Elevation, routes, weather and history — primary mountain information in English and Japanese. Reliable data to plan your mountains with more confidence and freedom.",ph:"Search mountains (e.g. Everest, Fuji)",go:"Search",pop:"Popular",pops:["Fuji","Everest","Kilimanjaro","Alps"],feats:[["Global Coverage","200+ countries & regions\n100,000+ peaks"],["Real-time Weather","Latest mountain conditions\nat a glance"],["Routes & Maps","Detailed route & terrain data\nfor safer planning"],["Multilingual","Japanese & English —\nfor climbers worldwide"]]},
   featured:"Featured Mountains",lists:"Browse by List",newest:"Latest Articles",byCountry:"Browse by Country",viewAll:"View all →",season_now:"In Season This Month",your:"Your Summit Checklist",
-  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY"},
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY",legends:"LEGENDS"},
   f:{kw:"Keyword",country:"Country",allC:"All countries",elev:"Elevation",any:"Any",diff:"Difficulty",allD:"Any difficulty",found:"mountains found",none:"No mountains match your filters. Try adjusting them.",reset:"Reset"},
   sort:{t:"Sort:",elevD:"Highest first",elevA:"Lowest first",diffA:"Easiest first",diffD:"Hardest first",name:"Name"},
   l:{elevation:"Elevation",summary:"Overview",features:"Features",history:"History & First Ascent",firstAscent:"First ascent",access:"Access",equipment:"Equipment",hazards:"⚠ Hazards",routes:"Climbing Routes",weather:"Weather (mock)",data:"Mountain Data",coords:"Coordinates",country:"Country",region:"Range",season:"Best season",prominence:"Prominence",nearby:"Nearby & Similar Peaks",dist:"Distance",gain:"Elevation gain",time:"Typical time",stamina:"Stamina",tech:"Tech grade",notes:"Notes",updated:"Last updated",map:"Map",home:"Home",peaks:"peaks",back:"← Back to list",cmp:"Elevation Compare",share:"Copy link",shared:"Link copied",summit:"Mark as climbed",summited:"✓ Climbed",unclimbed:"Unmark"},
@@ -931,6 +933,8 @@ function vHome(){
     '<div class="mq">'+mqRow(MQ_TOP,true)+mqRow(MQ_BOTTOM,false)+"</div>"+
     (seasonal.length?secHead("season",D.season_now,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+seasonal.map(mountainCard).join("")+"</div>":"")+
     secHead("featured",D.featured,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
+    secHead("legends",state.locale==="ja"?"伝説の登山家たち":"Legendary Climbers",'<span class="more" onclick="go({name:\'climbers\'})">'+D.viewAll+"</span>")+
+    '<div class="mq">'+mqClimberRow(MQ_CLIMBERS_A,true)+mqClimberRow(MQ_CLIMBERS_B,false)+"</div>"+
     yourHtml+
     secHead("lists",D.lists)+'<div class="grid">'+DATA.rankings.map(function(r){
       var done=sums.length?r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length:0;
@@ -1199,6 +1203,18 @@ function render(){
 /* ====== FVマーキー（Wikipedia引用写真 12枚x2段・上段右回り/下段左回り） ====== */
 var MQ_TOP=["mount-everest","k2","matterhorn","mont-blanc","kilimanjaro","denali","aconcagua","ama-dablam","fitz-roy","eiger","aoraki-mount-cook","alpamayo"];
 var MQ_BOTTOM=["mount-fuji","yarigatake","okuhotaka-dake","tsurugi-dake","shirouma-dake","tateyama","kita-dake","kai-komagatake","aka-dake","hakusan","daisen","miyanoura-dake"];
+// 登山家マーキー（注目の山セクション直下・肖像はWikipedia引用）
+var MQ_CLIMBERS_A=[["cl_161","アダム・オンドラ","Adam Ondra"],["cl_095","アナトリ・ブクレーエフ","Anatoli Boukreev"],["cl_164","アレックス・オノルド","Alex Honnold"],["cl_148","イヴォン・シュイナード","Yvon Chouinard"],["cl_061","イェジ・ククチカ","Jerzy Kukuczka"],["cl_033","ヴァルテル・ボナッティ","Walter Bonatti"],["cl_098","ウーリー・ステック","Ueli Steck"],["cl_026","エドモンド・ヒラリー","Edmund Hillary"],["cl_001","エドワード・ウィンパー","Edward Whymper"],["cl_087","カトリーヌ・デスティベル","Catherine Destivelle"],["cl_123","カミ・リタ・シェルパ","Kami Rita Sherpa"],["cl_100","キリアン・ジョルネ","Kilian Jornet"]];
+var MQ_CLIMBERS_B=[["cl_160","クリス・シャーマ","Chris Sharma"],["cl_046","クリス・ボニントン","Chris Bonington"],["cl_137","ゲルリンデ・カルテンブルンナー","Gerlinde Kaltenbrunner"],["cl_171","コンラッド・アンカー","Conrad Anker"],["cl_172","ジミー・チン","Jimmy Chin"],["cl_054","ジョー・シンプソン","Joe Simpson"],["cl_007","ジョージ・マロリー","George Mallory"],["cl_104","ダビド・ラマ","David Lama"],["cl_027","テンジン・ノルゲイ","Tenzing Norgay"],["cl_165","トミー・コールドウェル","Tommy Caldwell"],["cl_127","ニルマル・プルジャ","Nirmal Purja"],["cl_019","ハインリヒ・ハラー","Heinrich Harrer"]];
+function mqClimberRow(list,rightward){
+  var items=list.map(function(c){
+    var name=state.locale==="ja"?c[1]:(c[2]||c[1]);
+    return '<div class="mqitem mqp" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="clOpen(\''+c[0]+'\')">'+
+      '<img src="'+asset("images/climbers/"+c[0]+".jpg")+'" alt="'+esc(name)+'" decoding="async">'+
+      '<span class="nm">'+esc(name)+"</span></div>";
+  }).join("");
+  return '<div class="mqrow"><div class="mqtrack'+(rightward?" r":"")+'">'+items+items+"</div></div>";
+}
 function mqRow(slugs,rightward){
   var items=slugs.map(function(s){
     var m=DATA.mountains.find(function(x){return x.slug===s});
