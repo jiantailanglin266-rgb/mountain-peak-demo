@@ -125,6 +125,24 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 .afb b{font-size:14px}
 .afb>div span{font-size:11.5px;color:var(--muted)}
 .afb .arw{font-weight:800;color:var(--glacier)}
+/* ブラッシュアップ: A11y・演出（速く始まりゆっくり止まる cubic-bezier(.22,1,.36,1)） */
+:focus-visible{outline:2px solid var(--glacier);outline-offset:2px;border-radius:6px}
+#pgbar{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--glacier),var(--route));z-index:80;pointer-events:none}
+header.site{transition:box-shadow .3s}
+header.site.scrolled{box-shadow:0 8px 28px -14px rgba(0,0,0,.6)}
+.hero .bg{will-change:transform}
+.hero .inner>*{animation:rise .7s cubic-bezier(.22,1,.36,1) backwards}
+.hero .inner>*:nth-child(2){animation-delay:.06s}.hero .inner>*:nth-child(3){animation-delay:.12s}.hero .inner>*:nth-child(4){animation-delay:.18s}.hero .inner>*:nth-child(5){animation-delay:.24s}.hero .inner>*:nth-child(6){animation-delay:.3s}.hero .inner>*:nth-child(7){animation-delay:.36s}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}}
+.hero .coord{font-size:11px;letter-spacing:.16em;color:rgba(255,255,255,.65);margin-top:7px;min-height:14px}
+.mthumb{background:linear-gradient(110deg,var(--hair) 8%,rgba(255,255,255,.05) 18%,var(--hair) 33%);background-size:200% 100%;animation:shimmer 1.5s linear infinite}
+@keyframes shimmer{to{background-position:-200% 0}}
+.mcard .mthumb img{transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.mcard:hover .mthumb img,.mcard:focus-visible .mthumb img{transform:scale(1.04)}
+.gauge .fill,.gauge .mk{transition:width 1s cubic-bezier(.22,1,.36,1),left 1s cubic-bezier(.22,1,.36,1)}
+.difflegend{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:2px 0 12px}
+.difflegend .lb{font-size:11px;color:var(--muted);letter-spacing:.04em;margin-right:3px}
+.sug button.kb{background:var(--paper)}
 /* ===== 言語セレクタ（41言語） ===== */
 .langwrap{position:relative}
 .langbtn{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
@@ -818,19 +836,52 @@ function suggest(inputId,boxId){
   box.innerHTML=hits.map(function(m){var t=tr(m),c=countryOf(m.countryId);
     return '<button type="button" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})"><span class="tri">▲</span><span>'+esc(t.name)+(c?' <span style="color:var(--muted);font-size:11px">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+'</span><span class="e mono">'+elevMain(m.elevationM)+" "+elevUnit()+"</span></button>"}).join("");
   box.style.display="block";
+  box.__idx=-1;
+}
+/* サジェストのキーボード操作: ↑↓で選択・Enterで確定・Escでクリア */
+function sugKey(ev,inputId,boxId,goFn){
+  var box=document.getElementById(boxId);
+  var items=box?box.querySelectorAll("button"):[];
+  var idx=(box&&box.__idx!==undefined)?box.__idx:-1;
+  if(ev.key==="ArrowDown"||ev.key==="ArrowUp"){
+    if(!items.length)return;
+    ev.preventDefault();
+    idx=ev.key==="ArrowDown"?(idx+1)%items.length:(idx-1+items.length)%items.length;
+    box.__idx=idx;
+    Array.prototype.forEach.call(items,function(b,i){b.classList.toggle("kb",i===idx)});
+    return;
+  }
+  if(ev.key==="Enter"){
+    ev.preventDefault();
+    if(idx>=0&&items[idx])items[idx].click();
+    else if(goFn)goFn();
+    return;
+  }
+  if(ev.key==="Escape"){
+    var inp=document.getElementById(inputId);
+    if(inp)inp.value="";
+    if(box){box.style.display="none";box.__idx=-1}
+  }
 }
 function hideSug(boxId){setTimeout(function(){var b=document.getElementById(boxId);if(b)b.style.display="none"},160)}
 
 /* ====== HTML部品 ====== */
-function diffBadge(lv){return '<span class="badge d'+lv+'">'+"▲".repeat(lv)+" "+d().diffs[lv]+"</span>"}
+function diffBadge(lv){
+  var lab=state.locale==="ja"?"難易度: "+d().diffs[lv]+"（5段階中"+lv+"）":"Difficulty: "+d().diffs[lv]+" ("+lv+" of 5)";
+  return '<span class="badge d'+lv+'" role="img" aria-label="'+lab+'" title="'+lab+'">'+"▲".repeat(lv)+" "+d().diffs[lv]+"</span>";
+}
 function tagBadges(tags){return (tags||[]).map(function(t){return d().tags[t]?'<span class="badge plain">'+esc(d().tags[t])+"</span>":""}).join("")}
 function seasonBadge(months){if(!months||!months.length)return "";return '<span class="badge plain">🗓 '+months.map(function(m){return d().months[m-1]}).join(" · ")+"</span>"}
 function gauge(m){
-  var pct=Math.min(100,m.elevationM/8849*100);
+  var pct=Math.min(100,m.elevationM/8849*100).toFixed(1);
   var refs=[3776,8000];
-  return '<div class="gauge" aria-hidden="true"><div class="base"><div class="fill" style="width:'+pct.toFixed(1)+'%"></div>'+
+  var lab=state.locale==="ja"
+    ?"標高 "+m.elevationM.toLocaleString()+"m — 世界最高峰8,849mの"+Math.round(pct)+"%"
+    :"Elevation "+m.elevationM.toLocaleString()+"m — "+Math.round(pct)+"% of Everest (8,849m)";
+  /* fill/mkは0%で描画し、スクロール到達時にdata-wの比率までイーズアウトで満ちる（fxCard） */
+  return '<div class="gauge" role="img" aria-label="'+lab+'"><div class="base"><div class="fill" data-w="'+pct+'" style="width:0%"></div>'+
     refs.map(function(r){return '<span class="ref" style="left:'+(r/8849*100).toFixed(1)+'%"></span>'}).join("")+
-    '<span class="mk" style="left:'+pct.toFixed(1)+'%">▲</span></div>'+
+    '<span class="mk" data-w="'+pct+'" style="left:0%" aria-hidden="true">▲</span></div>'+
     '<div class="lab mono"><span>0</span><span>8,849m</span></div></div>';
 }
 var MT_PHOTOS={"aconcagua":1,"adatara-yama":1,"aiguille-verte":1,"ainodake":1,"aizukoma-gatake":1,"aka-dake":1,"akagi-san":1,"akaishi-dake":1,"akan-dake":1,"alpamayo":1,"ama-dablam":1,"amagi-san":1,"amakazari-yama":1,"aneto":1,"annapurna":1,"aoraki-mount-cook":1,"ararat":1,"arashima-dake":1,"asama-yama":1,"aso-san":1,"azuma-san":1,"azumaya-san":1,"bandai-san":1,"baruntse":1,"belukha":1,"ben-nevis":1,"broad-peak":1,"cerro-torre":1,"chimborazo":1,"cho-oyu":1,"chokai-san":1,"cotopaxi":1,"daibosatsu-rei":1,"daisen":1,"daisetsuzan":1,"damavand":1,"denali":1,"dent-blanche":1,"dhaulagiri":1,"dom":1,"echigokoma-gatake":1,"eiger":1,"elbrus":1,"ena-san":1,"etna":1,"fansipan":1,"fitz-roy":1,"galdhopiggen":1,"gasherbrum-i":1,"gasherbrum-ii":1,"gassan":1,"goryu-dake":1,"gran-paradiso":1,"grand-teton":1,"grandes-jorasses":1,"grossglockner":1,"hachimantai":1,"hakkoda-san":1,"hakusan":1,"hallasan":1,"hayachine-san":1,"hijiri-dake":1,"hiragatake":1,"hiuchi-yama":1,"hiuchiga-take":1,"hoo-zan":1,"hotaka-yama":1,"huascaran":1,"huayna-potosi":1,"hvannadalshnukur":1,"ibuki-yama":1,"iide-san":1,"illimani":1,"ishizuchi-san":1,"island-peak":1,"ismoil-somoni":1,"iwaki-san":1,"iwate-san":1,"iztaccihuatl":1,"jengish-chokusu":1,"jonen-dake":1,"jungfrau":1,"k2":1,"kai-komagatake":1,"kaimon-dake":1,"kangchenjunga":1,"kasaga-take":1,"kashimayari-gatake":1,"kazbek":1,"khan-tengri":1,"kilimanjaro":1,"kinabalu":1,"kinpu-san":1,"kirigamine":1,"kirishima-yama":1,"kiso-komagatake":1,"kita-dake":1,"klyuchevskaya":1,"kobushiga-take":1,"kosciuszko":1,"kuju-san":1,"kumotori-yama":1,"kurobegoro-dake":1,"kusatsu-shirane-san":1,"la-meije":1,"lenin-peak":1,"lhotse":1,"longs-peak":1,"machapuchare":1,"makalu":1,"makihata-yama":1,"manaslu":1,"marmolada":1,"matterhorn":1,"mera-peak":1,"miyanoura-dake":1,"mizugaki-yama":1,"moench":1,"mont-blanc":1,"monte-rosa":1,"monte-viso":1,"mount-assiniboine":1,"mount-everest":1,"mount-fuji":1,"mount-hood":1,"mount-kenya":1,"mount-logan":1,"mount-meru":1,"mount-olympus":1,"mount-rainier":1,"mount-robson":1,"mount-shasta":1,"mount-takao":1,"mount-taranaki":1,"mount-whitney":1,"mulhacen":1,"muztagh-ata":1,"myoko-san":1,"naeba-san":1,"nanda-devi":1,"nanga-parbat":1,"nantai-san":1,"nasu-dake":1,"nikko-shirane-san":1,"norikura-dake":1,"oasahi-dake":1,"odaigahara-yama":1,"ojos-del-salado":1,"okuhotaka-dake":1,"omine-san":1,"ontake-san":1,"pico-de-orizaba":1,"pikes-peak":1,"piz-bernina":1,"poroshiri-dake":1,"pumori":1,"puncak-jaya":1,"ras-dashen":1,"rausu-dake":1,"rishiri-zan":1,"ryokami-san":1,"sajama":1,"senjo-ga-take":1,"shari-dake":1,"shiomi-dake":1,"shirouma-dake":1,"shishapangma":1,"sobo-san":1,"stok-kangri":1,"sukai-san":1,"takatsuma-yama":1,"tanigawa-dake":1,"tanzawa-san":1,"tateshina-yama":1,"tateyama":1,"tekari-dake":1,"tokachi-dake":1,"tomuraushi-yama":1,"toubkal":1,"triglav":1,"tsukuba-san":1,"tsurugi-dake":1,"tsurugi-san":1,"utsugi-dake":1,"utsukushigahara":1,"villarrica":1,"vinson-massif":1,"warusawa-dake":1,"washiba-dake":1,"weisshorn":1,"wildspitze":1,"yake-dake":1,"yakushi-dake":1,"yarigatake":1,"yotei-zan":1,"yushan":1,"zao-san":1,"zugspitze":1};
@@ -850,7 +901,7 @@ function mountainCard(m){
     (isSum(m.id)?'<span class="done">✓ '+(state.locale==="ja"?"登頂":"Climbed")+"</span>":"")+
     '<div class="mrow"><div class="mthumb">'+mtPhoto(m,t.name)+'</div><div class="mbody">'+
     '<div class="top"><div><div class="nm">'+esc(t.name)+'</div>'+(t.localName&&t.localName!==t.name?'<div class="ln">'+esc(t.localName)+"</div>":"")+"</div>"+
-    '<div class="el mono">'+elevMain(m.elevationM)+"<small> "+elevUnit()+"</small></div></div>"+
+    '<div class="el mono"><span class="cnt" data-v="'+m.elevationM+'">'+elevMain(m.elevationM)+"</span><small> "+elevUnit()+"</small></div></div>"+
     '<div class="sm">'+esc(t.summary)+"</div>"+
     '<div class="badges">'+diffBadge(m.difficultyLevel)+(c?'<span class="badge plain">'+flag(c.id)+" "+esc(names(c))+"</span>":"")+"</div>"+gauge(m)+"</div></div></div>";
 }
@@ -957,8 +1008,8 @@ function vHome(){
       var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
       return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">'+esc(names(r))+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
   }
-  return '<section class="hero fv"><img class="bg" src="'+asset("images/hero-bg.jpg")+'" alt="" aria-hidden="true"><div class="scrim"></div>'+stampSVG()+'<div class="inner"><div class="kicker mono">'+D.hero.k+'</div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
-    '<div class="searchbox"><div class="fvsearch"><svg class="mag" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" autocomplete="off" oninput="suggest(\'homeQ\',\'homeSug\')" onblur="hideSug(\'homeSug\')" onkeydown="if(event.key===\'Enter\'){event.preventDefault();homeSearch()}"><button onclick="homeSearch()">'+D.hero.go+'</button></div><div id="homeSug" class="sug" style="display:none"></div></div>'+
+  return '<section class="hero fv"><img class="bg" src="'+asset("images/hero-bg.jpg")+'" alt="" aria-hidden="true"><div class="scrim"></div>'+stampSVG()+'<div class="inner"><div class="kicker mono">'+D.hero.k+'</div><div class="coord mono" id="heroCoord" data-s="27°59′17″N 86°55′31″E" aria-hidden="true"></div><h1 class="disp">'+D.hero.t+'</h1><p class="sub">'+D.hero.s+'</p>'+
+    '<div class="searchbox"><div class="fvsearch"><svg class="mag" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg><input id="homeQ" placeholder="'+esc(D.hero.ph)+'" autocomplete="off" oninput="suggest(\'homeQ\',\'homeSug\')" onblur="hideSug(\'homeSug\')" onkeydown="sugKey(event,\'homeQ\',\'homeSug\',homeSearch)"><button onclick="homeSearch()">'+D.hero.go+'</button></div><div id="homeSug" class="sug" style="display:none"></div></div>'+
     '<div class="pops"><span class="lb">'+esc(D.hero.pop)+'</span>'+D.hero.pops.map(function(p){return '<button class="pchip" onclick="go({name:\'mountains\',q:\''+esc(p)+'\'})">'+esc(p)+'</button>'}).join("")+'</div>'+
     '<div class="feats">'+D.hero.feats.map(function(f,i){return '<div class="feat">'+FEAT_ICONS[i]+'<div><div class="t">'+esc(f[0])+'</div><div class="d">'+esc(f[1])+'</div></div></div>'}).join("")+'</div>'+
     '</div><div class="chev"><button aria-label="scroll down" onclick="scrollPastHero()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div></section>'+
@@ -987,9 +1038,10 @@ function vMountains(){
     var lbl=t?D.tags[t]:D.f.any;
     return '<span class="chip'+(f.tag===t?" on":"")+'" onclick="state.filters.tag=\''+t+'\';render()">'+esc(lbl)+"</span>"}).join("")+"</div>";
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.mountains}])+
-    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.mountains+"</h1>"+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:10px;letter-spacing:-.01em">'+D.tabs.mountains+"</h1>"+
+    '<div class="difflegend"><span class="lb">'+(state.locale==="ja"?"難易度の凡例:":"Difficulty legend:")+"</span>"+[1,2,3,4,5].map(diffBadge).join("")+"</div>"+
     '<div class="card"><div class="filters">'+
-    '<label>'+D.f.kw+'<input id="fQ" value="'+esc(f.q)+'" autocomplete="off" oninput="suggest(\'fQ\',\'fSug\')" onblur="hideSug(\'fSug\')" onkeydown="if(event.key===\'Enter\')applyFilters()"><div id="fSug" class="sug" style="display:none;text-transform:none;letter-spacing:0;font-weight:400"></div></label>'+
+    '<label>'+D.f.kw+'<input id="fQ" value="'+esc(f.q)+'" autocomplete="off" oninput="suggest(\'fQ\',\'fSug\')" onblur="hideSug(\'fSug\')" onkeydown="sugKey(event,\'fQ\',\'fSug\',applyFilters)"><div id="fSug" class="sug" style="display:none;text-transform:none;letter-spacing:0;font-weight:400"></div></label>'+
     '<label>'+D.f.country+(f.country?" "+flag(f.country):"")+'<select id="fC" onchange="applyFilters()">'+opts(f.country,[["",D.f.allC]].concat(DATA.countries.map(function(c){return[c.id,names(c)]})))+"</select></label>"+
     '<label>'+D.f.elev+'<select id="fE" onchange="applyFilters()">'+opts(f.elev,[["",D.f.any]].concat(Object.keys(BANDS).map(function(k){return[k,k+" m"]})))+"</select></label>"+
     '<label>'+D.f.diff+'<select id="fD" onchange="applyFilters()">'+opts(f.diff,[["",D.f.allD],["1","1 "+D.diffs[1]],["2","2 "+D.diffs[2]],["3","3 "+D.diffs[3]],["4","4 "+D.diffs[4]],["5","5 "+D.diffs[5]]])+"</select></label>"+
@@ -1198,10 +1250,21 @@ function pageTitle(v){
 var _obs=null;
 function reveal(){
   var els=document.querySelectorAll(".rv:not(.in)");
-  if(!("IntersectionObserver" in window)){els.forEach?els.forEach(function(e){e.classList.add("in")}):Array.prototype.forEach.call(els,function(e){e.classList.add("in")});return}
+  if(!("IntersectionObserver" in window)){Array.prototype.forEach.call(els,function(e){e.classList.add("in");fxCard(e)});fxCard(document);return}
   if(_obs)_obs.disconnect();
-  _obs=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");_obs.unobserve(en.target)}})},{threshold:.06,rootMargin:"0px 0px -20px 0px"});
+  /* 出現は時間差フェード（1バッチ内で45msずつ・ワンショット）。早めに発火させ空白の間延びを防ぐ */
+  _obs=new IntersectionObserver(function(entries){entries.forEach(function(en,i){if(en.isIntersecting){
+    en.target.style.transitionDelay=Math.min(i*45,240)+"ms";
+    en.target.classList.add("in");
+    fxCard(en.target);
+    _obs.unobserve(en.target);
+  }})},{threshold:.05,rootMargin:"0px 0px 140px 0px"});
   Array.prototype.forEach.call(els,function(e){_obs.observe(e)});
+  /* .rv外（山詳細ヒーロー等）のゲージ・カウントは即時発火 */
+  Array.prototype.forEach.call(document.querySelectorAll(".gauge .fill[data-w]"),function(f){
+    var card=f.closest?f.closest(".rv"):null;
+    if(!card)fxCard(f.parentNode.parentNode);
+  });
 }
 function render(){
   var D=d(),v=state.view,html="";
@@ -1243,6 +1306,48 @@ function render(){
   document.getElementById("fdisc").innerHTML="<b>"+D.disc.t+"</b><br>"+D.disc.b+'<div style="margin-top:9px"><b>'+aft().discT+"</b> "+aft().discB+"</div>";
   document.title=pageTitle(v);
   reveal();
+  if(v.name==="home")typeCoord();
+}
+
+/* ====== ブラッシュアップFX（ゼロ依存・reduced-motion尊重） ====== */
+var REDUCED=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+/* カードがビューポートに入った瞬間: 標高バーを比率まで満たし、標高数値をカウントアップ */
+function fxCard(root){
+  Array.prototype.forEach.call(root.querySelectorAll(".gauge .fill[data-w]"),function(el){
+    var w=el.getAttribute("data-w")+"%";
+    requestAnimationFrame(function(){el.style.width=w});
+  });
+  Array.prototype.forEach.call(root.querySelectorAll(".gauge .mk[data-w]"),function(el){
+    var w=el.getAttribute("data-w")+"%";
+    requestAnimationFrame(function(){el.style.left=w});
+  });
+  Array.prototype.forEach.call(root.querySelectorAll(".cnt[data-v]"),function(el){countUp(el)});
+}
+function countUp(el){
+  var v=parseInt(el.getAttribute("data-v"),10);
+  el.removeAttribute("data-v");
+  if(!v)return;
+  var target=state.unit==="ft"?ft(v):v;
+  if(REDUCED){el.textContent=target.toLocaleString();return}
+  var t0=null,dur=900; // アニメ速度はここで調整
+  function step(ts){
+    if(!t0)t0=ts;
+    var p=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*e).toLocaleString();
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+/* ヒーローの座標タイプライター（エベレスト山頂座標=世界観の核） */
+function typeCoord(){
+  var el=document.getElementById("heroCoord");
+  if(!el)return;
+  var s=el.getAttribute("data-s")||"";
+  clearInterval(window.__coordT);
+  if(REDUCED){el.textContent=s;return}
+  el.textContent="";
+  var i=0;
+  window.__coordT=setInterval(function(){el.textContent=s.slice(0,++i);if(i>=s.length)clearInterval(window.__coordT)},46);
 }
 
 /* ====== アフィリエイト（装備ガイド・山岳保険。PR表記=景表法ステマ規制対応） ====== */
@@ -2129,7 +2234,37 @@ window.comToggleForm=comToggleForm;window.comSubmit=comSubmit;window.comReply=co
 window.vidOpen=vidOpen;window.vidClose=vidClose;
 window.clOpen=clOpen;window.clClose=clClose;window.clRefresh=clRefresh;
 window.selectLang=selectLang;window.toggleLangMenu=toggleLangMenu;
-document.addEventListener("keydown",function(e){if(e.key==="Escape"){vidClose();clClose()}});
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape"){vidClose();clClose();toggleChat(false)}
+  /* 「/」で検索にフォーカス（入力中は無効） */
+  if(e.key==="/"){
+    var tag=(e.target.tagName||"").toLowerCase();
+    if(tag!=="input"&&tag!=="textarea"&&tag!=="select"){
+      var q=document.getElementById("homeQ")||document.getElementById("fQ");
+      if(q){e.preventDefault();q.focus()}
+    }
+  }
+});
+/* スクロール進捗バー+ヘッダー影+ヒーロー微パララックス（rAF・passive） */
+(function(){
+  var pg=document.createElement("div");pg.id="pgbar";document.body.appendChild(pg);
+  var hd=document.querySelector("header.site"),tick=false;
+  function onScroll(){
+    if(tick)return;tick=true;
+    requestAnimationFrame(function(){
+      tick=false;
+      var max=document.documentElement.scrollHeight-window.innerHeight;
+      pg.style.width=(max>0?window.scrollY/max*100:0)+"%";
+      if(hd)hd.classList.toggle("scrolled",window.scrollY>8);
+      if(!REDUCED){
+        var bg=document.querySelector(".hero .bg");
+        if(bg)bg.style.transform="translateY("+Math.min(40,window.scrollY*.08)+"px) scale(1.06)";
+      }
+    });
+  }
+  window.addEventListener("scroll",onScroll,{passive:true});
+  onScroll();
+})();
 
 var toTop=document.getElementById("toTop");
 toTop.addEventListener("click",function(){window.scrollTo({top:0,behavior:"smooth"})});
@@ -2156,7 +2291,7 @@ parseHash();
 render();
 /* 検証用フック */
 window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
-window.afTrack=afTrack;window.gearGo=gearGo;
+window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
 })();
 </script>
