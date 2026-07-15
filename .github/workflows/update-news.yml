@@ -1,0 +1,25 @@
+# 山岳ニュースの自動更新: 毎日6:00 JSTにRSSを取得してnews.jsをコミット
+# → pushによりGitHub Pagesが自動再デプロイされ、サイトの「山の最新ニュース」が更新される
+name: Update mountain news (RSS)
+on:
+  schedule:
+    - cron: "0 21 * * *" # 21:00 UTC = 6:00 JST
+  workflow_dispatch: {} # 手動実行も可（Actionsタブから）
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch RSS and regenerate news.js
+        run: node tools/fetch-rss.mjs
+      - name: Commit & push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add news.js
+          git diff --cached --quiet || (git commit -m "chore: 山岳ニュースを自動更新 (RSS)" && git push)

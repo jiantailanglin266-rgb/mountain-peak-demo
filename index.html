@@ -143,6 +143,14 @@ header.site.scrolled{box-shadow:0 8px 28px -14px rgba(0,0,0,.6)}
 .difflegend{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:2px 0 12px}
 .difflegend .lb{font-size:11px;color:var(--muted);letter-spacing:.04em;margin-right:3px}
 .sug button.kb{background:var(--paper)}
+/* 山の最新ニュース（RSS） */
+.newslist{padding:10px 20px 14px}
+.newslist .nrow{display:flex;justify-content:space-between;gap:16px;align-items:baseline;padding:11px 0;border-bottom:1px dashed var(--line);text-decoration:none;color:inherit}
+.newslist .nrow:last-of-type{border-bottom:none}
+.newslist .nrow .t{font-size:13.5px;font-weight:600;line-height:1.7}
+.newslist .nrow:hover .t,.newslist .nrow:focus-visible .t{color:var(--glacier)}
+.newslist .nrow .m{font-size:10.5px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+@media(max-width:640px){.newslist .nrow{flex-direction:column;gap:3px}.newslist .nrow .m{white-space:normal}}
 /* ===== 言語セレクタ（41言語） ===== */
 .langwrap{position:relative}
 .langbtn{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
@@ -627,7 +635,9 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
-(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=201",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}})();
+(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=201",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
+/* 山岳ニュース（RSS自動更新・任意ロード）。日付クエリでSWキャッシュを毎日バイパス */
+try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOString().slice(0,10),false);n.send();if(n.status===200||n.status===0){(0,eval)(n.responseText)}}catch(e){}})();
 </script>
 <script>
 (function(){
@@ -672,7 +682,7 @@ var DICT = {
    justNow:"たった今",minAgo:"分前",hourAgo:"時間前",dayAgo:"日前"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"世界中の山を、<br>もっと身近に。",s:"標高、ルート、天気、歴史まで。<br>登山に必要な情報を、日本語と英語でわかりやすく。<br>Mountain Peakは、世界の山を正確なデータでつなぐプラットフォームです。",ph:"山名・キーワードで検索（例: 富士山, Everest）",go:"検索",pop:"人気の検索",pops:["富士山","エベレスト","キリマンジャロ","アルプス"],feats:[["日本と世界の名峰を収録","日本百名山すべてと\n8000m峰など世界の200座"],["山頂天気の目安","標高で補正した山頂付近の\n気象の目安を表示"],["ルート・地図情報","主要ルートの距離・標高差・\nコースタイムを収録"],["多言語対応","日本語・英語で利用可能\n世界中の登山者をサポート"]]},
   featured:"注目の山",lists:"リストから探す",newest:"新着記事",byCountry:"国から探す",viewAll:"すべて見る →",season_now:"今月が旬の山",your:"あなたの登頂チェックリスト",
-  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY",legends:"LEGENDS",films:"FILMS"},
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY",legends:"LEGENDS",films:"FILMS",news:"NEWS"},
   f:{kw:"キーワード",country:"国",allC:"すべての国",elev:"標高",any:"指定なし",diff:"難易度",allD:"すべての難易度",found:"件の山が見つかりました",none:"条件に合う山が見つかりませんでした。フィルタを変えてみてください。",reset:"リセット"},
   sort:{t:"並び替え:",elevD:"標高が高い順",elevA:"標高が低い順",diffA:"難易度がやさしい順",diffD:"難易度が高い順",name:"名前順"},
   l:{elevation:"標高",summary:"概要",features:"特徴",history:"歴史・初登頂",firstAscent:"初登頂",access:"登山口・アクセス",equipment:"必要装備",hazards:"⚠ 危険箇所",routes:"主な登頂ルート",weather:"天気（参考値）",data:"山のデータ",coords:"緯度経度",country:"国",region:"山域",season:"ベストシーズン",prominence:"プロミネンス",nearby:"近隣・類似の山",dist:"距離",gain:"累積標高差",time:"標準コースタイム",stamina:"体力度",tech:"技術グレード",notes:"補足",updated:"最終更新",map:"地図",home:"ホーム",peaks:"座",back:"← 一覧へ戻る",cmp:"標高くらべ",share:"リンクをコピー",shared:"リンクをコピーしました",summit:"登頂済みにする",summited:"✓ 登頂済み",unclimbed:"未登頂に戻す"},
@@ -722,7 +732,7 @@ var DICT = {
    justNow:"just now",minAgo:"min ago",hourAgo:"h ago",dayAgo:"d ago"},
   hero:{k:"GLOBAL MOUNTAIN DATABASE",t:"The world's mountains,<br>done right",s:"Elevation, routes, weather and history — primary mountain information in English and Japanese. Reliable data to plan your mountains with more confidence and freedom.",ph:"Search mountains (e.g. Everest, Fuji)",go:"Search",pop:"Popular",pops:["Fuji","Everest","Kilimanjaro","Alps"],feats:[["Japan & The World","All 100 Famous Japanese Mountains\nplus the 8000ers — 200 peaks"],["Summit Weather Guide","Elevation-adjusted reference\nconditions near the summit"],["Routes & Maps","Distance, gain and course times\nfor major routes"],["Multilingual","Japanese & English —\nfor climbers worldwide"]]},
   featured:"Featured Mountains",lists:"Browse by List",newest:"Latest Articles",byCountry:"Browse by Country",viewAll:"View all →",season_now:"In Season This Month",your:"Your Summit Checklist",
-  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY",legends:"LEGENDS",films:"FILMS"},
+  eyebrows:{featured:"FEATURED",lists:"COLLECTIONS",newest:"ARTICLES",byCountry:"BY COUNTRY",season:"IN SEASON",your:"YOUR SUMMITS",nearby:"NEARBY",legends:"LEGENDS",films:"FILMS",news:"NEWS"},
   f:{kw:"Keyword",country:"Country",allC:"All countries",elev:"Elevation",any:"Any",diff:"Difficulty",allD:"Any difficulty",found:"mountains found",none:"No mountains match your filters. Try adjusting them.",reset:"Reset"},
   sort:{t:"Sort:",elevD:"Highest first",elevA:"Lowest first",diffA:"Easiest first",diffD:"Hardest first",name:"Name"},
   l:{elevation:"Elevation",summary:"Overview",features:"Features",history:"History & First Ascent",firstAscent:"First ascent",access:"Access",equipment:"Equipment",hazards:"⚠ Hazards",routes:"Climbing Routes",weather:"Weather (reference)",data:"Mountain Data",coords:"Coordinates",country:"Country",region:"Range",season:"Best season",prominence:"Prominence",nearby:"Nearby & Similar Peaks",dist:"Distance",gain:"Elevation gain",time:"Typical time",stamina:"Stamina",tech:"Tech grade",notes:"Notes",updated:"Last updated",map:"Map",home:"Home",peaks:"peaks",back:"← Back to list",cmp:"Elevation Compare",share:"Copy link",shared:"Link copied",summit:"Mark as climbed",summited:"✓ Climbed",unclimbed:"Unmark"},
@@ -1021,7 +1031,8 @@ function vHome(){
       return '<span class="chip" onclick=\'go({name:"country",slug:"'+c.slug+'"})\'>'+flag(c.id)+" "+esc(names(c))+"</span>"}).join("")+"</div>"+
     secHead("films",state.locale==="ja"?"動画で旅する名峰":"Mountains on Film",'<span class="more" onclick="go({name:\'videos\'})">'+D.viewAll+"</span>")+
     '<div class="mq">'+mqVideoRow(MQ_VIDEOS_A,true)+mqVideoRow(MQ_VIDEOS_B,false)+"</div>"+
-    secHead("newest",D.newest,'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+"</span>")+'<div class="grid">'+arts.map(articleCard).join("")+"</div>";
+    secHead("newest",D.newest,'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+"</span>")+'<div class="grid">'+arts.map(articleCard).join("")+"</div>"+
+    newsBlock();
 }
 function homeSearch(){var q=document.getElementById("homeQ").value;go({name:"mountains",q:q})}
 function vMountains(){
@@ -1140,7 +1151,8 @@ function vArticles(){
     '<h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px;letter-spacing:-.01em">'+D.tabs.articles+'</h1>'+
     '<div class="chips" style="margin-bottom:18px"><span class="chip'+(state.artCat===""?" on":"")+'" onclick="state.artCat=\'\';render()">'+D.f.any+"</span>"+
     cats.map(function(c){return '<span class="chip'+(state.artCat===c?" on":"")+'" onclick="state.artCat=\''+c+'\';render()">'+esc(D.cats[c])+"</span>"}).join("")+"</div>"+
-    (list.length?'<div class="grid">'+list.map(articleCard).join("")+"</div>":'<div class="empty">—</div>');
+    (list.length?'<div class="grid">'+list.map(articleCard).join("")+"</div>":'<div class="empty">—</div>')+
+    newsBlock();
 }
 function vArticle(slug){
   var a=DATA.articles.find(function(x){return x.slug===slug});
@@ -1331,6 +1343,17 @@ function countUp(el){
     if(p<1)requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
+}
+/* 山の最新ニュース（news.js=RSS自動更新。無ければ何も表示しない） */
+function newsBlock(){
+  var NW=(window.MP_NEWS&&window.MP_NEWS[state.locale])||[];
+  if(!NW.length)return "";
+  var ja=state.locale==="ja";
+  return secHead("news",ja?"山の最新ニュース":"Latest Mountain News")+
+    '<div class="card newslist rv">'+NW.map(function(n){
+      return '<a class="nrow" href="'+esc(n.u)+'" target="_blank" rel="noopener nofollow"><span class="t">'+esc(n.t)+'</span><span class="m mono">'+esc(n.s||"")+(n.d?" · "+esc(n.d):"")+" ↗</span></a>";
+    }).join("")+
+    '<p class="afnote">'+(ja?"Google News RSSから毎朝6時に自動更新。リンク先は外部メディアの記事です。":"Auto-updated daily from Google News RSS. Links open external media.")+"</p></div>";
 }
 /* ヒーローの座標タイプライター（エベレスト山頂座標=世界観の核） */
 function typeCoord(){
@@ -1642,7 +1665,7 @@ function vidIndex(id){
 function vidCardsHtml(list){
   return '<div class="vgrid">'+list.map(function(v){
     return '<div class="card vcard rv" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="vidOpen(\''+v.id+'\')">'+
-    '<div class="vthumb"><img src="https://i.ytimg.com/vi/'+v.id+'/hqdefault.jpg" alt="'+esc(v.title)+'" decoding="async"><div class="vplay"><span>▶</span></div></div>'+
+    '<div class="vthumb"><img src="https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg" alt="'+esc(v.title)+'" decoding="async"><div class="vplay"><span>▶</span></div></div>'+
     '<div class="vinfo"><div class="vtitle">'+esc(v.title)+'</div><div class="vauthor">▶ '+esc(v.author)+" · YouTube</div></div></div>";
   }).join("")+"</div>";
 }
