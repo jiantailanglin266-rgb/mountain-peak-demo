@@ -593,7 +593,7 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
     <p class="note" id="fnote"></p>
     <div class="notice" style="margin-top:14px;max-width:760px" id="fdisc"></div>
     <nav class="flinks" id="flinks" aria-label="Legal"></nav>
-    <div class="cr">© 2026 Mountain Peak / STELLAR — Photos: Wikimedia Commons (CC) / Unsplash</div>
+    <div class="cr">© 2026 Mountain Peak — Photos: Wikimedia Commons (CC) / Unsplash</div>
   </div>
 </footer>
 <button id="toTop" aria-label="Back to top">↑</button>
@@ -1938,18 +1938,18 @@ function vLegal(doc){
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:c.t}])+
     '<div style="max-width:760px;margin:0 auto"><h1 class="disp" style="font-size:26px;font-weight:800;margin-bottom:16px">'+esc(c.t)+"</h1>"+
     c.s.map(function(sec){return '<div class="card" style="margin-bottom:12px"><h2 style="font-size:14.5px;font-weight:800">'+esc(sec[0])+'</h2><p style="font-size:13.5px;color:var(--muted);line-height:1.9;margin-top:8px">'+esc(sec[1])+"</p></div>"}).join("")+
-    '<p style="font-size:11px;color:var(--muted);margin-top:14px">'+(state.locale==="ja"?"制定日: 2026年7月1日 / 運営: STELLAR":"Effective: July 1, 2026 / Operator: STELLAR")+"</p></div>";
+    '<p style="font-size:11px;color:var(--muted);margin-top:14px">'+(state.locale==="ja"?"制定日: 2026年7月1日 / 運営: Mountain Peak 運営事務局":"Effective: July 1, 2026 / Operator: Mountain Peak")+"</p></div>";
 }
 function vAbout(){
   var D=d(),ja=state.locale==="ja";
   var secs=ja?[
-   ["運営者","Mountain Peak は STELLAR が企画・運営するグローバル山岳情報プラットフォームです。日本百名山から8000m峰まで世界200座を、日本語と英語で紹介しています。"],
+   ["運営者","Mountain Peak は、日本百名山から8000m峰まで世界200座を日本語と英語で紹介するグローバル山岳情報プラットフォームです。運営はMountain Peak 運営事務局が行っています。"],
    ["運営方針","①安全に関わる情報（難易度・危険箇所・コースタイム）は出典を確認できたもののみ掲載する ②各ページに最終更新の考え方を明示する ③免責と注意喚起を機能要件として全ページに置く — この3点を編集の柱としています。"],
    ["データポリシー","山・ルートのデータは公的情報・ガイドブック等を基に編集し、AIによる下書きを使用する場合も必ず人間によるレビューを経て公開します。収録データは随時更新していますが、実際の登山判断には必ず最新の公式情報を併用してください。"],
    ["写真・動画のクレジット","写真は Wikimedia Commons（CC）・Unsplash のライセンスに基づき使用しています。動画はYouTube公式埋め込みプレーヤーで再生され、各権利は権利者に帰属します。"],
    ["訂正・お問い合わせ","掲載情報の誤りを見つけた場合は、コミュニティの「現地情報」カテゴリへの投稿からご連絡ください。安全に関わる訂正は最優先で対応します。"]
   ]:[
-   ["Operator","Mountain Peak is a global mountain information platform planned and operated by STELLAR, covering 200 peaks from the 100 Famous Japanese Mountains to the 8000ers, in Japanese and English."],
+   ["Operator","Mountain Peak is a global mountain information platform covering 200 peaks from the 100 Famous Japanese Mountains to the 8000ers, in Japanese and English, run by the Mountain Peak editorial team."],
    ["Editorial Policy","1) Safety-related information (difficulty, hazards, course times) is published only when sources can be verified. 2) Update practices are stated on each page. 3) Disclaimers and safety notices are treated as core features on every page."],
    ["Data Policy","Mountain and route data are edited from official sources and guidebooks. Where AI drafting is used, every entry is human-reviewed before publication. Data is updated continuously — always pair it with current official information for real climbing decisions."],
    ["Photo & Video Credits","Photos are used under Wikimedia Commons (CC) and Unsplash licenses. Videos play via YouTube's official embedded player; all rights remain with their owners."],

@@ -296,7 +296,7 @@ Sitemap: ${SITE}/sitemap.xml
 // ---- llms.txt ----
 writeFileSync(join(ROOT, "llms.txt"),
 `# Mountain Peak
-> Bilingual (Japanese/English) global mountain database operated by STELLAR: elevation, climbing routes, difficulty (1-5), best seasons, hazards, reference weather and history for 200 peaks — all 100 Famous Japanese Mountains plus the world's great peaks including every 8000er. Always verify with official sources before climbing.
+> Bilingual (Japanese/English) global mountain database: elevation, climbing routes, difficulty (1-5), best seasons, hazards, reference weather and history for 200 peaks — all 100 Famous Japanese Mountains plus the world's great peaks including every 8000er. Always verify with official sources before climbing.
 
 ## Key pages
 - Mountains index (200 peaks): ${SITE}/ja/mountains/ (EN: ${SITE}/en/mountains/)
