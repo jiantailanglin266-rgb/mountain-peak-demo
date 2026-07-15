@@ -627,7 +627,7 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
-(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=200",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}})();
+(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=201",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}})();
 </script>
 <script>
 (function(){
@@ -963,7 +963,9 @@ function vHome(){
   var sums=getSum();
   var yourHtml="";
   if(sums.length){
-    yourHtml=secHead("your",D.your)+'<div class="grid">'+DATA.rankings.map(function(r){
+    var yourRanks=DATA.rankings.filter(function(r){return r.mountainIds.some(function(id){return sums.indexOf(id)>=0})}).slice(0,6);
+    if(!yourRanks.length)yourRanks=DATA.rankings.slice(0,3);
+    yourHtml=secHead("your",D.your)+'<div class="grid">'+yourRanks.map(function(r){
       var done=r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length;
       return '<div class="card mcard" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})"><div class="nm">'+esc(names(r))+'</div><div class="progress"><div class="bar"><i style="width:'+(done/r.mountainIds.length*100).toFixed(0)+'%"></i></div><div class="t"><span><b>'+D.prog(done,r.mountainIds.length)+"</b></span><span class='mono'>"+(done/r.mountainIds.length*100).toFixed(0)+"%</span></div></div></div>"}).join("")+"</div>";
   }
@@ -978,7 +980,7 @@ function vHome(){
     secHead("legends",state.locale==="ja"?"伝説の登山家たち":"Legendary Climbers",'<span class="more" onclick="go({name:\'climbers\'})">'+D.viewAll+"</span>")+
     '<div class="mq">'+mqClimberRow(MQ_CLIMBERS_A,true)+mqClimberRow(MQ_CLIMBERS_B,false)+"</div>"+
     yourHtml+
-    secHead("lists",D.lists)+'<div class="grid">'+DATA.rankings.map(function(r){
+    secHead("lists",D.lists,'<span class="more" onclick="go({name:\'rankings\'})">'+D.viewAll+"</span>")+'<div class="grid">'+DATA.rankings.slice(0,6).map(function(r){
       var done=sums.length?r.mountainIds.filter(function(id){return sums.indexOf(id)>=0}).length:0;
       return '<div class="card mcard rv" onclick="go({name:\'ranking\',slug:\''+r.slug+'\'})">'+rankThumbs(r)+'<div class="nm">'+esc(names(r))+'</div><div class="sm" style="-webkit-line-clamp:3">'+esc(r.descriptions[state.locale]||r.descriptions.ja)+'</div><div class="badges"><span style="font-size:12px;font-weight:700;color:var(--glacier)">'+r.mountainIds.length+" "+D.l.peaks+" →</span>"+(done?'<span class="badge d1">✓ '+done+"</span>":"")+"</div></div>"}).join("")+"</div>"+
     afHomeStrip()+

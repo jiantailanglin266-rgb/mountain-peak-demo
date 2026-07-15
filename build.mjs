@@ -59,7 +59,7 @@ const STATIC_TITLES = {
   ja: {
     home: ["Mountain Peak — 世界中の山を、多言語で、正しく引ける山岳データベース", "標高・ルート・天気・歴史。登山に必要な一次情報を日本語と英語で。日本百名山からセブンサミッツまで。"],
     mountains: ["山をさがす — 標高・難易度・国で絞り込み | Mountain Peak", "世界の山を標高・難易度・国・タグで検索。日本百名山から8000m峰まで、登山に必要な一次情報を収録。"],
-    rankings: ["山のリスト — 日本百名山・セブンサミッツ・8000m峰 | Mountain Peak", "日本百名山、七大陸最高峰、8000m峰。定番の山リストを登頂チェックリスト付きで。"],
+    rankings: ["山のリスト — 百名山・セブンサミッツから山域別・テーマ別まで34選 | Mountain Peak", "日本百名山、七大陸最高峰、8000m峰から、山域別・標高別・難易度別・季節別のテーマリストまで34パターン。登頂チェックリスト付き。"],
     articles: ["記事・ガイド — 登山の始め方から装備まで | Mountain Peak", "登山初心者の始め方、装備チェックリスト、季節別おすすめ、山岳気象の読み方など実用ガイド。"],
     videos: ["山の動画ライブラリ — YouTubeキュレーション | Mountain Peak", "富士山からエベレストまで、山のYouTube動画をキュレーション。ルート解説・絶景4K・初心者ガイド。"],
     community: ["コミュニティ — 登山者の情報交換掲示板 | Mountain Peak", "質問・山行記録・装備・現地情報。登山者どうしで情報交換できるコミュニティ掲示板。"],
@@ -74,7 +74,7 @@ const STATIC_TITLES = {
   en: {
     home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. Primary mountain information from the 100 Famous Japanese Mountains to the Seven Summits."],
     mountains: ["Find Mountains — Filter by Elevation, Difficulty & Country | Mountain Peak", "Search the world's mountains by elevation, difficulty, country and tags."],
-    rankings: ["Mountain Lists — Seven Summits, 8000ers & More | Mountain Peak", "The Seven Summits, 8,000m peaks and Japan's 100 Famous Mountains, with summit checklists."],
+    rankings: ["Mountain Lists — 34 Collections from the Seven Summits to Seasonal Picks | Mountain Peak", "The Seven Summits, 8000ers and Japan's 100 Famous Mountains, plus 30+ themed lists by range, elevation, difficulty and season — with summit checklists."],
     articles: ["Articles & Guides | Mountain Peak", "How to start hiking, gear checklists, seasonal picks and mountain weather guides."],
     videos: ["Mountain Video Library | Mountain Peak", "Curated YouTube videos from Fuji to Everest: route guides, scenic 4K and beginner tips."],
     community: ["Community — Climbers' Forum | Mountain Peak", "Questions, trip reports, gear talk and current conditions from fellow climbers."],
