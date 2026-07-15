@@ -845,7 +845,10 @@ function filterMountains(f){
     return true;
   });
   var s=f.sort||"elevD";
+  /* 写真がある山を優先表示（同順位内で選択中のソートを適用） */
+  var noPh=function(m){return MT_PHOTOS[m.slug]?0:1};
   list.sort(function(a,b){
+    var p=noPh(a)-noPh(b);if(p)return p;
     if(s==="elevA")return a.elevationM-b.elevationM;
     if(s==="diffA")return a.difficultyLevel-b.difficultyLevel||b.elevationM-a.elevationM;
     if(s==="diffD")return b.difficultyLevel-a.difficultyLevel||b.elevationM-a.elevationM;
@@ -2183,7 +2186,7 @@ function vCountry(slug){
   var c=DATA.countries.find(function(x){return x.slug===slug});
   if(!c)return '<div class="empty">404</div>';
   var D=d(),H=D.hub;
-  var mts=DATA.mountains.filter(function(m){return m.countryId===c.id&&m.status==="published"}).sort(function(a,b){return b.elevationM-a.elevationM});
+  var mts=DATA.mountains.filter(function(m){return m.countryId===c.id&&m.status==="published"}).sort(function(a,b){return (MT_PHOTOS[b.slug]?1:0)-(MT_PHOTOS[a.slug]?1:0)||b.elevationM-a.elevationM});
   var regs=DATA.regions.filter(function(r){return r.countryId===c.id});
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries,go:'go({name:"countries"})'},{n:names(c)}])+
     '<div class="card detail-hero"><h1 class="disp" style="font-size:clamp(22px,3.6vw,30px)">'+flag(c.id)+" "+esc(names(c))+(state.locale==="ja"?"の山":" — Mountains")+'</h1>'+
@@ -2196,7 +2199,7 @@ function vRegion(slug){
   if(!r)return '<div class="empty">404</div>';
   var D=d(),H=D.hub;
   var c=r.countryId?countryOf(r.countryId):null;
-  var mts=DATA.mountains.filter(function(m){return m.regionId===r.id&&m.status==="published"}).sort(function(a,b){return b.elevationM-a.elevationM});
+  var mts=DATA.mountains.filter(function(m){return m.regionId===r.id&&m.status==="published"}).sort(function(a,b){return (MT_PHOTOS[b.slug]?1:0)-(MT_PHOTOS[a.slug]?1:0)||b.elevationM-a.elevationM});
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:H.countries,go:'go({name:"countries"})'},{n:c?names(c):"",go:c?'go({name:"country",slug:"'+c.slug+'"})':null},{n:names(r)}].filter(function(x){return x.n}))+
     '<div class="card detail-hero"><h1 class="disp" style="font-size:clamp(22px,3.6vw,30px)">⛰ '+esc(names(r))+'</h1>'+
     '<p class="dsum">'+esc(r.summaries[state.locale]||r.summaries.ja)+"</p>"+
