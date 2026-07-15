@@ -612,6 +612,14 @@ body.chatlock{overflow:hidden}
   nav.tabs button{min-height:44px}
   .langbtn{min-height:40px}
 }
+/* 動画ページPC: 多段組みで縦長を解消（スマホ=900px未満は従来どおり縦一列） */
+@media(min-width:900px){
+  .vsecs{columns:3;column-gap:18px;margin-top:6px}
+  .vsec{break-inside:avoid;-webkit-column-break-inside:avoid;display:inline-block;width:100%;vertical-align:top;margin-bottom:12px}
+  .vsec .vsechead{margin:8px 0 10px}
+  .vsecs .vgrid{grid-template-columns:1fr}
+}
+@media(min-width:1500px){.vsecs{columns:4}}
 </style>
 <link rel="canonical" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/countries/georgia/">
 <link rel="alternate" hreflang="ja" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/countries/georgia/">
@@ -1816,20 +1824,21 @@ function vidCardsHtml(list){
 }
 function vVideos(){
   var D=d(),V=D.vid;
+  /* PCは.vsecs（多段組み）に流し込むため、見出し+カード群を.vsec単位でラップ */
   var secs=VID_ORDER.filter(function(k){return MT_VIDEOS[k]&&MT_VIDEOS[k].length}).map(function(k){
     var m=DATA.mountains.find(function(x){return x.id===k});
     var name=m?tr(m).name:k;
-    return '<div class="vsechead"><span class="vt disp">⛰ '+esc(name)+"</span>"+
+    return '<div class="vsec"><div class="vsechead"><span class="vt disp">⛰ '+esc(name)+"</span>"+
       (m?'<span class="vlink" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">'+V.toMt+"</span>":"")+"</div>"+
-      vidCardsHtml(MT_VIDEOS[k]);
+      vidCardsHtml(MT_VIDEOS[k])+"</div>";
   }).join("");
-  var themes='<div class="vsechead"><span class="vt disp">'+V.themeBeginner+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_beginner)+
-    '<div class="vsechead"><span class="vt disp">'+V.theme4k+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_4k);
+  var themes='<div class="vsec"><div class="vsechead"><span class="vt disp">'+V.themeBeginner+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_beginner)+"</div>"+
+    '<div class="vsec"><div class="vsechead"><span class="vt disp">'+V.theme4k+"</span></div>"+vidCardsHtml(MT_VIDEOS.theme_4k)+"</div>";
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:V.title}])+
     '<h1 class="disp" style="font-size:26px;font-weight:800;letter-spacing:-.01em">'+V.title+'</h1>'+
     '<p style="font-size:13px;color:var(--muted);margin-top:4px">'+V.sub+"</p>"+
     '<div class="comnotice" style="margin-top:14px">'+V.notice+"</div>"+
-    themes+secs;
+    '<div class="vsecs">'+themes+secs+"</div>";
 }
 function vidOpen(id){
   var v=vidIndex(id),V=d().vid;
