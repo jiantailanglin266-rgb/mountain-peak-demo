@@ -63,6 +63,23 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 .pill button{padding:4px 10px;border-radius:999px;color:var(--muted);font-weight:600;letter-spacing:.02em}
 .pill button.on{background:var(--ink);color:var(--paper)}
 .iconbtn{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;display:flex;align-items:center;justify-content:center}
+/* ===== 言語セレクタ（41言語） ===== */
+.langwrap{position:relative}
+.langbtn{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
+.langbtn:hover{border-color:var(--ink)}
+.langbtn .caret{font-size:9px;color:var(--muted)}
+.langmenu{position:absolute;top:calc(100% + 8px);right:0;z-index:60;width:min(560px,calc(100vw - 28px));background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lift);padding:12px;max-height:min(480px,calc(100dvh - 120px));overflow-y:auto}
+.langnote{font-size:10.5px;color:var(--muted);line-height:1.7;padding:2px 6px 10px;border-bottom:1px solid var(--hair);margin-bottom:10px}
+.langgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:4px}
+.langgrid button{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:10px;font-size:12.5px;text-align:left;color:var(--ink);transition:background .12s}
+.langgrid button:hover{background:var(--route-soft)}
+.langgrid button.on{background:var(--ink);color:var(--paper);font-weight:700}
+.langgrid button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* Google翻訳ウィジェットのバナー・要素を隠す */
+.gthost{display:none!important}
+body{top:0!important;position:static!important}
+.skiptranslate iframe,#goog-gt-tt,.goog-te-balloon-frame{display:none!important}
+font[style*="background-color"]{background:transparent!important;box-shadow:none!important}
 @media(max-width:760px){
   .hrow{flex-wrap:wrap;height:auto;padding:8px 0 0}
   nav.tabs{order:3;width:100%;border-top:1px solid var(--hair);margin-top:2px}
@@ -500,8 +517,11 @@ div.clface span{font-size:34px;font-weight:800;color:rgba(255,255,255,.85)}
       <div class="pill" id="unitPill" role="group" aria-label="Elevation unit">
         <button data-u="m" class="on mono">m</button><button data-u="ft" class="mono">ft</button>
       </div>
-      <div class="pill" id="langPill" role="group" aria-label="Language">
-        <button data-l="ja" class="on">日本語</button><button data-l="en">English</button>
+      <div class="langwrap">
+        <button class="langbtn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language / 言語">
+          <img class="fi" id="langBtnFlag" alt="" width="18" height="14"><span id="langBtnName">日本語</span><span class="caret">▾</span>
+        </button>
+        <div class="langmenu" id="langMenu" role="listbox" style="display:none"></div>
       </div>
       <button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode">🌙</button>
     </div>
@@ -1139,7 +1159,7 @@ function render(){
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
-  Array.prototype.forEach.call(document.querySelectorAll("#langPill button"),function(b){b.classList.toggle("on",b.dataset.l===state.locale)});
+  syncLangBtn();
   Array.prototype.forEach.call(document.querySelectorAll("#unitPill button"),function(b){b.classList.toggle("on",b.dataset.u===state.unit)});
   document.documentElement.lang=state.locale;
   document.getElementById("flinks").innerHTML=[["legal","terms"],["legal","privacy"],["legal","disclaimer"],["about",""]].map(function(x){
@@ -1153,13 +1173,85 @@ function render(){
   reveal();
 }
 
+/* ====== 多言語（40言語: ja/en=ネイティブ、他=Google翻訳エンジン） ====== */
+var LANGS=[
+["ja","jp","日本語","native"],["en","us","English","native"],
+["zh-CN","cn","中文（简体）"],["zh-TW","tw","中文（繁體）"],["ko","kr","한국어"],
+["fr","fr","Français"],["de","de","Deutsch"],["es","es","Español"],["it","it","Italiano"],["pt","pt","Português"],
+["ru","ru","Русский"],["uk","ua","Українська"],["pl","pl","Polski"],["cs","cz","Čeština"],["sk","sk","Slovenčina"],
+["nl","nl","Nederlands"],["sv","se","Svenska"],["no","no","Norsk"],["da","dk","Dansk"],["fi","fi","Suomi"],
+["el","gr","Ελληνικά"],["tr","tr","Türkçe"],["hu","hu","Magyar"],["ro","ro","Română"],["bg","bg","Български"],
+["hr","hr","Hrvatski"],["sl","si","Slovenščina"],["ar","sa","العربية"],["iw","il","עברית"],["fa","ir","فارسی"],
+["hi","in","हिन्दी"],["ne","np","नेपाली"],["bn","bd","বাংলা"],["ur","pk","اردو"],
+["th","th","ไทย"],["vi","vn","Tiếng Việt"],["id","id","Bahasa Indonesia"],["ms","my","Bahasa Melayu"],["tl","ph","Filipino"],
+["sw","tz","Kiswahili"],["mn","mn","Монгол"]
+];
+function currentLang(){return load("mp-gt")||state.locale}
+function langOf(code){for(var i=0;i<LANGS.length;i++)if(LANGS[i][0]===code)return LANGS[i];return LANGS[0]}
+function gtSetCookie(tl){
+  var v=tl?("/auto/"+tl):"";
+  var exp=tl?"":"; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  document.cookie="googtrans="+v+"; path=/"+exp;
+  document.cookie="googtrans="+v+"; path=/; domain="+location.hostname+exp;
+  try{document.cookie="googtrans="+v+"; path=/; domain=."+location.hostname+exp}catch(e){}
+}
+function gtLoad(){
+  if(document.getElementById("gtScript"))return;
+  window.googleTranslateElementInit=function(){
+    try{new window.google.translate.TranslateElement({pageLanguage:state.locale,autoDisplay:false},"gtHost")}catch(e){}
+  };
+  var host=document.createElement("div");host.id="gtHost";host.className="gthost";document.body.appendChild(host);
+  var s=document.createElement("script");s.id="gtScript";
+  s.src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+  document.head.appendChild(s);
+}
+function selectLang(code){
+  toggleLangMenu(false);
+  var lang=langOf(code);
+  if(lang[3]==="native"){
+    store("mp-gt","");try{localStorage.removeItem("mp-gt")}catch(e){}
+    gtSetCookie(null);
+    var wasGt=!!document.getElementById("gtScript");
+    if(code!==state.locale){state.locale=code;store("mp-demo-lang",code);}
+    if(wasGt){location.reload();return}
+    go(state.view);
+    return;
+  }
+  store("mp-gt",code);
+  gtSetCookie(code);
+  location.reload();
+}
+function toggleLangMenu(open){
+  var m=document.getElementById("langMenu"),b=document.getElementById("langBtn");
+  var willOpen=open!==undefined?open:m.style.display==="none";
+  if(willOpen&&!m.innerHTML){
+    m.innerHTML='<div class="langnote">'+(state.locale==="ja"?"日本語・English以外は自動翻訳（Google翻訳）で表示されます":"Languages other than 日本語/English are machine-translated by Google Translate")+"</div>"+
+      '<div class="langgrid">'+LANGS.map(function(l){
+      return '<button role="option" data-code="'+l[0]+'" class="'+(currentLang()===l[0]?"on":"")+'" onclick="selectLang(\''+l[0]+'\')">'+
+        '<img class="fi" src="'+asset("images/flags/"+l[1]+".png")+'" alt="" width="18" height="14"><span>'+l[2]+"</span></button>";
+    }).join("")+"</div>";
+  }
+  m.style.display=willOpen?"block":"none";
+  b.setAttribute("aria-expanded",willOpen?"true":"false");
+}
+function syncLangBtn(){
+  var lang=langOf(currentLang());
+  var f=document.getElementById("langBtnFlag"),n=document.getElementById("langBtnName");
+  if(f)f.src=asset("images/flags/"+lang[1]+".png");
+  if(n)n.textContent=lang[2];
+}
+
 /* ====== 初期化 ====== */
-document.getElementById("langPill").addEventListener("click",function(e){
-  var b=e.target.closest("button");if(!b)return;
-  state.locale=b.dataset.l;
-  store("mp-demo-lang",state.locale);
-  go(state.view);
+document.getElementById("langBtn").addEventListener("click",function(e){e.stopPropagation();toggleLangMenu()});
+document.addEventListener("click",function(e){
+  var m=document.getElementById("langMenu");
+  if(m&&m.style.display!=="none"&&!e.target.closest(".langwrap"))toggleLangMenu(false);
 });
+/* Google翻訳: 保存された言語があれば復元 */
+(function(){
+  var gt=load("mp-gt");
+  if(gt&&langOf(gt)[3]!=="native"){gtSetCookie(gt);gtLoad()}
+})();
 document.getElementById("unitPill").addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;
   state.unit=b.dataset.u;
@@ -1783,6 +1875,7 @@ window.toggleChat=toggleChat;window.chatSend=chatSend;window.chatChip=chatChip;w
 window.comToggleForm=comToggleForm;window.comSubmit=comSubmit;window.comReply=comReply;window.comLike=comLike;window.comReport=comReport;
 window.vidOpen=vidOpen;window.vidClose=vidClose;
 window.clOpen=clOpen;window.clClose=clClose;window.clRefresh=clRefresh;
+window.selectLang=selectLang;window.toggleLangMenu=toggleLangMenu;
 document.addEventListener("keydown",function(e){if(e.key==="Escape"){vidClose();clClose()}});
 
 var toTop=document.getElementById("toTop");
