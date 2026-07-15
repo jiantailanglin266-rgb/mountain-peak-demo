@@ -63,6 +63,23 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 .pill button{padding:4px 10px;border-radius:999px;color:var(--muted);font-weight:600;letter-spacing:.02em}
 .pill button.on{background:var(--ink);color:var(--paper)}
 .iconbtn{width:34px;height:34px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;display:flex;align-items:center;justify-content:center}
+/* ===== FVマーキー（2段・逆回転） ===== */
+.mq{margin:22px 0 4px;display:flex;flex-direction:column;gap:12px;position:relative}
+.mq::before,.mq::after{content:"";position:absolute;top:0;bottom:0;width:70px;z-index:2;pointer-events:none}
+.mq::before{left:0;background:linear-gradient(90deg,var(--paper),transparent)}
+.mq::after{right:0;background:linear-gradient(-90deg,var(--paper),transparent)}
+.mqrow{overflow:hidden}
+.mqtrack{display:flex;width:max-content;animation:mqL 60s linear infinite}
+.mqtrack.r{animation-name:mqR}
+.mqrow:hover .mqtrack{animation-play-state:paused}
+@keyframes mqL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes mqR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.mqitem{position:relative;width:232px;height:142px;border-radius:14px;overflow:hidden;flex-shrink:0;margin-right:12px;cursor:pointer;box-shadow:var(--shadow)}
+.mqitem img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
+.mqitem:hover img{transform:scale(1.06)}
+.mqitem .nm{position:absolute;left:0;right:0;bottom:0;padding:20px 11px 8px;font-size:11.5px;font-weight:700;color:#fff;background:linear-gradient(0deg,rgba(10,18,24,.78),transparent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:640px){.mqitem{width:170px;height:106px;margin-right:9px}.mq::before,.mq::after{width:34px}}
+@media(prefers-reduced-motion:reduce){.mqtrack{animation:none}}
 /* ===== 言語セレクタ（41言語） ===== */
 .langwrap{position:relative}
 .langbtn{display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px;font-size:12px;font-weight:600}
@@ -902,6 +919,7 @@ function vHome(){
     '<div class="pops"><span class="lb">'+esc(D.hero.pop)+'</span>'+D.hero.pops.map(function(p){return '<button class="pchip" onclick="go({name:\'mountains\',q:\''+esc(p)+'\'})">'+esc(p)+'</button>'}).join("")+'</div>'+
     '<div class="feats">'+D.hero.feats.map(function(f,i){return '<div class="feat">'+FEAT_ICONS[i]+'<div><div class="t">'+esc(f[0])+'</div><div class="d">'+esc(f[1])+'</div></div></div>'}).join("")+'</div>'+
     '</div><div class="chev"><button aria-label="scroll down" onclick="scrollPastHero()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div></section>'+
+    '<div class="mq">'+mqRow(MQ_TOP,true)+mqRow(MQ_BOTTOM,false)+"</div>"+
     (seasonal.length?secHead("season",D.season_now,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+seasonal.map(mountainCard).join("")+"</div>":"")+
     secHead("featured",D.featured,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
     yourHtml+
@@ -1167,6 +1185,21 @@ function render(){
   document.getElementById("fdisc").innerHTML="<b>"+D.disc.t+"</b><br>"+D.disc.b;
   document.title=pageTitle(v);
   reveal();
+}
+
+/* ====== FVマーキー（Wikipedia引用写真 12枚x2段・上段右回り/下段左回り） ====== */
+var MQ_TOP=["mount-everest","k2","matterhorn","mont-blanc","kilimanjaro","denali","aconcagua","ama-dablam","fitz-roy","eiger","aoraki-mount-cook","alpamayo"];
+var MQ_BOTTOM=["mount-fuji","yarigatake","okuhotaka-dake","tsurugi-dake","shirouma-dake","tateyama","kita-dake","kai-komagatake","aka-dake","hakusan","daisen","miyanoura-dake"];
+function mqRow(slugs,rightward){
+  var items=slugs.map(function(s){
+    var m=DATA.mountains.find(function(x){return x.slug===s});
+    if(!m)return "";
+    var t=tr(m);
+    return '<div class="mqitem" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="go({name:\'mountain\',slug:\''+s+'\'})">'+
+      '<img src="'+asset("images/mountains/"+s+".jpg")+'" alt="'+esc(t.name)+'" decoding="async">'+
+      '<span class="nm">'+esc(t.name)+' <span class="mono" style="font-weight:500;opacity:.8">'+m.elevationM.toLocaleString()+"m</span></span></div>";
+  }).join("");
+  return '<div class="mqrow"><div class="mqtrack'+(rightward?" r":"")+'">'+items+items+"</div></div>";
 }
 
 /* ====== 多言語（40言語: ja/en=ネイティブ、他=Google翻訳エンジン） ====== */
