@@ -739,10 +739,26 @@ body.chatlock{overflow:hidden}
 .ldhead h2{font-size:21px;font-weight:800;letter-spacing:-.01em;margin-top:4px}
 .ldhead .rt{font-size:12px;color:var(--muted);font-weight:500}
 .ldhead .cx{width:38px;height:38px;border-radius:999px;font-size:16px;background:var(--paper);flex-shrink:0}
+.ldtabs{display:flex;gap:8px;margin:2px 0 18px}
+.ldtabs button{border-radius:999px;padding:9px 22px;font-size:13px;font-weight:700;background:var(--paper);color:var(--muted);transition:all .15s}
+.ldtabs button.on{background:var(--route);color:#fff}
+.ldaxis{display:flex;gap:6px;margin:0 0 8px;justify-content:flex-end}
+.ldaxis button{border-radius:999px;padding:5px 14px;font-size:11px;font-weight:700;background:var(--paper);color:var(--muted)}
+.ldaxis button.on{background:var(--ink);color:var(--paper)}
 .ldtiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.ldtile{background:var(--paper);border-radius:12px;padding:12px 8px;text-align:center}
-.ldtile .v{font-size:17px;font-weight:800}
-.ldtile .k{font-size:9.5px;color:var(--muted);letter-spacing:.08em;margin-top:3px}
+.ldtile{background:var(--paper);border-radius:12px;padding:12px 10px;text-align:center}
+.ldtile .v{font-size:19px;font-weight:800}
+.ldtile .v small{font-size:11px;font-weight:600;color:var(--muted)}
+.ldtile .k{font-size:9.5px;color:var(--muted);letter-spacing:.08em;margin-bottom:4px}
+.ldcphead{display:flex;gap:18px;flex-wrap:wrap;font-size:11px;color:var(--muted);padding:9px 0;border-bottom:1px solid var(--hair);margin-bottom:10px}
+.ldcphead b{color:var(--ink);font-size:13px;margin-left:4px}
+.ldgap{font-size:10px;color:var(--muted);padding:1px 0 1px 62px}
+.ldtl .dot.S,.ldtl .dot.G{width:22px;height:22px;margin-left:-12px;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.ldtl .dot.S{background:var(--forest)}
+.ldtl .dot.G{background:var(--route)}
+.ldhead h2{cursor:pointer}
+.ldhead .mtlink{font-size:10.5px;color:var(--glacier);font-weight:700;letter-spacing:.04em}
+.ldhead h2:hover .mtlink{text-decoration:underline}
 .ldbox{border-radius:14px;overflow:hidden;background:var(--paper);margin-bottom:12px}
 .ldbox:empty{display:none}
 .ldbox svg{display:block;width:100%;height:auto}
@@ -1777,14 +1793,15 @@ function gpxParse(text){
       if(isNaN(lat)||isNaN(lon))continue;
       var eleEl=tp[i].getElementsByTagName("ele")[0];
       var ele=eleEl?parseFloat(eleEl.textContent):null;
-      var tEl=tp[i].getElementsByTagName("time")[0];
-      if(tEl){var tm=new Date(tEl.textContent).getTime();if(!isNaN(tm)){if(t0===null)t0=tm;t1=tm}}
+      var tEl=tp[i].getElementsByTagName("time")[0],tm=null;
+      if(tEl){tm=new Date(tEl.textContent).getTime();if(isNaN(tm))tm=null;else{if(t0===null)t0=tm;t1=tm}}
       if(prev)dist+=haversine(prev[0],prev[1],lat,lon);
       if(ele!==null&&!isNaN(ele)){
         if(lastEle===null)lastEle=ele;
         else{var dd=ele-lastEle;if(Math.abs(dd)>=3){if(dd>0)up+=dd;else down-=dd;lastEle=ele}}
       }
-      pts.push([lat,lon,ele]);prev=[lat,lon];
+      /* [lat,lng,ele,経過分] — 経過分は行動時間軸グラフ用 */
+      pts.push([lat,lon,ele,(tm!==null&&t0!==null)?Math.round((tm-t0)/6000)/10:null]);prev=[lat,lon];
     }
     if(pts.length<2)return null;
     /* 600点に間引き（描画・保存用） */
@@ -1813,24 +1830,54 @@ function trackSVG(pts){
     '<circle cx="'+s[0]+'" cy="'+s[1]+'" r="6" fill="var(--forest)" stroke="#fff" stroke-width="2"/>'+
     '<circle cx="'+e[0]+'" cy="'+e[1]+'" r="6" fill="var(--route)" stroke="#fff" stroke-width="2"/></svg>';
 }
-/* 標高プロファイルSVG */
-function profileSVG(pts,distKm){
+/* 標高プロファイルSVG。mode: "dist"=距離（点順）/"time"=行動時間（GPXの経過分） */
+function profileSVG(pts,distKm,mode){
   var eles=pts.map(function(p){return p[2]}).filter(function(x){return x!==null&&!isNaN(x)});
   if(eles.length<2)return "";
   var minE=Math.min.apply(null,eles),maxE=Math.max.apply(null,eles);
   if(maxE-minE<1)maxE=minE+1;
   var W=640,H=180,padL=8,padB=18,padT=14;
-  var xs=function(i){return padL+(W-padL*2)*(i/(pts.length-1))};
+  var useTime=mode==="time"&&pts.some(function(p){return p[3]!=null});
+  var totalMin=useTime?Math.max.apply(null,pts.map(function(p){return p[3]||0})):0;
+  if(useTime&&totalMin<=0)useTime=false;
+  var xs=function(p,i){
+    var f=useTime?((p[3]!=null?p[3]:0)/totalMin):(i/(pts.length-1));
+    return padL+(W-padL*2)*f;
+  };
   var ys=function(e){return padT+(H-padT-padB)*(1-(e-minE)/(maxE-minE))};
   var d="",started=false;
-  pts.forEach(function(p,i){if(p[2]===null||isNaN(p[2]))return;var x=xs(i).toFixed(1),y=ys(p[2]).toFixed(1);d+=(started?"L":"M")+x+" "+y;started=true});
+  pts.forEach(function(p,i){if(p[2]===null||isNaN(p[2]))return;var x=xs(p,i).toFixed(1),y=ys(p[2]).toFixed(1);d+=(started?"L":"M")+x+" "+y;started=true});
   var area=d+"L"+(W-padL)+" "+(H-padB)+"L"+padL+" "+(H-padB)+"Z";
+  var xLabel=useTime?fmtMins(totalMin):(distKm?distKm+"km":"");
   return '<svg viewBox="0 0 '+W+' '+H+'" role="img" aria-label="Elevation profile">'+
     '<path d="'+area+'" fill="var(--route-soft)"/>'+
     '<path d="'+d+'" fill="none" stroke="var(--route)" stroke-width="2"/>'+
     '<text x="'+padL+'" y="12" font-size="10" fill="var(--muted)" font-family="monospace">'+Math.round(maxE).toLocaleString()+'m</text>'+
     '<text x="'+padL+'" y="'+(H-4)+'" font-size="10" fill="var(--muted)" font-family="monospace">'+Math.round(minE).toLocaleString()+"m</text>"+
-    (distKm?'<text x="'+(W-padL)+'" y="'+(H-4)+'" font-size="10" fill="var(--muted)" font-family="monospace" text-anchor="end">'+distKm+"km</text>":"")+"</svg>";
+    (xLabel?'<text x="'+(W-padL)+'" y="'+(H-4)+'" font-size="10" fill="var(--muted)" font-family="monospace" text-anchor="end">'+xLabel+"</text>":"")+"</svg>";
+}
+/* グラフ軸切替（距離/行動時間）とGPX書き出し */
+function ldProf(mode,btn){
+  var c=window.__ldCtx;if(!c||!c.g)return;
+  var p=document.getElementById("ldprof");
+  if(p)p.innerHTML=profileSVG(c.g.pts,c.a.dist,mode);
+  if(btn)Array.prototype.forEach.call(btn.parentNode.querySelectorAll("button"),function(b){b.classList.toggle("on",b===btn)});
+}
+function logGpxExport(id){
+  var a=getLogs().find(function(x){return x.i===id});if(!a)return;
+  phGet("gpx_"+id,function(data){
+    if(!data){toast(state.locale==="ja"?"この記録に軌跡データはありません":"No track data in this entry");return}
+    try{
+      var pts=JSON.parse(data).pts;
+      var m=DATA.mountains.find(function(y){return y.id===a.m});
+      var gpx='<?xml version="1.0" encoding="UTF-8"?>\n<gpx version="1.1" creator="Mountain Peak" xmlns="http://www.topografix.com/GPX/1/1">\n<trk><name>'+esc(m?tr(m).name:"activity")+" "+esc(a.d)+"</name><trkseg>\n"+
+        pts.map(function(p){return '<trkpt lat="'+p[0]+'" lon="'+p[1]+'">'+(p[2]!=null?"<ele>"+p[2]+"</ele>":"")+"</trkpt>"}).join("\n")+
+        "\n</trkseg></trk>\n</gpx>";
+      var blob=new Blob([gpx],{type:"application/gpx+xml"});
+      var el=document.createElement("a");el.href=URL.createObjectURL(blob);el.download="mountain-peak-"+a.d+".gpx";el.click();
+      setTimeout(function(){URL.revokeObjectURL(el.href)},2000);
+    }catch(e){}
+  });
 }
 /* フォームの選択式UI（チップ/セレクト）: renderを呼ばずDOMだけ更新（入力中の値を守る） */
 function logWSet(el){
@@ -1907,31 +1954,60 @@ function logDetail(id){
   var o=document.getElementById("ldov");
   if(!o){o=document.createElement("div");o.id="ldov";document.body.appendChild(o);
     o.addEventListener("click",function(e){if(e.target===o)ldClose()})}
-  var tile=function(v,k){return '<div class="ldtile"><div class="v mono">'+v+'</div><div class="k">'+k+"</div></div>"};
-  var tl=(a.tl||[]).map(function(x){return '<div class="ldtl"><span class="tm mono">'+esc(x.t)+'</span><span class="dot"></span><span class="nm">'+esc(x.n)+"</span></div>"}).join("");
-  o.innerHTML='<div class="ldcard">'+
-    '<div class="ldhead"><div><div class="pname mono">'+esc(a.d)+(a.sched?" · "+esc(a.sched):"")+(a.w?" · "+esc(a.w):"")+'</div><h2>'+esc(m?tr(m).name:"?")+(a.r?' <span class="rt">'+esc(a.r)+"</span>":"")+'</h2></div>'+
-    '<button class="cx" aria-label="close" onclick="ldClose()">✕</button></div>'+
+  var tile=function(ic,v,k){return '<div class="ldtile"><div class="k">'+ic+" "+k+'</div><div class="v mono">'+v+"</div></div>"};
+  /* チェックポイント: S/Gマーカー+区間タイム（YAMAP方式） */
+  var rows=[];
+  if(a.ls)rows.push({t:a.ls,n:ja?"スタート":"Start",k:"S"});
+  (a.tl||[]).forEach(function(x){rows.push({t:x.t,n:x.n})});
+  if(a.le)rows.push({t:a.le,n:ja?"ゴール":"Goal",k:"G"});
+  var toMin=function(t){var p=t.split(":");return +p[0]*60+ +p[1]};
+  var tl="";
+  rows.forEach(function(x,i){
+    if(i>0){var gap=toMin(x.t)-toMin(rows[i-1].t);if(gap<0)gap+=1440;
+      if(gap>0)tl+='<div class="ldgap mono">'+fmtMins(gap)+"</div>"}
+    tl+='<div class="ldtl"><span class="tm mono">'+esc(x.t)+'</span><span class="dot'+(x.k?" "+x.k:"")+'">'+(x.k||"")+'</span><span class="nm">'+esc(x.n)+"</span></div>";
+  });
+  var cpHead=rows.length?('<div class="ldcphead"><span>'+(ja?"合計時間":"Total")+' <b class="mono">'+fmtMins(a.mins)+"</b></span>"+
+    (a.dist!=null?"<span>"+(ja?"距離":"Dist")+' <b class="mono">'+a.dist+"km</b></span>":"")+
+    (a.up!=null?"<span>"+(ja?"のぼり/くだり":"Up/Down")+' <b class="mono">'+a.up+" / "+(a.down!=null?a.down:"—")+"m</b></span>":"")+"</div>"):"";
+  var hasDiary=!!(a.t||a.g||(a.p&&a.p.length));
+  var dataTab=
     '<div class="ldtiles">'+
-      tile(fmtMins(a.mins),(ja?"タイム":"Time"))+
-      tile(a.dist!=null?a.dist+"km":"—",(ja?"距離":"Distance"))+
-      tile(a.up!=null?"+"+a.up.toLocaleString()+"m":"—",(ja?"のぼり":"Ascent"))+
-      tile(a.down!=null?"-"+a.down.toLocaleString()+"m":"—",(ja?"くだり":"Descent"))+"</div>"+
+      tile("⏱",fmtMins(a.mins),(ja?"タイム":"Time"))+
+      tile("↔",a.dist!=null?a.dist+"<small>km</small>":"—",(ja?"距離":"Distance"))+
+      tile("↗",a.up!=null?a.up.toLocaleString()+"<small>m</small>":"—",(ja?"のぼり":"Ascent"))+
+      tile("↘",a.down!=null?a.down.toLocaleString()+"<small>m</small>":"—",(ja?"くだり":"Descent"))+"</div>"+
     ((a.dist&&a.mins)?'<div class="ldpace mono">'+(ja?"平均ペース ":"Avg pace ")+(a.dist/(a.mins/60)).toFixed(1)+" km/h</div>":"")+
-    '<div id="ldtrack" class="ldbox"></div><div id="ldprof" class="ldbox"></div>'+
-    (tl?'<h3 class="ldh">'+(ja?"タイムライン":"Timeline")+'</h3><div class="ldtls">'+tl+"</div>":"")+
+    '<div id="ldtrack" class="ldbox"></div>'+
+    '<div class="ldaxis" id="ldaxis" style="display:none"><button class="on" onclick="ldProf(\'dist\',this)">'+(ja?"距離":"Distance")+'</button><button onclick="ldProf(\'time\',this)">'+(ja?"行動時間":"Time")+"</button></div>"+
+    '<div id="ldprof" class="ldbox"></div>'+
+    (rows.length?'<h3 class="ldh">'+(ja?"チェックポイント":"Checkpoints")+"</h3>"+cpHead+'<div class="ldtls">'+tl+"</div>":"")+
+    '<div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap"><button class="abtn" onclick="logGpxExport(\''+a.i+'\')">🛰 GPX'+(ja?"エクスポート":" export")+"</button></div>";
+  var diaryTab=
     (a.t?'<h3 class="ldh">'+(ja?"感想":"Notes")+'</h3><p class="ldmemo">'+esc(a.t)+"</p>":"")+
     (a.g?'<h3 class="ldh">'+(ja?"装備":"Gear")+'</h3><p class="ldmemo">'+esc(a.g)+"</p>":"")+
-    ((a.p&&a.p.length)?'<h3 class="ldh">'+(ja?"写真":"Photos")+'</h3><div class="logphs" id="ldphs">'+a.p.map(function(pid){return '<img class="logph" data-pid="'+esc(pid)+'" alt="" onclick="if(this.src)phView(this.src)">'}).join("")+"</div>":"")+
+    ((a.p&&a.p.length)?'<h3 class="ldh">'+(ja?"写真":"Photos")+'</h3><div class="logphs" id="ldphs">'+a.p.map(function(pid){return '<img class="logph" data-pid="'+esc(pid)+'" alt="" onclick="if(this.src)phView(this.src)">'}).join("")+"</div>":"")||
+    '<p class="ldmemo">'+(ja?"日記はまだ書かれていません。":"No diary yet.")+"</p>";
+  o.innerHTML='<div class="ldcard">'+
+    '<div class="ldhead"><div><div class="pname mono">'+esc(a.d)+(a.sched?" · "+esc(a.sched):"")+(a.w?" · "+esc(a.w):"")+'</div>'+
+    '<h2 role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="ldClose();go({name:\'mountain\',slug:\''+(m?m.slug:"")+'\'})">'+esc(m?tr(m).name:"?")+' <span class="mtlink">'+(ja?"山の情報 →":"Mountain →")+"</span></h2>"+
+    (a.r?'<div class="rt">'+esc(a.r)+"</div>":"")+"</div>"+
+    '<button class="cx" aria-label="close" onclick="ldClose()">✕</button></div>'+
+    '<div class="ldtabs"><button class="on" onclick="ldTab(this,\'data\')">'+(ja?"活動データ":"Activity")+'</button>'+(hasDiary?'<button onclick="ldTab(this,\'diary\')">'+(ja?"日記":"Diary")+"</button>":"")+"</div>"+
+    '<div id="ldTabData">'+dataTab+"</div>"+
+    '<div id="ldTabDiary" style="display:none">'+diaryTab+"</div>"+
     "</div>";
   o.classList.add("show");
   /* IndexedDBから軌跡・写真を流し込み */
+  window.__ldCtx=null;
   phGet("gpx_"+a.i,function(data){
     if(!data)return;
     try{var g=JSON.parse(data);
+      window.__ldCtx={g:g,a:a};
       var t=document.getElementById("ldtrack"),p=document.getElementById("ldprof");
       if(t)t.innerHTML=trackSVG(g.pts);
-      if(p)p.innerHTML=profileSVG(g.pts,a.dist);
+      if(p)p.innerHTML=profileSVG(g.pts,a.dist,"dist");
+      if(g.pts.some(function(pt){return pt[3]!=null})){var ax=document.getElementById("ldaxis");if(ax)ax.style.display="flex"}
     }catch(e){}
   });
   Array.prototype.forEach.call(o.querySelectorAll("img.logph[data-pid]"),function(el){
@@ -3393,6 +3469,13 @@ window.logSug=logSug;window.logPick=logPick;window.logAdd=logAdd;window.logDel=l
 window.logPhotoAdd=logPhotoAdd;window.logPhotoRm=logPhotoRm;window.phView=phView;
 window.logGpxFile=logGpxFile;window.logDetail=logDetail;window.ldClose=ldClose;
 window.logWSet=logWSet;window.logSchedSet=logSchedSet;window.logDateSet=logDateSet;window.logTlAdd=logTlAdd;window.logTlRm=logTlRm;
+window.ldTab=function(btn,key){
+  Array.prototype.forEach.call(btn.parentNode.querySelectorAll("button"),function(b){b.classList.toggle("on",b===btn)});
+  var d=document.getElementById("ldTabData"),y=document.getElementById("ldTabDiary");
+  if(d)d.style.display=key==="data"?"":"none";
+  if(y)y.style.display=key==="diary"?"":"none";
+};
+window.ldProf=ldProf;window.logGpxExport=logGpxExport;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
 })();
 </script>
