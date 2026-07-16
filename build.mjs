@@ -72,6 +72,7 @@ const STATIC_TITLES = {
     gear: ["登山装備ガイド — 三種の神器から雪山装備まで | Mountain Peak", "登山靴・ザック・レインウェアの三種の神器からテント泊・雪山装備まで。難易度別の装備リスト、選び方と価格目安、山岳保険の情報。"],
     logbook: ["登山記録（サミットログ） — 山行を記録しよう | Mountain Peak", "登った山・日付・ルート・天気・メモを記録して自分だけの登山史に。統計とJSON書き出し対応、データはブラウザ内にのみ保存。"],
     routemaps: ["ルート図ライブラリ — ビジュアルルートガイド | Mountain Peak", "富士山吉田ルートなど代表的な山のルートを1枚に凝縮した概略ルート図。行程・ピッチ・アプローチ・推奨装備を収録。"],
+    people: ["山を愛した人々 — 人生と山の物語 | Mountain Peak", "俳優、作家、探検家。世界を動かした人々の人生には、ときに一つの山、一つの風景が寄り添っていた。山と人の物語を、確かめられる事実だけで記録するカテゴリー。"],
   },
   en: {
     home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. About 2,000 peaks from the 100 Famous Japanese Mountains to every 8000er, in English and Japanese."],
@@ -89,6 +90,7 @@ const STATIC_TITLES = {
     gear: ["Hiking Gear Guide — From the Big Three to Winter Kit | Mountain Peak", "Boots, packs and rain shells to tents and crampons: gear checklists by difficulty, buying tips, price ranges and mountain insurance basics."],
     logbook: ["Summit Log — Track Your Climbs | Mountain Peak", "Log every climb with date, route, weather and notes. Stats and JSON export; data stays in your browser."],
     routemaps: ["Route Map Library — Visual Route Guides | Mountain Peak", "One-sheet schematic route maps for iconic mountains: line, pitches, approach and recommended gear."],
+    people: ["People Who Loved the Mountains — Mountain Lives | Mountain Peak", "Actors, writers, explorers. Behind lives that moved the world there was often one mountain, quietly present. Stories of mountains and lives, told with verified facts only."],
   },
 };
 
@@ -98,7 +100,7 @@ function push(path, l, title, desc, opts = {}) {
 
 for (const l of LOCALES) {
   const S = STATIC_TITLES[l];
-  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries", "climbers", "gear", "logbook", "routemaps"]) {
+  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries", "climbers", "gear", "logbook", "routemaps", "people"]) {
     const p = key === "home" ? `/${l}/` : `/${l}/${key}/`;
     push(p, l, S[key][0], S[key][1], { kind: key });
   }
@@ -159,7 +161,16 @@ function jsonLd(p) {
     crumbs.push({ name: tr(p.mt, p.locale).name, item: `${SITE}/${p.locale}/mountains/${p.mt.slug}/` }, { name: tr(p.r, p.locale).name, item: url });
   } else if (p.kind === "article") {
     const t = tr(p.a, p.locale);
-    out.push({ "@context": "https://schema.org", "@type": "Article", headline: t.title, description: p.desc, url, datePublished: p.a.publishedAt, inLanguage: p.locale });
+    const art = { "@context": "https://schema.org", "@type": "Article", headline: t.title, description: p.desc, url, datePublished: p.a.publishedAt, inLanguage: p.locale,
+      author: { "@type": "Organization", name: p.a.authorName || "Mountain Peak" } };
+    // 人物記事: about=Person（本文の主題と一致する範囲のみ）+ パンくずに「山を愛した人々」
+    if (p.a.person) {
+      art.about = { "@type": "Person", name: p.a.person.nameEn || p.a.person.name,
+        ...(p.a.person.birth ? { birthDate: p.a.person.birth } : {}), ...(p.a.person.death ? { deathDate: p.a.person.death } : {}) };
+      if (p.a.heroImg) art.image = `${SITE}/${p.a.heroImg}`;
+      crumbs.push({ name: p.locale === "ja" ? "山を愛した人々" : "People Who Loved the Mountains", item: `${SITE}/${p.locale}/people/` });
+    }
+    out.push(art);
     crumbs.push({ name: t.title, item: url });
   } else if (p.kind === "ranking") {
     out.push({ "@context": "https://schema.org", "@type": "ItemList", name: nm(p.k, p.locale), url,
@@ -243,6 +254,13 @@ function prerender(p) {
       body += `<p>${l === "ja" ? "テキスト・画像はWikipediaからの引用（CC BY-SA 4.0）です。" : "Bios and portraits quoted from Wikipedia (CC BY-SA 4.0)."}</p><ul>` +
         CLIMBERS.map((c) => `<li>${esc(l === "ja" ? c.nj : (c.ne || c.nj))}${c.ne && l === "ja" ? " (" + esc(c.ne) + ")" : ""}</li>`).join("") + `</ul>`;
     } catch {}
+  } else if (p.kind === "people") {
+    const ppl = DATA.articles.filter((a) => a.person && a.status === "published");
+    body += `<ul>` + ppl.map((a) => {
+      const t = tr(a, l);
+      return `<li><a href="${url(`/${l}/articles/${a.slug}/`)}">${esc((l === "ja" ? a.person.name : (a.person.nameEn || a.person.name)) + " — " + t.title)}</a></li>`;
+    }).join("") + `</ul>` +
+      `<p>${l === "ja" ? "山と人の物語を、確かめられる事実だけで記録します。出典を明記し、確認できない名言は使いません。" : "Stories of mountains and lives, recorded with verified facts only."}</p>`;
   } else if (p.kind === "routemaps") {
     const maps = l === "ja"
       ? ["富士山 吉田ルート ルート図 — 五合目〜剣ヶ峰の概略図", "北穂高岳 東壁 ABCフェイス ルート図 — アルパインクライミング概略図"]

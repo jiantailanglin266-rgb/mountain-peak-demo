@@ -612,6 +612,48 @@ body.chatlock{overflow:hidden}
   nav.tabs button{min-height:44px}
   .langbtn{min-height:40px}
 }
+/* 山を愛した人々（静か・雑誌的・非対称。既存トークンのみ使用） */
+.pplhero{position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lift);margin-top:6px}
+.pplhero img{width:100%;height:min(46vh,420px);object-fit:cover;display:block}
+.pplhero .scr{position:absolute;inset:0;background:linear-gradient(12deg,rgba(8,14,20,.78) 12%,rgba(8,14,20,.24) 46%,transparent 72%)}
+.pplhero .inner{position:absolute;left:0;right:0;bottom:0;padding:30px 32px}
+.pplhero .eyebrow{font-size:10.5px;letter-spacing:.2em;color:rgba(255,255,255,.75)}
+.pplhero h1{font-size:clamp(24px,3.6vw,36px);font-weight:800;color:#fff;margin-top:8px;letter-spacing:-.01em}
+.pplhero .cp{font-size:clamp(14px,1.9vw,17px);color:rgba(255,255,255,.94);margin-top:10px;font-weight:600}
+.pplhero .sb{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:8px;line-height:1.9;max-width:620px}
+.pplfeat{display:grid;grid-template-columns:7fr 5fr;gap:0;border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+.pplfeat .fimg{cursor:pointer;min-height:300px}
+.pplfeat .fimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.pplfeat .fimg:hover img{transform:scale(1.03)}
+.pplfeat .ftx{padding:26px 28px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.pplfeat .ftx h3{font-size:clamp(17px,2vw,21px);font-weight:800;line-height:1.55;letter-spacing:-.01em}
+.pplfeat .lead{font-size:12.5px;color:var(--muted);line-height:1.95;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.pname{font-size:11px;letter-spacing:.12em;color:var(--route);font-weight:700}
+.pname .yrs{color:var(--muted);font-weight:500;letter-spacing:.06em}
+.fmeta{width:100%;border-collapse:collapse}
+.fmeta td{font-size:12px;padding:7px 0;border-bottom:1px dashed var(--hair);line-height:1.7}
+.fmeta td:first-child{color:var(--muted);width:88px;font-size:10.5px;letter-spacing:.08em}
+.pmetaCard{margin:14px 0 16px;padding:8px 20px}
+.factbadge{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.06em;color:var(--forest);background:var(--forest-soft);border-radius:999px;padding:2px 9px;margin-left:8px}
+.srclist{padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.srclist li{font-size:12px;line-height:1.8}
+.srclist a{color:var(--glacier)}
+.pgrid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.pcard{padding:0;overflow:hidden}
+.pcard .plink{display:block;color:inherit;text-decoration:none}
+.pcard .pimg{aspect-ratio:16/9;background:var(--hair);overflow:hidden}
+.pcard .pimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.pcard:hover .pimg img{transform:scale(1.04)}
+.pcard .pbody{padding:14px 17px 16px}
+.pcard .pttl{font-size:14px;font-weight:800;line-height:1.6;margin-top:6px}
+.pcard .pex{font-size:12px;color:var(--muted);line-height:1.85;margin-top:7px}
+.pcard .pmeta{font-size:10.5px;color:var(--muted);margin-top:9px;letter-spacing:.04em}
+.pplrow{display:flex;align-items:baseline;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);cursor:pointer;flex-wrap:wrap}
+.pplrow .nm{font-weight:800;font-size:13.5px;color:var(--glacier)}
+.pplrow .tt{font-size:12px;color:var(--muted);flex:1;min-width:180px}
+.pplrow .arw{color:var(--route);font-weight:800}
+.pplrow:hover .nm{text-decoration:underline}
+@media(max-width:880px){.pplfeat{grid-template-columns:1fr}.pplfeat .fimg{min-height:200px;aspect-ratio:16/9}.pplhero .inner{padding:20px 18px}}
 /* 記事のリッチ本文（読み物） */
 .article-body .ah2{display:flex;align-items:baseline;gap:10px;font-size:21px;font-weight:800;letter-spacing:-.01em;margin:38px 0 6px;line-height:1.5}
 .article-body .ah2 .eyebrow{font-size:12px;color:var(--route);letter-spacing:.2em}
@@ -690,7 +732,7 @@ body.chatlock{overflow:hidden}
 <link rel="alternate" hreflang="ja" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/reading-mountain-weather/">
 <link rel="alternate" hreflang="en" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/reading-mountain-weather/">
 <link rel="alternate" hreflang="x-default" href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/reading-mountain-weather/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"山の天気の読み方 — 予報の限界と撤退の判断","description":"山岳気象の基本。天気予報の見方、危険な兆候、撤退判断の基準について。","url":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/reading-mountain-weather/","datePublished":"2026-06-25T00:00:00.000Z","inLanguage":"ja"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"山の天気の読み方 — 予報の限界と撤退の判断","description":"山岳気象の基本。天気予報の見方、危険な兆候、撤退判断の基準について。","url":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/reading-mountain-weather/","datePublished":"2026-06-25T00:00:00.000Z","inLanguage":"ja","author":{"@type":"Organization","name":"Mountain Peak編集部"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mountain Peak","item":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/"},{"@type":"ListItem","position":2,"name":"山の天気の読み方 — 予報の限界と撤退の判断","item":"https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/reading-mountain-weather/"}]}</script>
 </head>
 <body>
@@ -747,7 +789,7 @@ body.chatlock{overflow:hidden}
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
-(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=203",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
+(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=204",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
 /* 山岳ニュース（RSS自動更新・任意ロード）。日付クエリでSWキャッシュを毎日バイパス */
 try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOString().slice(0,10),false);n.send();if(n.status===200||n.status===0){(0,eval)(n.responseText)}}catch(e){}})();
 </script>
@@ -758,7 +800,7 @@ try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOStri
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",routemaps:"ルート図",rankings:"リスト",logbook:"記録",articles:"記事・ガイド",gear:"装備",videos:"動画",climbers:"登山家",community:"コミュニティ"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",routemaps:"ルート図",rankings:"リスト",people:"山と人",logbook:"記録",articles:"記事・ガイド",gear:"装備",videos:"動画",climbers:"登山家",community:"コミュニティ"},
   clm:{title:"世界の登山家名鑑",sub:"黄金期の開拓者から現代のアルパインクライマーまで、世界の著名登山家300名を紹介。",
    notice:"各登山家の紹介文・肖像画像は <b>Wikipedia（日本語版・英語版）からの引用</b>で、ライセンスは CC BY-SA 4.0 です。カード内のリンクから原典記事をご覧いただけます。動画はYouTube公式埋め込みプレーヤーで再生されます。",
    searchPh:"名前で検索（例: メスナー, Honnold）",all:"すべて",found:"名",
@@ -808,7 +850,7 @@ var DICT = {
   fnote:"Mountain Peak は、世界の山の標高・ルート・天気の目安・歴史を日本語と英語でまとめる山岳情報プラットフォームです。登頂チェックリストや掲示板への投稿はお使いのブラウザ内に保存され、入力内容がサーバーへ送信されることはありません。",
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
- en:{tabs:{home:"Home",mountains:"Mountains",routemaps:"Route Maps",rankings:"Lists",logbook:"Log",articles:"Articles",gear:"Gear",videos:"Videos",climbers:"Climbers",community:"Community"},
+ en:{tabs:{home:"Home",mountains:"Mountains",routemaps:"Route Maps",rankings:"Lists",people:"Mountain Lives",logbook:"Log",articles:"Articles",gear:"Gear",videos:"Videos",climbers:"Climbers",community:"Community"},
   clm:{title:"Great Mountaineers of the World",sub:"300 celebrated climbers, from golden-age pioneers to today's alpinists.",
    notice:"Biographies and portraits are <b>quoted from Wikipedia (Japanese & English editions)</b> under CC BY-SA 4.0. Follow the links on each card to the original articles. Videos play via YouTube's official embedded player.",
    searchPh:"Search by name (e.g. Messner, Honnold)",all:"All",found:"climbers",
@@ -1214,6 +1256,7 @@ function vMountain(slug){
     (routes.length?'<div class="card sect"><h3>'+D.l.routes+"</h3>"+routes.map(function(rt){var rtt=tr(rt);
       return '<div class="rcard" onclick="event.stopPropagation();go({name:\'route\',slug:\''+rt.slug+'\'})"><div class="rt"><span>'+esc(rtt.name)+"</span>"+diffBadge(rt.difficultyLevel)+'</div><div class="rs">'+esc(rtt.overview.slice(0,90))+'…</div><div class="rs mono">📏 '+rt.distanceKm+"km ・ ↗ "+rt.elevationGainM.toLocaleString()+"m ・ ⏱ "+fmtTime(rt.estTimeMin)+"</div></div>"}).join("")+"</div>":"")+
     rmapsForMountain(m.slug)+
+    pplMtBlock(m.slug)+
     faqBlock(m,t,routes)+
     (MT_VIDEOS[m.id]&&MT_VIDEOS[m.id].length?'<div class="card sect"><h3>'+d().vid.detailTitle+"</h3>"+vidCardsHtml(MT_VIDEOS[m.id])+"</div>":"")+
     disclaimer(m.updatedAt)+
@@ -1284,10 +1327,17 @@ function vArticle(slug){
   var a=DATA.articles.find(function(x){return x.slug===slug});
   if(!a)return '<div class="empty">404</div>';
   var D=d(),t=tr(a);
-  return '<div class="article-body">'+crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.articles,go:'go({name:"articles"})'},{n:t.title}])+
+  var isPerson=!!a.person;
+  /* 人物記事はパンくず・メタ・出典・関連導線を「山を愛した人々」仕様に */
+  var crumb=isPerson
+    ?crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:pplT().t,go:'go({name:"people"})'},{n:a.person.name}])
+    :crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.articles,go:'go({name:"articles"})'},{n:t.title}]);
+  return '<div class="article-body">'+crumb+
     '<div class="cat" style="font-size:12px;color:var(--muted)"><span class="badge plain">'+esc(D.cats[a.category]||a.category)+"</span> "+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+" · "+esc(a.authorName)+"</div>"+
     '<h1 class="disp">'+esc(t.title)+"</h1>"+
+    (isPerson?pplArticleHead(a):"")+
     '<div class="card">'+artBody(t.body)+"</div>"+
+    (isPerson?pplArticleFoot(a):"")+
     afArticleCta(a.category)+
     '<div style="margin-top:14px"><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div>"+
     '<div style="margin-top:14px">'+disclaimer(a.publishedAt)+"</div></div>";
@@ -1311,7 +1361,7 @@ function pathFor(view,locale){
   if(n==="thread")return "/"+l+"/community/?t="+encodeURIComponent(view.slug);
   if(n==="country")return "/"+l+"/countries/"+view.slug+"/";
   if(n==="region")return "/"+l+"/regions/"+view.slug+"/";
-  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/",gear:"/gear/",logbook:"/logbook/",routemaps:"/routemaps/"};
+  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/",gear:"/gear/",logbook:"/logbook/",routemaps:"/routemaps/",people:"/people/"};
   return "/"+l+(map[n]||"/");
 }
 function go(view){
@@ -1357,7 +1407,7 @@ function parseHash(){
     if(q0)state.filters={q:q0,country:"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"};
     return;
   }
-  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1,logbook:1,routemaps:1};
+  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1,logbook:1,routemaps:1,people:1};
   state.view=valid2[name]?{name:name}:{name:"home"};
 }
 /* ビュー別タイトル（SSG生成ページのタイトル設計と同一パターン） */
@@ -1377,6 +1427,7 @@ function pageTitle(v){
     if(v.name==="gear")return (ja?"登山装備ガイド — 三種の神器から雪山装備まで":"Hiking Gear Guide — From the Big Three to Winter Kit")+" | Mountain Peak";
     if(v.name==="logbook")return (ja?"登山記録（サミットログ） — 山行を記録しよう":"Summit Log — Track Your Climbs")+" | Mountain Peak";
     if(v.name==="routemaps")return (ja?"ルート図ライブラリ — ビジュアルルートガイド":"Route Map Library — Visual Route Guides")+" | Mountain Peak";
+    if(v.name==="people")return (ja?"山を愛した人々 — 人生と山の物語":"People Who Loved the Mountains — Mountain Lives")+" | Mountain Peak";
     var statics={mountains:D.tabs.mountains,rankings:D.tabs.rankings,articles:D.tabs.articles,videos:D.tabs.videos,community:D.tabs.community,thread:D.tabs.community};
     if(statics[v.name])return statics[v.name]+" | Mountain Peak";
   }catch(e){}
@@ -1424,10 +1475,11 @@ function render(){
     else if(v.name==="gear")html=vGear();
     else if(v.name==="logbook")html=vLogbook();
     else if(v.name==="routemaps")html=vRoutemaps();
+    else if(v.name==="people")html=vPeople();
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
-  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["routemaps",D.tabs.routemaps],["rankings",D.tabs.rankings],["logbook",D.tabs.logbook],["articles",D.tabs.articles],["gear",D.tabs.gear],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["routemaps",D.tabs.routemaps],["rankings",D.tabs.rankings],["people",D.tabs.people],["logbook",D.tabs.logbook],["articles",D.tabs.articles],["gear",D.tabs.gear],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
@@ -1832,6 +1884,139 @@ function rmapsForMountain(slug){
     maps.map(function(r){return '<div class="rmimg dtl" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="phView(\''+asset(r.img)+'\')"><img src="'+asset(r.img)+'" alt="'+esc(ja?r.tj:r.te)+'" decoding="async"><span class="zm">🔍 '+T.open+"</span></div>"+
       '<p style="font-size:12px;color:var(--muted);margin:8px 0 14px;line-height:1.8">'+esc(ja?r.dj:r.de)+"</p>"}).join("")+
     '<p class="afnote">'+rmt().notice.replace(/<[^>]+>/g,"")+"</p></div>";
+}
+
+/* ====== 山を愛した人々（People Who Loved the Mountains）/people/ ====== */
+var PPL_T={
+ ja:{t:"山を愛した人々",eb:"MOUNTAIN LIVES",
+  copy:"山を愛した人は、そこで何を見つけたのか。",
+  sub:"俳優、作家、探検家。世界を動かした人々の人生には、ときに一つの山、一つの風景が静かに寄り添っていた。",
+  featured:"FEATURED STORY",stories:"STORIES",storiesT:"人物の物語",
+  editorialEb:"EDITORIAL",editorialT:"このカテゴリーについて",
+  editorial:"私たちは、有名な人生を消費するためにこのページを作っていません。その人が山に何を求め、自然から何を受け取り、どう生きたのか — それを、確かめられる事実だけで記録します。出典を明記し、確認できない名言は使いません。山を知ることは、人を知ることだと信じているからです。",
+  journeysEb:"RELATED JOURNEYS",journeysT:"物語の舞台へ",
+  read:"分で読める",era:"時代",place:"ゆかりの地",mts:"関係する山",life:"生没",
+  author:"執筆",fact:"事実確認",factBadge:"✓ ファクトチェック済み",
+  sourcesT:"出典・参考資料",updatedT:"最終更新",
+  backCat:"← 山を愛した人々 一覧へ",toStory:"物語を読む →",
+  mtBlockT:"この山と生きた人々",
+  emptyT:"物語は、これから増えていきます",
+  empty:"「山を愛した人々」は始まったばかりのカテゴリーです。新しい物語を、ひとつずつ丁寧に加えていきます。"},
+ en:{t:"People Who Loved the Mountains",eb:"MOUNTAIN LIVES",
+  copy:"What did those who loved the mountains find there?",
+  sub:"Actors, writers, explorers. Behind lives that moved the world, there was often one mountain, one landscape, quietly present.",
+  featured:"FEATURED STORY",stories:"STORIES",storiesT:"Stories",
+  editorialEb:"EDITORIAL",editorialT:"About this category",
+  editorial:"These pages do not exist to consume famous lives. We record what each person sought in the mountains, what nature gave them, and how they lived — using only what can be verified. Sources are cited; unverifiable quotations are never used. Because to know a mountain is to know a person.",
+  journeysEb:"RELATED JOURNEYS",journeysT:"Go where the story lives",
+  read:"min read",era:"Era",place:"Places",mts:"Mountains",life:"Life",
+  author:"Words",fact:"Fact check",factBadge:"✓ Fact-checked",
+  sourcesT:"Sources & References",updatedT:"Last updated",
+  backCat:"← All Mountain Lives",toStory:"Read the story →",
+  mtBlockT:"People who lived with this mountain",
+  emptyT:"More stories are on the way",
+  empty:"Mountain Lives has just begun. We will add new stories, one careful piece at a time."}
+};
+function pplT(){return PPL_T[state.locale]||PPL_T.ja}
+function mpTrack(ev,p){try{(window.dataLayer=window.dataLayer||[]).push(Object.assign({event:ev},p||{}))}catch(e){}}
+function peopleList(){return DATA.articles.filter(function(a){return a.person&&a.status==="published"})}
+function pplReadMin(a){return a.readingTime||Math.max(3,Math.round(((tr(a).body||"").length)/550))}
+function pplName(a){return state.locale==="ja"?a.person.name:(a.person.nameEn||a.person.name)}
+function pplLife(a){var b=(a.person.birth||"").slice(0,4),d=(a.person.death||"").slice(0,4);return b?(b+(d?"–"+d:"–")):""}
+function pplPlaces(a){var ja=state.locale==="ja";return (a.related&&a.related.places||[]).map(function(p){return ja?p.ja:(p.en||p.ja)}).join(" / ")}
+/* 関連スコア: 手動指定>山域>国>テーマ>職業>時代（同一記事除外・published限定） */
+function pplRelated(a,max){
+  var W={override:100,mt:30,country:25,theme:15,occ:10,era:5};
+  var list=peopleList().filter(function(x){return x.id!==a.id});
+  var scored=list.map(function(x){
+    var s=0;
+    if((a.relatedOverride||[]).indexOf(x.slug)>=0)s+=W.override;
+    var am=(a.related&&a.related.mountains)||[],xm=(x.related&&x.related.mountains)||[];
+    if(am.some(function(m){return xm.indexOf(m)>=0}))s+=W.mt;
+    if(a.related&&x.related&&a.related.country&&a.related.country===x.related.country)s+=W.country;
+    var at=(a.related&&a.related.themes)||[],xt=(x.related&&x.related.themes)||[];
+    if(at.some(function(t){return xt.indexOf(t)>=0}))s+=W.theme;
+    var ao=(a.person.occupations)||[],xo=(x.person.occupations)||[];
+    if(ao.some(function(o){return xo.indexOf(o)>=0}))s+=W.occ;
+    if(a.related&&x.related&&a.related.era&&a.related.era===x.related.era)s+=W.era;
+    return {a:x,s:s};
+  }).filter(function(x){return x.s>0}).sort(function(p,q){return q.s-p.s});
+  return scored.slice(0,max||3).map(function(x){return x.a});
+}
+function pplForMountain(slug){
+  return peopleList().filter(function(a){return a.related&&(a.related.mountains||[]).indexOf(slug)>=0});
+}
+function personCard(a){
+  var T=pplT(),t=tr(a);
+  return '<article class="card pcard rv"><a class="plink" href="'+BASE+pathFor({name:"article",slug:a.slug})+'" onclick="event.preventDefault();mpTrack(\'people_story_click\',{slug:\''+a.slug+'\'});go({name:\'article\',slug:\''+a.slug+'\'})">'+
+    '<div class="pimg">'+(a.heroImg?'<img src="'+asset(a.heroImg)+'" alt="" decoding="async">':"")+"</div>"+
+    '<div class="pbody"><div class="pname mono">'+esc(pplName(a))+(pplLife(a)?' <span class="yrs">'+pplLife(a)+"</span>":"")+"</div>"+
+    '<h3 class="pttl">'+esc(t.title)+"</h3>"+
+    '<p class="pex">'+esc((t.body||"").replace(/\*\*/g,"").split(/\n\n+/)[1]||"").slice(0,86)+"…</p>"+
+    '<div class="pmeta">'+esc(pplPlaces(a))+" · "+pplReadMin(a)+" "+T.read+"</div></a></article>";
+}
+function vPeople(){
+  var D=d(),T=pplT(),ja=state.locale==="ja";
+  var people=peopleList().sort(function(a,b){return (b.featured?1:0)-(a.featured?1:0)||b.publishedAt.localeCompare(a.publishedAt)});
+  var feat=people.filter(function(a){return a.featured})[0]||people[0];
+  var rest=people.filter(function(a){return feat&&a.id!==feat.id});
+  var featT=feat?tr(feat):null;
+  var mtLinks=feat&&feat.related?(feat.related.mountains||[]).map(function(s){var m=DATA.mountains.find(function(x){return x.slug===s});return m?'<a class="hublink" onclick="go({name:\'mountain\',slug:\''+s+'\'})">'+esc(tr(m).name)+"</a>":""}).join(" · "):"";
+  var hero='<section class="pplhero rv"><img src="'+asset("images/articles/hepburn-hero.jpg")+'" alt="" decoding="async"><div class="scr"></div>'+
+    '<div class="inner"><div class="eyebrow mono">△ '+T.eb+'</div><h1 class="disp">'+esc(T.t)+'</h1><p class="cp">'+esc(T.copy)+'</p><p class="sb">'+esc(T.sub)+"</p></div></section>";
+  var featured=feat?('<h2 class="sec"><span class="eyebrow mono">△ '+T.featured+"</span></h2>"+
+    '<article class="pplfeat rv"><div class="fimg" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="mpTrack(\'people_featured_click\',{slug:\''+feat.slug+'\'});go({name:\'article\',slug:\''+feat.slug+'\'})"><img src="'+asset(feat.heroImg||"images/articles/hepburn-hero.jpg")+'" alt="'+esc(featT.title)+'" decoding="async"></div>'+
+    '<div class="ftx"><div class="pname mono">'+esc(pplName(feat))+' <span class="yrs">'+pplLife(feat)+'</span></div>'+
+    '<h3 class="disp">'+esc(featT.title)+'</h3><p class="lead">'+esc((featT.body||"").replace(/\*\*/g,"").split(/\n\n+/)[0])+"</p>"+
+    '<table class="fmeta"><tr><td>'+T.place+"</td><td>"+esc(pplPlaces(feat))+"</td></tr>"+
+    (mtLinks?"<tr><td>"+T.mts+"</td><td>"+mtLinks+"</td></tr>":"")+
+    (feat.related&&feat.related.era?"<tr><td>"+T.era+"</td><td>"+esc(feat.related.era)+"</td></tr>":"")+
+    "<tr><td>"+(ja?"読了時間":"Reading")+'</td><td>'+pplReadMin(feat)+" "+T.read+"</td></tr></table>"+
+    '<span class="aflink" onclick="mpTrack(\'people_featured_click\',{slug:\''+feat.slug+'\'});go({name:\'article\',slug:\''+feat.slug+'\'})">'+T.toStory+"</span></div></article>"):"";
+  var grid=rest.length?('<h2 class="sec"><span class="eyebrow mono">△ '+T.stories+'</span><span class="tt disp">'+T.storiesT+'</span></h2><div class="grid pgrid">'+rest.map(personCard).join("")+"</div>"):
+    '<div class="card rv" style="margin-top:18px;padding:22px"><b style="font-size:14px">'+T.emptyT+'</b><p style="font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.9">'+T.empty+"</p></div>";
+  var editorial='<h2 class="sec"><span class="eyebrow mono">△ '+T.editorialEb+'</span><span class="tt disp">'+T.editorialT+'</span></h2>'+
+    '<div class="card rv" style="padding:24px 26px"><p style="font-size:13.5px;line-height:2.1;color:var(--muted)">'+esc(T.editorial)+'</p><p style="margin-top:12px"><span class="aflink" onclick="go({name:\'about\'})">'+(ja?"編集方針を読む →":"Editorial policy →")+"</span></p></div>";
+  var journeys='<h2 class="sec"><span class="eyebrow mono">△ '+T.journeysEb+'</span><span class="tt disp">'+T.journeysT+'</span></h2><div class="chips" style="margin-top:4px">'+
+    '<span class="chip" onclick="go({name:\'country\',slug:\'switzerland\'})">'+flag("c_ch")+" "+(ja?"スイスの山":"Mountains of Switzerland")+"</span>"+
+    '<span class="chip" onclick="go({name:\'mountain\',slug:\'mont-blanc\'})">⛰ '+(ja?"モンブラン":"Mont Blanc")+"</span>"+
+    '<span class="chip" onclick="go({name:\'routemaps\'})">🗺 '+(ja?"ルート図ライブラリ":"Route Maps")+"</span>"+
+    '<span class="chip" onclick="go({name:\'articles\'})">'+(ja?"記事・ガイド一覧":"All Articles")+"</span></div>";
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:T.t}])+hero+featured+grid+editorial+journeys;
+}
+/* 人物記事の拡張ブロック（vArticleから呼ばれる） */
+function pplArticleHead(a){
+  var T=pplT(),ja=state.locale==="ja";
+  var mtLinks=(a.related&&a.related.mountains||[]).map(function(s){var m=DATA.mountains.find(function(x){return x.slug===s});return m?'<a class="hublink" onclick="go({name:\'mountain\',slug:\''+s+'\'})">'+esc(tr(m).name)+"</a>":""}).filter(Boolean).join(" · ");
+  return '<div class="card pmetaCard"><table class="fmeta">'+
+    "<tr><td>"+(ja?"人物":"Person")+'</td><td><b>'+esc(a.person.name)+"</b>"+(a.person.nameEn?' <span class="mono" style="color:var(--muted);font-size:11px">'+esc(a.person.nameEn)+"</span>":"")+"</td></tr>"+
+    (pplLife(a)?"<tr><td>"+T.life+'</td><td class="mono">'+pplLife(a)+"</td></tr>":"")+
+    (pplPlaces(a)?"<tr><td>"+T.place+"</td><td>"+esc(pplPlaces(a))+"</td></tr>":"")+
+    (mtLinks?"<tr><td>"+T.mts+"</td><td>"+mtLinks+"</td></tr>":"")+
+    "<tr><td>"+(ja?"読了時間":"Reading")+"</td><td>"+pplReadMin(a)+" "+T.read+"</td></tr>"+
+    "<tr><td>"+T.author+"</td><td>"+esc(a.authorName)+(a.factCheck==="reviewed"?' <span class="factbadge">'+T.factBadge+"</span>":"")+"</td></tr>"+
+    "</table></div>";
+}
+function pplArticleFoot(a){
+  var T=pplT(),ja=state.locale==="ja";
+  var src=(a.sources||[]).length?('<div class="card sect"><h3>'+T.sourcesT+'</h3><ol class="srclist">'+a.sources.map(function(s){
+    var inner=esc(s.title)+(s.publisher?' — <span style="color:var(--muted)">'+esc(s.publisher)+"</span>":"");
+    return "<li>"+(s.url?'<a href="'+esc(s.url)+'" target="_blank" rel="noopener nofollow">'+inner+" ↗</a>":inner)+"</li>";
+  }).join("")+"</ol>"+(a.factChecker?'<p class="afnote">'+T.fact+": "+esc(a.factChecker)+" · "+T.updatedT+": "+new Date(a.publishedAt).toLocaleDateString(ja?"ja-JP":"en-US")+"</p>":"")+"</div>"):"";
+  var rel=pplRelated(a,3);
+  var relHtml=rel.length?('<h2 class="sec"><span class="eyebrow mono">△ '+T.stories+'</span><span class="tt disp">'+T.storiesT+'</span></h2><div class="grid pgrid">'+rel.map(personCard).join("")+"</div>"):"";
+  var journeys='<div class="chips" style="margin-top:16px">'+
+    (a.related&&a.related.country?'<span class="chip" onclick="go({name:\'country\',slug:\''+(DATA.countries.find(function(c){return c.id===a.related.country})||{}).slug+'\'})">'+flag(a.related.country)+" "+(ja?"この国の山を見る":"Mountains of this country")+"</span>":"")+
+    (a.related&&a.related.mountains||[]).map(function(s){var m=DATA.mountains.find(function(x){return x.slug===s});return m?'<span class="chip" onclick="go({name:\'mountain\',slug:\''+s+'\'})">⛰ '+esc(tr(m).name)+"</span>":""}).join("")+
+    '<span class="chip" onclick="go({name:\'people\'})">'+T.backCat+"</span></div>";
+  return src+relHtml+journeys;
+}
+function pplMtBlock(slug){
+  var ps=pplForMountain(slug);
+  if(!ps.length)return "";
+  var T=pplT();
+  return '<div class="card sect"><h3>🕯 '+T.mtBlockT+"</h3>"+ps.map(function(a){var t=tr(a);
+    return '<div class="pplrow" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="go({name:\'article\',slug:\''+a.slug+'\'})"><span class="nm">'+esc(pplName(a))+'</span><span class="tt">'+esc(t.title)+"</span><span class='arw'>→</span></div>"}).join("")+"</div>";
 }
 
 /* ====== アフィリエイト（装備ガイド・山岳保険。PR表記=景表法ステマ規制対応） ====== */
@@ -2888,7 +3073,7 @@ parseHash();
 render();
 /* 検証用フック */
 window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
-window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;
+window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;window.mpTrack=mpTrack;
 window.logSug=logSug;window.logPick=logPick;window.logAdd=logAdd;window.logDel=logDel;window.logExport=logExport;window.logImportFile=logImportFile;window.logQuick=logQuick;
 window.logPhotoAdd=logPhotoAdd;window.logPhotoRm=logPhotoRm;window.phView=phView;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
