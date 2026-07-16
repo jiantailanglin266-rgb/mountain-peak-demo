@@ -202,7 +202,13 @@ function prerender(p) {
       `<p><a href="${url(`/${l}/mountains/${p.mt.slug}/`)}">${esc(tr(p.mt, l).name)}</a></p>`;
   } else if (p.kind === "article") {
     const t = tr(p.a, l);
-    body += t.body.split(/\n\n+/).slice(0, 4).map((x) => `<p>${esc(x)}</p>`).join("");
+    // 簡易記法を除去してテキスト化（[img:]は除外、##は見出しに、**は外す）
+    body += t.body.split(/\n\n+/)
+      .map((x) => x.trim())
+      .filter((x) => x && !/^\[img:/.test(x) && x !== "---")
+      .slice(0, 8)
+      .map((x) => /^## /.test(x) ? `<h2>${esc(x.slice(3))}</h2>` : `<p>${esc(x.replace(/\*\*/g, "").replace(/^\*|\*$/g, ""))}</p>`)
+      .join("");
   } else if (p.kind === "ranking") {
     // カタログ級（cat）は静的ページが無いためリンクせずテキストで列挙
     body += `<ol>` + p.k.mountainIds.map((id) => {

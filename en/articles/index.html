@@ -612,6 +612,15 @@ body.chatlock{overflow:hidden}
   nav.tabs button{min-height:44px}
   .langbtn{min-height:40px}
 }
+/* 記事のリッチ本文（読み物） */
+.article-body .ah2{display:flex;align-items:baseline;gap:10px;font-size:21px;font-weight:800;letter-spacing:-.01em;margin:38px 0 6px;line-height:1.5}
+.article-body .ah2 .eyebrow{font-size:12px;color:var(--route);letter-spacing:.2em}
+.article-body .afig{margin:26px -6px}
+.article-body .afig img{width:100%;border-radius:14px;display:block;box-shadow:var(--shadow);cursor:zoom-in}
+.article-body .afig figcaption{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.7;text-align:right}
+.article-body .ahr{border:none;border-top:1px dashed var(--line);width:42%;margin:34px auto}
+.article-body .anote{font-size:11.5px;color:var(--muted);border-left:2px solid var(--line);padding-left:13px;line-height:1.95}
+.article-body .card p{line-height:2.05}
 /* FVブランドフィルム */
 .fvfilm{position:relative;margin:22px 0 4px;border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lift);background:#0A141A}
 .fvfilm video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
@@ -702,7 +711,7 @@ body.chatlock{overflow:hidden}
     </div>
   </div>
 </header>
-<main><div class="wrap" id="app"><h1>Articles &amp; Guides</h1><p>How to start hiking, gear checklists, seasonal picks and mountain weather guides.</p><ul><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/how-to-start-hiking/">How to Start Hiking — From First Step to First Summit</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/beginner-gear-checklist/">Beginner's Day-Hike Gear Checklist</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/fuji-first-climb-guide/">Your First Mt. Fuji Climb — Routes, Huts, and Altitude</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/climbing-in-japan-for-visitors/">Climbing in Japan: The Essential Guide for International Visitors</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/best-mountains-by-season/">The Best Japanese Mountains for Every Season</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/reading-mountain-weather/">Reading Mountain Weather — Forecast Limits and When to Turn Back</a></li></ul></div></main>
+<main><div class="wrap" id="app"><h1>Articles &amp; Guides</h1><p>How to start hiking, gear checklists, seasonal picks and mountain weather guides.</p><ul><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/audrey-hepburn-switzerland/">The Opposite of Fame Was a Mountain — Why Audrey Hepburn Spent Her Last Years in a Small Swiss Village</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/how-to-start-hiking/">How to Start Hiking — From First Step to First Summit</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/beginner-gear-checklist/">Beginner's Day-Hike Gear Checklist</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/fuji-first-climb-guide/">Your First Mt. Fuji Climb — Routes, Huts, and Altitude</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/climbing-in-japan-for-visitors/">Climbing in Japan: The Essential Guide for International Visitors</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/best-mountains-by-season/">The Best Japanese Mountains for Every Season</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/en/articles/reading-mountain-weather/">Reading Mountain Weather — Forecast Limits and When to Turn Back</a></li></ul></div></main>
 <footer class="site">
   <div class="wrap">
     <div class="frow"><img class="wordmark fw" data-asset="images/logo-wordmark.png" alt="Mountain Peak" height="20"></div>
@@ -732,7 +741,7 @@ body.chatlock{overflow:hidden}
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
-(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=202",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
+(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=203",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
 /* 山岳ニュース（RSS自動更新・任意ロード）。日付クエリでSWキャッシュを毎日バイパス */
 try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOString().slice(0,10),false);n.send();if(n.status===200||n.status===0){(0,eval)(n.responseText)}}catch(e){}})();
 </script>
@@ -785,7 +794,7 @@ var DICT = {
   l:{elevation:"標高",summary:"概要",features:"特徴",history:"歴史・初登頂",firstAscent:"初登頂",access:"登山口・アクセス",equipment:"必要装備",hazards:"⚠ 危険箇所",routes:"主な登頂ルート",weather:"天気（参考値）",data:"山のデータ",coords:"緯度経度",country:"国",region:"山域",season:"ベストシーズン",prominence:"プロミネンス",nearby:"近隣・類似の山",dist:"距離",gain:"累積標高差",time:"標準コースタイム",stamina:"体力度",tech:"技術グレード",notes:"補足",updated:"最終更新",map:"地図",home:"ホーム",peaks:"座",back:"← 一覧へ戻る",cmp:"標高くらべ",share:"リンクをコピー",shared:"リンクをコピーしました",summit:"登頂済みにする",summited:"✓ 登頂済み",unclimbed:"未登頂に戻す"},
   w:{now:"現在の天気",week:"週間予報",wind:"風速",sr:"日の出",ss:"日の入り",est:"山頂付近の推定値",mock:"モデル推定値",note:"天気は標高補正モデルによる参考情報です。登山の可否判断は必ず公式予報など複数の情報源と現地の最新情報で行ってください。"},
   diffs:{0:"難易度未評価",1:"初級",2:"初中級",3:"中級",4:"上級",5:"エキスパート"},
-  cats:{guide:"初心者ガイド",gear:"装備",season:"季節",safety:"安全",inbound:"訪日登山"},
+  cats:{story:"読み物",guide:"初心者ガイド",gear:"装備",season:"季節",safety:"安全",inbound:"訪日登山"},
   months:["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
   monthsS:["1","2","3","4","5","6","7","8","9","10","11","12"],
   tags:{hyakumeizan:"日本百名山","seven-summits":"七大陸最高峰","8000m":"8000m峰",beginner:"初心者向け"},
@@ -835,7 +844,7 @@ var DICT = {
   l:{elevation:"Elevation",summary:"Overview",features:"Features",history:"History & First Ascent",firstAscent:"First ascent",access:"Access",equipment:"Equipment",hazards:"⚠ Hazards",routes:"Climbing Routes",weather:"Weather (reference)",data:"Mountain Data",coords:"Coordinates",country:"Country",region:"Range",season:"Best season",prominence:"Prominence",nearby:"Nearby & Similar Peaks",dist:"Distance",gain:"Elevation gain",time:"Typical time",stamina:"Stamina",tech:"Tech grade",notes:"Notes",updated:"Last updated",map:"Map",home:"Home",peaks:"peaks",back:"← Back to list",cmp:"Elevation Compare",share:"Copy link",shared:"Link copied",summit:"Mark as climbed",summited:"✓ Climbed",unclimbed:"Unmark"},
   w:{now:"Current Weather",week:"7-Day Forecast",wind:"Wind",sr:"Sunrise",ss:"Sunset",est:"Estimated near summit",mock:"Modeled estimate",note:"Weather here is an elevation-adjusted model estimate for reference. Always make go/no-go decisions from official forecasts and current local conditions."},
   diffs:{0:"Unrated",1:"Easy",2:"Moderate",3:"Challenging",4:"Difficult",5:"Expert"},
-  cats:{guide:"Beginner Guide",gear:"Gear",season:"Seasons",safety:"Safety",inbound:"Climbing in Japan"},
+  cats:{story:"Stories",guide:"Beginner Guide",gear:"Gear",season:"Seasons",safety:"Safety",inbound:"Climbing in Japan"},
   months:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
   monthsS:["J","F","M","A","M","J","J","A","S","O","N","D"],
   tags:{hyakumeizan:"100 Famous Japanese Mountains","seven-summits":"Seven Summits","8000m":"8000m Peak",beginner:"Beginner-friendly"},
@@ -1272,7 +1281,7 @@ function vArticle(slug){
   return '<div class="article-body">'+crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.articles,go:'go({name:"articles"})'},{n:t.title}])+
     '<div class="cat" style="font-size:12px;color:var(--muted)"><span class="badge plain">'+esc(D.cats[a.category]||a.category)+"</span> "+new Date(a.publishedAt).toLocaleDateString(state.locale==="ja"?"ja-JP":"en-US")+" · "+esc(a.authorName)+"</div>"+
     '<h1 class="disp">'+esc(t.title)+"</h1>"+
-    '<div class="card">'+t.body.split(/\n\n+/).map(function(p){return "<p>"+esc(p)+"</p>"}).join("")+"</div>"+
+    '<div class="card">'+artBody(t.body)+"</div>"+
     afArticleCta(a.category)+
     '<div style="margin-top:14px"><button class="abtn" onclick="shareLink()">🔗 '+D.l.share+"</button></div>"+
     '<div style="margin-top:14px">'+disclaimer(a.publishedAt)+"</div></div>";
@@ -1460,6 +1469,19 @@ function countUp(el){
     if(p<1)requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
+}
+/* 記事本文レンダラー（マークダウン簡易記法: ## 見出し / **強調** / [img:パス|キャプション] / --- / *注記*） */
+function artBody(body){
+  return body.split(/\n\n+/).map(function(p){
+    p=p.trim();
+    if(!p)return "";
+    var m=p.match(/^\[img:([^\|\]]+)\|?([^\]]*)\]$/);
+    if(m)return '<figure class="afig"><img src="'+asset(m[1])+'" alt="'+esc(m[2])+'" decoding="async" onclick="phView(this.src)"><figcaption>'+esc(m[2])+"</figcaption></figure>";
+    if(p.indexOf("## ")===0)return '<h2 class="ah2"><span class="eyebrow mono" aria-hidden="true">△</span>'+esc(p.slice(3))+"</h2>";
+    if(p==="---")return '<hr class="ahr">';
+    if(p.charAt(0)==="*"&&p.charAt(p.length-1)==="*"&&p.indexOf("**")!==0)return '<p class="anote">'+esc(p.slice(1,-1))+"</p>";
+    return "<p>"+esc(p).replace(/\*\*([^*]+)\*\*/g,"<b>$1</b>")+"</p>";
+  }).join("");
 }
 /* 大量リスト用: 48件+「さらに表示」ボタンの段階描画（2000山対応） */
 function moreGrid(list,marginTop){
