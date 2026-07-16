@@ -753,7 +753,7 @@ body.chatlock{overflow:hidden}
     </div>
   </div>
 </header>
-<main><div class="wrap" id="app"><h1>記事・ガイド — 登山の始め方から装備まで</h1><p>登山初心者の始め方、装備チェックリスト、季節別おすすめ、山岳気象の読み方など実用ガイド。</p><ul><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/audrey-hepburn-switzerland/">名声の反対語は、山だった — オードリー・ヘプバーンが晩年をスイスの小さな村で過ごした理由</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/how-to-start-hiking/">登山の始め方 — 最初の一歩から最初の頂まで</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/beginner-gear-checklist/">初心者のための登山装備チェックリスト【日帰り編】</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/fuji-first-climb-guide/">初めての富士登山 完全ガイド — ルート選び・山小屋・高山病対策</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/climbing-in-japan-for-visitors/">訪日外国人のための日本登山ガイド（概要）</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/best-mountains-by-season/">季節別おすすめの山 — 春夏秋冬の名山カレンダー</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/reading-mountain-weather/">山の天気の読み方 — 予報の限界と撤退の判断</a></li></ul></div></main>
+<main><div class="wrap" id="app"><h1>記事・ガイド — 登山の始め方から装備まで</h1><p>登山初心者の始め方、装備チェックリスト、季節別おすすめ、山岳気象の読み方など実用ガイド。</p><ul><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/audrey-hepburn-switzerland/">名声の反対語は、山だった — オードリー・ヘプバーンが晩年をスイスの小さな村で過ごした理由</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/kyuya-fukada-hyakumeizan/">百の頂に、百の喜び — 深田久弥はなぜ人生の後半を山に返したのか</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/how-to-start-hiking/">登山の始め方 — 最初の一歩から最初の頂まで</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/beginner-gear-checklist/">初心者のための登山装備チェックリスト【日帰り編】</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/fuji-first-climb-guide/">初めての富士登山 完全ガイド — ルート選び・山小屋・高山病対策</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/climbing-in-japan-for-visitors/">訪日外国人のための日本登山ガイド（概要）</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/best-mountains-by-season/">季節別おすすめの山 — 春夏秋冬の名山カレンダー</a></li><li><a href="https://jiantailanglin266-rgb.github.io/mountain-peak-demo/ja/articles/reading-mountain-weather/">山の天気の読み方 — 予報の限界と撤退の判断</a></li></ul></div></main>
 <footer class="site">
   <div class="wrap">
     <div class="frow"><img class="wordmark fw" data-asset="images/logo-wordmark.png" alt="Mountain Peak" height="20"></div>
@@ -783,7 +783,7 @@ body.chatlock{overflow:hidden}
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
-(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=204",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
+(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=205",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
 /* 山岳ニュース（RSS自動更新・任意ロード）。日付クエリでSWキャッシュを毎日バイパス */
 try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOString().slice(0,10),false);n.send();if(n.status===200||n.status===0){(0,eval)(n.responseText)}}catch(e){}})();
 </script>
@@ -1999,7 +1999,9 @@ function pplArticleFoot(a){
   }).join("")+"</ol>"+(a.factChecker?'<p class="afnote">'+T.fact+": "+esc(a.factChecker)+" · "+T.updatedT+": "+new Date(a.publishedAt).toLocaleDateString(ja?"ja-JP":"en-US")+"</p>":"")+"</div>"):"";
   var rel=pplRelated(a,3);
   var relHtml=rel.length?('<h2 class="sec"><span class="eyebrow mono">△ '+T.stories+'</span><span class="tt disp">'+T.storiesT+'</span></h2><div class="grid pgrid">'+rel.map(personCard).join("")+"</div>"):"";
+  var rank=a.related&&a.related.ranking?DATA.rankings.find(function(r){return r.slug===a.related.ranking}):null;
   var journeys='<div class="chips" style="margin-top:16px">'+
+    (rank?'<span class="chip" onclick="go({name:\'ranking\',slug:\''+rank.slug+'\'})">🏆 '+esc(names(rank))+"</span>":"")+
     (a.related&&a.related.country?'<span class="chip" onclick="go({name:\'country\',slug:\''+(DATA.countries.find(function(c){return c.id===a.related.country})||{}).slug+'\'})">'+flag(a.related.country)+" "+(ja?"この国の山を見る":"Mountains of this country")+"</span>":"")+
     (a.related&&a.related.mountains||[]).map(function(s){var m=DATA.mountains.find(function(x){return x.slug===s});return m?'<span class="chip" onclick="go({name:\'mountain\',slug:\''+s+'\'})">⛰ '+esc(tr(m).name)+"</span>":""}).join("")+
     '<span class="chip" onclick="go({name:\'people\'})">'+T.backCat+"</span></div>";
