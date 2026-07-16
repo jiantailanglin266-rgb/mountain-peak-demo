@@ -612,6 +612,17 @@ body.chatlock{overflow:hidden}
   nav.tabs button{min-height:44px}
   .langbtn{min-height:40px}
 }
+/* ルート図ライブラリ */
+.rmgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-top:16px}
+.rmcard{padding:0;overflow:hidden}
+.rmimg{position:relative;cursor:zoom-in;background:var(--hair)}
+.rmimg img{width:100%;display:block}
+.rmimg .zm{position:absolute;right:10px;bottom:10px;font-size:10.5px;font-weight:700;background:rgba(10,18,24,.72);color:#fff;border-radius:999px;padding:4px 10px;opacity:0;transition:opacity .2s}
+.rmimg:hover .zm,.rmimg:focus-visible .zm{opacity:1}
+.rmimg.dtl{border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+.rminfo{padding:13px 16px 15px}
+.rminfo .ttl{font-weight:800;font-size:14.5px}
+.rminfo .ds{font-size:12px;color:var(--muted);line-height:1.75;margin:6px 0 8px}
 /* サミットログ */
 .logstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0 14px}
 .logstats .card{padding:14px 16px}
@@ -724,7 +735,7 @@ try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOStri
 
 /* ====== UI辞書 ====== */
 var DICT = {
- ja:{tabs:{home:"ホーム",mountains:"山をさがす",rankings:"リスト",logbook:"記録",articles:"記事・ガイド",gear:"装備",videos:"動画",climbers:"登山家",community:"コミュニティ"},
+ ja:{tabs:{home:"ホーム",mountains:"山をさがす",routemaps:"ルート図",rankings:"リスト",logbook:"記録",articles:"記事・ガイド",gear:"装備",videos:"動画",climbers:"登山家",community:"コミュニティ"},
   clm:{title:"世界の登山家名鑑",sub:"黄金期の開拓者から現代のアルパインクライマーまで、世界の著名登山家300名を紹介。",
    notice:"各登山家の紹介文・肖像画像は <b>Wikipedia（日本語版・英語版）からの引用</b>で、ライセンスは CC BY-SA 4.0 です。カード内のリンクから原典記事をご覧いただけます。動画はYouTube公式埋め込みプレーヤーで再生されます。",
    searchPh:"名前で検索（例: メスナー, Honnold）",all:"すべて",found:"名",
@@ -774,7 +785,7 @@ var DICT = {
   fnote:"Mountain Peak は、世界の山の標高・ルート・天気の目安・歴史を日本語と英語でまとめる山岳情報プラットフォームです。登頂チェックリストや掲示板への投稿はお使いのブラウザ内に保存され、入力内容がサーバーへ送信されることはありません。",
   prog:function(n,t){return n+" / "+t+" 座 登頂"},
   expedition:function(d){return "約"+d+"日（遠征）"},hm:function(h,m){return (h?h+"時間":"")+(m?m+"分":"")}},
- en:{tabs:{home:"Home",mountains:"Mountains",rankings:"Lists",logbook:"Log",articles:"Articles",gear:"Gear",videos:"Videos",climbers:"Climbers",community:"Community"},
+ en:{tabs:{home:"Home",mountains:"Mountains",routemaps:"Route Maps",rankings:"Lists",logbook:"Log",articles:"Articles",gear:"Gear",videos:"Videos",climbers:"Climbers",community:"Community"},
   clm:{title:"Great Mountaineers of the World",sub:"300 celebrated climbers, from golden-age pioneers to today's alpinists.",
    notice:"Biographies and portraits are <b>quoted from Wikipedia (Japanese & English editions)</b> under CC BY-SA 4.0. Follow the links on each card to the original articles. Videos play via YouTube's official embedded player.",
    searchPh:"Search by name (e.g. Messner, Honnold)",all:"All",found:"climbers",
@@ -1175,6 +1186,7 @@ function vMountain(slug){
     afGearBox(m)+
     (routes.length?'<div class="card sect"><h3>'+D.l.routes+"</h3>"+routes.map(function(rt){var rtt=tr(rt);
       return '<div class="rcard" onclick="event.stopPropagation();go({name:\'route\',slug:\''+rt.slug+'\'})"><div class="rt"><span>'+esc(rtt.name)+"</span>"+diffBadge(rt.difficultyLevel)+'</div><div class="rs">'+esc(rtt.overview.slice(0,90))+'…</div><div class="rs mono">📏 '+rt.distanceKm+"km ・ ↗ "+rt.elevationGainM.toLocaleString()+"m ・ ⏱ "+fmtTime(rt.estTimeMin)+"</div></div>"}).join("")+"</div>":"")+
+    rmapsForMountain(m.slug)+
     faqBlock(m,t,routes)+
     (MT_VIDEOS[m.id]&&MT_VIDEOS[m.id].length?'<div class="card sect"><h3>'+d().vid.detailTitle+"</h3>"+vidCardsHtml(MT_VIDEOS[m.id])+"</div>":"")+
     disclaimer(m.updatedAt)+
@@ -1272,7 +1284,7 @@ function pathFor(view,locale){
   if(n==="thread")return "/"+l+"/community/?t="+encodeURIComponent(view.slug);
   if(n==="country")return "/"+l+"/countries/"+view.slug+"/";
   if(n==="region")return "/"+l+"/regions/"+view.slug+"/";
-  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/",gear:"/gear/",logbook:"/logbook/"};
+  var map={home:"/",mountains:"/mountains/",rankings:"/rankings/",articles:"/articles/",videos:"/videos/",community:"/community/",about:"/about/",countries:"/countries/",climbers:"/climbers/",gear:"/gear/",logbook:"/logbook/",routemaps:"/routemaps/"};
   return "/"+l+(map[n]||"/");
 }
 function go(view){
@@ -1318,7 +1330,7 @@ function parseHash(){
     if(q0)state.filters={q:q0,country:"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"};
     return;
   }
-  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1,logbook:1};
+  var valid2={home:1,mountains:1,rankings:1,articles:1,videos:1,about:1,countries:1,climbers:1,gear:1,logbook:1,routemaps:1};
   state.view=valid2[name]?{name:name}:{name:"home"};
 }
 /* ビュー別タイトル（SSG生成ページのタイトル設計と同一パターン） */
@@ -1337,6 +1349,7 @@ function pageTitle(v){
     if(v.name==="climbers")return D.clm.title+" | Mountain Peak";
     if(v.name==="gear")return (ja?"登山装備ガイド — 三種の神器から雪山装備まで":"Hiking Gear Guide — From the Big Three to Winter Kit")+" | Mountain Peak";
     if(v.name==="logbook")return (ja?"登山記録（サミットログ） — 山行を記録しよう":"Summit Log — Track Your Climbs")+" | Mountain Peak";
+    if(v.name==="routemaps")return (ja?"ルート図ライブラリ — ビジュアルルートガイド":"Route Map Library — Visual Route Guides")+" | Mountain Peak";
     var statics={mountains:D.tabs.mountains,rankings:D.tabs.rankings,articles:D.tabs.articles,videos:D.tabs.videos,community:D.tabs.community,thread:D.tabs.community};
     if(statics[v.name])return statics[v.name]+" | Mountain Peak";
   }catch(e){}
@@ -1383,10 +1396,11 @@ function render(){
     else if(v.name==="climbers")html=vClimbers();
     else if(v.name==="gear")html=vGear();
     else if(v.name==="logbook")html=vLogbook();
+    else if(v.name==="routemaps")html=vRoutemaps();
   }catch(e){html='<div class="empty">Error: '+esc(e.message)+"</div>"}
   document.getElementById("app").innerHTML=html;
   /* タブ */
-  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["rankings",D.tabs.rankings],["logbook",D.tabs.logbook],["articles",D.tabs.articles],["gear",D.tabs.gear],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
+  var tabDefs=[["home",D.tabs.home],["mountains",D.tabs.mountains],["routemaps",D.tabs.routemaps],["rankings",D.tabs.rankings],["logbook",D.tabs.logbook],["articles",D.tabs.articles],["gear",D.tabs.gear],["videos",D.tabs.videos],["climbers",D.tabs.climbers],["community",D.tabs.community]];
   var active=v.name.replace(/^(mountain|route)$/,"mountains").replace(/^ranking$/,"rankings").replace(/^article$/,"articles").replace(/^thread$/,"community");
   document.getElementById("tabs").innerHTML=tabDefs.map(function(t){return '<button class="'+(t[0]===active?"on":"")+'" onclick=\'go({name:"'+t[0]+'"})\'>'+t[1]+"</button>"}).join("");
   /* 言語・単位ピル */
@@ -1679,6 +1693,51 @@ function vLogbook(){
     '<label class="abtn" style="cursor:pointer">'+T.imp+'<input type="file" accept="application/json,.json" style="display:none" onchange="logImportFile(event)"></label></div>'+
     "</div></div>"+
     (logs.length?rows:'<div class="empty" style="margin-top:20px"><div class="big">📓</div>'+T.empty+"</div>");
+}
+
+/* ====== ルート図（ルートマップ）。追加は RMAPS に1行+images/routemaps/に画像 ====== */
+var RMAPS=[
+ {id:"fuji-yoshida",m:"mount-fuji",img:"images/routemaps/fuji-yoshida.jpg",
+  tj:"富士山 吉田ルート ルート図",te:"Mt. Fuji — Yoshida Route Map",
+  dj:"日本最高峰への王道ルートガイド。五合目〜剣ヶ峰の行程・ピッチ一覧・アプローチマップ・推奨装備をまとめた概略図。",
+  de:"The classic line to Japan's highest point: 5th Station to Kengamine with pitch list, approach map and gear (schematic)."},
+ {id:"kitahotaka-abc",m:"",img:"images/routemaps/kitahotaka-abc.jpg",
+  tj:"北穂高岳 東壁 ABCフェイス ルート図",te:"Kita-Hotaka East Face — ABC Face Route Map",
+  dj:"北アルプス・北穂高岳東壁のアルパインクライミングルートガイド。7ピッチ・最高グレードVI+の概略図。",
+  de:"Alpine climbing on Kita-Hotaka's east face: 7 pitches, top grade VI+ (schematic)."}
+];
+var RM_T={
+ ja:{t:"ルート図ライブラリ",sub:"代表的な山のルートを1枚に凝縮したビジュアルルートガイド。行程・ピッチ・アプローチ・装備をまとめています。順次追加予定。",
+  notice:"⚠ 掲載のルート図は<b>概略図（イメージを含む）</b>です。実際のルート状況・グレード・所要時間は現地条件により大きく異なります。登山計画には必ず最新の公式情報・登山地図・ガイドブックを使用し、自己責任で行動してください。",
+  open:"クリックで拡大",toMt:"山の詳細 →",count:"点のルート図"},
+ en:{t:"Route Map Library",sub:"One-sheet visual route guides for iconic mountains — line, pitches, approach and gear. More coming.",
+  notice:"⚠ These route maps are <b>schematics (including conceptual imagery)</b>. Real conditions, grades and times vary greatly. Always plan with current official information, proper maps and guidebooks, at your own risk.",
+  open:"Click to enlarge",toMt:"Mountain page →",count:" route maps"}
+};
+function rmt(){return RM_T[state.locale]||RM_T.ja}
+function vRoutemaps(){
+  var D=d(),T=rmt(),ja=state.locale==="ja";
+  return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:T.t}])+
+    '<h1 class="disp" style="font-size:26px;font-weight:800;letter-spacing:-.01em">🗺 '+T.t+"</h1>"+
+    '<p style="font-size:13px;color:var(--muted);margin-top:4px">'+T.sub+"</p>"+
+    '<div class="comnotice" style="margin-top:12px">'+T.notice+"</div>"+
+    '<div class="count"><b>'+RMAPS.length+"</b> "+T.count+"</div>"+
+    '<div class="rmgrid">'+RMAPS.map(function(r){
+      var m=r.m?DATA.mountains.find(function(x){return x.slug===r.m}):null;
+      return '<div class="card rmcard rv"><div class="rmimg" role="button" tabindex="0" aria-label="'+esc(ja?r.tj:r.te)+" — "+T.open+'" onkeydown="if(event.key===\'Enter\')this.click()" onclick="phView(\''+asset(r.img)+'\')"><img src="'+asset(r.img)+'" alt="'+esc(ja?r.tj:r.te)+'" decoding="async"><span class="zm">🔍 '+T.open+"</span></div>"+
+      '<div class="rminfo"><div class="ttl">'+esc(ja?r.tj:r.te)+'</div><div class="ds">'+esc(ja?r.dj:r.de)+"</div>"+
+      (m?'<span class="aflink" onclick="go({name:\'mountain\',slug:\''+m.slug+'\'})">⛰ '+esc(tr(m).name)+" — "+T.toMt+"</span>":"")+"</div></div>";
+    }).join("")+"</div>";
+}
+/* 山詳細用: この山のルート図 */
+function rmapsForMountain(slug){
+  var maps=RMAPS.filter(function(r){return r.m===slug});
+  if(!maps.length)return "";
+  var T=rmt(),ja=state.locale==="ja";
+  return '<div class="card sect"><h3>🗺 '+(ja?"ルート図":"Route Maps")+"</h3>"+
+    maps.map(function(r){return '<div class="rmimg dtl" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="phView(\''+asset(r.img)+'\')"><img src="'+asset(r.img)+'" alt="'+esc(ja?r.tj:r.te)+'" decoding="async"><span class="zm">🔍 '+T.open+"</span></div>"+
+      '<p style="font-size:12px;color:var(--muted);margin:8px 0 14px;line-height:1.8">'+esc(ja?r.dj:r.de)+"</p>"}).join("")+
+    '<p class="afnote">'+rmt().notice.replace(/<[^>]+>/g,"")+"</p></div>";
 }
 
 /* ====== アフィリエイト（装備ガイド・山岳保険。PR表記=景表法ステマ規制対応） ====== */

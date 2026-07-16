@@ -71,6 +71,7 @@ const STATIC_TITLES = {
     climbers: ["世界の登山家名鑑 — 著名クライマー300名 | Mountain Peak", "ウィンパーやメスナーから植村直己、アレックス・オノルドまで。世界の著名登山家300名をWikipedia引用の経歴・肖像・関連動画つきで紹介。"],
     gear: ["登山装備ガイド — 三種の神器から雪山装備まで | Mountain Peak", "登山靴・ザック・レインウェアの三種の神器からテント泊・雪山装備まで。難易度別の装備リスト、選び方と価格目安、山岳保険の情報。"],
     logbook: ["登山記録（サミットログ） — 山行を記録しよう | Mountain Peak", "登った山・日付・ルート・天気・メモを記録して自分だけの登山史に。統計とJSON書き出し対応、データはブラウザ内にのみ保存。"],
+    routemaps: ["ルート図ライブラリ — ビジュアルルートガイド | Mountain Peak", "富士山吉田ルートなど代表的な山のルートを1枚に凝縮した概略ルート図。行程・ピッチ・アプローチ・推奨装備を収録。"],
   },
   en: {
     home: ["Mountain Peak — The Global Mountain Database in English & Japanese", "Elevation, routes, weather and history. About 2,000 peaks from the 100 Famous Japanese Mountains to every 8000er, in English and Japanese."],
@@ -87,6 +88,7 @@ const STATIC_TITLES = {
     climbers: ["Great Mountaineers of the World — 300 Famous Climbers | Mountain Peak", "From Whymper and Messner to Naomi Uemura and Alex Honnold: 300 celebrated climbers with Wikipedia-sourced bios, portraits and videos."],
     gear: ["Hiking Gear Guide — From the Big Three to Winter Kit | Mountain Peak", "Boots, packs and rain shells to tents and crampons: gear checklists by difficulty, buying tips, price ranges and mountain insurance basics."],
     logbook: ["Summit Log — Track Your Climbs | Mountain Peak", "Log every climb with date, route, weather and notes. Stats and JSON export; data stays in your browser."],
+    routemaps: ["Route Map Library — Visual Route Guides | Mountain Peak", "One-sheet schematic route maps for iconic mountains: line, pitches, approach and recommended gear."],
   },
 };
 
@@ -96,7 +98,7 @@ function push(path, l, title, desc, opts = {}) {
 
 for (const l of LOCALES) {
   const S = STATIC_TITLES[l];
-  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries", "climbers", "gear", "logbook"]) {
+  for (const key of ["home", "mountains", "rankings", "articles", "videos", "community", "about", "countries", "climbers", "gear", "logbook", "routemaps"]) {
     const p = key === "home" ? `/${l}/` : `/${l}/${key}/`;
     push(p, l, S[key][0], S[key][1], { kind: key });
   }
@@ -235,6 +237,12 @@ function prerender(p) {
       body += `<p>${l === "ja" ? "テキスト・画像はWikipediaからの引用（CC BY-SA 4.0）です。" : "Bios and portraits quoted from Wikipedia (CC BY-SA 4.0)."}</p><ul>` +
         CLIMBERS.map((c) => `<li>${esc(l === "ja" ? c.nj : (c.ne || c.nj))}${c.ne && l === "ja" ? " (" + esc(c.ne) + ")" : ""}</li>`).join("") + `</ul>`;
     } catch {}
+  } else if (p.kind === "routemaps") {
+    const maps = l === "ja"
+      ? ["富士山 吉田ルート ルート図 — 五合目〜剣ヶ峰の概略図", "北穂高岳 東壁 ABCフェイス ルート図 — アルパインクライミング概略図"]
+      : ["Mt. Fuji Yoshida Route Map (schematic)", "Kita-Hotaka East Face ABC Face Route Map (schematic)"];
+    body += `<ul>` + maps.map((x) => `<li>${esc(x)}</li>`).join("") + `</ul>` +
+      `<p>${l === "ja" ? "※概略図です。登山計画には必ず最新の公式情報を使用してください。" : "Schematics only — always plan with current official information."}</p>`;
   } else if (p.kind === "gear") {
     const cats = l === "ja"
       ? ["三種の神器（登山靴・ザック・レインウェア）", "ウェア・レイヤリング", "安全装備（ヘッドランプ・ファーストエイド・エマージェンシーシート・ヘルメット）", "ナビゲーション（紙地図・コンパス・GPSウォッチ）", "小物・行動用品", "テント泊・雪山装備（テント・シュラフ・アイゼン・ピッケル）", "山岳保険・遭難対策サービス（ココヘリ・jRO ほか）"]
