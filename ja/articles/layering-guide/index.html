@@ -734,7 +734,7 @@ body.chatlock{overflow:hidden}
 .logrow .lact{font-size:11px;color:var(--glacier);margin-top:5px;letter-spacing:.02em}
 #ldov{position:fixed;inset:0;background:rgba(6,12,16,.9);display:none;z-index:88;overflow-y:auto;padding:26px 14px}
 #ldov.show{display:block}
-.ldcard{max-width:720px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px 28px;box-shadow:var(--shadow-lift)}
+.ldcard{max-width:860px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px 26px 32px;box-shadow:var(--shadow-lift)}
 .ldhead{display:flex;align-items:flex-start;gap:14px;justify-content:space-between;margin-bottom:16px}
 .ldhead h2{font-size:21px;font-weight:800;letter-spacing:-.01em;margin-top:4px}
 .ldhead .rt{font-size:12px;color:var(--muted);font-weight:500}
@@ -769,7 +769,37 @@ body.chatlock{overflow:hidden}
 .ldtl .dot{width:9px;height:9px;border-radius:999px;background:var(--route);margin-left:-5.5px;flex-shrink:0;border:2px solid var(--card)}
 .ldtl .nm{font-size:13px;font-weight:600}
 .ldmemo{font-size:13px;line-height:1.95;white-space:pre-wrap;color:var(--muted)}
-@media(max-width:560px){.ldtiles{grid-template-columns:repeat(2,1fr)}.ldcard{padding:18px 16px 22px}}
+/* YAMAP方式のページ下部セクション: 活動詳細本文/写真グリッド/通ったコース/通った山/活動日記一覧 */
+.ldsech{font-size:21px;font-weight:800;letter-spacing:-.01em;margin:30px 0 14px;padding-top:24px;border-top:1px solid var(--hair)}
+.lddiary{font-size:14.5px;line-height:2.15;white-space:pre-wrap}
+.ldgal{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.ldgal img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:8px;cursor:zoom-in;background:var(--hair);display:block}
+.ldcourse{display:flex;gap:16px;background:var(--paper);border-radius:14px;padding:14px;margin-bottom:12px}
+.ldcourse .cimg{width:160px;flex-shrink:0;border-radius:10px;overflow:hidden;cursor:zoom-in;align-self:flex-start}
+.ldcourse .cimg img{width:100%;display:block}
+.ldcourse .ar{font-size:11px;color:var(--muted);margin-bottom:3px}
+.ldcourse .ttl{font-size:15.5px;font-weight:800;letter-spacing:-.01em}
+.ldcourse .cst{font-size:12px;margin:7px 0 5px}
+.ldcourse .cst small{color:var(--muted);font-size:10px}
+.ldcourse .ds{font-size:12px;color:var(--muted);line-height:1.85}
+.ldmtgrid,.ldloggrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ldmtcard{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;cursor:pointer;background:var(--paper)}
+.ldmtcard img,.ldmtcard svg{width:100%;height:100%;object-fit:cover;display:block}
+.ldmtcard .cap{position:absolute;left:0;right:0;bottom:0;padding:32px 12px 10px;background:linear-gradient(transparent,rgba(6,12,16,.8));color:#fff}
+.ldmtcard .cap .ar{font-size:10px;opacity:.85}
+.ldmtcard .cap .nm{font-size:15px;font-weight:800}
+.ldlogcard{cursor:pointer}
+.ldlogcard .ph{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:var(--paper)}
+.ldlogcard .ph img,.ldlogcard .ph svg{width:100%;height:100%;object-fit:cover;display:block}
+.ldlogcard .ph .cov{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ldlogcard .ov{position:absolute;right:8px;bottom:8px;background:rgba(6,12,16,.68);color:#fff;font-size:10px;padding:4px 8px;border-radius:8px}
+.ldlogcard .pc{position:absolute;right:8px;top:8px;background:rgba(6,12,16,.68);color:#fff;font-size:10px;padding:3px 7px;border-radius:8px}
+.ldlogcard .ttl{font-size:13.5px;font-weight:700;margin-top:8px}
+.ldlogcard .mt2{font-size:11px;color:var(--muted);margin-top:3px}
+.ldlogcard .tag{display:inline-block;background:var(--paper);border:1px solid var(--hair);border-radius:999px;padding:1px 9px;font-size:10px;margin-left:4px}
+@media(max-width:560px){.ldtiles{grid-template-columns:repeat(2,1fr)}.ldcard{padding:18px 16px 24px}
+.ldgal{grid-template-columns:repeat(2,1fr)}.ldmtgrid,.ldloggrid{grid-template-columns:1fr 1fr}
+.ldcourse{flex-direction:column}.ldcourse .cimg{width:100%}.ldsech{font-size:18px}}
 /* ログ写真（IndexedDB保存・タップで拡大） */
 .lphs{display:flex;gap:8px;flex-wrap:wrap}
 .lph{position:relative;width:66px;height:66px;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
@@ -1974,10 +2004,39 @@ function logDetail(id){
     (rows.length?'<h3 class="ldh">'+(ja?"チェックポイント":"Checkpoints")+"</h3>"+cpHead+'<div class="ldtls">'+tl+"</div>":"")+
     '<div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap"><button class="abtn" onclick="logGpxExport(\''+a.i+'\')">🛰 GPX'+(ja?"エクスポート":" export")+"</button></div>";
   var diaryTab=
-    (a.t?'<h3 class="ldh">'+(ja?"感想":"Notes")+'</h3><p class="ldmemo">'+esc(a.t)+"</p>":"")+
-    (a.g?'<h3 class="ldh">'+(ja?"装備":"Gear")+'</h3><p class="ldmemo">'+esc(a.g)+"</p>":"")+
-    ((a.p&&a.p.length)?'<h3 class="ldh">'+(ja?"写真":"Photos")+'</h3><div class="logphs" id="ldphs">'+a.p.map(function(pid){return '<img class="logph" data-pid="'+esc(pid)+'" alt="" onclick="if(this.src)phView(this.src)">'}).join("")+"</div>":"")||
+    ((a.t||(a.p&&a.p.length))?
+      '<h2 class="ldsech" style="margin-top:4px;border-top:0;padding-top:0">'+(ja?"活動詳細":"Activity notes")+"</h2>"+
+      (a.t?'<div class="lddiary">'+esc(a.t)+"</div>":"")+
+      ((a.p&&a.p.length)?'<div class="ldgal">'+a.p.map(function(pid){return '<img data-pid="'+esc(pid)+'" alt="" onclick="if(this.src)phView(this.src)">'}).join("")+"</div>":""):"")+
+    (a.g?'<h3 class="ldh">'+(ja?"装備":"Gear")+'</h3><p class="ldmemo">'+esc(a.g)+"</p>":"")||
     '<p class="ldmemo">'+(ja?"日記はまだ書かれていません。":"No diary yet.")+"</p>";
+  /* ページ下部（YAMAP方式）: 通ったコース / 通った山 / 同じ山の活動日記一覧 */
+  var cname=m?tr(m).name:"?";
+  var co=m?countryOf(m.countryId):null,rg=m?regionOf(m.regionId):null;
+  var area=[co?names(co):"",rg?names(rg):""].filter(Boolean).join(" / ");
+  var myStats=[];
+  if(a.mins!=null)myStats.push("⏱ "+fmtMins(a.mins));
+  if(a.dist!=null)myStats.push("↔ "+a.dist+"km");
+  if(a.up!=null)myStats.push("↗ "+a.up.toLocaleString()+"m");
+  var courseMaps=m?RMAPS.filter(function(r){return r.m===m.slug}):[];
+  var courseSec=courseMaps.length?'<h2 class="ldsech">'+(ja?"この活動日記で通ったコース":"Course on this activity")+"</h2>"+
+    courseMaps.map(function(r){return '<div class="ldcourse"><div class="cimg" role="button" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="phView(\''+asset(r.img)+'\')"><img src="'+asset(r.img)+'" alt="'+esc(ja?r.tj:r.te)+'" loading="lazy"></div>'+
+      '<div class="cbody"><div class="ar">'+esc(area)+'</div><div class="ttl">'+esc(ja?r.tj:r.te)+"</div>"+
+      (myStats.length?'<div class="cst mono">'+myStats.join("　")+' <small>('+(ja?"あなたの記録":"your record")+")</small></div>":"")+
+      '<p class="ds">'+esc(ja?r.dj:r.de)+"</p></div></div>"}).join(""):"";
+  var mtSec=m?'<h2 class="ldsech">'+(ja?"この活動日記で通った山":"Mountains on this activity")+"</h2>"+
+    '<div class="ldmtgrid"><div class="ldmtcard" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="ldClose();go({name:\'mountain\',slug:\''+m.slug+'\'})">'+mtPhoto(m,cname)+
+    '<div class="cap"><div class="ar">'+esc(rg?names(rg):(co?names(co):""))+'</div><div class="nm">'+esc(cname)+" "+m.elevationM.toLocaleString()+"m</div></div></div></div>":"";
+  var others=getLogs().filter(function(x){return x.m===a.m&&x.i!==a.i}).sort(function(x,y){return y.d.localeCompare(x.d)}).slice(0,6);
+  var logSec=others.length?'<h2 class="ldsech">'+(ja?cname+"の活動日記一覧":"Activities on "+cname)+"</h2>"+
+    '<div class="ldloggrid">'+others.map(function(x){
+      var st=[];if(x.mins!=null)st.push("⏱"+fmtMins(x.mins));if(x.dist!=null)st.push(x.dist+"km");if(x.up!=null)st.push("↗"+x.up.toLocaleString()+"m");
+      return '<div class="ldlogcard" role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="logDetail(\''+x.i+'\')">'+
+        '<div class="ph">'+(m?mtPhoto(m,cname):"")+((x.p&&x.p[0])?'<img class="cov" data-pid="'+esc(x.p[0])+'" alt="">':"")+
+        (st.length?'<div class="ov mono">'+st.join(" · ")+"</div>":"")+
+        ((x.p&&x.p.length)?'<div class="pc mono">📷 '+x.p.length+"</div>":"")+"</div>"+
+        '<div class="ttl">'+esc(cname)+(x.r?"（"+esc(x.r)+"）":"")+'</div>'+
+        '<div class="mt2 mono">'+esc(x.d)+(x.sched?' <span class="tag">'+esc(x.sched)+"</span>":"")+"</div></div>"}).join("")+"</div>":"";
   o.innerHTML='<div class="ldcard">'+
     '<div class="ldhead"><div><div class="pname mono">'+esc(a.d)+(a.sched?" · "+esc(a.sched):"")+(a.w?" · "+esc(a.w):"")+'</div>'+
     '<h2 role="link" tabindex="0" onkeydown="if(event.key===\'Enter\')this.click()" onclick="ldClose();go({name:\'mountain\',slug:\''+(m?m.slug:"")+'\'})">'+esc(m?tr(m).name:"?")+' <span class="mtlink">'+(ja?"山の情報 →":"Mountain →")+"</span></h2>"+
@@ -1986,8 +2045,10 @@ function logDetail(id){
     '<div class="ldtabs"><button class="on" onclick="ldTab(this,\'data\')">'+(ja?"活動データ":"Activity")+'</button>'+(hasDiary?'<button onclick="ldTab(this,\'diary\')">'+(ja?"日記":"Diary")+"</button>":"")+"</div>"+
     '<div id="ldTabData">'+dataTab+"</div>"+
     '<div id="ldTabDiary" style="display:none">'+diaryTab+"</div>"+
+    courseSec+mtSec+logSec+
     "</div>";
   o.classList.add("show");
+  o.scrollTop=0;
   /* IndexedDBから軌跡・写真を流し込み */
   window.__ldCtx=null;
   phGet("gpx_"+a.i,function(data){
@@ -2000,7 +2061,7 @@ function logDetail(id){
       if(g.pts.some(function(pt){return pt[3]!=null})){var ax=document.getElementById("ldaxis");if(ax)ax.style.display="flex"}
     }catch(e){}
   });
-  Array.prototype.forEach.call(o.querySelectorAll("img.logph[data-pid]"),function(el){
+  Array.prototype.forEach.call(o.querySelectorAll("img[data-pid]"),function(el){
     var pid=el.getAttribute("data-pid");el.removeAttribute("data-pid");
     phGet(pid,function(data){if(data){el.src=data}else if(el.parentNode){el.parentNode.removeChild(el)}});
   });
