@@ -785,7 +785,7 @@ body.chatlock{overflow:hidden}
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
 <script>
-(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=208",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
+(function(){var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/);var b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");try{var x=new XMLHttpRequest();x.open("GET",b+"/data.js?v=209",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){console.error("data.js load failed",e)}
 /* 山岳ニュース（RSS自動更新・任意ロード）。日付クエリでSWキャッシュを毎日バイパス */
 try{var n=new XMLHttpRequest();n.open("GET",b+"/news.js?d="+new Date().toISOString().slice(0,10),false);n.send();if(n.status===200||n.status===0){(0,eval)(n.responseText)}}catch(e){}})();
 </script>
@@ -1363,6 +1363,7 @@ function pathFor(view,locale){
 function go(view){
   if(view.name==="mountains"){state.filters={q:view.q||"",country:view.country||"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"}}
   state.cardLimit=48;
+  state.pplTheme="";
   state.view=view;
   var url=BASE+pathFor(view);
   if(location.pathname+location.search!==url){try{history.pushState(null,"",url)}catch(e){}}
@@ -1914,6 +1915,20 @@ var PPL_T={
   empty:"Mountain Lives has just begun. We will add new stories, one careful piece at a time."}
 };
 function pplT(){return PPL_T[state.locale]||PPL_T.ja}
+/* テーマ導線: 記事2本以上のテーマのみ表示（薄いテーマページは作らない） */
+var PPL_THEMES=[
+ {k:"adventure",ja:"冒険と山",en:"Adventure & Mountains"},
+ {k:"quiet-life",ja:"静かな暮らし",en:"The Quiet Life"},
+ {k:"literature",ja:"文学と山",en:"Literature & Mountains"},
+ {k:"alps",ja:"アルプスを愛した人々",en:"Lovers of the Alps"},
+ {k:"conservation",ja:"自然保護",en:"Conservation"},
+ {k:"hyakumeizan",ja:"日本の山を愛した人々",en:"Lovers of Japan's Mountains"},
+ {k:"art",ja:"芸術と山",en:"Art & Mountains"},
+ {k:"film",ja:"映画と山",en:"Film & Mountains"}
+];
+function pplThemeLabel(k){var t=PPL_THEMES.find(function(x){return x.k===k});return t?(state.locale==="ja"?t.ja:t.en):k}
+function pplByTheme(k){return peopleList().filter(function(a){return a.related&&(a.related.themes||[]).indexOf(k)>=0})}
+function pplThemeSet(k){state.pplTheme=state.pplTheme===k?"":k;mpTrack("people_theme_click",{theme:k});render();}
 function mpTrack(ev,p){try{(window.dataLayer=window.dataLayer||[]).push(Object.assign({event:ev},p||{}))}catch(e){}}
 function peopleList(){return DATA.articles.filter(function(a){return a.person&&a.status==="published"})}
 function pplReadMin(a){return a.readingTime||Math.max(3,Math.round(((tr(a).body||"").length)/550))}
@@ -1969,8 +1984,19 @@ function vPeople(){
     (feat.related&&feat.related.era?"<tr><td>"+T.era+"</td><td>"+esc(feat.related.era)+"</td></tr>":"")+
     "<tr><td>"+(ja?"読了時間":"Reading")+'</td><td>'+pplReadMin(feat)+" "+T.read+"</td></tr></table>"+
     '<span class="aflink" onclick="mpTrack(\'people_featured_click\',{slug:\''+feat.slug+'\'});go({name:\'article\',slug:\''+feat.slug+'\'})">'+T.toStory+"</span></div></article>"):"";
-  var grid=rest.length?('<h2 class="sec"><span class="eyebrow mono">△ '+T.stories+'</span><span class="tt disp">'+T.storiesT+'</span></h2><div class="grid pgrid">'+rest.map(personCard).join("")+"</div>"):
+  /* Explore by Theme: 2本以上のテーマだけ表示。クリックでその場絞り込み（別ページは作らない） */
+  var themes=PPL_THEMES.map(function(t){return {t:t,n:pplByTheme(t.k).length}}).filter(function(x){return x.n>=2});
+  var active=state.pplTheme&&themes.some(function(x){return x.t.k===state.pplTheme})?state.pplTheme:"";
+  var themeHtml=themes.length?('<h2 class="sec"><span class="eyebrow mono">△ EXPLORE BY THEME</span><span class="tt disp">'+(ja?"テーマから辿る":"Explore by Theme")+'</span></h2><div class="chips" style="margin-top:2px">'+
+    themes.map(function(x){return '<span class="chip'+(active===x.t.k?" on":"")+'" role="switch" aria-checked="'+(active===x.t.k)+'" onclick="pplThemeSet(\''+x.t.k+'\')">'+esc(ja?x.t.ja:x.t.en)+' <span class="mono" style="opacity:.65;font-size:10px">'+x.n+"</span></span>"}).join("")+
+    (active?'<span class="chip" onclick="pplThemeSet(\''+active+'\')">✕ '+(ja?"すべて表示":"Show all")+"</span>":"")+"</div>"):"";
+  var gridItems=active?pplByTheme(active):rest;
+  var gridHead=active
+    ?'<h2 class="sec"><span class="eyebrow mono">△ '+T.stories+'</span><span class="tt disp">'+esc(pplThemeLabel(active))+'</span><span class="more" onclick="pplThemeSet(\''+active+'\')">✕ '+(ja?"解除":"Clear")+"</span></h2>"
+    :'<h2 class="sec"><span class="eyebrow mono">△ '+T.stories+'</span><span class="tt disp">'+T.storiesT+"</span></h2>";
+  var grid=gridItems.length?(gridHead+'<div class="grid pgrid">'+gridItems.map(personCard).join("")+"</div>"):
     '<div class="card rv" style="margin-top:18px;padding:22px"><b style="font-size:14px">'+T.emptyT+'</b><p style="font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.9">'+T.empty+"</p></div>";
+  grid=themeHtml+grid;
   var editorial='<h2 class="sec"><span class="eyebrow mono">△ '+T.editorialEb+'</span><span class="tt disp">'+T.editorialT+'</span></h2>'+
     '<div class="card rv" style="padding:24px 26px"><p style="font-size:13.5px;line-height:2.1;color:var(--muted)">'+esc(T.editorial)+'</p><p style="margin-top:12px"><span class="aflink" onclick="go({name:\'about\'})">'+(ja?"編集方針を読む →":"Editorial policy →")+"</span></p></div>";
   var journeys='<h2 class="sec"><span class="eyebrow mono">△ '+T.journeysEb+'</span><span class="tt disp">'+T.journeysT+'</span></h2><div class="chips" style="margin-top:4px">'+
@@ -3072,7 +3098,7 @@ parseHash();
 render();
 /* 検証用フック */
 window.__mp={go:go,filterMountains:filterMountains,mockForecast:mockForecast,state:state,data:DATA,getSum:getSum};
-window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;window.mpTrack=mpTrack;
+window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;window.mpTrack=mpTrack;window.pplThemeSet=pplThemeSet;
 window.logSug=logSug;window.logPick=logPick;window.logAdd=logAdd;window.logDel=logDel;window.logExport=logExport;window.logImportFile=logImportFile;window.logQuick=logQuick;
 window.logPhotoAdd=logPhotoAdd;window.logPhotoRm=logPhotoRm;window.phView=phView;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
