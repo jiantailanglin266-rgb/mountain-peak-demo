@@ -715,6 +715,20 @@ body.chatlock{overflow:hidden}
 .ldgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
 .ldgrid label{display:flex;flex-direction:column;gap:5px;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
 .ldgrid input{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 10px;font-size:13px;color:inherit;font-family:inherit}
+.ldaterow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.ldaterow input{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:7px 10px;font-size:13px;color:inherit;font-family:inherit}
+.tsel{display:flex;gap:4px;align-items:center}
+.tsel select{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 6px;font-size:14px;color:inherit;font-family:inherit;flex:1;min-width:52px}
+.tsel .c{color:var(--muted);font-weight:700}
+.ltllist:not(:empty){margin-bottom:10px}
+.ltlrow{display:flex;align-items:center;gap:12px;padding:7px 10px;background:var(--card);border:1px solid var(--hair);border-radius:9px;margin-bottom:6px}
+.ltlrow .tm{font-size:12px;color:var(--glacier);font-weight:700}
+.ltlrow .nm{flex:1;font-size:13px;font-weight:600}
+.ltlrow button{width:24px;height:24px;border-radius:999px;background:var(--paper);color:var(--muted);font-size:11px}
+.ltlrow button:hover{background:var(--route);color:#fff}
+.ltladd{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ltladd input{flex:1;min-width:150px;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 12px;font-size:14px;color:inherit;font-family:inherit}
+.ldpace{font-size:11px;color:var(--muted);text-align:right;margin:-8px 2px 12px}
 .logrow .opn{font-size:10px;color:var(--muted);font-weight:600;letter-spacing:.06em}
 .logrow .nm:hover .opn{color:var(--route)}
 .logrow .lact{font-size:11px;color:var(--glacier);margin-top:5px;letter-spacing:.02em}
@@ -1407,6 +1421,7 @@ function go(view){
   if(view.name==="mountains"){state.filters={q:view.q||"",country:view.country||"",elev:"",diff:"",tag:"",sort:"elevD",photo:"1"}}
   state.cardLimit=48;
   state.pplTheme="";
+  state.logW="";state.logSched="";state.logTl=[];
   state.view=view;
   var url=BASE+pathFor(view);
   if(location.pathname+location.search!==url){try{history.pushState(null,"",url)}catch(e){}}
@@ -1536,7 +1551,7 @@ function render(){
   document.title=pageTitle(v);
   reveal();
   if(v.name==="home"){typeCoord();fvFilmInit()}
-  if(v.name==="logbook")logPhotosHydrate();
+  if(v.name==="logbook"){logPhotosHydrate();logTlRender()}
 }
 
 /* ====== ブラッシュアップFX（ゼロ依存・reduced-motion尊重） ====== */
@@ -1695,24 +1710,21 @@ function logAdd(){
   var staged=state.logPhotos||[];
   /* 活動データ（GPX自動 or 手動入力） */
   var num=function(id){var v=parseFloat((document.getElementById(id)||{}).value);return isNaN(v)?null:v};
-  var ls=(document.getElementById("lstart")||{}).value||"",le=(document.getElementById("lend")||{}).value||"";
+  var ls=logTimeGet("lstart"),le=logTimeGet("lend");
   var mins=null;
   if(ls&&le){var p1=ls.split(":"),p2=le.split(":");mins=(+p2[0]*60+ +p2[1])-(+p1[0]*60+ +p1[1]);if(mins<0)mins+=1440}
   if(mins==null&&state.logGpx&&state.logGpx.mins)mins=state.logGpx.mins;
-  /* タイムライン: 1行=「HH:MM 場所」 */
-  var tl=((document.getElementById("ltl")||{}).value||"").split(/\n/).map(function(line){
-    var mm=line.trim().match(/^(\d{1,2}:\d{2})\s+(.+)$/);return mm?{t:mm[1],n:mm[2].slice(0,40)}:null;
-  }).filter(Boolean).slice(0,20);
+  var tl=(state.logTl||[]).slice(0,20);
   var id2=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
   logs.push({i:id2,m:pick,d:dt,
-    w:document.getElementById("lw").value,r:(document.getElementById("lr").value||"").slice(0,80),t:(document.getElementById("lm").value||"").slice(0,600),
+    w:state.logW||"",sched:state.logSched||"",r:(document.getElementById("lr")||{}).value?document.getElementById("lr").value.slice(0,80):"",t:(document.getElementById("lm").value||"").slice(0,600),
     g:((document.getElementById("lgear")||{}).value||"").slice(0,200),
     dist:num("ldist"),up:num("lup")!=null?Math.round(num("lup")):null,down:num("ldown")!=null?Math.round(num("ldown")):null,
     mins:mins,ls:ls,le:le,tl:tl,
     p:staged.map(function(x){return x.id}),c:new Date().toISOString()});
   staged.forEach(function(x){phPut(x.id,x.data)});
   if(state.logGpx&&state.logGpx.pts)phPut("gpx_"+id2,JSON.stringify({pts:state.logGpx.pts}));
-  state.logPhotos=[];state.logGpx=null;
+  state.logPhotos=[];state.logGpx=null;state.logW="";state.logSched="";state.logTl=[];
   saveLogs(logs);
   var s=getSum();if(s.indexOf(pick)<0){s.push(pick);store("mp-demo-summits",JSON.stringify(s))}
   state.logPick=null;
@@ -1820,6 +1832,51 @@ function profileSVG(pts,distKm){
     '<text x="'+padL+'" y="'+(H-4)+'" font-size="10" fill="var(--muted)" font-family="monospace">'+Math.round(minE).toLocaleString()+"m</text>"+
     (distKm?'<text x="'+(W-padL)+'" y="'+(H-4)+'" font-size="10" fill="var(--muted)" font-family="monospace" text-anchor="end">'+distKm+"km</text>":"")+"</svg>";
 }
+/* フォームの選択式UI（チップ/セレクト）: renderを呼ばずDOMだけ更新（入力中の値を守る） */
+function logWSet(el){
+  var v=el.getAttribute("data-w");
+  state.logW=(state.logW===v)?"":v;
+  Array.prototype.forEach.call(document.querySelectorAll("#lwchips .chip"),function(c){c.classList.toggle("on",c.getAttribute("data-w")===state.logW)});
+}
+function logSchedSet(el){
+  var v=el.getAttribute("data-s");
+  state.logSched=(state.logSched===v)?"":v;
+  Array.prototype.forEach.call(document.querySelectorAll("#lschips .chip"),function(c){c.classList.toggle("on",c.getAttribute("data-s")===state.logSched)});
+}
+function logDateSet(offset){
+  var d=new Date();d.setDate(d.getDate()-offset);
+  var s=d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
+  var el=document.getElementById("ld");if(el)el.value=s;
+  Array.prototype.forEach.call(document.querySelectorAll("#ldatechips .chip"),function(c){c.classList.toggle("on",c.getAttribute("data-o")==String(offset))});
+}
+function logTimeSel(id,hv,mv){
+  var h=document.getElementById(id+"H"),m=document.getElementById(id+"M");
+  if(h&&hv!=null)h.value=String(hv);
+  if(m&&mv!=null)m.value=String(Math.round(mv/5)*5%60);
+}
+function logTimeGet(id){
+  var h=(document.getElementById(id+"H")||{}).value,m=(document.getElementById(id+"M")||{}).value;
+  if(h===""||h==null||h==="--")return "";
+  return ("0"+h).slice(-2)+":"+("0"+(m||0)).slice(-2);
+}
+/* チェックポイント（タイムテーブル）の追加式UI */
+function logTlRender(){
+  var box=document.getElementById("ltlList");if(!box)return;
+  var tl=state.logTl||[];
+  box.innerHTML=tl.map(function(x,i){
+    return '<div class="ltlrow"><span class="tm mono">'+esc(x.t)+'</span><span class="nm">'+esc(x.n)+'</span><button type="button" aria-label="remove" onclick="logTlRm('+i+')">✕</button></div>';
+  }).join("");
+}
+function logTlAdd(){
+  var t=logTimeGet("ltl");
+  var n=(document.getElementById("ltlN")||{}).value.trim();
+  if(!t||!n){toast(state.locale==="ja"?"時刻と地点名を入れてください":"Set a time and a place");return}
+  (state.logTl=state.logTl||[]).push({t:t,n:n.slice(0,40)});
+  state.logTl.sort(function(a,b){return a.t.localeCompare(b.t)});
+  document.getElementById("ltlN").value="";
+  logTlRender();
+}
+function logTlRm(i){(state.logTl||[]).splice(i,1);logTlRender()}
 /* GPX入力（フォーム）: 解析→活動データ欄へ自動入力+軌跡をステージ */
 function logGpxFile(ev){
   var f=ev.target.files&&ev.target.files[0];
@@ -1832,7 +1889,9 @@ function logGpxFile(ev){
     if(!g){if(el)el.textContent=(state.locale==="ja"?"GPXを読み取れませんでした":"Could not read GPX");state.logGpx=null;return}
     state.logGpx=g;
     var set=function(id,v){var e=document.getElementById(id);if(e&&v!=null&&v!=="")e.value=v};
-    set("ldist",g.dist);set("lup",g.up);set("ldown",g.down);set("lstart",g.start);set("lend",g.end);
+    set("ldist",g.dist);set("lup",g.up);set("ldown",g.down);
+    if(g.start){var s=g.start.split(":");logTimeSel("lstart",+s[0],+s[1])}
+    if(g.end){var e2=g.end.split(":");logTimeSel("lend",+e2[0],+e2[1])}
     if(el)el.textContent="✓ "+(state.locale==="ja"?"GPX読込: ":"GPX loaded: ")+g.dist+"km · ↗"+g.up+"m · ↘"+g.down+"m"+(g.mins?" · "+fmtMins(g.mins):"");
   };
   rd.readAsText(f);
@@ -1851,13 +1910,14 @@ function logDetail(id){
   var tile=function(v,k){return '<div class="ldtile"><div class="v mono">'+v+'</div><div class="k">'+k+"</div></div>"};
   var tl=(a.tl||[]).map(function(x){return '<div class="ldtl"><span class="tm mono">'+esc(x.t)+'</span><span class="dot"></span><span class="nm">'+esc(x.n)+"</span></div>"}).join("");
   o.innerHTML='<div class="ldcard">'+
-    '<div class="ldhead"><div><div class="pname mono">'+esc(a.d)+(a.w?" · "+esc(a.w):"")+'</div><h2>'+esc(m?tr(m).name:"?")+(a.r?' <span class="rt">'+esc(a.r)+"</span>":"")+'</h2></div>'+
+    '<div class="ldhead"><div><div class="pname mono">'+esc(a.d)+(a.sched?" · "+esc(a.sched):"")+(a.w?" · "+esc(a.w):"")+'</div><h2>'+esc(m?tr(m).name:"?")+(a.r?' <span class="rt">'+esc(a.r)+"</span>":"")+'</h2></div>'+
     '<button class="cx" aria-label="close" onclick="ldClose()">✕</button></div>'+
     '<div class="ldtiles">'+
       tile(fmtMins(a.mins),(ja?"タイム":"Time"))+
       tile(a.dist!=null?a.dist+"km":"—",(ja?"距離":"Distance"))+
       tile(a.up!=null?"+"+a.up.toLocaleString()+"m":"—",(ja?"のぼり":"Ascent"))+
       tile(a.down!=null?"-"+a.down.toLocaleString()+"m":"—",(ja?"くだり":"Descent"))+"</div>"+
+    ((a.dist&&a.mins)?'<div class="ldpace mono">'+(ja?"平均ペース ":"Avg pace ")+(a.dist/(a.mins/60)).toFixed(1)+" km/h</div>":"")+
     '<div id="ldtrack" class="ldbox"></div><div id="ldprof" class="ldbox"></div>'+
     (tl?'<h3 class="ldh">'+(ja?"タイムライン":"Timeline")+'</h3><div class="ldtls">'+tl+"</div>":"")+
     (a.t?'<h3 class="ldh">'+(ja?"感想":"Notes")+'</h3><p class="ldmemo">'+esc(a.t)+"</p>":"")+
@@ -1962,6 +2022,11 @@ function vLogbook(){
   state.logPrefill=null;
   var today=new Date();
   var todayS=today.getFullYear()+"-"+("0"+(today.getMonth()+1)).slice(-2)+"-"+("0"+today.getDate()).slice(-2);
+  /* 時・分セレクト（5分刻み）の選択肢 */
+  var hourOpts='<option value="--">--</option>';
+  for(var hh=0;hh<24;hh++)hourOpts+='<option value="'+hh+'">'+("0"+hh).slice(-2)+"</option>";
+  var minOpts="";
+  for(var mm2=0;mm2<60;mm2+=5)minOpts+='<option value="'+mm2+'">'+("0"+mm2).slice(-2)+"</option>";
   var rows="",lastYear="";
   logs.forEach(function(x){
     var m=DATA.mountains.find(function(y){return y.id===x.m});
@@ -1988,21 +2053,36 @@ function vLogbook(){
       byMonth.map(function(n,i){return '<div class="b"><div class="bar" style="height:'+(n/maxM*62)+'px" title="'+n+'"></div><span class="m mono">'+(i+1)+"</span></div>"}).join("")+"</div></div>"+
     '<div class="card" style="margin-top:14px"><h3 style="font-size:14px;font-weight:800;margin-bottom:12px">'+T.addT+'</h3><div class="logform">'+
     '<label class="full">'+T.fMt+'<span class="lsug"><input id="lq" autocomplete="off" placeholder="'+T.fMtPh+'" value="'+(pre?esc(tr(pre).name):"")+'" oninput="logSug()" onblur="setTimeout(function(){var b=document.getElementById(\'lsugbox\');if(b)b.style.display=\'none\'},160)"><div id="lsugbox" class="sug" style="display:none"></div></span></label>'+
-    "<label>"+T.fDate+'<input id="ld" type="date" value="'+todayS+'" max="'+todayS+'"></label>'+
-    "<label>"+T.fW+'<select id="lw">'+T.w.map(function(w){return '<option value="'+esc(w)+'">'+(w||"—")+"</option>"}).join("")+"</select></label>"+
+    /* 日付: 今日/昨日/一昨日チップ+カレンダー */
+    '<div class="full"><div class="lbl">'+T.fDate+'</div><div class="ldaterow"><span class="chips" id="ldatechips">'+
+      [[0,ja?"今日":"Today"],[1,ja?"昨日":"Yesterday"],[2,ja?"一昨日":"2 days ago"]].map(function(x){
+        return '<span class="chip'+(x[0]===0?" on":"")+'" data-o="'+x[0]+'" onclick="logDateSet('+x[0]+')">'+x[1]+"</span>"}).join("")+
+      '</span><input id="ld" type="date" value="'+todayS+'" max="'+todayS+'" onchange="Array.prototype.forEach.call(document.querySelectorAll(\'#ldatechips .chip\'),function(c){c.classList.remove(\'on\')})"></div></div>'+
+    /* 日程タイプ */
+    '<div class="full"><div class="lbl">'+(ja?"日程":"Schedule")+'</div><div class="chips" id="lschips">'+
+      (ja?["日帰り","前夜泊","1泊2日","2泊以上"]:["Day trip","Night before","2 days","3+ days"]).map(function(s){
+        return '<span class="chip'+(state.logSched===s?" on":"")+'" data-s="'+esc(s)+'" role="switch" aria-checked="'+(state.logSched===s)+'" onclick="logSchedSet(this)">'+esc(s)+"</span>"}).join("")+"</div></div>"+
+    /* 天気: チップトグル */
+    '<div class="full"><div class="lbl">'+T.fW+'</div><div class="chips" id="lwchips">'+
+      T.w.filter(Boolean).map(function(w){return '<span class="chip'+(state.logW===w?" on":"")+'" data-w="'+esc(w)+'" role="switch" aria-checked="'+(state.logW===w)+'" onclick="logWSet(this)">'+esc(w)+"</span>"}).join("")+"</div></div>"+
     '<label class="full">'+T.fRoute+'<input id="lr" placeholder="'+T.fRoutePh+'"></label>'+
     '<label class="full">'+T.fMemo+'<textarea id="lm" placeholder="'+T.fMemoPh+'"></textarea></label>'+
-    /* 活動データ（GPXで自動入力 or 手動） */
+    /* 活動データ（GPXで自動入力 or 手動）。時刻は時・分セレクト（5分刻み） */
     '<div class="full ldact"><div class="lbl">'+(ja?"活動データ（任意・GPXで自動入力）":"Activity data (optional — auto-filled from GPX)")+"</div>"+
     '<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px"><label class="abtn" style="cursor:pointer;display:inline-flex">🛰 '+(ja?"GPXを読み込む":"Load GPX")+'<input type="file" accept=".gpx,application/gpx+xml" style="display:none" onchange="logGpxFile(event)"></label><span id="lgpxinfo" class="mono" style="font-size:11px;color:var(--forest)"></span></div>'+
     '<div class="ldgrid">'+
-    "<label>"+(ja?"開始":"Start")+'<input id="lstart" type="time"></label>'+
-    "<label>"+(ja?"終了":"End")+'<input id="lend" type="time"></label>'+
+    "<label>"+(ja?"開始":"Start")+'<span class="tsel"><select id="lstartH">'+hourOpts+'</select><span class="c">:</span><select id="lstartM">'+minOpts+"</select></span></label>"+
+    "<label>"+(ja?"終了":"End")+'<span class="tsel"><select id="lendH">'+hourOpts+'</select><span class="c">:</span><select id="lendM">'+minOpts+"</select></span></label>"+
     "<label>"+(ja?"距離(km)":"Distance (km)")+'<input id="ldist" type="number" step="0.1" min="0" inputmode="decimal"></label>'+
     "<label>"+(ja?"のぼり(m)":"Ascent (m)")+'<input id="lup" type="number" step="1" min="0" inputmode="numeric"></label>'+
     "<label>"+(ja?"くだり(m)":"Descent (m)")+'<input id="ldown" type="number" step="1" min="0" inputmode="numeric"></label>'+
     "</div></div>"+
-    '<label class="full">'+(ja?"タイムライン（任意・1行=「時刻 場所」）":"Timeline (optional — one line = \"time place\")")+'<textarea id="ltl" placeholder="07:30 '+(ja?"登山口":"Trailhead")+'&#10;10:20 '+(ja?"山頂":"Summit")+'&#10;13:00 '+(ja?"下山":"Down")+'"></textarea></label>'+
+    /* チェックポイント（タイムテーブル）: セレクト+追加ボタン式 */
+    '<div class="full ldact"><div class="lbl">'+(ja?"チェックポイント（任意）":"Checkpoints (optional)")+"</div>"+
+    '<div id="ltlList" class="ltllist"></div>'+
+    '<div class="ltladd"><span class="tsel"><select id="ltlH">'+hourOpts+'</select><span class="c">:</span><select id="ltlM">'+minOpts+"</select></span>"+
+    '<input id="ltlN" placeholder="'+(ja?"地点名（例: 山頂）":"Place (e.g. Summit)")+'" onkeydown="if(event.key===\'Enter\'){event.preventDefault();logTlAdd()}">'+
+    '<button type="button" class="abtn" onclick="logTlAdd()">＋ '+(ja?"追加":"Add")+"</button></div></div>"+
     '<label class="full">'+(ja?"装備メモ（任意）":"Gear notes (optional)")+'<input id="lgear" placeholder="'+(ja?"例: 30Lザック / チェーンスパイク / 水2L":"e.g. 30L pack / chain spikes / 2L water")+'"></label>'+
     '<div class="full"><div class="lbl">'+T.fPhoto+'</div><div id="lphotos" class="lphs"></div><label class="abtn" style="cursor:pointer;display:inline-flex;margin-top:8px">'+T.fPhotoBtn+'<input type="file" accept="image/*" multiple style="display:none" onchange="logPhotoAdd(event)"></label></div>'+
     '<div class="full" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button class="abtn" style="background:var(--route);color:#fff;border-color:var(--route)" onclick="logAdd()">'+T.save+'</button>'+
@@ -3312,6 +3392,7 @@ window.afTrack=afTrack;window.gearGo=gearGo;window.sugKey=sugKey;window.mpTrack=
 window.logSug=logSug;window.logPick=logPick;window.logAdd=logAdd;window.logDel=logDel;window.logExport=logExport;window.logImportFile=logImportFile;window.logQuick=logQuick;
 window.logPhotoAdd=logPhotoAdd;window.logPhotoRm=logPhotoRm;window.phView=phView;
 window.logGpxFile=logGpxFile;window.logDetail=logDetail;window.ldClose=ldClose;
+window.logWSet=logWSet;window.logSchedSet=logSchedSet;window.logDateSet=logDateSet;window.logTlAdd=logTlAdd;window.logTlRm=logTlRm;
 window.go=go;window.homeSearch=homeSearch;window.applyFilters=applyFilters;window.resetFilters=resetFilters;window.state=state;window.render=render;window.suggest=suggest;window.hideSug=hideSug;window.toggleSum=toggleSum;window.shareLink=shareLink;window.scrollPastHero=scrollPastHero;
 })();
 </script>
