@@ -612,6 +612,14 @@ body.chatlock{overflow:hidden}
   nav.tabs button{min-height:44px}
   .langbtn{min-height:40px}
 }
+/* FVブランドフィルム */
+.fvfilm{position:relative;margin:22px 0 4px;border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lift);background:#0A141A}
+.fvfilm video{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.fvfilm .ffgrad{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,14,20,.42),transparent 34%),linear-gradient(180deg,rgba(8,14,20,.3),transparent 26%);pointer-events:none}
+.fvfilm .fflabel{position:absolute;top:14px;left:16px;font-size:10px;font-weight:700;letter-spacing:.2em;color:rgba(255,255,255,.9);background:rgba(10,18,24,.45);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:6px 13px}
+.fvfilm .ffmute{position:absolute;right:14px;bottom:14px;width:42px;height:42px;border-radius:999px;background:rgba(10,18,24,.55);color:#fff;font-size:15px;backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.16);transition:transform .18s;display:flex;align-items:center;justify-content:center}
+.fvfilm .ffmute:hover{transform:scale(1.08)}
+@media(max-width:640px){.fvfilm{border-radius:16px}.fvfilm .ffmute{width:44px;height:44px;right:10px;bottom:10px}.fvfilm .fflabel{top:10px;left:10px}}
 /* ルート図ライブラリ */
 .rmgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin-top:16px}
 .rmcard{padding:0;overflow:hidden}
@@ -1120,6 +1128,10 @@ function vHome(){
     '<div class="pops"><span class="lb">'+esc(D.hero.pop)+'</span>'+D.hero.pops.map(function(p){return '<button class="pchip" onclick="go({name:\'mountains\',q:\''+esc(p)+'\'})">'+esc(p)+'</button>'}).join("")+'</div>'+
     '<div class="feats">'+D.hero.feats.map(function(f,i){return '<div class="feat">'+FEAT_ICONS[i]+'<div><div class="t">'+esc(f[0])+'</div><div class="d">'+esc(f[1])+'</div></div></div>'}).join("")+'</div>'+
     '</div><div class="chev"><button aria-label="scroll down" onclick="scrollPastHero()"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button></div></section>'+
+    /* FV直下のブランドフィルム（画面内で自動再生・ミュート解除可・reduced-motionは手動再生） */
+    '<div class="fvfilm rv"><video id="fvVideo" poster="'+asset("media/fv-film-poster.jpg")+'" muted loop playsinline preload="metadata" aria-label="Mountain Peak brand film"><source src="'+asset("media/fv-film.mp4")+'" type="video/mp4"></video>'+
+    '<div class="ffgrad" aria-hidden="true"></div><span class="fflabel mono">△ MOUNTAIN PEAK — THE FILM</span>'+
+    '<button class="ffmute" id="ffMute" aria-label="'+(state.locale==="ja"?"音声のオン/オフ":"Toggle sound")+'">🔇</button></div>'+
     '<div class="mq">'+mqRow(MQ_TOP,true)+mqRow(MQ_BOTTOM,false)+"</div>"+
     (seasonal.length?secHead("season",D.season_now,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+seasonal.map(mountainCard).join("")+"</div>":"")+
     secHead("featured",D.featured,'<span class="more" onclick="go({name:\'mountains\'})">'+D.viewAll+"</span>")+'<div class="grid">'+featured.map(mountainCard).join("")+"</div>"+
@@ -1423,7 +1435,7 @@ function render(){
   document.getElementById("fdisc").innerHTML="<b>"+D.disc.t+"</b><br>"+D.disc.b+'<div style="margin-top:9px"><b>'+aft().discT+"</b> "+aft().discB+"</div>";
   document.title=pageTitle(v);
   reveal();
-  if(v.name==="home")typeCoord();
+  if(v.name==="home"){typeCoord();fvFilmInit()}
   if(v.name==="logbook")logPhotosHydrate();
 }
 
@@ -1477,6 +1489,24 @@ function newsBlock(){
       return '<a class="nrow" href="'+esc(n.u)+'" target="_blank" rel="noopener nofollow"><span class="t">'+esc(n.t)+'</span><span class="m mono">'+esc(n.s||"")+(n.d?" · "+esc(n.d):"")+" ↗</span></a>";
     }).join("")+
     '<p class="afnote">'+(ja?"Google News RSSから毎朝6時に自動更新。リンク先は外部メディアの記事です。":"Auto-updated daily from Google News RSS. Links open external media.")+"</p></div>";
+}
+/* FVフィルム: 画面内にある時だけ再生（省電力）。reduced-motionは自動再生せず手動コントロール */
+function fvFilmInit(){
+  var v=document.getElementById("fvVideo");
+  if(!v)return;
+  var btn=document.getElementById("ffMute");
+  if(btn)btn.onclick=function(e){
+    e.stopPropagation();
+    v.muted=!v.muted;
+    btn.textContent=v.muted?"🔇":"🔊";
+    if(v.paused)v.play&&v.play().catch(function(){});
+  };
+  if(REDUCED){v.controls=true;return}
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(es){es.forEach(function(en){
+      if(en.isIntersecting){v.play&&v.play().catch(function(){})}else{v.pause()}
+    })},{threshold:.25}).observe(v);
+  }else{v.autoplay=true;v.play&&v.play().catch(function(){})}
 }
 /* ヒーローの座標タイプライター（エベレスト山頂座標=世界観の核） */
 function typeCoord(){
