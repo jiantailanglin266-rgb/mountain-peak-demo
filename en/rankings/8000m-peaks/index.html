@@ -92,7 +92,16 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 .mqitem.mqp img{object-position:center 18%}
 .mqitem.mqv .vp{position:absolute;top:50%;left:50%;transform:translate(-50%,-58%);width:38px;height:38px;border-radius:999px;background:rgba(196,69,54,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;padding-left:3px;box-shadow:0 6px 18px -4px rgba(0,0,0,.5);transition:transform .18s;pointer-events:none}
 .mqitem.mqv:hover .vp{transform:translate(-50%,-58%) scale(1.12)}
-@media(max-width:640px){.mqitem{width:170px;height:106px;margin-right:9px}.mqitem.mqp{width:108px;height:138px}.mqitem.mqv .vp{width:30px;height:30px;font-size:11px}.mq::before,.mq::after{width:34px}}
+/* 三段フォトアーカイブ（8〜10枚可視・控えめ彩度→ホバーで解放） */
+.secsub{font-size:12.5px;color:var(--muted);margin:-6px 0 4px;letter-spacing:.01em}
+.mqar{gap:10px;margin:16px 0 10px}
+.mqitem.mqa{width:clamp(126px,10.9vw,182px);height:auto;aspect-ratio:3/2;border-radius:9px;margin-right:10px;box-shadow:0 12px 26px -16px rgba(0,0,0,.6)}
+.mqitem.mqa img{filter:saturate(.8) contrast(1.03) brightness(.97);transition:filter .4s,transform .4s}
+.mqitem.mqa:hover img{filter:none;transform:scale(1.06)}
+.mqar .mqrow:nth-child(1) .mqtrack{animation-duration:96s}
+.mqar .mqrow:nth-child(2) .mqtrack{animation-duration:118s}
+.mqar .mqrow:nth-child(3) .mqtrack{animation-duration:86s}
+@media(max-width:640px){.mqitem{width:170px;height:106px;margin-right:9px}.mqitem.mqp{width:108px;height:138px}.mqitem.mqv .vp{width:30px;height:30px;font-size:11px}.mq::before,.mq::after{width:34px}.mqitem.mqa{width:118px;margin-right:8px}}
 @media(prefers-reduced-motion:reduce){.mqtrack{animation:none}}
 /* アフィリエイト（PR表記=景表法対応） */
 .prb{display:inline-block;font-size:8.5px;font-weight:700;letter-spacing:.16em;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 4px;vertical-align:2px;margin-left:6px}
@@ -1293,6 +1302,9 @@ function vHome(){
     secHead("films",state.locale==="ja"?"動画で旅する名峰":"Mountains on Film",'<span class="more" onclick="go({name:\'videos\'})">'+D.viewAll+"</span>")+
     '<div class="mq">'+mqVideoRow(MQ_VIDEOS_A,true)+mqVideoRow(MQ_VIDEOS_B,false)+"</div>"+
     secHead("newest",D.newest,'<span class="more" onclick="go({name:\'articles\'})">'+D.viewAll+"</span>")+'<div class="grid">'+arts.map(articleCard).join("")+"</div>"+
+    secHead("archive",state.locale==="ja"?"山の記憶 — フィールドアーカイブ":"Field Archive — Moments on the Mountain")+
+    '<p class="secsub">'+(state.locale==="ja"?"アルプスの岩と雪、稜線の風。フィールドで撮りためた一瞬を、三段の帯でゆっくりと。":"Rock, snow and ridgeline wind — moments captured in the field, drifting by in three slow bands.")+"</p>"+
+    '<div class="mq mqar">'+mqArchRow(0,19,true)+mqArchRow(19,38,false)+mqArchRow(38,56,true)+"</div>"+
     newsBlock();
 }
 function homeSearch(){var q=document.getElementById("homeQ").value;go({name:"mountains",q:q})}
@@ -2653,6 +2665,16 @@ function mqVideoRow(list,rightward){
       '<img src="https://i.ytimg.com/vi/'+v[0]+'/mqdefault.jpg" alt="'+esc(name)+'" decoding="async">'+
       '<span class="vp" aria-hidden="true">▶</span><span class="nm">'+esc(name)+"</span></div>";
   }).join("");
+  return '<div class="mqrow"><div class="mqtrack'+(rightward?" r":"")+'">'+items+items+"</div></div>";
+}
+/* 三段フォトアーカイブ・マーキー（images/shimizu/s01〜s56、クリックでライトボックス） */
+function mqArchRow(a,b,rightward){
+  var items="";
+  for(var i=a;i<b;i++){
+    var n=("0"+(i+1)).slice(-2);
+    items+='<div class="mqitem mqa" role="button" tabindex="0" aria-label="photo '+(i+1)+'" onkeydown="if(event.key===\'Enter\')this.click()" onclick="phView(this.querySelector(\'img\').src)">'+
+      '<img src="'+asset("images/shimizu/s"+n+".jpg")+'" alt="" loading="lazy" decoding="async"></div>';
+  }
   return '<div class="mqrow"><div class="mqtrack'+(rightward?" r":"")+'">'+items+items+"</div></div>";
 }
 function mqRow(slugs,rightward){
