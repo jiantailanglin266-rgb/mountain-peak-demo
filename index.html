@@ -2631,7 +2631,11 @@ var AF_RAKU=[
   p:"1,780円",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/macks-i/cabinet/spats/spats2.jpg?_ex=240x240",
   url:"https://hb.afl.rakuten.co.jp/ichiba/5627743a.28a9adc8.5627743b.5d855651/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmacks-i%2Fspats%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"}
 ];
-function rakuFor(catEb){return AF_RAKU.filter(function(r){return r.cat===catEb})}
+/* 楽天ウェブサービスAPIで自動取得する装備（tools/fetch-rakuten.mjs が下の1行を書き換える）
+   手動AF_RAKUで未カバーの装備を補完。RAKUTEN_APP_ID / RAKUTEN_AFFILIATE_ID が必要 */
+var AF_RAKU_AUTO=[]; /*END_AF_RAKU_AUTO*/
+function rakuAll(){return AF_RAKU.concat(typeof AF_RAKU_AUTO!=="undefined"?AF_RAKU_AUTO:[])}
+function rakuFor(catEb){return rakuAll().filter(function(r){return r.cat===catEb})}
 function rakuMedia(it,name){
   return it.img?'<img src="'+esc(it.img)+'" alt="'+esc(name)+'" loading="lazy" decoding="async">':'<span class="rkph">'+(it.ic||"🛒")+"</span>";
 }
@@ -2697,7 +2701,7 @@ function afGearBox(m){
   if(!picks.length)return "";
   picks.sort(function(a,b){return b.lv-a.lv});
   picks=picks.slice(0,6);
-  var reals=AF_RAKU.filter(function(r){return r.lv<=m.difficultyLevel}).slice(0,2);
+  var reals=rakuAll().filter(function(r){return r.lv<=m.difficultyLevel}).slice(0,2);
   var buy=ja?"楽天で購入":"Rakuten";
   return '<div class="card sect afmt"><h3>🎒 '+esc(T.mtBox)+" "+diffBadge(m.difficultyLevel)+" "+prBadge()+"</h3>"+
     reals.map(function(it){return '<div class="afreal"><a class="th'+(it.img?"":" ph")+'" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+':mt_'+m.slug+'\')">'+rakuMedia(it,ja?it.j:it.e)+'</a><span class="n">'+esc(ja?it.j:it.e)+' <span class="mono" style="color:var(--route)">'+esc(it.p)+'</span></span><a class="rkbuy" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+':mt_'+m.slug+':buy\')">'+buy+" ↗</a></div>"}).join("")+
