@@ -53,7 +53,7 @@ function apiGet(params) {
 // 全カテゴリに分散して合計約290点。1キーワードから複数点を取得（重複はitemCodeで除去）
 const TAKE_DEFAULT = 4;
 // カテゴリ別の上限（合計約296点。分散を保つため上限に達したらそのカテゴリは以降スキップ）
-const CAP = { "BIG THREE": 148, "LAYERING": 142, "SAFETY": 130, "NAVIGATION": 52, "ACCESSORIES": 162, "ADVANCED": 148 };
+const CAP = { "BIG THREE": 180, "LAYERING": 175, "SAFETY": 135, "NAVIGATION": 60, "ACCESSORIES": 205, "ADVANCED": 182 };
 const KEYWORDS = [
   // ===== BIG THREE（登山靴・ザック・レインウェア）約25 =====
   { cat: "BIG THREE", lv: 1, ic: "🥾", q: "登山靴 メンズ ミッドカット",        e: "Hiking Boots (men)" },
@@ -353,6 +353,80 @@ const KEYWORDS = [
   { cat: "ADVANCED", lv: 4, ic: "🧤", q: "オーバーミトン 冬 登山 防水",       e: "Over-mittens" },
   { cat: "ADVANCED", lv: 3, ic: "🛏", q: "銀マット テント 登山 折りたたみ", take: 2, e: "Foil Mat" },
   { cat: "ADVANCED", lv: 3, ic: "🍲", q: "コッヘル アルミ セット 登山",        e: "Aluminum Cookset" },
+  // ===== 第6弾（+約150点。ブランド指名中心で重複回避） =====
+  // BIG THREE
+  { cat: "BIG THREE", lv: 2, ic: "🥾", q: "登山靴 スカルパ",                 e: "Boots (SCARPA)" },
+  { cat: "BIG THREE", lv: 2, ic: "🥾", q: "登山靴 ラスポルティバ",            e: "Boots (La Sportiva)" },
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "モンベル マウンテンクルーザー 登山靴", e: "Boots (mont-bell MC)" },
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "アディダス テレックス トレッキング",  e: "Shoes (adidas Terrex)" },
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "ナイキ トレッキングシューズ",        e: "Shoes (Nike)" },
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "登山 長靴 防水 ぬかるみ", take: 2,  e: "Rain Boots" },
+  { cat: "BIG THREE", lv: 2, ic: "🎒", q: "マムート ザック 登山",             e: "Backpack (Mammut)" },
+  { cat: "BIG THREE", lv: 2, ic: "🎒", q: "ドイター ザック 登山",             e: "Backpack (Deuter)" },
+  { cat: "BIG THREE", lv: 2, ic: "🎒", q: "ザック 55L 縦走 登山",            e: "Backpack (55L)" },
+  { cat: "BIG THREE", lv: 1, ic: "🎒", q: "ウルトラライト ザック 登山 軽量",    e: "UL Backpack" },
+  { cat: "BIG THREE", lv: 1, ic: "🌧", q: "ワークマン レインウェア 登山",       e: "Rain (Workman)" },
+  { cat: "BIG THREE", lv: 1, ic: "🌧", q: "モンベル レインウェア 登山",         e: "Rain (mont-bell)" },
+  { cat: "BIG THREE", lv: 1, ic: "🌧", q: "ゴアテックス レインジャケット メンズ 登山", e: "GTX Rain Jacket" },
+  // LAYERING
+  { cat: "LAYERING", lv: 2, ic: "👕", q: "ミレー ドライナミック メッシュ",      e: "Base (Millet Dry)" },
+  { cat: "LAYERING", lv: 2, ic: "👕", q: "ファイントラック ベースレイヤー",      e: "Base (finetrack)" },
+  { cat: "LAYERING", lv: 1, ic: "👕", q: "メリノウール Tシャツ メンズ 半袖",     e: "Merino Tee (men)" },
+  { cat: "LAYERING", lv: 1, ic: "👖", q: "モンベル トレッキングパンツ",         e: "Pants (mont-bell)" },
+  { cat: "LAYERING", lv: 1, ic: "👖", q: "ワークマン トレッキングパンツ 登山",   e: "Pants (Workman)" },
+  { cat: "LAYERING", lv: 1, ic: "🩳", q: "登山 ショートパンツ レディース",      e: "Shorts (women)" },
+  { cat: "LAYERING", lv: 1, ic: "🧥", q: "パタゴニア フリース 登山",           e: "Fleece (Patagonia)" },
+  { cat: "LAYERING", lv: 2, ic: "🪶", q: "モンベル ダウンジャケット 登山",      e: "Down (mont-bell)" },
+  { cat: "LAYERING", lv: 2, ic: "🪶", q: "パタゴニア ナノパフ インサレーション", e: "Insulation (Nano Puff)" },
+  { cat: "LAYERING", lv: 3, ic: "🧤", q: "登山 グローブ 防水 冬 メンズ 保温",   e: "Winter Gloves (men)" },
+  { cat: "LAYERING", lv: 1, ic: "🧦", q: "ダーンタフ ソックス 登山",           e: "Socks (Darn Tough)" },
+  { cat: "LAYERING", lv: 1, ic: "🧢", q: "登山 キャップ メッシュ 速乾", take: 2, e: "Mesh Cap" },
+  // SAFETY
+  { cat: "SAFETY", lv: 2, ic: "🔦", q: "ペツル ヘッドランプ",               e: "Headlamp (Petzl)" },
+  { cat: "SAFETY", lv: 2, ic: "🔦", q: "ブラックダイヤモンド ヘッドランプ",     e: "Headlamp (BD)" },
+  { cat: "SAFETY", lv: 3, ic: "⛺", q: "ツェルト 非常用 登山 モンベル", take: 2, e: "Emergency Shelter" },
+  { cat: "SAFETY", lv: 2, ic: "💧", q: "ソーヤー 浄水器 ミニ", take: 2,     e: "Sawyer Filter" },
+  { cat: "SAFETY", lv: 1, ic: "🍬", q: "塩飴 熱中症 スポーツ 大袋", take: 2, e: "Salt Candy" },
+  { cat: "SAFETY", lv: 1, ic: "🌿", q: "ハッカ油 スプレー 虫除け 携帯", take: 2, e: "Mint Repellent" },
+  { cat: "SAFETY", lv: 2, ic: "🦶", q: "足首 サポーター 登山 捻挫", take: 2,  e: "Ankle Support" },
+  { cat: "SAFETY", lv: 1, ic: "📣", q: "ホイッスル 金属 大音量 登山", take: 2, e: "Metal Whistle" },
+  // NAVIGATION
+  { cat: "NAVIGATION", lv: 2, ic: "⌚", q: "ガーミン フォアアスリート",         e: "Garmin Forerunner" },
+  { cat: "NAVIGATION", lv: 2, ic: "⌚", q: "スント バーティカル 登山",          e: "Suunto Vertical" },
+  { cat: "NAVIGATION", lv: 1, ic: "🧭", q: "シルバ コンパス 登山",            e: "Silva Compass" },
+  { cat: "NAVIGATION", lv: 2, ic: "🔭", q: "ニコン 双眼鏡 コンパクト",         e: "Binoculars (Nikon)" },
+  { cat: "NAVIGATION", lv: 1, ic: "🗺", q: "昭文社 山と高原地図 エリア", take: 2, e: "Map (Shobunsha)" },
+  // ACCESSORIES
+  { cat: "ACCESSORIES", lv: 1, ic: "🥢", q: "LEKI トレッキングポール",         e: "Poles (LEKI)" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🥢", q: "ブラックダイヤモンド トレッキングポール", e: "Poles (BD)" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧤", q: "ワークマン グローブ アウトドア",   e: "Gloves (Workman)" },
+  { cat: "ACCESSORIES", lv: 2, ic: "🕶", q: "オークリー サングラス スポーツ",   e: "Sunglasses (Oakley)" },
+  { cat: "ACCESSORIES", lv: 2, ic: "🕶", q: "スワンズ サングラス 登山",        e: "Sunglasses (SWANS)" },
+  { cat: "ACCESSORIES", lv: 1, ic: "💧", q: "プラティパス ハイドレーション",     e: "Hydration (Platypus)" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🍶", q: "ナルゲン ボトル 1L 登山",         e: "Nalgene Bottle" },
+  { cat: "ACCESSORIES", lv: 1, ic: "☕", q: "サーモス 山専用ボトル 保温",       e: "Thermos (Yama)" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🔗", q: "ナイトアイズ カラビナ", take: 2,  e: "Nite Ize Carabiner" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧻", q: "今治 タオル 速乾 アウトドア", take: 2, e: "Imabari Towel" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🍫", q: "井村屋 スポーツようかん 行動食", take: 2, e: "Yokan (energy)" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🥜", q: "ミックスナッツ 大袋 行動食", take: 2, e: "Mixed Nuts" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧴", q: "アネッサ 日焼け止め スポーツ", take: 2, e: "Sunscreen (Anessa)" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧢", q: "登山 サンバイザー レディース", take: 2, e: "Sun Visor" },
+  { cat: "ACCESSORIES", lv: 1, ic: "📱", q: "スマホ ネックストラップ アウトドア", take: 2, e: "Phone Strap" },
+  // ADVANCED
+  { cat: "ADVANCED", lv: 3, ic: "⛺", q: "モンベル ステラリッジ テント",       e: "Tent (Stellaridge)" },
+  { cat: "ADVANCED", lv: 3, ic: "⛺", q: "ネイチャーハイク テント 登山",       e: "Tent (Naturehike)" },
+  { cat: "ADVANCED", lv: 4, ic: "⛺", q: "アライ エアライズ テント",          e: "Tent (Aerise)" },
+  { cat: "ADVANCED", lv: 3, ic: "🛌", q: "モンベル ダウンハガー シュラフ",      e: "Bag (Down Hugger)" },
+  { cat: "ADVANCED", lv: 4, ic: "🛌", q: "ナンガ シュラフ ダウン",            e: "Bag (NANGA)" },
+  { cat: "ADVANCED", lv: 3, ic: "🛏", q: "サーマレスト マット 登山",           e: "Mat (Therm-a-Rest)" },
+  { cat: "ADVANCED", lv: 3, ic: "🛏", q: "ニーモ マット 登山", take: 2,      e: "Mat (NEMO)" },
+  { cat: "ADVANCED", lv: 3, ic: "🔥", q: "SOTO バーナー アウトドア",          e: "Stove (SOTO)" },
+  { cat: "ADVANCED", lv: 3, ic: "🔥", q: "プリムス バーナー 登山",            e: "Stove (Primus)" },
+  { cat: "ADVANCED", lv: 3, ic: "🔥", q: "イワタニ ジュニアバーナー", take: 2, e: "Stove (Iwatani)" },
+  { cat: "ADVANCED", lv: 3, ic: "🍵", q: "エバニュー チタン クッカー",         e: "Cookset (EVERNEW)" },
+  { cat: "ADVANCED", lv: 3, ic: "🍳", q: "トランギア メスティン",             e: "Mess Tin (Trangia)" },
+  { cat: "ADVANCED", lv: 4, ic: "🧗", q: "モンベル アイゼン 軽アイゼン", take: 2, e: "Crampons (mont-bell)" },
+  { cat: "ADVANCED", lv: 4, ic: "🦿", q: "モンベル ゲイター 雪山", take: 2,   e: "Gaiters (mont-bell)" },
 ];
 
 const shorten = (s) => ((s.split(/[【\[]/)[0].trim() || s).slice(0, 34));
