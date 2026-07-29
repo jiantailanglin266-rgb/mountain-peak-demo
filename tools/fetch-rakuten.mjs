@@ -278,9 +278,12 @@ console.log("合計 " + out.length + " 点取得 " + JSON.stringify(catCount));
 
 if (!out.length) { console.error("1件も取得できず — 既存ブロックを保持"); process.exit(1); }
 
-const file = join(ROOT, "index.html");
-const src = readFileSync(file, "utf-8");
-const re = /var AF_RAKU_AUTO=[\s\S]*?\/\*END_AF_RAKU_AUTO\*\//;
-if (!re.test(src)) throw new Error("AF_RAKU_AUTO ブロックが index.html に見つかりません");
-writeFileSync(file, src.replace(re, "var AF_RAKU_AUTO=" + JSON.stringify(out) + "; /*END_AF_RAKU_AUTO*/"), "utf-8");
-console.log("AF_RAKU_AUTO を更新: " + out.length + "点（この後 node build.mjs → デプロイ）");
+// 自動取得商品は別ファイル rakuten.js に出力（1150静的ページへの複製を回避）
+writeFileSync(join(ROOT, "rakuten.js"), "var AF_RAKU_AUTO=" + JSON.stringify(out) + ";\n", "utf-8");
+// index.html の rakuten.js?v=N をインクリメントしてキャッシュを更新
+const idxPath = join(ROOT, "index.html");
+let idx = readFileSync(idxPath, "utf-8");
+const bumped = idx.replace(/rakuten\.js\?v=(\d+)/, (mm, n) => "rakuten.js?v=" + (Number(n) + 1));
+if (bumped === idx) console.warn("警告: index.html の rakuten.js?v= が見つからず、バージョンをbumpできませんでした");
+else writeFileSync(idxPath, bumped, "utf-8");
+console.log("rakuten.js を更新: " + out.length + "点。index.htmlの?v=も更新。この後 node build.mjs → デプロイ");
