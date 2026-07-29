@@ -134,6 +134,9 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 .rkcard:hover{transform:translateY(-1px);box-shadow:var(--shadow-lift)}
 .rkcard .rkimg{flex:0 0 88px;width:88px;height:88px;border-radius:9px;overflow:hidden;background:#fff;display:block}
 .rkcard .rkimg img{width:100%;height:100%;object-fit:contain}
+.rkcard .rkimg.ph,.afmt .afreal .th.ph{background:var(--paper);display:flex;align-items:center;justify-content:center}
+.rkcard .rkimg.ph .rkph{font-size:36px;line-height:1}
+.afmt .afreal .th.ph .rkph{font-size:21px;line-height:1}
 .rkcard .rkbd{flex:1;min-width:0;display:flex;flex-direction:column}
 .rkcard .rknm{font-size:12.5px;font-weight:700;line-height:1.42;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .rkcard .rkpr{font-size:13.5px;font-weight:800;color:var(--route);margin:5px 0 8px}
@@ -2609,17 +2612,48 @@ var AF_INS=[
    url = 楽天アフィリエイトのクリックリンク（トラッキングIDを含むhrefをそのまま貼る）
    img = 商品サムネイル直リンク（thumbnail.image.rakuten.co.jp の ?_ex=240x240 推奨） */
 var AF_RAKU=[
- {id:"glove-summer",cat:"ACCESSORIES",lv:1,
+ {id:"rainwear-set",cat:"BIG THREE",lv:1,ic:"🌧",
+  j:"レインウェア上下セット（耐水圧20,000mm）",e:"Rain Jacket & Pants Set (20,000mm waterproof)",
+  p:"6,980円〜",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/benque/cabinet/item/10348328/be24_nv_rakuten_2.jpg?_ex=240x240",
+  url:"https://hb.afl.rakuten.co.jp/ichiba/562770c0.c553f849.562770c1.81a5bc0a/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fbenque%2Fbe24-r128%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"},
+ {id:"shoes-trekking",cat:"BIG THREE",lv:1,ic:"🥾",
+  j:"トレッキングシューズ（撥水・初心者向け）",e:"Trekking Shoes (water-repellent, beginner)",
+  p:"5,980円",img:"",
+  url:"https://hb.afl.rakuten.co.jp/ichiba/56277153.308d2c61.56277154.577a8812/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ftrendstyle%2Fem610b01%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIxMDB4MTAwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"},
+ {id:"glove-summer",cat:"ACCESSORIES",lv:1,ic:"🧤",
   j:"トレッキンググローブ（夏用・スマホ対応・速乾）",e:"Trekking Gloves (summer, touchscreen, quick-dry)",
   p:"1,599円",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/shop-west/cabinet/globe/imgrc0129776689.jpg?_ex=240x240",
-  url:"https://hb.afl.rakuten.co.jp/ichiba/5627372a.7bc3c9ec.5627372b.7b28156d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshop-west%2Fglobe-m%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ=="}
+  url:"https://hb.afl.rakuten.co.jp/ichiba/5627372a.7bc3c9ec.5627372b.7b28156d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fshop-west%2Fglobe-m%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ=="},
+ {id:"pole-carbon-hiking",cat:"ACCESSORIES",lv:1,ic:"🥢",
+  j:"カーボン トレッキングポール 2本セット（軽量・1年保証）",e:"Carbon Trekking Poles (pair, lightweight)",
+  p:"8,980円",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/hikinglife/cabinet/11830942/7f.jpg?_ex=240x240",
+  url:"https://hb.afl.rakuten.co.jp/ichiba/5627721d.7a017e02.5627721e.43ef160b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fhikinglife%2Fsku-pole-carbon%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"},
+ {id:"pole-alu-weiwei",cat:"ACCESSORIES",lv:1,ic:"🥢",
+  j:"トレッキングポール 2本セット（アルミ・アンチショック）",e:"Aluminum Trekking Poles (pair, anti-shock)",
+  p:"1,980円",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/weiwei/cabinet/shouhin-image/tp012.jpg?_ex=240x240",
+  url:"https://hb.afl.rakuten.co.jp/ichiba/5627727a.82022371.5627727b.7234f63d/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fweiwei%2Ftp01%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"},
+ {id:"pole-dabada",cat:"ACCESSORIES",lv:1,ic:"🥢",
+  j:"DABADA カーボンポール 2本セット（軽量175g）",e:"DABADA Carbon Poles (pair, 175g)",
+  p:"6,998円",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/dabada/cabinet/03097240/05618592/imgrc0085901605.jpg?_ex=240x240",
+  url:"https://hb.afl.rakuten.co.jp/ichiba/562772e1.436f27e3.562772e2.1063ced5/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fdabada%2Fc-pole%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"},
+ {id:"hydration-2l",cat:"ACCESSORIES",lv:1,ic:"💧",
+  j:"ハイドレーションパック 2L（水分補給・大容量）",e:"Hydration Pack 2L (large capacity)",
+  p:"2,750円",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/aconcagua/cabinet/biiino/item/main-image-2/20260129220322_1.jpg?_ex=240x240",
+  url:"https://hb.afl.rakuten.co.jp/ichiba/5627737b.a20144b8.5627737c.4f9e1409/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Faconcagua%2Fwater1%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"},
+ {id:"gaiter-spats",cat:"ACCESSORIES",lv:2,ic:"🦿",
+  j:"登山スパッツ（ゲイター・撥水・泥除け）",e:"Gaiters (water-repellent, mud guard)",
+  p:"1,780円",img:"https://thumbnail.image.rakuten.co.jp/@0_mall/macks-i/cabinet/spats/spats2.jpg?_ex=240x240",
+  url:"https://hb.afl.rakuten.co.jp/ichiba/5627743a.28a9adc8.5627743b.5d855651/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fmacks-i%2Fspats%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"}
 ];
 function rakuFor(catEb){return AF_RAKU.filter(function(r){return r.cat===catEb})}
+function rakuMedia(it,name){
+  return it.img?'<img src="'+esc(it.img)+'" alt="'+esc(name)+'" loading="lazy" decoding="async">':'<span class="rkph">'+(it.ic||"🛒")+"</span>";
+}
 function rakuCard(it){
   var ja=state.locale==="ja",name=ja?it.j:it.e;
   var buy=ja?"楽天で購入 ↗":"Buy on Rakuten ↗";
   return '<div class="rkcard">'+
-    '<a class="rkimg" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+'\')"><img src="'+esc(it.img)+'" alt="'+esc(name)+'" loading="lazy" decoding="async"></a>'+
+    '<a class="rkimg'+(it.img?"":" ph")+'" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+'\')">'+rakuMedia(it,name)+'</a>'+
     '<div class="rkbd"><div class="rknm">'+esc(name)+" "+prBadge()+'</div>'+
     '<div class="rkpr mono">'+esc(it.p)+'<span class="rkt">'+(ja?"税込・楽天":"incl. tax · Rakuten")+'</span></div>'+
     '<a class="afbtn rkbuy" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+':buy\')">'+buy+"</a></div></div>";
@@ -2680,7 +2714,7 @@ function afGearBox(m){
   var reals=AF_RAKU.filter(function(r){return r.lv<=m.difficultyLevel}).slice(0,2);
   var buy=ja?"楽天で購入":"Rakuten";
   return '<div class="card sect afmt"><h3>🎒 '+esc(T.mtBox)+" "+diffBadge(m.difficultyLevel)+" "+prBadge()+"</h3>"+
-    reals.map(function(it){return '<div class="afreal"><a class="th" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+':mt_'+m.slug+'\')"><img src="'+esc(it.img)+'" alt="'+esc(ja?it.j:it.e)+'" loading="lazy" decoding="async"></a><span class="n">'+esc(ja?it.j:it.e)+' <span class="mono" style="color:var(--route)">'+esc(it.p)+'</span></span><a class="rkbuy" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+':mt_'+m.slug+':buy\')">'+buy+" ↗</a></div>"}).join("")+
+    reals.map(function(it){return '<div class="afreal"><a class="th'+(it.img?"":" ph")+'" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+':mt_'+m.slug+'\')">'+rakuMedia(it,ja?it.j:it.e)+'</a><span class="n">'+esc(ja?it.j:it.e)+' <span class="mono" style="color:var(--route)">'+esc(it.p)+'</span></span><a class="rkbuy" href="'+esc(it.url)+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'raku:'+esc(it.id)+':mt_'+m.slug+':buy\')">'+buy+" ↗</a></div>"}).join("")+
     picks.map(function(it){return '<div class="afrow"><span class="n">'+it.ic+" "+esc(ja?it.j:it.e)+'</span><span class="b">'+afA("amz",it.q,"mt_"+m.slug)+afA("rak",it.q,"mt_"+m.slug)+"</span></div>"}).join("")+
     '<div class="aflinks"><span class="aflink" onclick="go({name:\'gear\'})">'+esc(T.toGuide)+'</span><span class="aflink" onclick="gearGo(\'ins\')">🛡 '+esc(T.insCta)+"</span></div>"+
     '<p class="afnote" style="margin-top:9px">'+esc(T.prNotice)+"</p></div>";
