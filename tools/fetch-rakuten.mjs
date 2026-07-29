@@ -53,7 +53,7 @@ function apiGet(params) {
 // 全カテゴリに分散して合計約290点。1キーワードから複数点を取得（重複はitemCodeで除去）
 const TAKE_DEFAULT = 4;
 // カテゴリ別の上限（合計約296点。分散を保つため上限に達したらそのカテゴリは以降スキップ）
-const CAP = { "BIG THREE": 55, "LAYERING": 52, "SAFETY": 48, "NAVIGATION": 26, "ACCESSORIES": 60, "ADVANCED": 55 };
+const CAP = { "BIG THREE": 82, "LAYERING": 80, "SAFETY": 74, "NAVIGATION": 38, "ACCESSORIES": 92, "ADVANCED": 82 };
 const KEYWORDS = [
   // ===== BIG THREE（登山靴・ザック・レインウェア）約25 =====
   { cat: "BIG THREE", lv: 1, ic: "🥾", q: "登山靴 メンズ ミッドカット",        e: "Hiking Boots (men)" },
@@ -181,6 +181,59 @@ const KEYWORDS = [
   { cat: "ADVANCED", lv: 3, ic: "🌂", q: "ワカン スノーシュー 登山", take: 2, e: "Snowshoes/Wakan" },
   { cat: "ADVANCED", lv: 4, ic: "⛏", q: "ピッケル カバー プロテクター", take: 2, e: "Axe Guard" },
   { cat: "ADVANCED", lv: 4, ic: "🦿", q: "ロングスパッツ 雪山 ゲイター",      e: "Snow Gaiters" },
+  // ===== 第3弾（+約150点。ブランド・派生ニッチ） =====
+  // BIG THREE
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "モンベル 登山靴",                 e: "Boots (mont-bell)" },
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "キャラバン 登山靴 初心者",         e: "Boots (Caravan)" },
+  { cat: "BIG THREE", lv: 2, ic: "🥾", q: "サロモン トレッキングシューズ",     e: "Shoes (Salomon)" },
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "メレル トレッキングシューズ",       e: "Shoes (Merrell)" },
+  { cat: "BIG THREE", lv: 2, ic: "🎒", q: "ザック 登山 メンズ 大容量",        e: "Backpack (large)" },
+  { cat: "BIG THREE", lv: 1, ic: "🎒", q: "ノースフェイス リュック 登山",      e: "Backpack (TNF)" },
+  { cat: "BIG THREE", lv: 1, ic: "🎒", q: "サブバッグ 折りたたみ リュック",    e: "Packable Daypack" },
+  { cat: "BIG THREE", lv: 1, ic: "🌧", q: "レインウェア 上下 レディース おしゃれ", e: "Rain Set (women)" },
+  { cat: "BIG THREE", lv: 1, ic: "🌧", q: "レインポンチョ 登山 自転車",        e: "Rain Poncho" },
+  // LAYERING
+  { cat: "LAYERING", lv: 1, ic: "👕", q: "モンベル ジオライン ベースレイヤー",  e: "Base Layer (Geoline)" },
+  { cat: "LAYERING", lv: 1, ic: "👖", q: "登山 ロングパンツ 撥水 メンズ",      e: "Pants (water-repel)" },
+  { cat: "LAYERING", lv: 1, ic: "👗", q: "登山 スカート レディース",           e: "Hiking Skirt" },
+  { cat: "LAYERING", lv: 1, ic: "🦺", q: "フリースベスト アウトドア",          e: "Fleece Vest" },
+  { cat: "LAYERING", lv: 2, ic: "🦺", q: "化繊 ベスト 中綿 登山",             e: "Insulated Vest" },
+  { cat: "LAYERING", lv: 2, ic: "🧣", q: "登山 ネックウォーマー 防寒",         e: "Neck Warmer" },
+  { cat: "LAYERING", lv: 1, ic: "🩱", q: "登山 レギンス サポート メンズ",       e: "Leggings" },
+  { cat: "LAYERING", lv: 1, ic: "🧦", q: "登山 靴下 厚手 クッション",          e: "Cushioned Socks" },
+  // SAFETY
+  { cat: "SAFETY", lv: 1, ic: "💊", q: "携帯 ピルケース 常備薬", take: 2,     e: "Pill Case" },
+  { cat: "SAFETY", lv: 1, ic: "🧴", q: "消毒 アルコール 携帯 スプレー", take: 2, e: "Hand Sanitizer" },
+  { cat: "SAFETY", lv: 2, ic: "❄", q: "冷却スプレー 熱中症 携帯", take: 2,   e: "Cooling Spray" },
+  { cat: "SAFETY", lv: 1, ic: "🚻", q: "携帯トイレ 非常用 登山",             e: "Portable Toilet" },
+  { cat: "SAFETY", lv: 1, ic: "🩹", q: "虫刺され 薬 携帯 かゆみ止め", take: 2, e: "Bite Relief" },
+  { cat: "SAFETY", lv: 1, ic: "🔦", q: "ヘッドライト 防水 高輝度 USB",        e: "Headlamp (USB)" },
+  { cat: "SAFETY", lv: 1, ic: "🪫", q: "乾電池 単4 アルカリ 登山", take: 2,  e: "Batteries" },
+  // NAVIGATION
+  { cat: "NAVIGATION", lv: 3, ic: "📡", q: "ガーミン GPS 登山",              e: "Garmin GPS" },
+  { cat: "NAVIGATION", lv: 2, ic: "⌚", q: "SUUNTO 腕時計 アウトドア",        e: "Suunto Watch" },
+  { cat: "NAVIGATION", lv: 2, ic: "⌚", q: "カシオ プロトレック",             e: "Casio Pro Trek" },
+  { cat: "NAVIGATION", lv: 1, ic: "🌡", q: "温度計 携帯 アウトドア", take: 2, e: "Thermometer" },
+  { cat: "NAVIGATION", lv: 1, ic: "🧭", q: "方位磁石 キーホルダー コンパス", take: 2, e: "Keychain Compass" },
+  // ACCESSORIES
+  { cat: "ACCESSORIES", lv: 2, ic: "🦵", q: "膝サポーター 登山",              e: "Knee Support" },
+  { cat: "ACCESSORIES", lv: 1, ic: "📱", q: "スマホ ショルダー 登山",          e: "Phone Lanyard" },
+  { cat: "ACCESSORIES", lv: 1, ic: "☔", q: "レインカバー リュック 防水",       e: "Rain Cover" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧻", q: "携帯 ウェットティッシュ アウトドア", take: 2, e: "Wet Wipes" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧴", q: "ボトルホルダー ポーチ 登山", take: 2, e: "Bottle Holder" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🔗", q: "ミニカラビナ セット アウトドア",   e: "Mini Carabiners" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🎒", q: "コンプレッションバッグ 圧縮袋",    e: "Compression Bag" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧻", q: "速乾 タオル マイクロファイバー",   e: "Quick-dry Towel" },
+  { cat: "ACCESSORIES", lv: 2, ic: "🕶", q: "オーバーサングラス 眼鏡の上",     e: "Over-glasses Shades" },
+  // ADVANCED
+  { cat: "ADVANCED", lv: 3, ic: "🛏", q: "コット アウトドア 軽量 折りたたみ",   e: "Camp Cot" },
+  { cat: "ADVANCED", lv: 3, ic: "🔨", q: "ペグハンマー テント", take: 2,     e: "Peg Hammer" },
+  { cat: "ADVANCED", lv: 3, ic: "🏮", q: "LEDランタン 充電式 キャンプ",       e: "LED Lantern" },
+  { cat: "ADVANCED", lv: 3, ic: "🍴", q: "カトラリー スポーク アウトドア", take: 2, e: "Spork/Cutlery" },
+  { cat: "ADVANCED", lv: 4, ic: "🧥", q: "ダウンパンツ 登山 防寒",           e: "Down Pants" },
+  { cat: "ADVANCED", lv: 3, ic: "⛺", q: "登山 テント 3人用",               e: "Tent (3p)" },
+  { cat: "ADVANCED", lv: 3, ic: "🛡", q: "シュラフカバー 防水 登山", take: 2, e: "Bivy/Bag Cover" },
+  { cat: "ADVANCED", lv: 3, ic: "🍵", q: "チタン クッカー コッヘル 登山",      e: "Titanium Cookset" },
 ];
 
 const shorten = (s) => ((s.split(/[【\[]/)[0].trim() || s).slice(0, 34));
