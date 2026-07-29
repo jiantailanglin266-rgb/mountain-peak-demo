@@ -50,8 +50,10 @@ function apiGet(params) {
 }
 
 // cat = AF_GEARカテゴリ(eb) / lv = 難易度ゲート / q = 検索語 / e = 英語ラベル / ic = 絵文字 / take = 取得点数
-// 全カテゴリに分散して合計約150点。1キーワードから複数点を取得（重複はitemCodeで除去）
-const TAKE_DEFAULT = 3;
+// 全カテゴリに分散して合計約290点。1キーワードから複数点を取得（重複はitemCodeで除去）
+const TAKE_DEFAULT = 4;
+// カテゴリ別の上限（合計約296点。分散を保つため上限に達したらそのカテゴリは以降スキップ）
+const CAP = { "BIG THREE": 55, "LAYERING": 52, "SAFETY": 48, "NAVIGATION": 26, "ACCESSORIES": 60, "ADVANCED": 55 };
 const KEYWORDS = [
   // ===== BIG THREE（登山靴・ザック・レインウェア）約25 =====
   { cat: "BIG THREE", lv: 1, ic: "🥾", q: "登山靴 メンズ ミッドカット",        e: "Hiking Boots (men)" },
@@ -116,6 +118,69 @@ const KEYWORDS = [
   { cat: "ADVANCED", lv: 4, ic: "⛏", q: "ピッケル 登山", take: 2,          e: "Ice Axe" },
   { cat: "ADVANCED", lv: 3, ic: "❄", q: "スノーシュー", take: 2,           e: "Snowshoes" },
   { cat: "ADVANCED", lv: 3, ic: "🧴", q: "OD缶 ガス カートリッジ", take: 2,  e: "Gas Canister" },
+  // ===== 第2弾（+約150点） =====
+  // BIG THREE
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "登山靴 防水 ゴアテックス",          e: "Waterproof Boots" },
+  { cat: "BIG THREE", lv: 3, ic: "🥾", q: "登山靴 ハイカット 縦走",           e: "High-cut Boots" },
+  { cat: "BIG THREE", lv: 2, ic: "🥾", q: "アプローチシューズ クライミング",    e: "Approach Shoes" },
+  { cat: "BIG THREE", lv: 1, ic: "🥾", q: "トレイルランニングシューズ",         e: "Trail Running Shoes" },
+  { cat: "BIG THREE", lv: 1, ic: "🎒", q: "登山 ザック 20L 日帰り",           e: "Daypack (~20L)" },
+  { cat: "BIG THREE", lv: 2, ic: "🎒", q: "登山 ザック 40L",                 e: "Backpack (~40L)" },
+  { cat: "BIG THREE", lv: 3, ic: "🎒", q: "大型ザック 65L 登山",             e: "Backpack (~65L)" },
+  { cat: "BIG THREE", lv: 1, ic: "🌧", q: "レインジャケット 登山 メンズ",       e: "Rain Jacket (men)" },
+  { cat: "BIG THREE", lv: 1, ic: "🌧", q: "レインパンツ 登山",               e: "Rain Pants" },
+  { cat: "BIG THREE", lv: 1, ic: "🎽", q: "ヒップバッグ 登山 ウエストポーチ",   e: "Hip Pack" },
+  // LAYERING
+  { cat: "LAYERING", lv: 2, ic: "🧥", q: "ソフトシェル ジャケット 登山",       e: "Softshell Jacket" },
+  { cat: "LAYERING", lv: 1, ic: "🌬", q: "ウインドシェル 登山 軽量",          e: "Windshell" },
+  { cat: "LAYERING", lv: 1, ic: "👕", q: "登山 半袖Tシャツ 速乾",            e: "Tee (quick-dry)" },
+  { cat: "LAYERING", lv: 1, ic: "👕", q: "登山 ロングスリーブ 化繊",          e: "Long-sleeve (synthetic)" },
+  { cat: "LAYERING", lv: 1, ic: "🩳", q: "登山 ハーフパンツ ショートパンツ",   e: "Hiking Shorts" },
+  { cat: "LAYERING", lv: 2, ic: "🪶", q: "インナーダウン 軽量",              e: "Inner Down" },
+  { cat: "LAYERING", lv: 3, ic: "🧣", q: "メリノウール タートルネック",        e: "Merino Turtleneck" },
+  { cat: "LAYERING", lv: 1, ic: "🧦", q: "登山 靴下 5本指",                 e: "Toe Socks" },
+  { cat: "LAYERING", lv: 2, ic: "🧤", q: "登山 レインハット 防水帽子",        e: "Rain Hat" },
+  // SAFETY
+  { cat: "SAFETY", lv: 1, ic: "🔦", q: "ランタン LED 登山 軽量",            e: "Lantern" },
+  { cat: "SAFETY", lv: 1, ic: "🩹", q: "テーピング テープ スポーツ",          e: "Athletic Tape" },
+  { cat: "SAFETY", lv: 1, ic: "💊", q: "ポイズンリムーバー 虫刺され",         e: "Poison Remover" },
+  { cat: "SAFETY", lv: 2, ic: "💧", q: "携帯浄水器 アウトドア",             e: "Water Filter" },
+  { cat: "SAFETY", lv: 1, ic: "🧂", q: "塩分タブレット 熱中症対策", take: 2, e: "Salt Tablets" },
+  { cat: "SAFETY", lv: 1, ic: "🩹", q: "救急セット 登山 大容量",            e: "First Aid (large)" },
+  { cat: "SAFETY", lv: 3, ic: "⛑", q: "登山 ヘルメット 軽量 女性",          e: "Helmet (light)" },
+  { cat: "SAFETY", lv: 1, ic: "🔦", q: "ヘッドライト 電池式 明るい",         e: "Headlamp (AA)" },
+  { cat: "SAFETY", lv: 2, ic: "🔥", q: "マッチ 防水 火起こし", take: 2,     e: "Waterproof Matches" },
+  // NAVIGATION
+  { cat: "NAVIGATION", lv: 2, ic: "⌚", q: "ソーラー 腕時計 アウトドア",       e: "Solar Watch" },
+  { cat: "NAVIGATION", lv: 2, ic: "🔭", q: "双眼鏡 コンパクト 登山",         e: "Binoculars" },
+  { cat: "NAVIGATION", lv: 1, ic: "🧭", q: "コンパス プレート型 地図",        e: "Baseplate Compass" },
+  { cat: "NAVIGATION", lv: 2, ic: "⌚", q: "デジタルコンパス 高度計 気温",     e: "Digital Compass" },
+  { cat: "NAVIGATION", lv: 1, ic: "🔍", q: "ルーペ 地図 携帯", take: 2,     e: "Map Loupe" },
+  // ACCESSORIES
+  { cat: "ACCESSORIES", lv: 1, ic: "🥢", q: "トレッキングポール 折りたたみ",   e: "Folding Poles" },
+  { cat: "ACCESSORIES", lv: 1, ic: "👟", q: "インソール 登山 衝撃吸収",       e: "Insoles" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🌂", q: "アームカバー UV 登山",         e: "Arm Sleeves" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧻", q: "手ぬぐい 登山 アウトドア", take: 2, e: "Tenugui" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🔗", q: "カラビナ アウトドア 登山",       e: "Carabiner" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🎒", q: "スタッフサック 圧縮袋 登山",     e: "Stuff Sack" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🍫", q: "行動食 エナジーバー アウトドア",   e: "Energy Bars" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🍶", q: "サーモボトル 保温 山専",        e: "Thermo Bottle" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🥤", q: "折りたたみ コップ シリコン", take: 2, e: "Folding Cup" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🦟", q: "虫除け アウトドア 携帯", take: 2, e: "Insect Repellent" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🧴", q: "日焼け止め スポーツ 汗", take: 2, e: "Sunscreen" },
+  { cat: "ACCESSORIES", lv: 1, ic: "🕶", q: "サングラス スポーツ 調光",       e: "Sunglasses (photochromic)" },
+  // ADVANCED
+  { cat: "ADVANCED", lv: 3, ic: "⛺", q: "テント グランドシート 登山", take: 2, e: "Groundsheet" },
+  { cat: "ADVANCED", lv: 3, ic: "📌", q: "ペグ アルミ 軽量 テント", take: 2, e: "Tent Pegs" },
+  { cat: "ADVANCED", lv: 3, ic: "🪑", q: "アウトドア チェア コンパクト",      e: "Camp Chair" },
+  { cat: "ADVANCED", lv: 3, ic: "🔥", q: "ガスバーナー CB缶 アウトドア",      e: "Stove (CB)" },
+  { cat: "ADVANCED", lv: 3, ic: "☕", q: "チタン マグカップ 登山",           e: "Titanium Mug" },
+  { cat: "ADVANCED", lv: 3, ic: "🍳", q: "メスティン 飯盒 登山",            e: "Mess Tin" },
+  { cat: "ADVANCED", lv: 4, ic: "🧤", q: "冬用 グローブ 登山 防水",          e: "Winter Gloves" },
+  { cat: "ADVANCED", lv: 4, ic: "🥶", q: "バラクラバ 目出し帽 登山", take: 2, e: "Balaclava" },
+  { cat: "ADVANCED", lv: 3, ic: "🌂", q: "ワカン スノーシュー 登山", take: 2, e: "Snowshoes/Wakan" },
+  { cat: "ADVANCED", lv: 4, ic: "⛏", q: "ピッケル カバー プロテクター", take: 2, e: "Axe Guard" },
+  { cat: "ADVANCED", lv: 4, ic: "🦿", q: "ロングスパッツ 雪山 ゲイター",      e: "Snow Gaiters" },
 ];
 
 const shorten = (s) => ((s.split(/[【\[]/)[0].trim() || s).slice(0, 34));
@@ -123,15 +188,18 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const out = [];
 const seen = new Set(); // itemCode で全体重複除去
+const catCount = {};
 for (const k of KEYWORDS) {
+  const cap = CAP[k.cat] || 40;
+  if ((catCount[k.cat] || 0) >= cap) continue; // カテゴリ上限に達したらAPIを叩かずスキップ
   const take = k.take || TAKE_DEFAULT;
   try {
-    const { status, json, raw } = await apiGet({ keyword: k.q, hits: String(Math.min(30, take + 6)), imageFlag: "1", sort: "-reviewCount", availability: "1" });
+    const { status, json, raw } = await apiGet({ keyword: k.q, hits: String(Math.min(30, take + 8)), imageFlag: "1", sort: "-reviewCount", availability: "1" });
     if (status !== 200 || !json) { console.error(k.q + " HTTP" + status + " " + (json ? JSON.stringify(json.errors || json).slice(0, 120) : (raw || "").slice(0, 120))); await sleep(1200); continue; }
     const items = (json.Items || []).filter((x) => x.affiliateUrl && (x.mediumImageUrls || [])[0]);
     let n = 0;
     for (const it of items) {
-      if (n >= take) break;
+      if (n >= take || (catCount[k.cat] || 0) >= cap) break;
       const code = it.itemCode || it.affiliateUrl;
       if (seen.has(code)) continue;
       seen.add(code);
@@ -144,15 +212,16 @@ for (const k of KEYWORDS) {
         p: Number(it.itemPrice).toLocaleString() + "円",
         img, url: it.affiliateUrl,
       });
+      catCount[k.cat] = (catCount[k.cat] || 0) + 1;
       n++;
     }
-    console.log("ok: " + k.q + " +" + n + "点");
+    console.log("ok: " + k.q + " +" + n + " (" + k.cat + ":" + (catCount[k.cat] || 0) + ")");
   } catch (e) {
     console.error(k.q + " 失敗: " + e.message);
   }
   await sleep(1200); // レート制限対策(約1req/sec)
 }
-console.log("合計 " + out.length + " 点取得");
+console.log("合計 " + out.length + " 点取得 " + JSON.stringify(catCount));
 
 if (!out.length) { console.error("1件も取得できず — 既存ブロックを保持"); process.exit(1); }
 
