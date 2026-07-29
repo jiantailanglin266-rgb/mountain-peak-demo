@@ -2649,7 +2649,7 @@ var AF_RAKU=[
 ];
 /* 楽天ウェブサービスAPIで自動取得する装備（tools/fetch-rakuten.mjs が下の1行を書き換える）
    手動AF_RAKUで未カバーの装備を補完。RAKUTEN_APP_ID / RAKUTEN_AFFILIATE_ID が必要 */
-function rakuLoad(){if(typeof AF_RAKU_AUTO!=="undefined")return;try{var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/),b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");var x=new XMLHttpRequest();x.open("GET",b+"/rakuten.js?v=1",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){}}
+function rakuLoad(){if(typeof AF_RAKU_AUTO!=="undefined")return;try{var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/),b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");var x=new XMLHttpRequest();x.open("GET",b+"/rakuten.js?v=2",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){}}
 function rakuAll(){return AF_RAKU.concat(typeof AF_RAKU_AUTO!=="undefined"?AF_RAKU_AUTO:[])}
 function rakuFor(catEb){return rakuAll().filter(function(r){return r.cat===catEb})}
 function rakuMedia(it,name){
