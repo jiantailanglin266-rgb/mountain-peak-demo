@@ -1,21 +1,56 @@
-// 楽天ウェブサービス Ichiba Item Search API で装備商品を取得し、
+// 楽天ウェブサービス Ichiba Item Search API（2026新基盤）で装備商品を取得し、
 // index.html の AF_RAKU_AUTO ブロックを書き換える（各商品に楽天のアフィリリンクが付く）。
-// 実行:  RAKUTEN_APP_ID=xxxx RAKUTEN_AFFILIATE_ID=yyyy node tools/fetch-rakuten.mjs
-//   Windows PowerShell:  $env:RAKUTEN_APP_ID="xxxx"; $env:RAKUTEN_AFFILIATE_ID="yyyy"; node tools/fetch-rakuten.mjs
-// 方針: 手動AF_RAKUで未カバーの装備だけをAPIで補完。レビュー数の多い定番を1点/キーワード。
+//
+// 新基盤の要点（2026/2 リニューアル）:
+//  - エンドポイント: https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260401
+//  - applicationId(UUID) + accessKey + affiliateId をクエリパラメータで渡す
+//  - 「許可Webサイト」に登録したドメインと一致する Origin / Referer ヘッダーが必須（403 REFERRER対策）
+//  - Node標準の fetch は Origin/Referer が禁止ヘッダーで送れないため https モジュールを使う
+//
+// 実行(PowerShell):
+//   $env:RAKUTEN_APP_ID="xxxxxxxx-...";  $env:RAKUTEN_ACCESS_KEY="pk_xxxx";
+//   $env:RAKUTEN_AFFILIATE_ID="xxxx.xxxx.xxxx.xxxx";  node tools/fetch-rakuten.mjs
+//   （REFERERを変えたい場合のみ $env:RAKUTEN_REFERER="https://mountain-peak.jp/"）
 import { readFileSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
+import https from "https";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const APP_ID = process.env.RAKUTEN_APP_ID;
+const ACCESS_KEY = process.env.RAKUTEN_ACCESS_KEY;
 const AFF_ID = process.env.RAKUTEN_AFFILIATE_ID;
-if (!APP_ID || !AFF_ID) {
-  console.error("環境変数 RAKUTEN_APP_ID と RAKUTEN_AFFILIATE_ID を設定してください");
+// 楽天Developersの「許可されたWebサイト」に登録したドメインと一致必須
+const REFERER = process.env.RAKUTEN_REFERER || "https://mountain-peak.jp/";
+if (!APP_ID || !ACCESS_KEY || !AFF_ID) {
+  console.error("環境変数 RAKUTEN_APP_ID / RAKUTEN_ACCESS_KEY / RAKUTEN_AFFILIATE_ID を設定してください");
   process.exit(1);
 }
+const ORIGIN = (REFERER.match(/^https?:\/\/[^/]+/) || ["https://mountain-peak.jp"])[0];
 
-// cat = AF_GEARカテゴリ(eb) / lv = 難易度ゲート(山詳細ボックス用) / q = 検索語 / e = 英語ラベル / ic = 絵文字
+const HOST = "openapi.rakuten.co.jp";
+const PATH = "/ichibams/api/IchibaItem/Search/20260401";
+
+function apiGet(params) {
+  const qs = new URLSearchParams(Object.assign(
+    { applicationId: APP_ID, accessKey: ACCESS_KEY, affiliateId: AFF_ID, format: "json", formatVersion: "2" },
+    params
+  )).toString();
+  return new Promise((resolve, reject) => {
+    const req = https.request(
+      { host: HOST, path: PATH + "?" + qs, method: "GET",
+        headers: { Origin: ORIGIN, Referer: REFERER, "User-Agent": "Mozilla/5.0 MountainPeakGearBot/1.0" } },
+      (resp) => { let d = ""; resp.on("data", (c) => (d += c)); resp.on("end", () => {
+        try { resolve({ status: resp.statusCode, json: JSON.parse(d) }); }
+        catch { resolve({ status: resp.statusCode, json: null, raw: d }); }
+      }); });
+    req.on("error", reject);
+    req.end();
+  });
+}
+
+// cat = AF_GEARカテゴリ(eb) / lv = 難易度ゲート / q = 検索語 / e = 英語ラベル / ic = 絵文字
+// 手動AF_RAKU（レインウェア/シューズ/グローブ/ポール/ハイドレ/ゲイター）で未カバーの装備を補完
 const KEYWORDS = [
   { cat: "BIG THREE",   lv: 1, ic: "🎒", q: "登山 ザック 30L",               e: "Backpack (20–35L)" },
   { cat: "LAYERING",    lv: 1, ic: "👕", q: "登山 ベースレイヤー メリノウール", e: "Base Layer (merino)" },
@@ -30,31 +65,19 @@ const KEYWORDS = [
   { cat: "ADVANCED",    lv: 3, ic: "🛌", q: "シュラフ 登山 3シーズン",          e: "Sleeping Bag" },
 ];
 
-const API = "https://app.rakuten.co.jp/services/api/IchibaItem/Search/20220601";
 const shorten = (s) => ((s.split(/[【\[]/)[0].trim() || s).slice(0, 34));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const out = [];
 for (const k of KEYWORDS) {
-  const u = new URL(API);
-  u.searchParams.set("applicationId", APP_ID);
-  u.searchParams.set("affiliateId", AFF_ID);
-  u.searchParams.set("keyword", k.q);
-  u.searchParams.set("hits", "5");
-  u.searchParams.set("sort", "-reviewCount"); // レビュー数の多い順＝定番
-  u.searchParams.set("imageFlag", "1");       // 画像あり商品のみ
-  u.searchParams.set("availability", "1");     // 在庫あり
-  u.searchParams.set("format", "json");
-  u.searchParams.set("formatVersion", "2");
   try {
-    const res = await fetch(u, { headers: { "User-Agent": "MountainPeakGearBot/1.0" } });
-    if (!res.ok) throw new Error("HTTP " + res.status + " " + (await res.text()).slice(0, 200));
-    const data = await res.json();
-    const items = data.Items || [];
+    const { status, json, raw } = await apiGet({ keyword: k.q, hits: "5", imageFlag: "1", sort: "-reviewCount", availability: "1" });
+    if (status !== 200 || !json) { console.error(k.q + " HTTP" + status + " " + (json ? JSON.stringify(json.errors || json).slice(0, 120) : (raw || "").slice(0, 120))); await sleep(1200); continue; }
+    const items = json.Items || [];
     const it = items.find((x) => x.affiliateUrl && (x.mediumImageUrls || [])[0]);
-    if (!it) { console.error("該当なし: " + k.q); continue; }
-    const raw = typeof it.mediumImageUrls[0] === "string" ? it.mediumImageUrls[0] : it.mediumImageUrls[0].imageUrl;
-    const img = raw.replace(/\?_ex=\d+x\d+$/, "") + "?_ex=240x240";
+    if (!it) { console.error("該当なし: " + k.q); await sleep(1200); continue; }
+    const raw0 = typeof it.mediumImageUrls[0] === "string" ? it.mediumImageUrls[0] : it.mediumImageUrls[0].imageUrl;
+    const img = raw0.replace(/\?_ex=\d+x\d+$/, "") + "?_ex=240x240";
     out.push({
       id: "rk_" + k.q.replace(/\s+/g, "_"),
       cat: k.cat, lv: k.lv, ic: k.ic,
@@ -66,7 +89,7 @@ for (const k of KEYWORDS) {
   } catch (e) {
     console.error(k.q + " 失敗: " + e.message);
   }
-  await sleep(1100); // 楽天APIのレート制限(約1req/sec)対策
+  await sleep(1200); // レート制限対策(約1req/sec)
 }
 
 if (!out.length) { console.error("1件も取得できず — 既存ブロックを保持"); process.exit(1); }
