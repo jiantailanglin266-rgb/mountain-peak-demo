@@ -131,6 +131,20 @@ nav.tabs button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ro
 /* 楽天アフィリエイト 実商品カード（サイト純正スタイル。貼られた商品はAF_RAKUに追記） */
 .rkgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:12px;margin:2px 0 10px}
 @media(max-width:560px){.rkgrid{grid-template-columns:1fr}}
+/* 装備ガイド カテゴリ折りたたみ（アコーディオン） */
+.gearctl{display:flex;gap:8px;margin:16px 0 2px}
+.gearctl button{font-size:12px;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--muted);cursor:pointer;transition:color .15s,border-color .15s}
+.gearctl button:hover{color:var(--ink);border-color:var(--route)}
+.gearsec{border:1px solid var(--line);border-radius:14px;margin:12px 0;background:var(--card);box-shadow:var(--shadow);overflow:hidden}
+.gearsec-h{display:flex;align-items:center;gap:10px;width:100%;padding:14px 16px;background:transparent;border:0;cursor:pointer;text-align:left;color:inherit;font:inherit}
+.gearsec-h:hover{background:var(--route-soft)}
+.gearsec-h .eyebrow{flex:0 0 auto}
+.gearsec-h .tt{font-size:16px;font-weight:800;letter-spacing:-.01em}
+.gearsec-h .gearsec-n{margin-left:auto;color:var(--muted);font-size:11.5px;white-space:nowrap}
+.gearsec-h .gearsec-chev{color:var(--muted);font-size:13px;transition:transform .2s;flex:0 0 auto}
+.gearsec[data-open="1"] .gearsec-h .gearsec-chev{transform:rotate(180deg)}
+.gearsec-body{padding:2px 14px 14px}
+.gearsec[data-open="0"] .gearsec-body{display:none}
 .rkcard{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}
 .rkcard:hover{transform:translateY(-1px);box-shadow:var(--shadow-lift)}
 .rkcard .rkimg{flex:0 0 88px;width:88px;height:88px;border-radius:9px;overflow:hidden;background:#fff;display:block}
@@ -2649,7 +2663,7 @@ var AF_RAKU=[
 ];
 /* 楽天ウェブサービスAPIで自動取得する装備（tools/fetch-rakuten.mjs が下の1行を書き換える）
    手動AF_RAKUで未カバーの装備を補完。RAKUTEN_APP_ID / RAKUTEN_AFFILIATE_ID が必要 */
-function rakuLoad(){if(typeof AF_RAKU_AUTO!=="undefined")return;try{var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/),b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");var x=new XMLHttpRequest();x.open("GET",b+"/rakuten.js?v=2",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){}}
+function rakuLoad(){if(typeof AF_RAKU_AUTO!=="undefined")return;try{var p=location.pathname,mm=p.match(/^(.*?)\/(ja|en)(\/|$)/),b=mm?mm[1]:p.replace(/\/index\.html$/,"").replace(/\/$/,"");var x=new XMLHttpRequest();x.open("GET",b+"/rakuten.js?v=3",false);x.send();if(x.status===200||x.status===0){(0,eval)(x.responseText)}}catch(e){}}
 function rakuAll(){return AF_RAKU.concat(typeof AF_RAKU_AUTO!=="undefined"?AF_RAKU_AUTO:[])}
 function rakuFor(catEb){return rakuAll().filter(function(r){return r.cat===catEb})}
 function rakuMedia(it,name){
@@ -2687,18 +2701,25 @@ function afA(mc,q,id){
 }
 function prBadge(){return '<span class="prb mono">'+aft().pr+"</span>"}
 function gearGo(anchor){go({name:"gear"});if(anchor)setTimeout(function(){var el=document.getElementById("af-"+anchor);if(el)el.scrollIntoView()},80)}
+function gearToggle(btn){var s=btn.parentNode;var o=s.getAttribute("data-open")==="1"?"0":"1";s.setAttribute("data-open",o);btn.setAttribute("aria-expanded",o==="1")}
+function gearAll(open){Array.prototype.forEach.call(document.querySelectorAll(".gearsec"),function(s){s.setAttribute("data-open",open?"1":"0");var b=s.querySelector(".gearsec-h");if(b)b.setAttribute("aria-expanded",!!open)})}
+window.gearToggle=gearToggle;window.gearAll=gearAll;
 function vGear(){
   rakuLoad();
   var D=d(),T=aft(),ja=state.locale==="ja";
-  var cats=AF_GEAR.map(function(cat){
-    return '<h2 class="sec"><span class="eyebrow mono">△ '+cat.eb+'</span><span class="tt disp">'+esc(ja?cat.tj:cat.te)+"</span></h2>"+
+  var cats=AF_GEAR.map(function(cat,ci){
+    var n=cat.items.length+rakuFor(cat.eb).length;
+    var op=ci===0?"1":"0"; // 先頭カテゴリのみ展開、他は折りたたみ
+    return '<section class="gearsec" data-open="'+op+'">'+
+    '<button class="gearsec-h" type="button" aria-expanded="'+(op==="1")+'" onclick="gearToggle(this)"><span class="eyebrow mono">△ '+cat.eb+'</span><span class="tt disp">'+esc(ja?cat.tj:cat.te)+'</span><span class="gearsec-n mono">'+n+(ja?"点":"")+'</span><span class="gearsec-chev" aria-hidden="true">▾</span></button>'+
+    '<div class="gearsec-body">'+
     rakuStrip(cat.eb)+
     '<div class="grid afgrid">'+cat.items.map(function(it){
       var name=ja?it.j:it.e;
       return '<div class="card afcard rv"><div class="ttl">'+it.ic+" "+esc(name)+" "+prBadge()+'</div><div class="pt">'+esc(ja?it.dj:it.de)+"</div>"+
       '<div class="pm"><span class="mono">'+T.price+" "+it.p+"</span>"+(it.lv>1?'<span class="badge d'+it.lv+'">'+esc(D.diffs[it.lv])+(ja?"〜":"+")+"</span>":"")+"</div>"+
       '<div class="afbtns">'+afA("amz",it.q,it.e)+afA("rak",it.q,it.e)+afA("yah",it.q,it.e)+"</div></div>";
-    }).join("")+"</div>";
+    }).join("")+"</div></div></section>";
   }).join("");
   var ins='<div id="af-ins"></div><h2 class="sec"><span class="eyebrow mono">△ '+T.insEb+'</span><span class="tt disp">'+esc(T.insT)+"</span></h2>"+
     '<p style="font-size:13.5px;color:var(--muted);margin:-6px 0 14px;line-height:1.8">'+esc(T.insSub)+"</p>"+
@@ -2707,8 +2728,9 @@ function vGear(){
       '<div class="afbtns"><a class="afbtn ins" href="'+s.url+'" target="_blank" rel="sponsored nofollow noopener" onclick="afTrack(\'ins:'+s.id+'\')">'+T.insBtn+"</a></div></div>";
     }).join("")+"</div>"+
     '<div class="notice" style="margin-top:16px">'+esc(T.insNote)+"</div>";
+  var ctl='<div class="gearctl"><button type="button" onclick="gearAll(1)">'+(ja?"すべて展開":"Expand all")+'</button><button type="button" onclick="gearAll(0)">'+(ja?"すべて閉じる":"Collapse all")+'</button></div>';
   return crumbs([{n:D.l.home,go:'go({name:"home"})'},{n:D.tabs.gear}])+
-    '<div class="card detail-hero"><h1 class="disp">🎒 '+esc(T.t)+'</h1><p class="dsum">'+esc(T.sub)+'</p><p class="afnote">'+esc(T.prNotice)+"</p></div>"+cats+ins;
+    '<div class="card detail-hero"><h1 class="disp">🎒 '+esc(T.t)+'</h1><p class="dsum">'+esc(T.sub)+'</p><p class="afnote">'+esc(T.prNotice)+"</p></div>"+ctl+cats+ins;
 }
 /* 山詳細: 難易度に応じた装備ピック */
 function afGearBox(m){
