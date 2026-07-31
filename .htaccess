@@ -1,14 +1,15 @@
 # Mountain Peak — Apache 設定（直接アクセス/リロードでも404にしない）
-Options -MultiViews
+# ※ Options 系ディレクティブは共有サーバー(CloudLinux等)で500を招くため使用しない
 DirectoryIndex index.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  RewriteBase /
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
   RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]{1,6}$
-  RewriteRule ^ /index.html [L]
+  RewriteRule ^ index.html [L]
 </IfModule>
 
 ErrorDocument 404 /404.html
