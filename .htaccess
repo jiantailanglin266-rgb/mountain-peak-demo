@@ -1,0 +1,14 @@
+# Mountain Peak — Apache 設定（直接アクセス/リロードでも404にしない）
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]{1,6}$
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+ErrorDocument 404 /404.html

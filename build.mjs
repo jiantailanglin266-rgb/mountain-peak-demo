@@ -396,4 +396,26 @@ self.addEventListener("fetch",function(e){
 
 writeFileSync(join(ROOT, ".nojekyll"), "", "utf-8");
 
-console.log(`OK: ${pages.length} pages + sitemap/robots/llms/404/manifest/sw generated`);
+// ---- サーバー側フォールバック（直接アクセス/リロードで404にしない） ----
+// Apache（XServer等の多くのレンタルサーバー）: ディレクトリURL→index.html、
+// 静的ページの無いパスはSPA本体へフォールバック
+writeFileSync(join(ROOT, ".htaccess"),
+`# Mountain Peak — Apache 設定（直接アクセス/リロードでも404にしない）
+Options -MultiViews
+DirectoryIndex index.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteCond %{REQUEST_URI} !\\.[A-Za-z0-9]{1,6}$
+  RewriteRule ^ /index.html [L]
+</IfModule>
+
+ErrorDocument 404 /404.html
+`, "utf-8");
+// Netlify / Cloudflare Pages 系: SPAフォールバック
+writeFileSync(join(ROOT, "_redirects"), "/*  /index.html  200\n", "utf-8");
+
+console.log(`OK: ${pages.length} pages + sitemap/robots/llms/404/manifest/sw/.htaccess/_redirects generated`);
